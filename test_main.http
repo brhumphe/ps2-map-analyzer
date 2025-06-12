@@ -1,0 +1,10 @@
+# Test your FastAPI endpoints
+
+GET http://127.0.0.1:8000/
+Accept: application/json
+
+### GET capturable bases
+GET http://127.0.0.1:8000/capturable-bases/?world_id=1&zone_id=4&faction_id=1
+Accept: application/json
+
+###

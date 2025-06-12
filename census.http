@@ -1,0 +1,44 @@
+### GET all lithafalcon collections
+GET https://census.lithafalcon.cc/get/ps2?c:censusJSON=false
+
+### GET world
+GET https://census.lithafalcon.cc/get/ps2/world?c:censusJSON=false
+
+### GET map_hex
+GET https://census.lithafalcon.cc/get/ps2/map_hex?c:censusJSON=false
+
+### GET map_region
+GET https://census.lithafalcon.cc/get/ps2/map_region?c:hide=localized_facility_name&zone_id=8&c:censusJSON=false
+
+### GET map_region to facility_id
+GET https://census.lithafalcon.cc/get/ps2/map_region?zone_id=8&c:show=map_region_id,facility_id,zone_id&c:censusJSON=false
+
+### GET map_state Osprey Esamir
+GET https://census.lithafalcon.cc/get/ps2/map_state?world_id=1&zone_id=8&c:censusJSON=false
+
+### GET faction
+GET https://census.lithafalcon.cc/get/ps2/faction?c:lang=en&c:hide=description&c:censusJSON=false
+
+### GET facility_type
+GET https://census.lithafalcon.cc/get/ps2/facility_type?c:censusJSON=false
+
+### GET facility_link
+GET https://census.lithafalcon.cc/get/ps2/facility_link?zone_id=8&c:censusJSON=false
+
+### GET facility_info
+GET https://census.lithafalcon.cc/get/ps2/facility_info?c:lang=en&c:censusJSON=false
+
+### GET zone info
+GET https://census.lithafalcon.cc/get/ps2/zone?c:lang=en&c:hide=description&c:censusJSON=false
+
+### GET map combined info
+GET https://census.daybreakgames.com/get/ps2:v2/zone?zone_id=2&c:join=map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id%27map_region_id)&c:lang=en
+
+### GET map combined info from lithafalcon
+GET https://census.lithafalcon.cc/get/ps2/zone?zone_id=2&c:join=map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id%27map_region_id)&c:lang=en&c:censusJSON=false
+
+### GET metagame info for world via metagame.ps2.live
+GET https://metagame.ps2.live/1
+
+### GET metagame info via honu
+GET https://wt.honu.pw/api/world/overview
