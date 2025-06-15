@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from map_tools import find_capturable_bases
+from backend.map_tools import find_capturable_bases
 
 
 @pytest.fixture(scope="module")

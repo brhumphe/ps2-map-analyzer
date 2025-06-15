@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map View</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin="" language="JavaScript"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    // Add cursor coordinates in a popup that follows the mouse
+    L.CursorHandler = L.Handler.extend({
+
+        addHooks: function () {
+            this._popup = new L.Popup();
+            this._map.on('mouseover', this._open, this);
+            this._map.on('mousemove', this._update, this);
+            this._map.on('mouseout', this._close, this);
+        },
+
+        removeHooks: function () {
+            this._map.off('mouseover', this._open, this);
+            this._map.off('mousemove', this._update, this);
+            this._map.off('mouseout', this._close, this);
+        },
+
+        _open: function (e) {
+            this._update(e);
+            this._popup.openOn(this._map);
+        },
+
+        _close: function () {
+            this._map.closePopup(this._popup);
+        },
+
+        _update: function (e) {
+            this._popup.setLatLng(e.latlng)
+                .setContent(e.latlng.toString());
+        }
+
+
+    });
+
+    L.Map.addInitHook('addHandler', 'cursor', L.CursorHandler);
+
+    // Map creation
+    const map = L.map('map', {
+        crs: L.CRS.Simple,
+        center: [0, 0],
+        zoom: 0,
+        cursor: true,
+    }).setView([0, 0], 0);
+    // Create custom tile layer
+    const customTileLayer = L.tileLayer('', {
+        zoomSnap: 1,
+        minZoom: 0,
+        maxZoom: 0,
+        tileSize: 256,
+        minNativeZoom: 0,
+        maxNativeZoom: 0,
+        noWrap: true,
+        attribution: 'Indar Map',
+        bounds: [[-4096, -4096], [4096, 4096]],
+    });
+
+    // Override the tile URL creation
+    customTileLayer.getTileUrl = function (coords) {
+        const z = coords.z;
+        // Transform Leaflet coordinates to your coordinate system
+        // Leaflet gives 0,1,2,3... but you need 0,4,8,12... (increment by 4)
+        const gameX = coords.x * 4;
+        const gameY = coords.y * 4;
+
+        // Format as 3-digit zero-padded strings
+        let xStr = Math.abs(gameX).toString().padStart(3, '0');
+        let yStr = Math.abs(gameY).toString().padStart(3, '0');
+
+        // Handle negative coordinates
+        if (gameX < 0) xStr = '-' + Math.abs(gameX).toString().padStart(2, '0');
+        if (gameY < 0) yStr = '-' + Math.abs(gameY).toString().padStart(2, '0');
+
+        return `tiles/indar/Indar_Tile_${xStr}_${yStr}_LOD${z}.png`;
+    };
+
+    // Add to map
+    customTileLayer.addTo(map);
+</script>
+</body>
+</html>

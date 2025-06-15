@@ -13,6 +13,9 @@ GET https://census.lithafalcon.cc/get/ps2/map_region?c:hide=localized_facility_n
 ### GET map_region to facility_id
 GET https://census.lithafalcon.cc/get/ps2/map_region?zone_id=8&c:show=map_region_id,facility_id,zone_id&c:censusJSON=false
 
+### GET map_region to facility_id for list of facility ids
+GET https://census.lithafalcon.cc/get/ps2/map_region?c:show=map_region_id,facility_id,zone_id&c:censusJSON=false&facility_id=400317,256030
+
 ### GET map_state Osprey Esamir
 GET https://census.lithafalcon.cc/get/ps2/map_state?world_id=1&zone_id=8&c:censusJSON=false
 
@@ -27,6 +30,11 @@ GET https://census.lithafalcon.cc/get/ps2/facility_link?zone_id=8&c:censusJSON=f
 
 ### GET facility_info
 GET https://census.lithafalcon.cc/get/ps2/facility_info?c:lang=en&c:censusJSON=false
+
+### GET region name
+# Lightweight way to go from map_region_id to the name. map_region collection has far more info,
+# wheras region only has the zone_id and localized name.
+https://census.daybreakgames.com/get/ps2:v2/region?c:lang=en&region_id=2202
 
 ### GET zone info
 GET https://census.lithafalcon.cc/get/ps2/zone?c:lang=en&c:hide=description&c:censusJSON=false
