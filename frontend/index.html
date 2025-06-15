@@ -32,6 +32,27 @@
 <body>
 <div id="map"></div>
 <script>
+    const yx = L.latLng;
+
+    const xy = function (x, y) {
+        if (Array.isArray(x)) {    // When doing xy([x, y]);
+            return yx(x[1], x[0]);
+        }
+        return yx(y, x);  // When doing xy(x, y);
+    };
+
+    const game_to_latLng = function (x, y) {
+        const rad = 90 * Math.PI / 180;
+        return xy(x * Math.cos(rad) - y * Math.sin(rad),
+            x * Math.sin(rad) + y * Math.cos(rad) - 256);
+    }
+
+    const latLng_to_game = function (latLng) {
+        const rad = -90 * Math.PI / 180;
+        return [latLng.lng * Math.cos(rad) - latLng.lat * Math.sin(rad) + 256,
+            latLng.lng * Math.sin(rad) + latLng.lat * Math.cos(rad)];
+    }
+
     // Add cursor coordinates in a popup that follows the mouse
     L.CursorHandler = L.Handler.extend({
 
@@ -58,8 +79,9 @@
         },
 
         _update: function (e) {
+            const coords = latLng_to_game(e.latlng);
             this._popup.setLatLng(e.latlng)
-                .setContent(e.latlng.toString());
+                .setContent(`[${coords[0].toFixed(0)}, ${coords[1].toFixed(0)}]`);
         }
 
 
@@ -71,14 +93,14 @@
     const map = L.map('map', {
         crs: L.CRS.Simple,
         center: [0, 0],
-        zoom: 0,
+        zoom: -20,
         cursor: true,
     }).setView([0, 0], 0);
     // Create custom tile layer
     const customTileLayer = L.tileLayer('', {
         zoomSnap: 1,
-        minZoom: 0,
-        maxZoom: 0,
+        minZoom: -20,
+        maxZoom: 3,
         tileSize: 256,
         minNativeZoom: 0,
         maxNativeZoom: 0,
@@ -93,7 +115,7 @@
         // Transform Leaflet coordinates to your coordinate system
         // Leaflet gives 0,1,2,3... but you need 0,4,8,12... (increment by 4)
         const gameX = coords.x * 4;
-        const gameY = coords.y * 4;
+        const gameY = -coords.y * 4;
 
         // Format as 3-digit zero-padded strings
         let xStr = Math.abs(gameX).toString().padStart(3, '0');
@@ -108,6 +130,12 @@
 
     // Add to map
     customTileLayer.addTo(map);
+    const west_wg = game_to_latLng(-2276.637, 2486.449)
+    const east_wg = game_to_latLng(-2435.838, -2764.692)
+    const north_wg = game_to_latLng(2750.148, -95.01959)
+    L.marker(west_wg).addTo(map).bindPopup("West Gate [-2276.637, 2486.449]")
+    L.marker(east_wg).addTo(map).bindPopup("East Gate [-2435.838, -2764.692]")
+    L.marker(north_wg).addTo(map).bindPopup("North Gate [2750.148, -95.01959]")
 </script>
 </body>
 </html>
