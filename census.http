@@ -29,7 +29,7 @@ GET https://census.lithafalcon.cc/get/ps2/facility_type?c:censusJSON=false
 GET https://census.lithafalcon.cc/get/ps2/facility_link?zone_id=8&c:censusJSON=false
 
 ### GET facility_info
-GET https://census.lithafalcon.cc/get/ps2/facility_info?c:lang=en&c:censusJSON=false
+GET https://census.lithafalcon.cc/get/ps2/facility_info?c:lang=en&c:censusJSON=false&zone_id=4
 
 ### GET region name
 # Lightweight way to go from map_region_id to the name. map_region collection has far more info,

@@ -1,0 +1,973 @@
+{
+  "facility_info_list": [
+    {
+      "zone_id": 4,
+      "facility_id": 261000,
+      "facility_name": {
+        "en": "Sharpe's Run"
+      },
+      "facility_type_id": 6,
+      "location_x": 1355.88,
+      "location_y": 47.42969,
+      "location_z": -3052.788
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 262000,
+      "facility_name": {
+        "en": "Edgewater Overlook"
+      },
+      "facility_type_id": 6,
+      "location_x": 1324.95,
+      "location_y": 58.01372,
+      "location_z": -2389.168
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 263000,
+      "facility_name": {
+        "en": "Last Hold"
+      },
+      "facility_type_id": 6,
+      "location_x": 2112.503,
+      "location_y": 77.0633,
+      "location_z": -2229.821
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 264000,
+      "facility_name": {
+        "en": "Wainwright Armory"
+      },
+      "facility_type_id": 6,
+      "location_x": 982.7468,
+      "location_y": 40.17625,
+      "location_z": -1631.166
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 265000,
+      "facility_name": {
+        "en": "The Offal Pit"
+      },
+      "facility_type_id": 6,
+      "location_x": 2626.842,
+      "location_y": 3.797127,
+      "location_z": -723.8876
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 266000,
+      "facility_name": {
+        "en": "Kessel's Crossing"
+      },
+      "facility_type_id": 6,
+      "location_x": 3185.979,
+      "location_y": 26.20848,
+      "location_z": -186.0505
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 269000,
+      "facility_name": {
+        "en": "Bunker J993"
+      },
+      "facility_type_id": 6,
+      "location_x": 857.3224,
+      "location_y": 43.2776,
+      "location_z": 1359.799
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 270000,
+      "facility_name": {
+        "en": "Fallbridge Chemical"
+      },
+      "facility_type_id": 6,
+      "location_x": 1518.862,
+      "location_y": 5.892097,
+      "location_z": 2428.438
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 271000,
+      "facility_name": {
+        "en": "Halcyon Watch"
+      },
+      "facility_type_id": 6,
+      "location_x": 2333.234,
+      "location_y": 76.58478,
+      "location_z": 2645.741
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 272000,
+      "facility_name": {
+        "en": "Bridgewater Shipping Yard"
+      },
+      "facility_type_id": 6,
+      "location_x": 1120.911,
+      "location_y": 58.97974,
+      "location_z": 2761.887
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 273000,
+      "facility_name": {
+        "en": "OMR Terraforming"
+      },
+      "facility_type_id": 6,
+      "location_x": 36.74343,
+      "location_y": 41.34005,
+      "location_z": -3262.866
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 274000,
+      "facility_name": {
+        "en": "Iron Quay"
+      },
+      "facility_type_id": 6,
+      "location_x": 342.7441,
+      "location_y": 9.031357,
+      "location_z": -1818.297
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 275000,
+      "facility_name": {
+        "en": "Broken Vale Garrison"
+      },
+      "facility_type_id": 6,
+      "location_x": 517.051,
+      "location_y": 160.4547,
+      "location_z": -475.1586
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 276000,
+      "facility_name": {
+        "en": "Woodman ASE Labs"
+      },
+      "facility_type_id": 6,
+      "location_x": 887.6013,
+      "location_y": 106.307,
+      "location_z": 779.0043
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 277000,
+      "facility_name": {
+        "en": "Johari Cove"
+      },
+      "facility_type_id": 6,
+      "location_x": -1317.243,
+      "location_y": 16.85356,
+      "location_z": -2450.562
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 278000,
+      "facility_name": {
+        "en": "Roothouse Distillery"
+      },
+      "facility_type_id": 6,
+      "location_x": -1492.96,
+      "location_y": 3.906586,
+      "location_z": -1933.5
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 279000,
+      "facility_name": {
+        "en": "Hunter's Blind"
+      },
+      "facility_type_id": 6,
+      "location_x": -1767.462,
+      "location_y": -12.75825,
+      "location_z": 68.10875
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 268000,
+      "facility_name": {
+        "en": "VEX BioLogics"
+      },
+      "facility_type_id": 6,
+      "location_x": 2033.715,
+      "location_y": 61.56718,
+      "location_z": 1261.743
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 281000,
+      "facility_name": {
+        "en": "SRP Hydroponics, Inc."
+      },
+      "facility_type_id": 6,
+      "location_x": -1536.903,
+      "location_y": 34.40091,
+      "location_z": 922.0722
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 282000,
+      "facility_name": {
+        "en": "The Ziggurat"
+      },
+      "facility_type_id": 6,
+      "location_x": -574.2111,
+      "location_y": 25.78734,
+      "location_z": 2919.94
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 267000,
+      "facility_name": {
+        "en": "Hossin BioChem, Inc."
+      },
+      "facility_type_id": 6,
+      "location_x": 2841.119,
+      "location_y": 28.64579,
+      "location_z": 1325.563
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 283000,
+      "facility_name": {
+        "en": "Nettlemire Gardens"
+      },
+      "facility_type_id": 6,
+      "location_x": -1139.473,
+      "location_y": 4,
+      "location_z": 2551.879
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 280000,
+      "facility_name": {
+        "en": "Gourney Dam"
+      },
+      "facility_type_id": 6,
+      "location_x": -663.1986,
+      "location_y": 137.8467,
+      "location_z": -293.3634
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 284000,
+      "facility_name": {
+        "en": "Whispering Pass"
+      },
+      "facility_type_id": 6,
+      "location_x": -2822.829,
+      "location_y": 12.4129,
+      "location_z": -741.7515
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287000,
+      "facility_name": {
+        "en": "Kestral Watch"
+      },
+      "facility_type_id": 6,
+      "location_x": -2571.105,
+      "location_y": 58.47634,
+      "location_z": 1894.895
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 285000,
+      "facility_name": {
+        "en": "SRP Nanite Relay Station"
+      },
+      "facility_type_id": 6,
+      "location_x": -2580.367,
+      "location_y": 20.73209,
+      "location_z": 143.9012
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287010,
+      "facility_name": {
+        "en": "Construction Site Alpha"
+      },
+      "facility_type_id": 6,
+      "location_x": 803.317,
+      "location_y": 17.26058,
+      "location_z": -2392.678
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287020,
+      "facility_name": {
+        "en": "Construction Site Beta"
+      },
+      "facility_type_id": 6,
+      "location_x": 2011.422,
+      "location_y": 63.11737,
+      "location_z": -657.8187
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287030,
+      "facility_name": {
+        "en": "Construction Site Gamma"
+      },
+      "facility_type_id": 6,
+      "location_x": 2036.46,
+      "location_y": 2.174717,
+      "location_z": 1951.483
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287050,
+      "facility_name": {
+        "en": "Construction Site Zeta"
+      },
+      "facility_type_id": 6,
+      "location_x": -2088.809,
+      "location_y": 27.60736,
+      "location_z": 745.2189
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287060,
+      "facility_name": {
+        "en": "Eastern Substation"
+      },
+      "facility_type_id": 6,
+      "location_x": -321.5656,
+      "location_y": 2.881757,
+      "location_z": 2037.027
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287070,
+      "facility_name": {
+        "en": "Fort Liberty"
+      },
+      "facility_type_id": 6,
+      "location_x": 1620.034,
+      "location_y": 17.86942,
+      "location_z": -1832.038
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287040,
+      "facility_name": {
+        "en": "Takkon Storage"
+      },
+      "facility_type_id": 6,
+      "location_x": -1348.853,
+      "location_y": 0.2717934,
+      "location_z": -1608.503
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287080,
+      "facility_name": {
+        "en": "Construction Site Epsilon"
+      },
+      "facility_type_id": 6,
+      "location_x": 882.1007,
+      "location_y": 9.599091,
+      "location_z": -1344.736
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287090,
+      "facility_name": {
+        "en": "Mossridge Command Center"
+      },
+      "facility_type_id": 6,
+      "location_x": 518.8907,
+      "location_y": 47.37925,
+      "location_z": 1281.232
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287110,
+      "facility_name": {
+        "en": "Outpost Lambda"
+      },
+      "facility_type_id": 6,
+      "location_x": -1158.351,
+      "location_y": 0.4849286,
+      "location_z": -278.4248
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287100,
+      "facility_name": {
+        "en": "Construction Site Omega"
+      },
+      "facility_type_id": 6,
+      "location_x": 1318.172,
+      "location_y": 2.920121,
+      "location_z": 1897.608
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 287120,
+      "facility_name": {
+        "en": "Construction Site Sigma"
+      },
+      "facility_type_id": 6,
+      "location_x": -2268.66,
+      "location_y": 42.8756,
+      "location_z": -207.0165
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 289000,
+      "facility_name": {
+        "en": "Genudine Holographics"
+      },
+      "facility_type_id": 5,
+      "location_x": 698.7863,
+      "location_y": 117.2206,
+      "location_z": -2960.46
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 290000,
+      "facility_name": {
+        "en": "Fort Drexler"
+      },
+      "facility_type_id": 5,
+      "location_x": -739.2179,
+      "location_y": 29.67773,
+      "location_z": -1772.752
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 291000,
+      "facility_name": {
+        "en": "Cairn Station"
+      },
+      "facility_type_id": 5,
+      "location_x": -1339.238,
+      "location_y": 7.860434,
+      "location_z": -803.3466
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 293000,
+      "facility_name": {
+        "en": "Genesis Terraforming Plant"
+      },
+      "facility_type_id": 5,
+      "location_x": -793.7712,
+      "location_y": 18.64989,
+      "location_z": 1706.592
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 294000,
+      "facility_name": {
+        "en": "Bravata PMC Compound"
+      },
+      "facility_type_id": 5,
+      "location_x": -3.031891,
+      "location_y": 22.12843,
+      "location_z": 1848.096
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 292000,
+      "facility_name": {
+        "en": "Southgate Checkpoint"
+      },
+      "facility_type_id": 5,
+      "location_x": -2562.811,
+      "location_y": 21.8301,
+      "location_z": 1386.953
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 295000,
+      "facility_name": {
+        "en": "Matsuda Genetics"
+      },
+      "facility_type_id": 5,
+      "location_x": 2442.044,
+      "location_y": 11.60689,
+      "location_z": 1869.857
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 296000,
+      "facility_name": {
+        "en": "Hayd Skydock"
+      },
+      "facility_type_id": 5,
+      "location_x": 2281.435,
+      "location_y": 29.48964,
+      "location_z": -221.0779
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 297000,
+      "facility_name": {
+        "en": "Hatcher Airstation"
+      },
+      "facility_type_id": 5,
+      "location_x": 1528.477,
+      "location_y": 37.65943,
+      "location_z": -1014.045
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 299000,
+      "facility_name": {
+        "en": "Naum"
+      },
+      "facility_type_id": 2,
+      "location_x": 2397.268,
+      "location_y": 16.10193,
+      "location_z": -1478.351
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 298000,
+      "facility_name": {
+        "en": "Nason's Defiance"
+      },
+      "facility_type_id": 5,
+      "location_x": -15.67515,
+      "location_y": 157.9806,
+      "location_z": 22.43514
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 299010,
+      "facility_name": {
+        "en": "Naum Ravine Overpass"
+      },
+      "facility_type_id": 6,
+      "location_x": 2642.908,
+      "location_y": 39.10121,
+      "location_z": -1183.002
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 299020,
+      "facility_name": {
+        "en": "Naum Marsh Compound"
+      },
+      "facility_type_id": 15,
+      "location_x": 2115.026,
+      "location_y": 14.3377,
+      "location_z": -1108.963
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 299030,
+      "facility_name": {
+        "en": "Naum Forward Barracks"
+      },
+      "facility_type_id": 6,
+      "location_x": 2263.15,
+      "location_y": 15.91239,
+      "location_z": -1828.472
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 300000,
+      "facility_name": {
+        "en": "Hurakan"
+      },
+      "facility_type_id": 2,
+      "location_x": -404.0651,
+      "location_y": 73.75275,
+      "location_z": -1007.791
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 300020,
+      "facility_name": {
+        "en": "Hurakan Western Pass"
+      },
+      "facility_type_id": 6,
+      "location_x": -302.0181,
+      "location_y": 82.09375,
+      "location_z": -1320.16
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 300010,
+      "facility_name": {
+        "en": "Hurakan Secure Storage"
+      },
+      "facility_type_id": 15,
+      "location_x": -77.25874,
+      "location_y": 112.5849,
+      "location_z": -773.0132
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 300030,
+      "facility_name": {
+        "en": "Hurakan Southern Depot"
+      },
+      "facility_type_id": 6,
+      "location_x": -703.9125,
+      "location_y": 70.34908,
+      "location_z": -1212.7
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 301000,
+      "facility_name": {
+        "en": "Ixtab"
+      },
+      "facility_type_id": 2,
+      "location_x": -469.0049,
+      "location_y": 55.88142,
+      "location_z": 1003.755
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 301010,
+      "facility_name": {
+        "en": "Ixtab Power Regulation"
+      },
+      "facility_type_id": 6,
+      "location_x": -478.7307,
+      "location_y": 80.71923,
+      "location_z": 753.8644
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 301020,
+      "facility_name": {
+        "en": "Ixtab Water Purification"
+      },
+      "facility_type_id": 15,
+      "location_x": -178.5421,
+      "location_y": 60.07989,
+      "location_z": 1324.977
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 301030,
+      "facility_name": {
+        "en": "Ixtab Southern Pass"
+      },
+      "facility_type_id": 6,
+      "location_x": -774.3772,
+      "location_y": 86.84877,
+      "location_z": 1192.519
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 302010,
+      "facility_name": {
+        "en": "East Acan Storage Depot"
+      },
+      "facility_type_id": 6,
+      "location_x": 1170.853,
+      "location_y": 90.21292,
+      "location_z": 373.6869
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 302020,
+      "facility_name": {
+        "en": "Acan Data Hub"
+      },
+      "facility_type_id": 6,
+      "location_x": 1473.683,
+      "location_y": 133.369,
+      "location_z": -313.8972
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 302030,
+      "facility_name": {
+        "en": "Acan Southern Labs"
+      },
+      "facility_type_id": 6,
+      "location_x": 786.3189,
+      "location_y": 122.1681,
+      "location_z": -154.3891
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 303000,
+      "facility_name": {
+        "en": "Bitol"
+      },
+      "facility_type_id": 3,
+      "location_x": -2159.799,
+      "location_y": 5.424654,
+      "location_z": -1355.342
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 302000,
+      "facility_name": {
+        "en": "Acan"
+      },
+      "facility_type_id": 3,
+      "location_x": 1135.101,
+      "location_y": 119.9432,
+      "location_z": -143.7333
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 303010,
+      "facility_name": {
+        "en": "Bitol Stockpile"
+      },
+      "facility_type_id": 6,
+      "location_x": -2028.893,
+      "location_y": 20.78772,
+      "location_z": -1681.812
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 303020,
+      "facility_name": {
+        "en": "Bitol Northern Outpost"
+      },
+      "facility_type_id": 6,
+      "location_x": -1897.288,
+      "location_y": 36.90087,
+      "location_z": -1248.184
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 303030,
+      "facility_name": {
+        "en": "Bitol Eastern Depot"
+      },
+      "facility_type_id": 6,
+      "location_x": -2085.203,
+      "location_y": 27.46079,
+      "location_z": -1020.36
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 304000,
+      "facility_name": {
+        "en": "Zotz"
+      },
+      "facility_type_id": 3,
+      "location_x": 486.8584,
+      "location_y": 14.89789,
+      "location_z": 2781.841
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 304010,
+      "facility_name": {
+        "en": "Zotz North Garden"
+      },
+      "facility_type_id": 6,
+      "location_x": 725.937,
+      "location_y": 14,
+      "location_z": 2436.851
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 304030,
+      "facility_name": {
+        "en": "Zotz Agriculture Lab"
+      },
+      "facility_type_id": 6,
+      "location_x": 266.6301,
+      "location_y": 14.48802,
+      "location_z": 2678.566
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 304020,
+      "facility_name": {
+        "en": "Zotz Arboretum"
+      },
+      "facility_type_id": 6,
+      "location_x": 473.9089,
+      "location_y": -37.46881,
+      "location_z": 2276.472
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 305010,
+      "facility_name": {
+        "en": "Ghanan Southern Crossing"
+      },
+      "facility_type_id": 6,
+      "location_x": -1026.51,
+      "location_y": 11.56948,
+      "location_z": -3025.609
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 305000,
+      "facility_name": {
+        "en": "Ghanan"
+      },
+      "facility_type_id": 4,
+      "location_x": -677.6385,
+      "location_y": 9.643489,
+      "location_z": -2805.934
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 305020,
+      "facility_name": {
+        "en": "Ghanan Research Labs"
+      },
+      "facility_type_id": 6,
+      "location_x": -410.7588,
+      "location_y": 42.3,
+      "location_z": -3181.961
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 305030,
+      "facility_name": {
+        "en": "Ghanan Eastern Gatehouse"
+      },
+      "facility_type_id": 6,
+      "location_x": -853.4761,
+      "location_y": 25.77377,
+      "location_z": -2508.433
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 286000,
+      "facility_name": {
+        "en": "Four Fingers"
+      },
+      "facility_type_id": 6,
+      "location_x": -3205.175,
+      "location_y": 15.59608,
+      "location_z": 743.1317
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 306000,
+      "facility_name": {
+        "en": "Mulac"
+      },
+      "facility_type_id": 4,
+      "location_x": -1873.173,
+      "location_y": 17.78925,
+      "location_z": 2161.547
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 306010,
+      "facility_name": {
+        "en": "Mulac Pass"
+      },
+      "facility_type_id": 6,
+      "location_x": -1462.456,
+      "location_y": 31.17031,
+      "location_z": 2030.324
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 307000,
+      "facility_name": {
+        "en": "Chac"
+      },
+      "facility_type_id": 4,
+      "location_x": 2970.179,
+      "location_y": 12.7552,
+      "location_z": 661.3818
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 306020,
+      "facility_name": {
+        "en": "Mulac Foundry"
+      },
+      "facility_type_id": 6,
+      "location_x": -1843.732,
+      "location_y": 19.26804,
+      "location_z": 2496.869
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 306030,
+      "facility_name": {
+        "en": "Mulac Purification Site"
+      },
+      "facility_type_id": 6,
+      "location_x": -2238.982,
+      "location_y": 10.10089,
+      "location_z": 2257.801
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 307010,
+      "facility_name": {
+        "en": "Chac Fusion Lab"
+      },
+      "facility_type_id": 6,
+      "location_x": 3088.505,
+      "location_y": 2.633946,
+      "location_z": 446.0441
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 307020,
+      "facility_name": {
+        "en": "Chac Water Purification"
+      },
+      "facility_type_id": 6,
+      "location_x": 3097.351,
+      "location_y": 7.239565,
+      "location_z": 961.715
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 307030,
+      "facility_name": {
+        "en": "Chac Intel Hub"
+      },
+      "facility_type_id": 6,
+      "location_x": 2707.071,
+      "location_y": 9.482571,
+      "location_z": 442.2849
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 309000,
+      "facility_name": {
+        "en": "Hossin Eastern Warpgate"
+      },
+      "facility_type_id": 7,
+      "location_x": 2036.771,
+      "location_y": 12.00514,
+      "location_z": 3023.958
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 308000,
+      "facility_name": {
+        "en": "Hossin Western Warpgate"
+      },
+      "facility_type_id": 7,
+      "location_x": 2046.573,
+      "location_y": 14.93053,
+      "location_z": -3122.905
+    },
+    {
+      "zone_id": 4,
+      "facility_id": 310000,
+      "facility_name": {
+        "en": "Hossin Southern Warpgate"
+      },
+      "facility_type_id": 7,
+      "location_x": -3302.816,
+      "location_y": 17.94242,
+      "location_z": -86.36958
+    }
+  ],
+  "returned": 88
+}
