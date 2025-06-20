@@ -1,0 +1,16 @@
+[project]
+name = "ps2mapstate"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi~=0.115.12",
+    "httpx~=0.28.1",
+    "pytest~=8.4.0",
+    "uv==0.7.13",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.0",
+]
