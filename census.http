@@ -45,6 +45,9 @@ GET https://census.daybreakgames.com/get/ps2:v2/zone?zone_id=2&c:join=map_region
 ### GET map combined info from lithafalcon
 GET https://census.lithafalcon.cc/get/ps2/zone?zone_id=2&c:join=map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id%27map_region_id)&c:lang=en&c:censusJSON=false
 
+### GET combined info with links from lithafalcon
+https://census.lithafalcon.cc/get/ps2/zone?zone_id=4&c:join=facility_link^on:zone_id^to:zone_id^list:1^inject_at:links^hide:description'zone_id,map_region^list:1^inject_at:regions^hide:zone_id'localized_facility_name(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&c:lang=en&c:hide=name,description&c:censusJSON=false
+
 ### GET metagame info for world via metagame.ps2.live
 GET https://metagame.ps2.live/1
 
