@@ -1,0 +1,1238 @@
+[
+  {
+    "worldID": 1,
+    "worldName": "Connery",
+    "playersOnline": 164,
+    "zones": [
+      {
+        "zoneID": 2,
+        "worldID": 1,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T06:07:37Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 90,
+          "total": 90
+        }
+      },
+      {
+        "zoneID": 4,
+        "worldID": 1,
+        "isOpened": true,
+        "unstableState": 1,
+        "alert": {
+          "id": 58742,
+          "timestamp": "2025-06-25T17:29:57Z",
+          "duration": 2700,
+          "zoneID": 4,
+          "worldID": 1,
+          "alertID": 187,
+          "instanceID": 45432,
+          "name": "",
+          "victorFactionID": null,
+          "warpgateVS": 309000,
+          "warpgateNC": 310000,
+          "warpgateTR": 308000,
+          "zoneFacilityCount": 88,
+          "countVS": null,
+          "countNC": null,
+          "countTR": null,
+          "participants": 0
+        },
+        "alertInfo": {
+          "id": 187,
+          "name": "Hossin Unstable Meltdown",
+          "description": "Control territory to lock Hossin",
+          "typeID": 9,
+          "durationMinutes": 45
+        },
+        "alertStart": "2025-06-25T17:29:57Z",
+        "alertEnd": "2025-06-25T18:14:57Z",
+        "lastLocked": "2025-06-25T01:54:52Z",
+        "playerCount": 138,
+        "players": {
+          "all": 138,
+          "vs": 53,
+          "nc": 45,
+          "tr": 40,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 16,
+          "nc": 11,
+          "tr": 7,
+          "total": 88
+        }
+      },
+      {
+        "zoneID": 6,
+        "worldID": 1,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T11:55:57Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 82,
+          "nc": 0,
+          "tr": 0,
+          "total": 82
+        }
+      },
+      {
+        "zoneID": 8,
+        "worldID": 1,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T04:32:53Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 49,
+          "nc": 0,
+          "tr": 0,
+          "total": 49
+        }
+      },
+      {
+        "zoneID": 344,
+        "worldID": 1,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T02:12:34Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 71,
+          "total": 71
+        }
+      }
+    ]
+  },
+  {
+    "worldID": 10,
+    "worldName": "Miller",
+    "playersOnline": 848,
+    "zones": [
+      {
+        "zoneID": 2,
+        "worldID": 10,
+        "isOpened": true,
+        "unstableState": 1,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T11:12:08Z",
+        "playerCount": 46,
+        "players": {
+          "all": 46,
+          "vs": 9,
+          "nc": 14,
+          "tr": 23,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 7,
+          "nc": 8,
+          "tr": 5,
+          "total": 90
+        }
+      },
+      {
+        "zoneID": 4,
+        "worldID": 10,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T16:26:09Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 88,
+          "nc": 0,
+          "tr": 0,
+          "total": 88
+        }
+      },
+      {
+        "zoneID": 6,
+        "worldID": 10,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": {
+          "id": 58741,
+          "timestamp": "2025-06-25T16:56:08Z",
+          "duration": 5400,
+          "zoneID": 6,
+          "worldID": 10,
+          "alertID": 156,
+          "instanceID": 41451,
+          "name": "",
+          "victorFactionID": null,
+          "warpgateVS": 203000,
+          "warpgateNC": 200000,
+          "warpgateTR": 201000,
+          "zoneFacilityCount": 82,
+          "countVS": null,
+          "countNC": null,
+          "countTR": null,
+          "participants": 0
+        },
+        "alertInfo": {
+          "id": 156,
+          "name": "Amerish Superiority",
+          "description": "Control territory to lock Amerish",
+          "typeID": 9,
+          "durationMinutes": 90
+        },
+        "alertStart": "2025-06-25T16:56:08Z",
+        "alertEnd": "2025-06-25T18:26:08Z",
+        "lastLocked": "2025-06-25T08:18:07Z",
+        "playerCount": 731,
+        "players": {
+          "all": 731,
+          "vs": 227,
+          "nc": 240,
+          "tr": 264,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 21,
+          "nc": 20,
+          "tr": 41,
+          "total": 82
+        }
+      },
+      {
+        "zoneID": 8,
+        "worldID": 10,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T14:12:55Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 49,
+          "tr": 0,
+          "total": 49
+        }
+      },
+      {
+        "zoneID": 344,
+        "worldID": 10,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T12:07:40Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 69,
+          "tr": 0,
+          "total": 69
+        }
+      }
+    ]
+  },
+  {
+    "worldID": 13,
+    "worldName": "Cobalt",
+    "playersOnline": 0,
+    "zones": [
+      {
+        "zoneID": 2,
+        "worldID": 13,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2024-10-29T14:50:16Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      },
+      {
+        "zoneID": 4,
+        "worldID": 13,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2024-10-29T14:50:19Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      },
+      {
+        "zoneID": 6,
+        "worldID": 13,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2024-10-29T14:50:17Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      },
+      {
+        "zoneID": 8,
+        "worldID": 13,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2024-10-29T14:50:16Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      },
+      {
+        "zoneID": 344,
+        "worldID": 13,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2024-10-29T14:50:17Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      }
+    ]
+  },
+  {
+    "worldID": 17,
+    "worldName": "Emerald",
+    "playersOnline": 0,
+    "zones": [
+      {
+        "zoneID": 2,
+        "worldID": 17,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-04-23T18:10:18Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      },
+      {
+        "zoneID": 4,
+        "worldID": 17,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-04-23T18:10:19Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      },
+      {
+        "zoneID": 6,
+        "worldID": 17,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-04-23T18:10:18Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      },
+      {
+        "zoneID": 8,
+        "worldID": 17,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-04-23T18:10:17Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      },
+      {
+        "zoneID": 344,
+        "worldID": 17,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-04-23T18:10:18Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      }
+    ]
+  },
+  {
+    "worldID": 24,
+    "worldName": "Apex",
+    "playersOnline": 0,
+    "zones": [
+      {
+        "zoneID": 2,
+        "worldID": 24,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": null,
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 89,
+          "total": 89
+        }
+      },
+      {
+        "zoneID": 4,
+        "worldID": 24,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": null,
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 30,
+          "nc": 29,
+          "tr": 29,
+          "total": 88
+        }
+      },
+      {
+        "zoneID": 6,
+        "worldID": 24,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": null,
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 81,
+          "nc": 0,
+          "tr": 0,
+          "total": 81
+        }
+      },
+      {
+        "zoneID": 8,
+        "worldID": 24,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": null,
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 49,
+          "tr": 0,
+          "total": 49
+        }
+      },
+      {
+        "zoneID": 344,
+        "worldID": 24,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": null,
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 69,
+          "tr": 0,
+          "total": 69
+        }
+      }
+    ]
+  },
+  {
+    "worldID": 19,
+    "worldName": "Jaeger",
+    "playersOnline": 3,
+    "zones": [
+      {
+        "zoneID": 2,
+        "worldID": 19,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-10T14:23:12Z",
+        "playerCount": 2,
+        "players": {
+          "all": 2,
+          "vs": 0,
+          "nc": 1,
+          "tr": 1,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 37,
+          "nc": 28,
+          "tr": 24,
+          "total": 89
+        }
+      },
+      {
+        "zoneID": 4,
+        "worldID": 19,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-10T14:23:14Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 29,
+          "nc": 24,
+          "tr": 35,
+          "total": 88
+        }
+      },
+      {
+        "zoneID": 6,
+        "worldID": 19,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-10T14:23:12Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 26,
+          "nc": 28,
+          "tr": 27,
+          "total": 81
+        }
+      },
+      {
+        "zoneID": 8,
+        "worldID": 19,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-10T14:23:11Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 20,
+          "nc": 17,
+          "tr": 12,
+          "total": 49
+        }
+      },
+      {
+        "zoneID": 344,
+        "worldID": 19,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-10T14:23:13Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 23,
+          "nc": 22,
+          "tr": 24,
+          "total": 69
+        }
+      }
+    ]
+  },
+  {
+    "worldID": 40,
+    "worldName": "SolTech",
+    "playersOnline": 8,
+    "zones": [
+      {
+        "zoneID": 2,
+        "worldID": 40,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T09:41:14Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 90,
+          "tr": 0,
+          "total": 90
+        }
+      },
+      {
+        "zoneID": 4,
+        "worldID": 40,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T15:42:11Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 88,
+          "nc": 0,
+          "tr": 0,
+          "total": 88
+        }
+      },
+      {
+        "zoneID": 6,
+        "worldID": 40,
+        "isOpened": true,
+        "unstableState": 1,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-24T22:06:21Z",
+        "playerCount": 3,
+        "players": {
+          "all": 3,
+          "vs": 0,
+          "nc": 1,
+          "tr": 2,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 3,
+          "nc": 11,
+          "tr": 3,
+          "total": 82
+        }
+      },
+      {
+        "zoneID": 8,
+        "worldID": 40,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T03:54:10Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 49,
+          "total": 49
+        }
+      },
+      {
+        "zoneID": 344,
+        "worldID": 40,
+        "isOpened": false,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-23T10:37:46Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 69,
+          "tr": 0,
+          "total": 69
+        }
+      }
+    ]
+  },
+  {
+    "worldID": 1000,
+    "worldName": "Genudine",
+    "playersOnline": 63,
+    "zones": [
+      {
+        "zoneID": 2,
+        "worldID": 1000,
+        "isOpened": true,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T18:03:17Z",
+        "playerCount": 18,
+        "players": {
+          "all": 18,
+          "vs": 12,
+          "nc": 1,
+          "tr": 4,
+          "unknown": 1
+        },
+        "territoryControl": {
+          "vs": 90,
+          "nc": 0,
+          "tr": 0,
+          "total": 90
+        }
+      },
+      {
+        "zoneID": 4,
+        "worldID": 1000,
+        "isOpened": true,
+        "unstableState": 1,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T04:16:13Z",
+        "playerCount": 30,
+        "players": {
+          "all": 30,
+          "vs": 8,
+          "nc": 14,
+          "tr": 7,
+          "unknown": 1
+        },
+        "territoryControl": {
+          "vs": 6,
+          "nc": 6,
+          "tr": 7,
+          "total": 88
+        }
+      },
+      {
+        "zoneID": 6,
+        "worldID": 1000,
+        "isOpened": true,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T10:03:17Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 82,
+          "tr": 0,
+          "total": 82
+        }
+      },
+      {
+        "zoneID": 8,
+        "worldID": 1000,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": null,
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      },
+      {
+        "zoneID": 344,
+        "worldID": 1000,
+        "isOpened": true,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T12:16:13Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 54,
+          "nc": 0,
+          "tr": 0,
+          "total": 54
+        }
+      }
+    ]
+  },
+  {
+    "worldID": 2000,
+    "worldName": "Ceres",
+    "playersOnline": 53,
+    "zones": [
+      {
+        "zoneID": 2,
+        "worldID": 2000,
+        "isOpened": true,
+        "unstableState": 2,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-24T23:15:21Z",
+        "playerCount": 43,
+        "players": {
+          "all": 43,
+          "vs": 19,
+          "nc": 6,
+          "tr": 15,
+          "unknown": 3
+        },
+        "territoryControl": {
+          "vs": 13,
+          "nc": 19,
+          "tr": 23,
+          "total": 89
+        }
+      },
+      {
+        "zoneID": 4,
+        "worldID": 2000,
+        "isOpened": true,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T05:03:06Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 88,
+          "total": 88
+        }
+      },
+      {
+        "zoneID": 6,
+        "worldID": 2000,
+        "isOpened": true,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T10:50:10Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 82,
+          "nc": 0,
+          "tr": 0,
+          "total": 82
+        }
+      },
+      {
+        "zoneID": 8,
+        "worldID": 2000,
+        "isOpened": true,
+        "unstableState": 3,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": null,
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "total": 0
+        }
+      },
+      {
+        "zoneID": 344,
+        "worldID": 2000,
+        "isOpened": true,
+        "unstableState": 0,
+        "alert": null,
+        "alertInfo": null,
+        "alertStart": null,
+        "alertEnd": null,
+        "lastLocked": "2025-06-25T14:26:21Z",
+        "playerCount": 0,
+        "players": {
+          "all": 0,
+          "vs": 0,
+          "nc": 0,
+          "tr": 0,
+          "unknown": 0
+        },
+        "territoryControl": {
+          "vs": 54,
+          "nc": 0,
+          "tr": 0,
+          "total": 54
+        }
+      }
+    ]
+  }
+]
