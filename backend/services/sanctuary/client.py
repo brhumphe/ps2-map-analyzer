@@ -1,15 +1,6 @@
-from typing import Any
-
-import httpx
-
+from services.common import fetch_json
 from services.sanctuary.models.map_state import MapStateResponse
 from services.sanctuary.models.zone import ZoneData, ZoneDataResponse
-
-
-async def fetch_json(client: httpx.AsyncClient, url: str, params: dict = None) -> dict[str, Any]:
-    response = await client.get(url, params=params)
-    response.raise_for_status()
-    return response.json()
 
 
 async def fetch_map_state(client, world_id, zone_id) -> MapStateResponse:

@@ -12,14 +12,14 @@ class CaptureReward(BaseModel):
     amount: int = Field(alias="Amount")
 
 
-class Hex(BaseModel):
+class HexData(BaseModel):
     x: int
     y: int
     hex_type: int
     type_name: str
 
 
-class Region(BaseModel):
+class RegionData(BaseModel):
     map_region_id: int
     facility_id: int
     facility_name: str
@@ -32,7 +32,7 @@ class Region(BaseModel):
     image_set_id: int
     image_id: int
     image_path: str
-    hexes: List[Hex]
+    hexes: List[HexData]
 
 
 class ZoneData(BaseModel):
@@ -43,7 +43,7 @@ class ZoneData(BaseModel):
     type: str
     dynamic: bool
     links: List[Link]
-    regions: List[Region]
+    regions: List[RegionData]
 
 
 class ZoneDataResponse(BaseModel):
