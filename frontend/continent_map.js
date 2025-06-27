@@ -10,7 +10,7 @@
 const game_to_latLng = function (x, z) {
     const rotationAngle = 90 * Math.PI / 180;
     let newX = x * Math.cos(rotationAngle) + z * Math.sin(rotationAngle);
-    let newY = x * Math.sin(rotationAngle) - z * Math.cos(rotationAngle) - 256;
+    let newY = x * Math.sin(rotationAngle) - z * Math.cos(rotationAngle);
     return L.latLng(newY, newX);
 }
 
@@ -27,14 +27,17 @@ const game_to_latLng = function (x, z) {
  */
 const latLng_to_game = function (latLng) {
     const rotationAngle = -90 * Math.PI / 180;
-    return [latLng.lng * Math.cos(rotationAngle) - latLng.lat * Math.sin(rotationAngle) + 256, latLng.lng * Math.sin(rotationAngle) + latLng.lat * Math.cos(rotationAngle)];
+    return [
+        latLng.lng * Math.cos(rotationAngle) - latLng.lat * Math.sin(rotationAngle),
+        latLng.lng * Math.sin(rotationAngle) + latLng.lat * Math.cos(rotationAngle)
+    ];
 }
 
 // Add cursor coordinates in a popup that follows the mouse for debugging
 L.CursorHandler = L.Handler.extend({
 
     addHooks: function () {
-        this._popup = new L.Popup();
+        this._popup = new L.Popup({autoPan: false});
         this._map.on('mouseover', this._open, this);
         this._map.on('mousemove', this._update, this);
         this._map.on('mouseout', this._close, this);
@@ -91,7 +94,8 @@ customTileLayer.getTileUrl = function (coords) {
     // Transform Leaflet coordinates to tile names
     // Leaflet gives 0,1,2,3... but need 0,4,8,12... (increment by 4)
     const tileX = coords.x * 4;
-    const tileY = -coords.y * 4;
+    // -4 to offset which row is being requested to match the names.
+    const tileY = -coords.y * 4-4;
 
     // Format as 3-digit zero-padded strings
     let xStr = Math.abs(tileX).toString().padStart(3, '0');
@@ -119,7 +123,7 @@ function placeRegionMarkers(zone) {
     }
 }
 
-// Fetch hossin map data
+// Fetch map data
 fetch('indar-map-info-combined.json')
     .then(response => response.json())
     .then(data => {
@@ -139,4 +143,4 @@ fetch('indar-map-info-combined.json')
             L.polyline([translatedCoordsA, translatedCoordsB], {color: 'red'}).addTo(map);
         }
     })
-    .catch(error => console.error('Error loading map data:', error));
+    // .catch(error => console.error('Error loading map data:', error));
