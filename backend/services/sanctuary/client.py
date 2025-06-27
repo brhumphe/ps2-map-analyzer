@@ -1,10 +1,11 @@
 from services.common import fetch_json
 from services.sanctuary.external_models.map_state import MapStateResponse
-from services.sanctuary.external_models.zone import ZoneData, ZoneDataResponse
+from services.sanctuary.external_models.zone import ZoneDataResponse
+from shared.models.map_state import MapState
 from shared.models.zone import Zone
 
 
-async def fetch_map_state(client, world_id, zone_id) -> MapStateResponse:
+async def fetch_map_state(client, world_id, zone_id) -> MapState:
     data = await fetch_json(
         client,
         "https://census.lithafalcon.cc/get/ps2/map_state",
@@ -15,7 +16,8 @@ async def fetch_map_state(client, world_id, zone_id) -> MapStateResponse:
             "c:show": "world_id,zone_id,timestamp,owning_faction_id,map_region_id",
         },
     )
-    return MapStateResponse(**data)
+    resp = MapStateResponse(**data)
+    return resp.as_map_state()
 
 
 async def fetch_zone_data(client, zone_id) -> Zone:
