@@ -1,19 +1,25 @@
-from enum import Enum
+from enum import IntEnum
+
+type FacilityID = int
+type RegionID = int
+type WorldID = int
 
 
-class Faction(Enum):
+class Faction(IntEnum):
     NEUTRAL = 0
     VS = 1
     NC = 2
     TR = 3
     NS = 4
 
-class HexType(Enum):
+
+class HexType(IntEnum):
     UNRESTRICTED = 0
     UNKNOWN = 1
     FACTION_RESTRICTED = 2
 
-class FacilityType(Enum):
+
+class FacilityType(IntEnum):
     DEFAULT = 1
     AMP_STATION = 2
     BIO_LAB = 3
@@ -32,7 +38,8 @@ class FacilityType(Enum):
     AMP_CTF = 16
     CONSTRUCTION_CTF = 17
 
-class Continent(Enum):
+
+class Continent(IntEnum):
     INDAR = 2
     HOSSIN = 4
     AMERISH = 6
