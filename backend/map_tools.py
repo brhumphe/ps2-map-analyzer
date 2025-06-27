@@ -1,7 +1,15 @@
+from shared.models.common import Faction
+from shared.models.map_state import MapState
+from shared.models.zone import Zone
+
+
 def find_capturable_bases(faction_id, links, map_state, region_list):
     facilities = {}
-    map_region_to_facility = {data["map_region_id"]: data["facility_id"] for data in region_list["map_region_list"] if
-                              "facility_id" in data}
+    map_region_to_facility = {
+        data["map_region_id"]: data["facility_id"]
+        for data in region_list["map_region_list"]
+        if "facility_id" in data
+    }
     for facility_state in map_state["map_state_list"]:
         facility_state["facility_id"] = map_region_to_facility[facility_state["map_region_id"]]
         facilities[facility_state["facility_id"]] = facility_state
@@ -21,3 +29,7 @@ def find_capturable_bases(faction_id, links, map_state, region_list):
             else:
                 capturable_facilities.add(facility_a["facility_id"])
     return capturable_facilities
+
+
+def find_capturable_bases_v2(faction: Faction, state: MapState, zone: Zone):
+    raise NotImplementedError

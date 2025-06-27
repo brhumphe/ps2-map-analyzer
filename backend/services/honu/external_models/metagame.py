@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 
 class PlayerCounts(BaseModel):
     """Player counts by faction"""
+
     all: int
     vs: int  # Vanu Sovereignty
     nc: int  # New Conglomerate
@@ -14,6 +15,7 @@ class PlayerCounts(BaseModel):
 
 class TerritoryControl(BaseModel):
     """Territory control counts by faction"""
+
     vs: int  # Vanu Sovereignty territories
     nc: int  # New Conglomerate territories
     tr: int  # Terran Republic territories
@@ -22,6 +24,7 @@ class TerritoryControl(BaseModel):
 
 class AlertStatus(BaseModel):
     """Active alert information"""
+
     id: int
     timestamp: datetime
     duration: int  # Duration in seconds
@@ -46,6 +49,7 @@ class AlertStatus(BaseModel):
 
 class AlertInfo(BaseModel):
     """Alert type information"""
+
     id: int
     name: str
     description: str
@@ -58,6 +62,7 @@ class AlertInfo(BaseModel):
 
 class ZoneMetaState(BaseModel):
     """Zone/continent information"""
+
     zoneID: int
     worldID: int
     isOpened: bool
@@ -77,6 +82,7 @@ class ZoneMetaState(BaseModel):
 
 class WorldMetaState(BaseModel):
     """Game world/server information"""
+
     worldID: int
     worldName: str
     playersOnline: int
@@ -88,6 +94,7 @@ class WorldMetaState(BaseModel):
 
 class MetaGameState(BaseModel):
     """Root model representing the complete game state"""
+
     worlds: List[WorldMetaState] = Field(alias="__root__")
 
     class Config:

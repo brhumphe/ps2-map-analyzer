@@ -1,15 +1,15 @@
-from shared.models.common import Faction, Continent
+from pydantic import BaseModel
+
+from shared.models.common import FacilityID, Faction, Continent
 
 
-class FacilityState:
-    world_id: int
-    zone_id: Continent
-    facility_id: int
+class FacilityState(BaseModel):
+    facility_id: FacilityID
     owning_faction_id: Faction
     last_updated: int
 
 
-class MapState:
+class MapState(BaseModel):
     world_id: int
     zone_id: Continent
-    facility_states: dict[int, FacilityState]
+    facility_states: dict[FacilityID, FacilityState]

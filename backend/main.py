@@ -17,7 +17,7 @@ async def lifespan(app: FastAPI):
 
     # Initialize the Client on startup and add it to the state
     async with httpx.AsyncClient(limits=limits, timeout=timeout) as client:
-        yield {'client': client}
+        yield {"client": client}
         # The Client closes on shutdown
 
 
@@ -47,7 +47,6 @@ async def capturable_bases(world_id: int, zone_id: int, faction_id: int, request
 
     zone_data_co = fetch_zone_data(client, zone_id)
 
-    map_state, zone_data = await asyncio.gather(map_state_co,
-                                                zone_data_co)
+    map_state, zone_data = await asyncio.gather(map_state_co, zone_data_co)
 
     return find_capturable_bases(faction_id, map_state, zone_data)
