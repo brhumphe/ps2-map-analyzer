@@ -9,8 +9,8 @@
  */
 const game_to_latLng = function (x, z) {
     const rotationAngle = 90 * Math.PI / 180;
-    let newX = x * Math.cos(rotationAngle) - z * Math.sin(rotationAngle);
-    let newY = x * Math.sin(rotationAngle) + z * Math.cos(rotationAngle) - 256;
+    let newX = x * Math.cos(rotationAngle) + z * Math.sin(rotationAngle);
+    let newY = x * Math.sin(rotationAngle) - z * Math.cos(rotationAngle) - 256;
     return L.latLng(newY, newX);
 }
 
@@ -106,9 +106,37 @@ customTileLayer.getTileUrl = function (coords) {
 
 // Add to map
 customTileLayer.addTo(map);
-const west_wg = game_to_latLng(-2276.637, 2486.449)
-const east_wg = game_to_latLng(-2435.838, -2764.692)
-const north_wg = game_to_latLng(2750.148, -95.01959)
-L.marker(west_wg).addTo(map).bindPopup("West Gate [-2276.637, 2486.449]")
-L.marker(east_wg).addTo(map).bindPopup("East Gate [-2435.838, -2764.692]")
-L.marker(north_wg).addTo(map).bindPopup("North Gate [2750.148, -95.01959]")
+
+function placeRegionMarkers(zone) {
+    for (const region of Object.values(zone["regions"])) {
+        if (region["location_x"] === undefined || region["location_z"] === undefined) continue;
+        const locationX = region["location_x"];
+        const locationZ = region["location_z"];
+        const position = game_to_latLng(locationX, locationZ)
+        L.marker(position).addTo(map).bindPopup(
+            `Region ${region["facility_name"]} @ ${locationX}, ${locationZ}`
+        )
+    }
+}
+
+// Fetch hossin map data
+fetch('indar-map-info-combined.json')
+    .then(response => response.json())
+    .then(data => {
+        let zone = data["zone_list"][0]
+        placeRegionMarkers(zone);
+        const facility_coords = {};
+        for (const obj of zone["regions"]) {
+            if (obj["location_x"] !== undefined && obj["location_y"] !== undefined) {
+                facility_coords[obj["facility_id"]] = [obj["location_x"], obj["location_z"]];
+            }
+        }
+        for (const link of zone["links"]) {
+            let loc_a = facility_coords[link["facility_id_a"]]
+            let loc_b = facility_coords[link["facility_id_b"]]
+            const translatedCoordsA = game_to_latLng(loc_a[0], loc_a[1]);
+            const translatedCoordsB = game_to_latLng(loc_b[0], loc_b[1]);
+            L.polyline([translatedCoordsA, translatedCoordsB], {color: 'red'}).addTo(map);
+        }
+    })
+    .catch(error => console.error('Error loading map data:', error));
