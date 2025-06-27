@@ -32,4 +32,13 @@ def find_capturable_bases(faction_id, links, map_state, region_list):
 
 
 def find_capturable_bases_v2(faction: Faction, state: MapState, zone: Zone):
-    raise NotImplementedError
+    lattice = zone.lattice
+    available = set()
+    for region_state in state.region_states.values():
+        if region_state.owning_faction_id != faction:
+            continue
+        for neighbor in lattice[region_state.map_region_id]:
+            neighbor_control = state.region_states[neighbor].owning_faction_id
+            if neighbor_control != faction:
+                available.add(neighbor)
+    return {zone.region_to_facility[x] for x in available}
