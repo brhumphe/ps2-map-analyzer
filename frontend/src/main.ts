@@ -1,3 +1,4 @@
+// import * as L from 'leaflet';
 /**
  * Converts game world coordinates (x, z) to latitude and longitude coordinates.
  *
@@ -7,7 +8,7 @@
  * @param {number} z - The Z coordinate in the game world.
  * @returns {L.LatLng} A Leaflet LatLng object representing the corresponding latitude and longitude.
  */
-const game_to_latLng = function (x, z) {
+const game_to_latLng = function (x: number, z: number): L.LatLng {
     const rotationAngle = 90 * Math.PI / 180;
     let newX = x * Math.cos(rotationAngle) + z * Math.sin(rotationAngle);
     let newY = x * Math.sin(rotationAngle) - z * Math.cos(rotationAngle);
@@ -25,7 +26,7 @@ const game_to_latLng = function (x, z) {
  * @param {number} latLng.lng - The longitude of the geographic location.
  * @returns {number[]} An array representing the transformed coordinates in PS2 (x, z) coordinates.
  */
-const latLng_to_game = function (latLng) {
+const latLng_to_game = function (latLng: { lng: number; lat: number; }) {
     const rotationAngle = -90 * Math.PI / 180;
     return [
         latLng.lng * Math.cos(rotationAngle) - latLng.lat * Math.sin(rotationAngle),
@@ -35,7 +36,7 @@ const latLng_to_game = function (latLng) {
 
 function initMouseCoordinatesPopup() {
 // Add cursor coordinates in a popup that follows the mouse for debugging
-    L.CursorHandler = L.Handler.extend({
+    (L as any).CursorHandler = L.Handler.extend({
 
         addHooks: function () {
             this._popup = new L.Popup({autoPan: false});
@@ -66,7 +67,7 @@ function initMouseCoordinatesPopup() {
         }
     });
 
-    L.Map.addInitHook('addHandler', 'cursor', L.CursorHandler);
+    L.Map.addInitHook('addHandler', 'cursor', (L as any).CursorHandler);
 }
 
 
@@ -76,7 +77,6 @@ function initMouseCoordinatesPopup() {
 function configureMapTileLayer(map) {
 // Create custom tile layer
     const customTileLayer = L.tileLayer('', {
-        zoomSnap: 1,
         minZoom: -50,
         maxZoom: 2,
         tileSize: 256,
@@ -178,7 +178,7 @@ initMouseCoordinatesPopup();
 
 // Map creation
 const map = L.map('map_div', {
-    crs: L.CRS.Simple, center: [0, 0], cursor: true,
+    crs: L.CRS.Simple, center: [0, 0],
 }).setView([0, 0], 0);
 
 configureMapTileLayer(map);

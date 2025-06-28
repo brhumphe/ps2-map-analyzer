@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "strict": false,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./frontend/dist",
+    "rootDir": "./frontend/src",
+    "baseUrl": "./",
+    "declaration": true,
+    "sourceMap": true,
+    "removeComments": false,
+    "noEmitOnError": false
+  },
+  "include": [
+    "frontend/src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "frontend/dist",
+    "backend",
+    "tests",
+    ".venv"
+  ]
+}
