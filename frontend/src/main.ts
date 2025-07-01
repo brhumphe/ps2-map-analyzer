@@ -160,8 +160,8 @@ function drawLattice(zone) {
     for (const link of zone["links"]) {
         let loc_a = facility_coords[link["facility_id_a"]]
         let loc_b = facility_coords[link["facility_id_b"]]
-        const translatedCoordsA = game_to_latLng({x: loc_a[0], z: loc_a[1]});
-        const translatedCoordsB = game_to_latLng({x: loc_b[0], z: loc_b[1]});
+        const translatedCoordsA = game_to_latLng(loc_a);
+        const translatedCoordsB = game_to_latLng(loc_b);
         L.polyline([translatedCoordsA, translatedCoordsB], {color: 'red'}).addTo(map);
     }
 }
