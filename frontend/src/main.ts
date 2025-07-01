@@ -1,12 +1,5 @@
 import * as L from 'leaflet';
-/**
- * Represents coordinates in the game world coordinate system.
- * Uses (x, z) coordinates where Y-axis is up in 3D space but discarded for 2D mapping.
- */
-interface GameCoordinates {
-    x: number;
-    z: number;
-}
+import {GameCoordinates, Zone} from "./types/zone_types";
 
 /**
  * Converts game world coordinates to latitude and longitude coordinates.
@@ -120,7 +113,7 @@ function configureMapTileLayer(map: L.Map): void {
  * Places markers on a map for each region in the provided zone object.
  * Each marker is positioned based on the region's coordinates and includes an informational popup.
  */
-function placeRegionMarkers(zone, map: L.Map) {
+function placeRegionMarkers(zone: Zone, map: L.Map) {
     for (const region of Object.values(zone["regions"])) {
         if (region["location_x"] === undefined || region["location_z"] === undefined) continue;
         const locationX = region["location_x"];
@@ -136,7 +129,7 @@ function placeRegionMarkers(zone, map: L.Map) {
  * Extracts the facility coordinates from a given zone object.
  * Iterates through the regions of the zone and retrieves the coordinates for each facility.
  */
-function extractFacilityCoordinates(zone):Record<number, GameCoordinates>
+function extractFacilityCoordinates(zone: Zone):Record<number, GameCoordinates>
  {
     const facility_coords = {};
     for (const obj of zone["regions"]) {
@@ -150,12 +143,12 @@ function extractFacilityCoordinates(zone):Record<number, GameCoordinates>
 /**
  * Draws a lattice structure by connecting facilities within a given zone using polylines.
  *
- * @param {Object} zone - The zone object containing facility and link information.
+ * @param {Zone} zone - The zone object containing facility and link information.
  *                        `zone.links` should be an array of objects, where each object represents a connection
  *                        between two facilities. Each object must have `facility_id_a` and `facility_id_b` properties.
  * @return {void} This function does not return a value, but it draws polylines on the map.
  */
-function drawLattice(zone) {
+function drawLattice(zone: Zone): void {
     let facility_coords = extractFacilityCoordinates(zone);
     for (const link of zone["links"]) {
         let loc_a = facility_coords[link["facility_id_a"]]
