@@ -1,42 +1,44 @@
-// import * as L from 'leaflet';
+import * as L from 'leaflet';
 /**
- * Converts game world coordinates (x, z) to latitude and longitude coordinates.
+ * Represents coordinates in the game world coordinate system.
+ * Uses (x, z) coordinates where Y-axis is up in 3D space but discarded for 2D mapping.
+ */
+interface GameCoordinates {
+    x: number;
+    z: number;
+}
+
+/**
+ * Converts game world coordinates to latitude and longitude coordinates.
  *
  * Note that PS2 uses Y-axis up 3D coordinates, so discard y for 2D map purposes.
  *
- * @param {number} x - The X coordinate in the game world.
- * @param {number} z - The Z coordinate in the game world.
+ * @param {GameCoordinates} coords - The coordinates in the game world.
  * @returns {L.LatLng} A Leaflet LatLng object representing the corresponding latitude and longitude.
  */
-const game_to_latLng = function (x: number, z: number): L.LatLng {
+const game_to_latLng = function (coords: GameCoordinates): L.LatLng {
     const rotationAngle = 90 * Math.PI / 180;
-    let newX = x * Math.cos(rotationAngle) + z * Math.sin(rotationAngle);
-    let newY = x * Math.sin(rotationAngle) - z * Math.cos(rotationAngle);
+    let newX = coords.x * Math.cos(rotationAngle) + coords.z * Math.sin(rotationAngle);
+    let newY = coords.x * Math.sin(rotationAngle) - coords.z * Math.cos(rotationAngle);
     return L.latLng(newY, newX);
 }
 
 /**
  * Converts latitude and longitude coordinates to game world coordinates.
  *
- * Note that PS2 uses Y-axis up 3D coordinates, so this returns (x, z) instead of (x, y)
- *
- * @function
- * @param {L.LatLng} latLng - An object representing the latitude and longitude coordinates.
- * @param {number} latLng.lat - The latitude of the geographic location.
- * @param {number} latLng.lng - The longitude of the geographic location.
- * @returns {number[]} An array representing the transformed coordinates in PS2 (x, z) coordinates.
+ * Note that PS2 uses Y-axis up 3D coordinates, so this returns GameCoordinates object
  */
-const latLng_to_game = function (latLng: { lng: number; lat: number; }) {
+const latLng_to_game = function (latLng: L.LatLng): GameCoordinates {
     const rotationAngle = -90 * Math.PI / 180;
-    return [
-        latLng.lng * Math.cos(rotationAngle) - latLng.lat * Math.sin(rotationAngle),
-        latLng.lng * Math.sin(rotationAngle) + latLng.lat * Math.cos(rotationAngle)
-    ];
+    return {
+        x: latLng.lng * Math.cos(rotationAngle) - latLng.lat * Math.sin(rotationAngle),
+        z: latLng.lng * Math.sin(rotationAngle) + latLng.lat * Math.cos(rotationAngle)
+    };
 }
 
 function initMouseCoordinatesPopup() {
 // Add cursor coordinates in a popup that follows the mouse for debugging
-    (L as any).CursorHandler = L.Handler.extend({
+    const CursorHandler = L.Handler.extend({
 
         addHooks: function () {
             this._popup = new L.Popup({autoPan: false});
@@ -63,7 +65,7 @@ function initMouseCoordinatesPopup() {
         _update: function (e) {
             const coords = latLng_to_game(e.latlng);
             this._popup.setLatLng(e.latlng)
-                .setContent(`[${coords[0].toFixed(0)}, ${coords[1].toFixed(0)}]`);
+                .setContent(`[${coords.x.toFixed(0)}, ${coords.z.toFixed(0)}]`);
         }
     });
 
@@ -72,9 +74,11 @@ function initMouseCoordinatesPopup() {
 
 
 /**
- * @param map
+ * Configures and adds a custom tile layer to a Leaflet map.
+ * @param {L.Map} map - The Leaflet map instance to which the custom tile layer will be added.
+ * @return {void}
  */
-function configureMapTileLayer(map) {
+function configureMapTileLayer(map: L.Map): void {
 // Create custom tile layer
     const customTileLayer = L.tileLayer('', {
         minZoom: -50,
@@ -115,17 +119,13 @@ function configureMapTileLayer(map) {
 /**
  * Places markers on a map for each region in the provided zone object.
  * Each marker is positioned based on the region's coordinates and includes an informational popup.
- *
- * @param {Object} zone - The zone object containing region data with coordinates and facility names.
- * @return {void} Does not return a value.
- * @param map Leaflet map to add markers to.
  */
-function placeRegionMarkers(zone, map) {
+function placeRegionMarkers(zone, map: L.Map) {
     for (const region of Object.values(zone["regions"])) {
         if (region["location_x"] === undefined || region["location_z"] === undefined) continue;
         const locationX = region["location_x"];
         const locationZ = region["location_z"];
-        const position = game_to_latLng(locationX, locationZ)
+        const position = game_to_latLng({x: locationX, z: locationZ})
         L.marker(position).addTo(map).bindPopup(
             `Region ${region["facility_name"]} @ ${locationX}, ${locationZ}`
         )
@@ -135,20 +135,13 @@ function placeRegionMarkers(zone, map) {
 /**
  * Extracts the facility coordinates from a given zone object.
  * Iterates through the regions of the zone and retrieves the coordinates for each facility.
- *
- * @param {Object} zone - The zone object containing regions and their facility data.
- * @param {Array} zone.regions - The array of region objects within the zone.
- * @param {number} zone.regions[].facility_id - The unique identifier for the facility.
- * @param {number} [zone.regions[].location_x] - The x-coordinate of the facility location.
- * @param {number} [zone.regions[].location_y] - The y-coordinate of the facility location.
- * @param {number} [zone.regions[].location_z] - The z-coordinate of the facility location.
- * @return {Object} An object mapping facility IDs to their respective coordinate arrays.
  */
-function extractFacilityCoordinates(zone) {
+function extractFacilityCoordinates(zone):Record<number, GameCoordinates>
+ {
     const facility_coords = {};
     for (const obj of zone["regions"]) {
-        if (obj["location_x"] !== undefined && obj["location_y"] !== undefined) {
-            facility_coords[obj["facility_id"]] = [obj["location_x"], obj["location_z"]];
+        if (obj["location_x"] !== undefined && obj["location_z"] !== undefined) {
+            facility_coords[obj["facility_id"]] = {x: obj["location_x"], z:obj["location_z"]};
         }
     }
     return facility_coords;
@@ -167,8 +160,8 @@ function drawLattice(zone) {
     for (const link of zone["links"]) {
         let loc_a = facility_coords[link["facility_id_a"]]
         let loc_b = facility_coords[link["facility_id_b"]]
-        const translatedCoordsA = game_to_latLng(loc_a[0], loc_a[1]);
-        const translatedCoordsB = game_to_latLng(loc_b[0], loc_b[1]);
+        const translatedCoordsA = game_to_latLng({x: loc_a[0], z: loc_a[1]});
+        const translatedCoordsB = game_to_latLng({x: loc_b[0], z: loc_b[1]});
         L.polyline([translatedCoordsA, translatedCoordsB], {color: 'red'}).addTo(map);
     }
 }
