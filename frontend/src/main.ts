@@ -1,5 +1,7 @@
 import * as L from 'leaflet';
-import {GameCoordinates, Zone} from "./types/zone_types";
+import {GameCoordinates, Zone} from "./types/zone_types.js";
+import {ZoneService} from "./services/zone_service.js";
+import {Continent} from "./types/common.js";
 
 /**
  * Converts game world coordinates to latitude and longitude coordinates.
@@ -170,11 +172,7 @@ const map = L.map('map_div', {
 configureMapTileLayer(map);
 
 // Fetch map data
-fetch('indar-map-info-combined.json')
-    .then(response => response.json())
-    .then(data => {
-        let zone = data["zone_list"][0]
-        placeRegionMarkers(zone, map);
-        drawLattice(zone);
-    })
-    .catch(error => console.error('Error loading map data:', error));
+const zoneService = new ZoneService();
+const zone = await zoneService.fetchZone(Continent.INDAR);
+placeRegionMarkers(zone, map);
+drawLattice(zone);
