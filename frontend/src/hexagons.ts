@@ -14,7 +14,7 @@ import {GameCoordinates} from "./types/zone_types";
  * size = hex_size/sqrt(3) # hex_size from Census (inner diameter) to size used in RBG formulas (outer radius)
  *
  */
-interface HexCoordinate {
+export interface HexCoordinate {
     readonly x: number;
     readonly y: number;
 }
@@ -32,7 +32,7 @@ interface HexCoordinate {
  *
  * All properties are immutable and should never be modified directly.
  */
-interface CubeCoordinate {
+export interface CubeCoordinate {
   readonly q: number;
   readonly r: number;
   readonly s: number;
@@ -55,7 +55,7 @@ interface CubeCoordinate {
  * @param {HexCoordinate} coord - The hexagonal grid coordinate with properties `x` and `y`.
  * @return {CubeCoordinate} The equivalent cube coordinate with properties `q`, `r`, and `s`.
  */
-function hexToCubeCoords(coord: HexCoordinate): CubeCoordinate {
+export function hexToCubeCoords(coord: HexCoordinate): CubeCoordinate {
   const q = coord.x+coord.y;
   const r = -coord.y;
   const s = -coord.x;
@@ -68,7 +68,7 @@ function hexToCubeCoords(coord: HexCoordinate): CubeCoordinate {
  * @param {CubeCoordinate} cord - The cube coordinate object with `r`, `s`, and `t` attributes.
  * @return {HexCoordinate} Returns a hexagonal coordinate object with `x` and `y` attributes.
  */
-function cubeToHexCoords(cord: CubeCoordinate): HexCoordinate {
+export function cubeToHexCoords(cord: CubeCoordinate): HexCoordinate {
   return {x: -cord.s, y: -cord.r};
 }
 
@@ -88,7 +88,7 @@ function cubeToHexCoords(cord: CubeCoordinate): HexCoordinate {
  * @param innerDiameter - Inner diameter of the hexagon
  * @returns GameCoordinates object with x and z values locating the center of the hex.
  */
-function hexCoordsToWorld(coords: HexCoordinate, innerDiameter: number): GameCoordinates {
+export function hexCoordsToWorld(coords: HexCoordinate, innerDiameter: number): GameCoordinates {
     const hexScale = 1.0; // 1./32.
     const hexSize = hexScale * innerDiameter;
     const innerRadius = hexSize / 2;
@@ -106,7 +106,3 @@ function hexCoordsToWorld(coords: HexCoordinate, innerDiameter: number): GameCoo
 
     return { x, z };
 }
-
-
-
-export {hexCoordsToWorld, HexCoordinate, hexToCubeCoords, cubeToHexCoords, CubeCoordinate};
