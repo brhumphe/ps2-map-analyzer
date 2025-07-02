@@ -9,6 +9,13 @@ export interface GameCoordinates {
   z: number;
 }
 
+export interface RegionHex {
+  x: number;
+  y: number;
+  hex_type: number;
+  type_name: string;
+}
+
 /**
  * Represents a facility/region in the game world
  */
@@ -21,6 +28,7 @@ export interface Region {
   location_y?: number;
   location_z?: number;
   zone_id: Continent;
+  hexes: RegionHex[];
 }
 
 /**

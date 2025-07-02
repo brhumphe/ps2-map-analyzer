@@ -163,7 +163,7 @@ function drawLattice(zone: Zone, leafletMap: L.Map): void {
 }
 
 /**
- * Given q and r hex coordinates, return the center of the hex in game coordinates.
+ * Given x and y hex coordinates, return the center of the hex in game coordinates.
  * Note that PS2 hex coordinates are axial coordinates, but the cube is oriented differently
  * from most common examples of hex coordinates as seen on RedBlobGames https://www.redblobgames.com/grids/hexagons/
  *
@@ -174,8 +174,8 @@ function drawLattice(zone: Zone, leafletMap: L.Map): void {
  * size = hex_size/sqrt(3) # hex_size from census (inner diameter) to size used in RBG formulas (outer radius)
  *
  * Adapted from https://github.com/voidwell/Voidwell.ClientUI/blob/master/src/src/app/planetside/shared/ps2-zone-map/ps2-zone-map.component.ts#L328
- * @param hexX - Hex coordinate q
- * @param hexY - Hex coordinate r
+ * @param hexX - Hex coordinate x
+ * @param hexY - Hex coordinate y
  * @param innerDiameter - Inner diameter of the hexagon
  * @returns GameCoordinates object with x and z values
  */
@@ -222,8 +222,8 @@ function drawHexagonAtGameCoords(map: L.Map, gameCenter: GameCoordinates, innerD
 }
 
 interface HexCoordinate {
-    q: number; // column
-    r: number; // row
+    x: number;
+    y: number;
 }
 
 /**
@@ -238,7 +238,6 @@ function drawHexagonsAtCoords(
     map: L.Map,
     hexCoordinates: HexCoordinate[],
     innerDiameter: number,
-    gameOffset: GameCoordinates = { x: 0, z: 0 },
     options?: L.PolylineOptions
 ): L.Polygon[] {
 
@@ -247,12 +246,12 @@ function drawHexagonsAtCoords(
 
     for (const hexCoord of hexCoordinates) {
         // Use the correct hex coordinate conversion
-        const hexCenter = hexCoordsToWorld(hexCoord.q, hexCoord.r, innerDiameter);
+        const hexCenter = hexCoordsToWorld(hexCoord.x, hexCoord.y, innerDiameter);
 
         // Apply offset if provided
         const finalCenter: GameCoordinates = {
-            x: hexCenter.x + gameOffset.x,
-            z: hexCenter.z + gameOffset.z
+            x: hexCenter.x,
+            z: hexCenter.z
         };
 
         // Create a hexagon at this position
@@ -268,7 +267,7 @@ function drawHexagonsAtCoords(
         const centerLatLng = game_to_latLng(finalCenter);
         L.marker(centerLatLng, {
             icon: L.divIcon({
-                html: `${hexCoord.q},${hexCoord.r}`,
+                html: `${hexCoord.x},${hexCoord.y}`,
                 className: 'hex-label',
                 iconSize: [30, 20],
                 iconAnchor: [15, 10]
@@ -281,6 +280,16 @@ function drawHexagonsAtCoords(
     return hexagons;
 }
 
+function extractZoneHexCoords(zone:Zone) {
+    let coords: HexCoordinate[] = []
+    for (const region of zone.regions) {
+        for (const regionHex of region.hexes) {
+            coords.push({x: regionHex.x, y: regionHex.y})
+        }
+    }
+    return coords
+}
+
 /**
  * Generates a 5x5 grid of hexagonal coordinates
  * @returns Array of hexagonal coordinates forming a 5x5 grid
@@ -291,7 +300,7 @@ function generate5x5HexGrid(): HexCoordinate[] {
     // Generate a 5x5 grid centered around (0,0)
     for (let r = -2; r <= 2; r++) {
         for (let q = -2; q <= 2; q++) {
-            coordinates.push({ q, r });
+            coordinates.push({ x: q, y: r });
         }
     }
 
@@ -317,7 +326,7 @@ drawLattice(zone, map);
 const gridCoordinates = generate5x5HexGrid();
 const gridCenter: GameCoordinates = { x: 0, z: 0 };
 
-drawHexagonsAtCoords(map, gridCoordinates, 200, gridCenter, {
+drawHexagonsAtCoords(map, extractZoneHexCoords(zone), 200, {
     color: 'green',
     fillColor: 'lightgreen',
     fillOpacity: 0.4,
