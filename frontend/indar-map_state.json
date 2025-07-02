@@ -1,0 +1,2408 @@
+{
+    "map_state_list": [
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2402,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2404,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2405,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2406,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2407,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 12,
+                "TR": 12,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 25.098041534423828,
+                "NC": 49.80392074584961,
+                "TR": 25.098041534423828,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2408,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2409,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2410,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2411,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2412,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2413,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2414,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 300000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2415,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2416,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2418,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2419,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2420,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 12,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 87.45098114013672,
+                "NC": 12.549020767211914,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2421,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2422,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2425,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2427,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2428,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2429,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2430,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2431,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 12,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 100,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2433,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2436,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2437,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2438,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2440,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2443,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 12,
+                "TR": 12,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 33.333335876464844,
+                "TR": 66.66667175292969,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2447,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2448,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2449,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 12,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 100,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2453,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2107,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 420000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2477,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2479,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2478,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2105,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 420000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2454,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2455,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2456,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2106,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 140000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2467,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2466,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2468,
+            "owning_faction_id": 3,
+            "is_contested": true,
+            "contesting_faction_id": 1,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": 186726,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2104,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 210000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2472,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 12,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 9.019608497619629,
+                "NC": 0,
+                "TR": 90.98039245605469,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2473,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2103,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2457,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2458,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2459,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2102,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 420000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2462,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2461,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2460,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2203,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 12,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 100,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2303,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 900000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 24,
+                "NC": 24,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 52.156864166259766,
+                "NC": 47.45098114013672,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2304,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 300000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2301,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 300000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2302,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 300000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2310,
+            "owning_faction_id": 2,
+            "is_contested": true,
+            "contesting_faction_id": 3,
+            "capture_time_ms": 450000,
+            "remaining_capture_time_ms": 439726,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 12,
+                "TR": 12,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 15.29411792755127,
+                "NC": 30.58823585510254,
+                "TR": 53.725494384765625,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2309,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2305,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2308,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 300000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 12,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 100,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2307,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 24,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 100,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2306,
+            "owning_faction_id": 3,
+            "is_contested": true,
+            "contesting_faction_id": 2,
+            "capture_time_ms": 720000,
+            "remaining_capture_time_ms": 332241,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 48,
+                "NC": 48,
+                "TR": 96,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 22.352941513061523,
+                "NC": 28.23529624938965,
+                "TR": 49.01960754394531,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2313,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 300000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2312,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 300000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2311,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 420000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2108,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 420000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2465,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2463,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2464,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 12,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 100,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2101,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 420000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2475,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2474,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2476,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2201,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 12,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 100,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2109,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 140000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2470,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 12,
+                "TR": 12,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 49.80392074584961,
+                "TR": 49.80392074584961,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2471,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2469,
+            "owning_faction_id": 0,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 240000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 2202,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": -1,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 12,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 100,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 18205,
+            "owning_faction_id": 3,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 60000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 12,
+                "TR": 12,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 20,
+                "TR": 80,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 18206,
+            "owning_faction_id": 1,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 60000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        },
+        {
+            "world_id": 1,
+            "zone_id": 2,
+            "zone_instance": 0,
+            "timestamp": 1751409935,
+            "map_region_id": 18207,
+            "owning_faction_id": 2,
+            "is_contested": false,
+            "contesting_faction_id": 0,
+            "capture_time_ms": 60000,
+            "remaining_capture_time_ms": -1,
+            "ctf_flags": 0,
+            "remaining_ctf_flags": 0,
+            "faction_population_upper_bound": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "faction_population_percentage": {
+                "VS": 0,
+                "NC": 0,
+                "TR": 0,
+                "NSO": 0
+            },
+            "event_name": "MapStateUpdate"
+        }
+    ],
+    "returned": 89
+}
