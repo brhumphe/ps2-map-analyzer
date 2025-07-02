@@ -1,4 +1,15 @@
-import {GameCoordinates} from "./types/zone_types";
+import {WorldCoordinate} from "./types/zone_types";
+
+type HexVertex = WorldCoordinate
+
+const HexDirection = {
+  E: [1, 0],
+  NE: [0, 1],
+  NW: [-1, 1],
+  W: [-1, 0],
+  SW: [0, -1],
+  SE: [1, -1]
+} as const;
 
 /**
  * Coordinates of a map hex as given by Census. It needs to be converted to a more conventional
@@ -38,6 +49,14 @@ export interface CubeCoordinate {
   readonly s: number;
 }
 
+function hexInDirection(coord: HexCoordinate, dir: keyof typeof HexDirection): HexCoordinate {
+  const [dx, dy] = HexDirection[dir];
+  return {
+    x: coord.x + dx,
+    y: coord.y + dy
+  };
+}
+
 /**
  * Converts a hexagonal grid coordinate to a cube coordinate system.
  *
@@ -73,7 +92,7 @@ export function cubeToHexCoords(cord: CubeCoordinate): HexCoordinate {
 }
 
 /**
- * Given x and y hex coordinates, return the center of the hex in game coordinates.
+ * Given x and y hex coordinates, return the center of the hex in world coordinates.
  * Note that PS2 hex coordinates are axial coordinates, but the cube is oriented differently
  * from most common examples of hex coordinates as seen on RedBlobGames https://www.redblobgames.com/grids/hexagons/
  *
@@ -86,9 +105,9 @@ export function cubeToHexCoords(cord: CubeCoordinate): HexCoordinate {
  * Adapted from https://github.com/voidwell/Voidwell.ClientUI/blob/master/src/src/app/planetside/shared/ps2-zone-map/ps2-zone-map.component.ts#L328
  * @param coords - Hex coordinate to convert.
  * @param innerDiameter - Inner diameter of the hexagon
- * @returns GameCoordinates object with x and z values locating the center of the hex.
+ * @returns WorldCoordinate locating the center of the hex.
  */
-export function hexCoordsToWorld(coords: HexCoordinate, innerDiameter: number): GameCoordinates {
+export function hexCoordsToWorld(coords: HexCoordinate, innerDiameter: number): WorldCoordinate {
     const hexScale = 1.0; // 1./32.
     const hexSize = hexScale * innerDiameter;
     const innerRadius = hexSize / 2;
@@ -105,4 +124,12 @@ export function hexCoordsToWorld(coords: HexCoordinate, innerDiameter: number): 
     const z = (2 * coords.x + coords.y) * innerRadius;
 
     return { x, z };
+}
+
+class HexGeometry {
+  private innerDiameter: number;
+  constructor(innerDiameter: number) {
+    this.innerDiameter = innerDiameter;
+  }
+
 }

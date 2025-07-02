@@ -2,9 +2,9 @@ import {Continent, FacilityID, RegionID} from "./common";
 
 /**
  * Represents coordinates in the game world coordinate system.
- * Uses (x, z) coordinates where Y-axis is up in 3D space but discarded for 2D mapping.
+ * Note that PS2 uses Y-axis vertical 3D coordinates, so discard y for 2D map purposes.
  */
-export interface GameCoordinates {
+export interface WorldCoordinate {
   x: number;
   z: number;
 }
