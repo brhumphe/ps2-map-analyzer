@@ -11,18 +11,29 @@ export interface HexEdge {
   readonly end: VertexCoordinate;
 }
 
+function snapToGrid(value: number, gridSize: number = 1): number {
+    return Math.round(value / gridSize) * gridSize;
+}
+
 /**
  * Converts a VertexCoordinate to a canonical string representation.
- * Values are rounded to 2 decimal places for consistent formatting.
+ * Nearby vertices are merged by snapping to a grid
  * 
  * @param vertex - The vertex coordinate to convert
- * @returns A string in the format "(x,z)" with values rounded to 2 decimal places
+ * @returns A string in the format "(x,z)" with values snapped to a grid
  */
 export function vertexToString(vertex: VertexCoordinate): string {
-  const roundedX = vertex.x.toFixed(2);
-  const roundedZ = vertex.z.toFixed(2);
-  return `(${roundedX},${roundedZ})`;
+    // Use grid size of 5 for snapping vertices - this was determined empirically
+    // based on hexagon geometry with an inner diameter of 200 units.
+    // This prevents floating-point imprecision from creating duplicate edges
+    // while being small enough to maintain distinct vertices
+
+    const gridSize = 5;
+    const snappedX = snapToGrid(vertex.x, gridSize);
+    const snappedZ = snapToGrid(vertex.z, gridSize);
+    return `(${snappedX},${snappedZ})`;
 }
+
 
 /**
  * Parses a string representation of a vertex coordinate back into a VertexCoordinate object.

@@ -258,22 +258,19 @@ describe('getNonSharedEdges', () => {
     });
   });
 
-  test('handles hexagons with non-integer coordinates', () => {
-    // Create hexagons with non-integer coordinates
-    const hex1: HexCoordinate = { x: 0.5, y: 0.5 };
-    const hex2: HexCoordinate = { x: 1.5, y: 0.5 };
-
-    const result = getNonSharedEdges([hex1, hex2], geometry);
-
-    // Two adjacent hexagons should have 10 non-shared edges
-    expect(result.length).toBe(10);
-
-    // Verify each edge is valid
-    result.forEach(edgeStr => {
-      const edge = parseEdgeString(edgeStr);
-      expect(edge).toHaveProperty('start');
-      expect(edge).toHaveProperty('end');
-    });
+  test("handle Ti Alloys", ()=>{
+    const hexCoordinates: HexCoordinate[] = [
+      {"x": 0, "y": -3},
+      {"x": 1,"y": -3},
+      {"x": 1,"y": -4},
+      {"x": 0,"y": -2},
+      {"x": 1,"y": -2},
+      {"x": -1,"y": -2},
+      {"x": -1,"y": -1},
+      {"x": 0,"y": -1}
+    ]
+    const result = getNonSharedEdges(hexCoordinates, geometry);
+    expect(result.length).toBe(20);
   });
 });
 
