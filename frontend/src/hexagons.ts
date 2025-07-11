@@ -2,6 +2,47 @@ import {WorldCoordinate} from "./types/zone_types";
 
 type VertexCoordinate = WorldCoordinate
 
+/**
+ * Represents an edge between two vertices of a hexagon.
+ * An edge is defined by two vertex coordinates that form a line segment.
+ */
+export interface HexEdge {
+  readonly start: VertexCoordinate;
+  readonly end: VertexCoordinate;
+}
+
+/**
+ * Converts a VertexCoordinate to a canonical string representation.
+ * Values are rounded to 2 decimal places for consistent formatting.
+ * 
+ * @param vertex - The vertex coordinate to convert
+ * @returns A string in the format "(x,z)" with values rounded to 2 decimal places
+ */
+export function vertexToString(vertex: VertexCoordinate): string {
+  const roundedX = vertex.x.toFixed(2);
+  const roundedZ = vertex.z.toFixed(2);
+  return `(${roundedX},${roundedZ})`;
+}
+
+/**
+ * Creates a canonical string representation of an edge.
+ * Ensures consistent ordering for bidirectional edges by placing the lexicographically smaller vertex first.
+ * 
+ * @param edge - The edge to convert to string
+ * @returns A string representation in the format "vertex1-vertex2"
+ */
+export function edgeToString(edge: HexEdge): string {
+  const startString = vertexToString(edge.start);
+  const endString = vertexToString(edge.end);
+  
+  // Ensure consistent ordering by placing the lexicographically smaller vertex first
+  if (startString <= endString) {
+    return `${startString}-${endString}`;
+  } else {
+    return `${endString}-${startString}`;
+  }
+}
+
 const HexDirection = {
   E: [1, 0],
   NE: [0, 1],
@@ -154,4 +195,24 @@ export class HexGeometry {
     return hexVertices;
   }
 
+  /**
+   * Returns all edges for a hexagon at the given coordinates.
+   * Each edge connects two adjacent vertices of the hexagon.
+   * 
+   * @param coords - The hexagonal coordinate to get edges for
+   * @returns An array of 6 edges, each representing a side of the hexagon
+   */
+  hexEdges(coords: HexCoordinate): HexEdge[] {
+    const vertices = this.hexVertices(coords);
+    const edges: HexEdge[] = [];
+    
+    // Connect each vertex to the next one, with the last vertex connecting back to the first
+    for (let i = 0; i < vertices.length; i++) {
+      const start = vertices[i];
+      const end = vertices[(i + 1) % vertices.length];
+      edges.push({ start, end });
+    }
+    
+    return edges;
+  }
 }
