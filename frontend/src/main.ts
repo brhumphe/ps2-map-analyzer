@@ -146,16 +146,17 @@ function extractFacilityCoordinates(zone: Zone):Record<number, WorldCoordinate>
  *
  * @param {Zone} zone - The zone object containing facility and link information.
  * @param leafletMap Map to add the lattice to
+ * @param options Override the polyline options for the lattice lines
  * @return {void} This function does not return a value, but it draws polylines on the map.
  */
-function drawLattice(zone: Zone, leafletMap: L.Map): void {
+function drawLattice(zone: Zone, leafletMap: L.Map, options?: L.PolylineOptions): void {
     let facility_coords = extractFacilityCoordinates(zone);
     for (const link of zone.links) {
         let loc_a = facility_coords[link["facility_id_a"]]
         let loc_b = facility_coords[link["facility_id_b"]]
         const translatedCoordsA = world_to_latLng(loc_a);
         const translatedCoordsB = world_to_latLng(loc_b);
-        L.polyline([translatedCoordsA, translatedCoordsB], {color: 'red'}).addTo(leafletMap);
+        L.polyline([translatedCoordsA, translatedCoordsB], {color: 'yellow', ...options}).addTo(leafletMap);
     }
 }
 
@@ -256,9 +257,20 @@ const zone = await zoneService.fetchZone(Continent.INDAR);
 placeRegionMarkers(zone, map);
 drawLattice(zone, map);
 
-drawHexagonsAtCoords(map, extractRegionHexCoords(zone, 2202), 200, {
-    color: 'green',
-    fillColor: 'lightgreen',
-    fillOpacity: 0.4,
-    weight: 2
-});
+
+function drawRegion(zone: Zone, regionId: RegionID, options?: L.PolylineOptions): L.Polygon {
+    const geometry = new HexGeometry(zone.hex_size)
+    const hexCoordinates = extractRegionHexCoords(zone, regionId)
+    const vertices = geometry.getBoundaryVertices(hexCoordinates)
+    const hexagonLatLngPoints = vertices.map(coord => world_to_latLng(coord));
+    return L.polygon(hexagonLatLngPoints, {
+        color: 'white',
+        fillColor: 'purple',
+        fillOpacity: 0.3,
+        weight: 2,
+        ...options
+    }).addTo(map);
+}
+drawRegion(zone, 2202, {"fillColor":"purple"});
+drawRegion(zone, 2440);
+drawRegion(zone, 2455);

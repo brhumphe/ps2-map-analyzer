@@ -62,6 +62,7 @@ Ruff is configured in `ruff.toml`. The configuration includes:
 ## Project Structure
 
 - `backend/`: Backend Python code
+  - `analysis/`: Computations on tactical state of the map
   - `services/`: Service modules
   - `shared/`: Shared modules and models
 - `frontend/`: Frontend code
