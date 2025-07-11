@@ -4,3 +4,5 @@
 **/__pycache__/**
 /frontend/dist/
 /frontend/tests/**/*.test.js
+/frontend/tests/**/*.test.d.ts
+/frontend/tests/**/*.test.js.map
