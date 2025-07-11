@@ -10,7 +10,7 @@ import {
   edgeToString,
   getNonSharedEdges,
   parseEdgeString,
-  orderEdges
+  orderEdges, getOrderedVertices
 } from '../src/hexagons';
 import {WorldCoordinate} from "../src/types/zone_types";
 
@@ -289,9 +289,32 @@ describe('orderEdges', () => {
     expect(result).toEqual([edge]);
   });
 
+  // Helper function to validate that edges form a proper closed path
+  function validateClosedPath(orderedEdges: string[]): boolean {
+    if (orderedEdges.length === 0) return true;
+    if (orderedEdges.length === 1) return false; // Single edge can't form closed loop
+
+    const startVertex = orderedEdges[0].split('|')[0];
+    let currentVertex = startVertex;
+
+    // Trace through each edge to find where we actually end up
+    for (const edge of orderedEdges) {
+      const [start, end] = edge.split('|');
+
+      if (start === currentVertex) {
+        currentVertex = end;
+      } else if (end === currentVertex) {
+        currentVertex = start;
+      } else {
+        return false; // Edge doesn't connect
+      }
+    }
+
+    return startVertex === currentVertex;
+  }
+
   test('orders edges to form a connected path', () => {
     // Create a square with vertices at (0,0), (1,0), (1,1), (0,1)
-    // Ensure edges form a closed loop by making sure they connect properly
     const edges = [
       '(0.00,0.00)|(1.00,0.00)', // bottom edge
       '(1.00,0.00)|(1.00,1.00)', // right edge
@@ -301,30 +324,21 @@ describe('orderEdges', () => {
 
     const result = orderEdges(edges);
 
-    // Verify the result forms a connected path
-    for (let i = 0; i < result.length - 1; i++) {
-      const currentEnd = result[i].split('|')[1];
-      const nextStart = result[i + 1].split('|')[0];
-
-      // The next edge should start with the end of the current edge
-      expect(nextStart).toBe(currentEnd);
-    }
-
-    // Verify the path forms a closed loop
-    const firstVertex = result[0].split('|')[0];
-    const lastVertex = result[result.length - 1].split('|')[1];
-    expect(firstVertex).toBe(lastVertex);
-
     // Verify we have the correct number of edges
     expect(result.length).toBe(4);
+
+    // Verify the result forms a proper closed path
+    expect(validateClosedPath(result)).toBe(true);
+
+    // Verify all original edges are present
+    expect(new Set(result)).toEqual(new Set(edges));
   });
 
   test('orders edges regardless of input order', () => {
     // Create a triangle with vertices at (0,0), (1,0), (0,1)
-    // Ensure edges form a closed loop by making sure they connect properly
     const edges = [
       '(0.00,0.00)|(1.00,0.00)', // bottom edge
-      '(1.00,0.00)|(0.00,1.00)', // right edge
+      '(1.00,0.00)|(0.00,1.00)', // diagonal edge
       '(0.00,1.00)|(0.00,0.00)'  // left edge
     ];
 
@@ -342,21 +356,15 @@ describe('orderEdges', () => {
     expect(result2.length).toBe(3);
     expect(result3.length).toBe(3);
 
-    // Verify all results form connected paths
-    for (const result of [result1, result2, result3]) {
-      for (let i = 0; i < result.length - 1; i++) {
-        const currentEnd = result[i].split('|')[1];
-        const nextStart = result[i + 1].split('|')[0];
+    // Verify all results form valid closed paths
+    expect(validateClosedPath(result1)).toBe(true);
+    expect(validateClosedPath(result2)).toBe(true);
+    expect(validateClosedPath(result3)).toBe(true);
 
-        // The next edge should start with the end of the current edge
-        expect(nextStart).toBe(currentEnd);
-      }
-
-      // Verify the path forms a closed loop
-      const firstVertex = result[0].split('|')[0];
-      const lastVertex = result[result.length - 1].split('|')[1];
-      expect(firstVertex).toBe(lastVertex);
-    }
+    // All should contain the same edges
+    expect(new Set(result1)).toEqual(new Set(edges));
+    expect(new Set(result2)).toEqual(new Set(edges));
+    expect(new Set(result3)).toEqual(new Set(edges));
   });
 
   test('throws error for edges that do not form a continuous boundary', () => {
@@ -379,5 +387,328 @@ describe('orderEdges', () => {
     ];
 
     expect(() => orderEdges(edges)).toThrow('Edges do not form a closed loop');
+  });
+
+  it('should correctly order the boundary edges of a hexagon', () => {
+    // Create a HexGeometry instance
+    const hexGeometry = new HexGeometry(100); // inner diameter of 100
+
+    // Get the edges of a hexagon at origin
+    const hexCoord = { x: 0, y: 0 };
+    const hexEdges = hexGeometry.hexEdges(hexCoord);
+
+    // Convert edges to canonical string form (this will be unordered)
+    const canonicalEdges = hexEdges.map(edge => edgeToString(edge));
+
+    // Shuffle the edges to simulate them being in random order (deterministic)
+    const shuffledEdges = [
+      canonicalEdges[2],
+      canonicalEdges[5],
+      canonicalEdges[1],
+      canonicalEdges[4],
+      canonicalEdges[0],
+      canonicalEdges[3]
+    ];
+
+    // Order the edges
+    const orderedEdges = orderEdges(shuffledEdges);
+
+    // Basic validation: should have 6 edges (same as input)
+    expect(orderedEdges).toHaveLength(6);
+
+    // All original edges should be present
+    expect(new Set(orderedEdges)).toEqual(new Set(canonicalEdges));
+
+    // Verify the result forms a proper closed path
+    expect(validateClosedPath(orderedEdges)).toBe(true);
+  });
+
+  it('should handle a simple triangle of edges', () => {
+    // Create a simple triangle with known vertices in canonical form
+    // Triangle vertices: (0,0), (1,0), (0.5,0.87)
+    const triangleEdges = [
+      "(0.00,0.00)|(1.00,0.00)", // bottom edge
+      "(0.50,0.87)|(1.00,0.00)", // right edge (canonical form: smaller vertex first)
+      "(0.00,0.00)|(0.50,0.87)"  // left edge
+    ];
+
+    const orderedEdges = orderEdges(triangleEdges);
+
+    expect(orderedEdges).toHaveLength(3);
+
+    // All original edges should be present
+    expect(new Set(orderedEdges)).toEqual(new Set(triangleEdges));
+
+    // Verify the result forms a proper closed path
+    expect(validateClosedPath(orderedEdges)).toBe(true);
+  });
+
+  it('should handle edge cases', () => {
+    // Empty array
+    expect(orderEdges([])).toEqual([]);
+
+    // Single edge
+    const singleEdge = ["(0.00,0.00)|(1.00,0.00)"];
+    expect(orderEdges(singleEdge)).toEqual(singleEdge);
+  });
+
+  it('should throw error for disconnected edges', () => {
+    // Two separate edges that don't connect
+    const disconnectedEdges = [
+      "(0.00,0.00)|(1.00,0.00)",
+      "(2.00,0.00)|(3.00,0.00)"
+    ];
+
+    expect(() => orderEdges(disconnectedEdges)).toThrow('Edges do not form a continuous boundary');
+  });
+
+  it('should throw error for edges that don\'t form a closed loop', () => {
+    // Three edges that form a path but not a loop
+    const openPathEdges = [
+      "(0.00,0.00)|(1.00,0.00)",
+      "(1.00,0.00)|(2.00,0.00)",
+      "(2.00,0.00)|(3.00,0.00)"
+    ];
+
+    expect(() => orderEdges(openPathEdges)).toThrow('Edges do not form a closed loop');
+  });
+
+  it('should produce consistent ordering regardless of input order', () => {
+    // Create a simple square
+    const squareEdges = [
+      "(0.00,0.00)|(1.00,0.00)",
+      "(1.00,0.00)|(1.00,1.00)",
+      "(0.00,1.00)|(1.00,1.00)",
+      "(0.00,0.00)|(0.00,1.00)"
+    ];
+
+    // Try different permutations of the same edges
+    const permutation1 = [squareEdges[0], squareEdges[2], squareEdges[1], squareEdges[3]];
+    const permutation2 = [squareEdges[3], squareEdges[1], squareEdges[0], squareEdges[2]];
+
+    const ordered1 = orderEdges(permutation1);
+    const ordered2 = orderEdges(permutation2);
+
+    // Both should produce valid orderings
+    expect(ordered1).toHaveLength(4);
+    expect(ordered2).toHaveLength(4);
+
+    // Both should contain all the same edges
+    expect(new Set(ordered1)).toEqual(new Set(ordered2));
+
+    // Both should form valid closed paths
+    expect(validateClosedPath(ordered1)).toBe(true);
+    expect(validateClosedPath(ordered2)).toBe(true);
+  });
+});
+
+describe('getOrderedVertices', () => {
+  it('should correctly order vertices of a square', () => {
+    // Define a square with vertices at (0,0), (1,0), (1,1), (0,1)
+    // Edges in canonical form (lexicographically smaller vertex first):
+    const squareEdges = [
+      "(0.00,0.00)|(1.00,0.00)", // bottom edge
+      "(1.00,0.00)|(1.00,1.00)", // right edge
+      "(0.00,1.00)|(1.00,1.00)", // top edge (reordered to canonical form)
+      "(0.00,0.00)|(0.00,1.00)"  // left edge
+    ];
+
+    const orderedVertices = getOrderedVertices(squareEdges);
+
+    // Should return exactly 4 vertices
+    expect(orderedVertices).toHaveLength(4);
+
+    // All expected vertices should be present
+    const expectedVertices = [
+      "(0.00,0.00)", "(1.00,0.00)", "(1.00,1.00)", "(0.00,1.00)"
+    ];
+
+    for (const vertex of expectedVertices) {
+      expect(orderedVertices).toContain(vertex);
+    }
+
+    // Verify the vertices form a connected path
+    // Each consecutive pair should share a vertex when parsed as edges
+    for (let i = 0; i < orderedVertices.length; i++) {
+      const currentVertex = orderedVertices[i];
+      const nextVertex = orderedVertices[(i + 1) % orderedVertices.length];
+
+      // Check that there's an edge connecting these vertices in our input
+      const edgeExists = squareEdges.some(edge => {
+        const [start, end] = edge.split('|');
+        return (start === currentVertex && end === nextVertex) ||
+               (start === nextVertex && end === currentVertex);
+      });
+
+      expect(edgeExists).toBe(true);
+    }
+  });
+
+  it('should handle empty edge array', () => {
+    const result = getOrderedVertices([]);
+    expect(result).toEqual([]);
+  });
+
+  it('should handle single edge', () => {
+    const singleEdge = ["(0.00,0.00)|(1.00,0.00)"];
+    const result = getOrderedVertices(singleEdge);
+    expect(result).toEqual(["(0.00,0.00)", "(1.00,0.00)"]);
+  });
+});
+
+describe('HexGeometry.getBoundaryVertices', () => {
+  let hexGeometry: HexGeometry;
+
+  beforeEach(() => {
+    // Use a simple inner diameter for testing
+    hexGeometry = new HexGeometry(100);
+  });
+
+  it('should return boundary vertices for a single hex', () => {
+    const singleHex: HexCoordinate[] = [{ x: 0, y: 0 }];
+
+    const boundaryVertices = hexGeometry.getBoundaryVertices(singleHex);
+
+    // A single hex should have 6 boundary vertices (all its vertices are on the boundary)
+    expect(boundaryVertices).toHaveLength(6);
+
+    // All vertices should be WorldCoordinate objects with x and z properties
+    boundaryVertices.forEach(vertex => {
+      expect(vertex).toHaveProperty('x');
+      expect(vertex).toHaveProperty('z');
+      expect(typeof vertex.x).toBe('number');
+      expect(typeof vertex.z).toBe('number');
+    });
+  });
+
+  it('should return boundary vertices for two adjacent hexes', () => {
+    const adjacentHexes: HexCoordinate[] = [
+      { x: 0, y: 0 },
+      { x: 1, y: 0 }
+    ];
+
+    const boundaryVertices = hexGeometry.getBoundaryVertices(adjacentHexes);
+
+    // Two adjacent hexes should have fewer boundary vertices than 12 (6+6)
+    // since they share some vertices
+    expect(boundaryVertices.length).toBeLessThan(12);
+    expect(boundaryVertices.length).toBeGreaterThan(6);
+
+    // Verify all vertices are valid WorldCoordinates
+    boundaryVertices.forEach(vertex => {
+      expect(vertex).toHaveProperty('x');
+      expect(vertex).toHaveProperty('z');
+      expect(typeof vertex.x).toBe('number');
+      expect(typeof vertex.z).toBe('number');
+    });
+  });
+
+  it('should return boundary vertices for a triangle of three hexes', () => {
+    const triangleHexes: HexCoordinate[] = [
+      { x: 0, y: 0 },
+      { x: 1, y: 0 },
+      { x: 0, y: 1 }
+    ];
+
+    const boundaryVertices = hexGeometry.getBoundaryVertices(triangleHexes);
+
+    // Three hexes in a triangle should have a reasonable number of boundary vertices
+    expect(boundaryVertices.length).toBeGreaterThan(6);
+    expect(boundaryVertices.length).toBeLessThan(18); // Less than 3*6
+
+    // Verify all vertices are valid WorldCoordinates
+    boundaryVertices.forEach(vertex => {
+      expect(vertex).toHaveProperty('x');
+      expect(vertex).toHaveProperty('z');
+      expect(typeof vertex.x).toBe('number');
+      expect(typeof vertex.z).toBe('number');
+    });
+  });
+
+  it('should return boundary vertices for a line of hexes', () => {
+    const lineHexes: HexCoordinate[] = [
+      { x: 0, y: 0 },
+      { x: 1, y: 0 },
+      { x: 2, y: 0 }
+    ];
+
+    const boundaryVertices = hexGeometry.getBoundaryVertices(lineHexes);
+
+    // A line of three hexes should have boundary vertices
+    expect(boundaryVertices.length).toBeGreaterThan(6);
+
+    // All vertices should be WorldCoordinate objects
+    boundaryVertices.forEach(vertex => {
+      expect(vertex).toHaveProperty('x');
+      expect(vertex).toHaveProperty('z');
+      expect(typeof vertex.x).toBe('number');
+      expect(typeof vertex.z).toBe('number');
+    });
+  });
+
+  it('should handle empty hex array', () => {
+    const emptyHexes: HexCoordinate[] = [];
+
+    const boundaryVertices = hexGeometry.getBoundaryVertices(emptyHexes);
+
+    // Empty input should return empty boundary
+    expect(boundaryVertices).toHaveLength(0);
+  });
+
+  it('should return vertices in a connected order', () => {
+    const hexes: HexCoordinate[] = [
+      { x: 0, y: 0 },
+      { x: 1, y: 0 }
+    ];
+
+    const boundaryVertices = hexGeometry.getBoundaryVertices(hexes);
+
+    // With at least 3 vertices, we can check basic connectivity
+    if (boundaryVertices.length >= 3) {
+      // Calculate distances between consecutive vertices
+      const distances: number[] = [];
+      for (let i = 0; i < boundaryVertices.length; i++) {
+        const current = boundaryVertices[i];
+        const next = boundaryVertices[(i + 1) % boundaryVertices.length];
+        const distance = Math.sqrt(
+          Math.pow(next.x - current.x, 2) + Math.pow(next.z - current.z, 2)
+        );
+        distances.push(distance);
+      }
+
+      // All consecutive vertices should be reasonably close (they're edges of hexagons)
+      // The exact distance depends on the hex size, but should be consistent
+      const maxDistance = Math.max(...distances);
+      const minDistance = Math.min(...distances);
+
+      // Distances shouldn't vary too wildly if vertices are properly ordered
+      expect(maxDistance / minDistance).toBeLessThan(2);
+    }
+  });
+
+  it('should produce different results for different hex arrangements', () => {
+    const arrangement1: HexCoordinate[] = [
+      { x: 0, y: 0 },
+      { x: 1, y: 0 }
+    ];
+
+    const arrangement2: HexCoordinate[] = [
+      { x: 0, y: 0 },
+      { x: 0, y: 1 }
+    ];
+
+    const boundary1 = hexGeometry.getBoundaryVertices(arrangement1);
+    const boundary2 = hexGeometry.getBoundaryVertices(arrangement2);
+
+    // Different arrangements should produce different boundary shapes
+    // (This is a basic sanity check - the exact comparison depends on the geometry)
+    expect(boundary1.length).toBeGreaterThan(0);
+    expect(boundary2.length).toBeGreaterThan(0);
+
+    // At least some vertices should be different
+    const vertices1Set = new Set(boundary1.map(v => `${v.x.toFixed(2)},${v.z.toFixed(2)}`));
+    const vertices2Set = new Set(boundary2.map(v => `${v.x.toFixed(2)},${v.z.toFixed(2)}`));
+
+    expect(vertices1Set).not.toEqual(vertices2Set);
   });
 });

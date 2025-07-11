@@ -301,11 +301,27 @@ export function orderEdges(edges: string[]): string[] {
     nextVertex = start === nextVertex ? end : start;
   }
 
-  // Verify the path forms a closed loop
-  const firstVertex = orderedEdges[0].split('|')[0];
-  const lastVertex = orderedEdges[orderedEdges.length - 1].split('|')[1];
+  // FIXED: Properly verify the path forms a closed loop
+  // We need to trace through the actual path to find the real final vertex
+  const startVertex = orderedEdges[0].split('|')[0];
+  let currentVertex = startVertex;
 
-  if (firstVertex !== lastVertex) {
+  // Trace through each edge to find where we actually end up
+  for (const edge of orderedEdges) {
+    const [start, end] = edge.split('|');
+
+    if (start === currentVertex) {
+      currentVertex = end;
+    } else if (end === currentVertex) {
+      currentVertex = start;
+    } else {
+      // This should never happen if our algorithm is correct
+      throw new Error('Internal error: edges are not properly connected');
+    }
+  }
+
+  // Check if we end up back at the starting vertex
+  if (startVertex !== currentVertex) {
     throw new Error('Edges do not form a closed loop');
   }
 
