@@ -30,9 +30,20 @@ export const latLng_to_world = function (latLng: L.LatLng): WorldCoordinate {
     };
 }
 
-function initMouseCoordinatesPopup() {
-// Add cursor coordinates in a popup that follows the mouse for debugging
+declare module 'leaflet' {
+    interface Map {
+        cursor: Handler;
+    }
+}
+
+
+function initMouseCoordinatesPopup(map: L.Map) {
+    // Add cursor coordinates in a popup that follows the mouse for debugging
     const CursorHandler = L.Handler.extend({
+        initialize: function (map: L.Map) {
+            this._map = map;
+            this._popup = null;
+        },
 
         addHooks: function () {
             this._popup = new L.Popup({autoPan: false});
@@ -45,25 +56,32 @@ function initMouseCoordinatesPopup() {
             this._map.off('mouseover', this._open, this);
             this._map.off('mousemove', this._update, this);
             this._map.off('mouseout', this._close, this);
+            this._popup = null;
         },
 
-        _open: function (e) {
+        _open: function (e: L.LeafletMouseEvent) {
             this._update(e);
             this._popup.openOn(this._map);
         },
 
         _close: function () {
-            this._map.closePopup(this._popup);
+            if (this._popup) {
+                this._map.closePopup(this._popup);
+            }
         },
 
-        _update: function (e) {
+        _update: function (e: L.LeafletMouseEvent) {
+            if (!this._popup) return;
             const coords = latLng_to_world(e.latlng);
             this._popup.setLatLng(e.latlng)
-                .setContent(`[${coords.x.toFixed(0)}, ${coords.z.toFixed(0)}]`);
+              .setContent(`[${coords.x.toFixed(0)}, ${coords.z.toFixed(0)}]`);
         }
     });
 
-    L.Map.addInitHook('addHandler', 'cursor', (L as any).CursorHandler);
+    // Create and enable the handler instance directly
+    // @ts-ignore
+    const handler = new CursorHandler(map);
+    handler.enable();
 }
 
 
@@ -121,7 +139,7 @@ function placeRegionMarkers(zone: Zone, map: L.Map) {
         const locationZ = region["location_z"];
         const position = world_to_latLng({x: locationX, z: locationZ})
         L.marker(position).addTo(map).bindPopup(
-            `Region ${region["facility_name"]} @ ${locationX}, ${locationZ}`
+            `Region ${region["facility_name"]} regionID:${region.map_region_id} @ ${locationX}, ${locationZ}`
         )
     }
 }
@@ -242,13 +260,13 @@ function extractRegionHexCoords(zone:Zone, regionId: RegionID): HexCoordinate[] 
     return coords
 }
 
-initMouseCoordinatesPopup();
+
 
 // Map creation
 const map = L.map('map_div', {
     crs: L.CRS.Simple, center: [0, 0],
 }).setView([-2250, -2250], 0);
-
+initMouseCoordinatesPopup(map);
 configureMapTileLayer(map);
 
 // Fetch map data
@@ -261,16 +279,25 @@ drawLattice(zone, map);
 function drawRegion(zone: Zone, regionId: RegionID, options?: L.PolylineOptions): L.Polygon {
     const geometry = new HexGeometry(zone.hex_size)
     const hexCoordinates = extractRegionHexCoords(zone, regionId)
-    const vertices = geometry.getBoundaryVertices(hexCoordinates)
-    const hexagonLatLngPoints = vertices.map(coord => world_to_latLng(coord));
-    return L.polygon(hexagonLatLngPoints, {
-        color: 'white',
-        fillColor: 'purple',
-        fillOpacity: 0.3,
-        weight: 2,
-        ...options
-    }).addTo(map);
+    try {
+        const vertices = geometry.getBoundaryVertices(hexCoordinates);
+        const hexagonLatLngPoints = vertices.map(coord => world_to_latLng(coord));
+        console.log({"zoneID": zone.zone_id, "regionID": regionId, "hexCoordinates": hexCoordinates, "vertices":vertices})
+        return L.polygon(hexagonLatLngPoints, {
+            color: 'white',
+            fillColor: 'purple',
+            fillOpacity: 0.3,
+            weight: 2,
+            ...options
+        }).addTo(map);
+    } catch (e) {
+        console.log(e, {"zoneID": zone.zone_id, "regionID": regionId, "hexCoordinates": hexCoordinates})
+        return
+    }
+
 }
-drawRegion(zone, 2202, {"fillColor":"purple"});
-drawRegion(zone, 2440);
-drawRegion(zone, 2455);
+
+for (const region of zone.regions) {
+    drawRegion(zone, region.map_region_id)
+}
+// drawRegion(zone, 2419)
