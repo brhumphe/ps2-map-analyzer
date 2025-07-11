@@ -26,7 +26,7 @@ export const latLng_to_world = function (latLng: L.LatLng): WorldCoordinate {
     const rotationAngle = -90 * Math.PI / 180;
     return {
         x: latLng.lng * Math.cos(rotationAngle) - latLng.lat * Math.sin(rotationAngle),
-        z: latLng.lng * Math.sin(rotationAngle) + latLng.lat * Math.cos(rotationAngle)
+        z: -(latLng.lng * Math.sin(rotationAngle) + latLng.lat * Math.cos(rotationAngle))
     };
 }
 
@@ -74,7 +74,7 @@ function initMouseCoordinatesPopup(map: L.Map) {
             if (!this._popup) return;
             const coords = latLng_to_world(e.latlng);
             this._popup.setLatLng(e.latlng)
-              .setContent(`[${coords.x.toFixed(0)}, ${coords.z.toFixed(0)}]`);
+              .setContent(`[x,z]=[${coords.x.toFixed(0)}, ${coords.z.toFixed(0)}]`);
         }
     });
 
@@ -297,7 +297,7 @@ function drawRegion(zone: Zone, regionId: RegionID, options?: L.PolylineOptions)
 
 }
 
-for (const region of zone.regions) {
-    drawRegion(zone, region.map_region_id)
-}
-// drawRegion(zone, 2419)
+// for (const region of zone.regions) {
+//     drawRegion(zone, region.map_region_id)
+// }
+drawRegion(zone, 2419)
