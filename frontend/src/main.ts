@@ -2,7 +2,7 @@ import * as L from 'leaflet';
 import {WorldCoordinate, Zone} from "./types/zone_types.js";
 import {ZoneService} from "./services/zone_service.js";
 import {Continent, RegionID} from "./types/common.js";
-import {HexCoordinate, hexCoordsToWorld} from "./hexagons.js";
+import {HexCoordinate, hexCoordsToWorld, HexGeometry} from "./hexagons.js";
 
 /**
  * Converts game world coordinates to latitude and longitude coordinates.
@@ -159,16 +159,9 @@ function drawLattice(zone: Zone, leafletMap: L.Map): void {
     }
 }
 
-function drawHexagonAtWorldCoords(map: L.Map, worldCenter: WorldCoordinate, innerDiameter: number, options?: L.PolylineOptions) {
-    const hexVertices: WorldCoordinate[] = [];
-    const radius = innerDiameter / Math.sqrt(3.0) * 2;
-    // Generate 6 points for pointy-top hexagon (no rotation needed)
-    for (let i = 0; i < 6; i++) {
-        const angle = (i * 60) * Math.PI / 180; // No additional rotation for pointy-top
-        const x = worldCenter.x + radius * Math.cos(angle);
-        const z = worldCenter.z + radius * Math.sin(angle);
-        hexVertices.push({x, z});
-    }
+function drawHexagonAtCoords(map: L.Map, coordinate: HexCoordinate, innerDiameter: number, options?: L.PolylineOptions) {
+    const geometry = new HexGeometry(innerDiameter)
+    const hexVertices: WorldCoordinate[] = geometry.hexVertices(coordinate)
 
     // Convert to LatLng and create polygon
     const hexagonLatLngPoints = hexVertices.map(coord => world_to_latLng(coord));
@@ -197,20 +190,11 @@ function drawHexagonsAtCoords(
 ): L.Polygon[] {
 
     const hexagons: L.Polygon[] = [];
-    const hexRadius = innerDiameter / 2; // For drawing the hexagon shape
+    const geometry = new HexGeometry(innerDiameter);
 
     for (const hexCoord of hexCoordinates) {
-        // Use the correct hex coordinate conversion
-        const hexCenter = hexCoordsToWorld(hexCoord, innerDiameter);
-
-        // Apply offset if provided
-        const finalCenter: WorldCoordinate = {
-            x: hexCenter.x,
-            z: hexCenter.z
-        };
-
         // Create a hexagon at this position
-        const hexagon = drawHexagonAtWorldCoords(map, finalCenter, hexRadius, {
+        const hexagon = drawHexagonAtCoords(map, hexCoord, innerDiameter, {
             color: 'blue',
             fillColor: 'lightblue',
             fillOpacity: 0.3,
@@ -219,7 +203,7 @@ function drawHexagonsAtCoords(
         });
 
         // Optional: Add coordinate labels
-        const centerLatLng = world_to_latLng(finalCenter);
+        const centerLatLng = world_to_latLng(geometry.hexCoordsToWorld(hexCoord));
         L.marker(centerLatLng, {
             icon: L.divIcon({
                 html: `${hexCoord.x},${hexCoord.y}`,

@@ -1,6 +1,6 @@
 import {WorldCoordinate} from "./types/zone_types";
 
-type HexVertex = WorldCoordinate
+type VertexCoordinate = WorldCoordinate
 
 const HexDirection = {
   E: [1, 0],
@@ -126,10 +126,32 @@ export function hexCoordsToWorld(coords: HexCoordinate, innerDiameter: number): 
     return { x, z };
 }
 
-class HexGeometry {
-  private innerDiameter: number;
+export class HexGeometry {
+  private readonly innerDiameter: number;
+  private readonly radius: number;
+
   constructor(innerDiameter: number) {
     this.innerDiameter = innerDiameter;
+    this.radius = this.innerDiameter / Math.sqrt(3.0);
+  }
+
+  hexCoordsToWorld(coords: HexCoordinate): WorldCoordinate {
+    return hexCoordsToWorld(coords, this.innerDiameter);
+  }
+
+  private readonly rotationAngle: number = Math.PI / 3;
+
+  hexVertices(coords: HexCoordinate): VertexCoordinate[] {
+    const hexVertices: VertexCoordinate[] = [];
+    let worldCenter = hexCoordsToWorld(coords, this.innerDiameter);
+    // Generate 6 points for pointy-top hexagon
+    for (let i = 0; i < 6; i++) {
+      const angle = i * this.rotationAngle;
+      const x = worldCenter.x + this.radius * Math.cos(angle);
+        const z = worldCenter.z + this.radius * Math.sin(angle);
+        hexVertices.push({x, z});
+    }
+    return hexVertices;
   }
 
 }
