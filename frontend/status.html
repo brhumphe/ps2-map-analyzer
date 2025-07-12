@@ -3,62 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PS2 Map State</title>
+    <title>PS2 Map State - Vue Version</title>
+
+    <!-- Add Vue via import map -->
+    <script type="importmap">
+    {
+        "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+    }
+    </script>
 </head>
 <body>
-    <h1>PS2 Map State Application</h1>
-    
-    <div>
-        <button id="pingBtn">Test Backend Connection</button>
-        <button id="dataBtn">Get Capturable Bases</button>
+    <div id="app">
+        <!-- This is where our Vue application will mount -->
     </div>
-    
-    <div id="status"></div>
-    <div id="result"></div>
 
-    <script>
-        const API_BASE = 'http://localhost:8000';
-        const statusDiv = document.getElementById('status');
-        const resultDiv = document.getElementById('result');
-
-        // Ping endpoint test
-        document.getElementById('pingBtn').addEventListener('click', async () => {
-            try {
-                statusDiv.innerHTML = '<p>Testing backend connection...</p>';
-                
-                const response = await fetch(`${API_BASE}/api/ping`);
-                const data = await response.json();
-                
-                statusDiv.innerHTML = '<p style="color: green;">✓ Backend connection successful!</p>';
-                resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-            } catch (error) {
-                statusDiv.innerHTML = '<p style="color: red;">✗ Backend connection failed!</p>';
-                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
-            }
-        });
-
-        // Capturable bases endpoint test
-        document.getElementById('dataBtn').addEventListener('click', async () => {
-            try {
-                statusDiv.innerHTML = '<p>Fetching capturable bases...</p>';
-                
-                // Example parameters - adjust as needed
-                const params = new URLSearchParams({
-                    world_id: 1,
-                    zone_id: 2,
-                    faction_id: 1
-                });
-                
-                const response = await fetch(`${API_BASE}/api/capturable-bases/?${params}`);
-                const data = await response.json();
-                
-                statusDiv.innerHTML = '<p style="color: green;">✓ Data fetched successfully!</p>';
-                resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-            } catch (error) {
-                statusDiv.innerHTML = '<p style="color: red;">✗ Failed to fetch data!</p>';
-                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
-            }
-        });
-    </script>
+    <!-- We'll put our Vue application code here -->
+    <script type="module" src="status-vue.js"></script>
 </body>
 </html>
