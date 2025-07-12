@@ -22,16 +22,17 @@ async def fetch_map_state(client, world_id, zone_id) -> MapState:
 
 async def fetch_zone_data(client, zone_id) -> Zone:
     """
-    https://census.lithafalcon.cc/get/ps2/zone?zone_id=2&c:join=map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&c:lang=en&c:censusJSON=false
+    https://census.lithafalcon.cc/get/ps2/zone?zone_id=4&c:join=facility_link^on:zone_id^to:zone_id^list:1^inject_at:links^hide:description'zone_id,map_region^list:1^inject_at:regions^hide:zone_id'localized_facility_name(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&c:lang=en&c:hide=name,description&c:censusJSON=false
     """
     data = await fetch_json(
         client,
         "https://census.lithafalcon.cc/get/ps2/zone",
         params={
             "zone_id": zone_id,
-            "c:join": "map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)",
+            "c:join": "facility_link^on:zone_id^to:zone_id^list:1^inject_at:links^hide:description'zone_id,map_region^list:1^inject_at:regions^hide:zone_id'localized_facility_name(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)",
             "c:lang": "en",
             "c:censusJSON": "false",
+            "c:hide": "name,description"
         },
     )
     response = ZoneDataResponse(**data)

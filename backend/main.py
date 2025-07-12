@@ -5,7 +5,7 @@ import httpx
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from map_tools import find_capturable_bases
+from analysis.territory import find_capturable_bases
 from services.sanctuary.client import fetch_map_state, fetch_zone_data
 
 
