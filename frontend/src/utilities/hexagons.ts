@@ -1,4 +1,4 @@
-import {WorldCoordinate} from "./types/zone_types";
+import {WorldCoordinate} from "../types/zone_types";
 
 type VertexCoordinate = WorldCoordinate
 
@@ -104,7 +104,7 @@ export function parseEdgeString(str: string): HexEdge {
       start: vertex1,
       end: vertex2
     };
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(`Invalid edge string format: ${error.message}`);
   }
 }

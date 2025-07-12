@@ -2,7 +2,8 @@ import * as L from 'leaflet';
 import {WorldCoordinate, Zone} from "./types/zone_types.js";
 import {ZoneService} from "./services/zone_service.js";
 import {Continent, RegionID} from "./types/common.js";
-import {HexCoordinate, hexCoordsToWorld, HexGeometry} from "./hexagons.js";
+import {HexCoordinate, HexGeometry} from "./utilities/hexagons.js";
+import {Polygon} from "leaflet";
 
 /**
  * Converts game world coordinates to latitude and longitude coordinates.
@@ -276,7 +277,7 @@ placeRegionMarkers(zone, map);
 drawLattice(zone, map);
 
 
-function drawRegion(zone: Zone, regionId: RegionID, options?: L.PolylineOptions): L.Polygon {
+function drawRegion(zone: Zone, regionId: RegionID, options?: L.PolylineOptions): Polygon | undefined {
     const geometry = new HexGeometry(zone.hex_size)
     const hexCoordinates = extractRegionHexCoords(zone, regionId)
     try {
@@ -292,7 +293,7 @@ function drawRegion(zone: Zone, regionId: RegionID, options?: L.PolylineOptions)
         }).addTo(map);
     } catch (e) {
         console.log(e, {"zoneID": zone.zone_id, "regionID": regionId, "hexCoordinates": hexCoordinates})
-        return
+        return undefined
     }
 
 }
