@@ -11,7 +11,7 @@ import {
   getNonSharedEdges,
   parseEdgeString,
   orderEdges, getOrderedVertices
-} from '../src/hexagons';
+} from '../src/utilities/hexagons';
 import {WorldCoordinate} from "../src/types/zone_types";
 
 describe('hexToCubeCoords', () => {
