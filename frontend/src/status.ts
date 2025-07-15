@@ -1,24 +1,52 @@
-// status-vue.js
-import { createApp, ref, computed } from 'vue';
 
-// Enhanced version with more reactive features
-const StatusApp = {
-  setup() {
+import {createApp, ref, computed, type Ref, defineComponent} from 'vue';
+
+interface RequestHistoryEntry {
+  timestamp: string;
+  type: string;
+  success: boolean;
+  data: string;
+}
+
+interface ResultData {
+  error?: string;
+  message?: string;
+  status?: string;
+}
+
+// Define props and emits types for the component
+interface StatusAppSetupReturn {
+  statusMessage: Ref<string>;
+  resultData: Ref<ResultData | null>;
+  isLoading: Ref<boolean>;
+  requestHistory: Ref<RequestHistoryEntry[]>;
+  requestCount: Ref<number>;
+  hasErrors: Ref<boolean>;
+  testBackendConnection: () => Promise<void>;
+  fetchCapturableBases: () => Promise<void>;
+  clearHistory: () => void;
+  getStatusColor: () => string;
+  formatResult: (data: ResultData | null) => string;
+}
+
+const API_BASE = 'http://localhost:8000';
+
+// Enhanced version with more reactive features and TypeScript support
+const StatusApp = defineComponent({
+  setup(): StatusAppSetupReturn {
     // Multiple pieces of reactive state
-    const statusMessage = ref('Ready');
-    const resultData = ref(null);
-    const isLoading = ref(false);
-    const requestHistory = ref([]);
+    const statusMessage = ref<string>('Ready');
+    const resultData = ref<ResultData | null>(null);
+    const isLoading = ref<boolean>(false);
+    const requestHistory = ref<RequestHistoryEntry[]>([]);
 
     const requestCount = computed(() => requestHistory.value.length);
     const hasErrors = computed(() =>
-      requestHistory.value.some(req => req.success === false)
+      requestHistory.value.some(req => !req.success)
     );
 
-    const API_BASE = 'http://localhost:8000';
-
     // Helper to record request history
-    const recordRequest = (type, success, data) => {
+    const recordRequest = (type: string, success: boolean, data: ResultData): void => {
       requestHistory.value.push({
         timestamp: new Date().toLocaleTimeString(),
         type,
@@ -27,58 +55,74 @@ const StatusApp = {
       });
     };
 
-    const testBackendConnection = async () => {
+    const testBackendConnection = async (): Promise<void> => {
       try {
         isLoading.value = true;
         statusMessage.value = 'Testing backend connection...';
         resultData.value = null;
 
         const response = await fetch(`${API_BASE}/api/ping`);
-        const data = await response.json();
+        const data: ResultData = await response.json();
 
         statusMessage.value = '✓ Backend connection successful!';
         resultData.value = data;
         recordRequest('Backend Test', true, data);
 
       } catch (error) {
+        const errorData: ResultData = {
+          error: error instanceof Error ? error.message : 'Unknown error'
+        };
         statusMessage.value = '✗ Backend connection failed!';
-        resultData.value = { error: error.message };
-        recordRequest('Backend Test', false, { error: error.message });
+        resultData.value = errorData;
+        recordRequest('Backend Test', false, errorData);
       } finally {
         isLoading.value = false;
       }
     };
 
-    const fetchCapturableBases = async () => {
+    const fetchCapturableBases = async (): Promise<void> => {
       try {
         isLoading.value = true;
         statusMessage.value = 'Fetching capturable bases...';
         resultData.value = null;
 
         const params = new URLSearchParams({
-          world_id: 1,
-          zone_id: 2,
-          faction_id: 1
+          world_id: '1',
+          zone_id: '2',
+          faction_id: '1'
         });
 
         const response = await fetch(`${API_BASE}/api/capturable-bases/?${params}`);
-        const data = await response.json();
+        const data: ResultData = await response.json();
 
         statusMessage.value = '✓ Data fetched successfully!';
         resultData.value = data;
         recordRequest('Capturable Bases', true, data);
 
       } catch (error) {
+        const errorData: ResultData = {
+          error: error instanceof Error ? error.message : 'Unknown error'
+        };
         statusMessage.value = '✗ Failed to fetch data!';
-        resultData.value = { error: error.message };
-        recordRequest('Capturable Bases', false, { error: error.message });
+        resultData.value = errorData;
+        recordRequest('Capturable Bases', false, errorData);
       } finally {
         isLoading.value = false;
       }
     };
 
-    const clearHistory = () => {
+    const clearHistory = (): void => {
       requestHistory.value = [];
+    };
+
+    const getStatusColor = (): string => {
+      if (statusMessage.value.includes('✓')) return 'green';
+      if (statusMessage.value.includes('✗')) return 'red';
+      return 'black';
+    };
+
+    const formatResult = (data: ResultData | null): string => {
+      return JSON.stringify(data, null, 2);
     };
 
     return {
@@ -90,7 +134,9 @@ const StatusApp = {
       hasErrors,
       testBackendConnection,
       fetchCapturableBases,
-      clearHistory
+      clearHistory,
+      getStatusColor,
+      formatResult
     };
   },
 
@@ -142,7 +188,7 @@ const StatusApp = {
         <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto;">{{ formatResult(resultData) }}</pre>
       </div>
       
-      <!-- Request history that automatically updates when new requests are made -->
+      <!-- Request history that automatically updates -->
       <div v-if="requestHistory.length > 0" style="margin: 20px 0;">
         <h3>Request History:</h3>
         <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; border-radius: 5px;">
@@ -162,20 +208,8 @@ const StatusApp = {
         </div>
       </div>
     </div>
-  `,
-
-  methods: {
-    getStatusColor() {
-      if (this.statusMessage.includes('✓')) return 'green';
-      if (this.statusMessage.includes('✗')) return 'red';
-      return 'black';
-    },
-
-    formatResult(data) {
-      return JSON.stringify(data, null, 2);
-    }
-  }
-};
+  `
+});
 
 // Create and mount the application
 createApp(StatusApp).mount('#app');
