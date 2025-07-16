@@ -1,7 +1,11 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { resolve } from 'path';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
 import vueDevTools from 'vite-plugin-vue-devtools';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default defineConfig({
   plugins: [
@@ -21,8 +25,8 @@ export default defineConfig({
     target: 'esnext',
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'frontend\\index.html'),
-        status: resolve(__dirname, 'frontend\\status.html')
+        main: resolve(__dirname, 'frontend/index.html'),
+        status: resolve(__dirname, 'frontend/status.html')
       }
     }
   },
@@ -37,6 +41,6 @@ export default defineConfig({
     __VUE_PROD_DEVTOOLS__: 'false'
   },
   server: {
-    open: '\\status.html'
+    open: '/status.html'
   }
 });
