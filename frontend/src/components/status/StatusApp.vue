@@ -47,29 +47,14 @@
     </div>
 
     <!-- Request history that automatically updates -->
-    <div v-if="requestHistory.length > 0" style="margin: 20px 0;">
-      <h3>Request History:</h3>
-      <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; border-radius: 5px;">
-        <div
-          v-for="(request, index) in requestHistory"
-          :key="index"
-          :style="{
-            padding: '10px',
-            borderBottom: index < requestHistory.length - 1 ? '1px solid #eee' : 'none',
-            backgroundColor: request.success ? '#f0fff0' : '#fff0f0'
-          }">
-          <strong>{{ request.timestamp }}</strong> - {{ request.type }}:
-          <span :style="{ color: request.success ? 'green' : 'red' }">
-            {{ request.data }}
-          </span>
-        </div>
-      </div>
-    </div>
+    <RequestHistory :request-history="requestHistory"/>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, type Ref } from 'vue';
+import {computed, defineComponent, ref} from 'vue';
+import RequestHistory from "./RequestHistory.vue";
+import {useRequestHistory} from "./useRequestHistory";
 
 interface RequestHistoryEntry {
   timestamp: string;
@@ -87,19 +72,20 @@ interface ResultData {
 const API_BASE = 'http://localhost:8000';
 
 export default defineComponent({
+  components: {RequestHistory},
   setup() {
     const statusMessage = ref<string>('Ready');
     const resultData = ref<ResultData | null>(null);
     const isLoading = ref<boolean>(false);
-    const requestHistory = ref<RequestHistoryEntry[]>([]);
+    const requestHistory = useRequestHistory();
 
-    const requestCount = computed(() => requestHistory.value.length);
+    const requestCount = computed(() => requestHistory.requestHistory.value.length);
     const hasErrors = computed(() =>
-      requestHistory.value.some(req => !req.success)
+      requestHistory.requestHistory.value.some(req => !req.success)
     );
 
     const recordRequest = (type: string, success: boolean, data: ResultData): void => {
-      requestHistory.value.push({
+      requestHistory.addRequest({
         timestamp: new Date().toLocaleTimeString(),
         type,
         success,
@@ -192,6 +178,3 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-/* You can add component-specific styles here */
-</style>
