@@ -5,9 +5,9 @@
     <!-- Request statistics that automatically update -->
     <div style="background: #f0f0f0; padding: 15px; margin: 20px 0; border-radius: 5px;">
       <h3>Request Statistics</h3>
-      <p>Total Requests: {{ requestCount }}</p>
-      <p :style="{ color: hasErrors ? 'red' : 'green' }">
-        Status: {{ hasErrors ? 'Some requests failed' : 'All requests successful' }}
+      <p>Total Requests: {{ history.requestCount }}</p>
+      <p :style="{ color: history.hasErrors.value ? 'red' : 'green' }">
+        Status: {{ history.hasErrors.value ? 'Some requests failed' : 'All requests successful' }}
       </p>
     </div>
 
@@ -27,7 +27,7 @@
       </button>
 
       <button
-        @click="clearHistory"
+        @click="history.clearHistory"
         :disabled="isLoading"
         style="padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 3px;">
         Clear History
@@ -47,12 +47,12 @@
     </div>
 
     <!-- Request history that automatically updates -->
-    <RequestHistory :request-history="requestHistory"/>
+    <RequestHistory :request-history="history"/>
   </div>
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, ref} from 'vue';
+import {defineComponent, ref} from 'vue';
 import RequestHistory from "@/components/status/RequestHistory.vue";
 import {useRequestHistory} from "@/components/status/useRequestHistory";
 
@@ -70,15 +70,10 @@ export default defineComponent({
     const statusMessage = ref<string>('Ready');
     const resultData = ref<ResultData | null>(null);
     const isLoading = ref<boolean>(false);
-    const requestHistory = useRequestHistory();
-
-    const requestCount = computed(() => requestHistory.requestHistory.value.length);
-    const hasErrors = computed(() =>
-      requestHistory.requestHistory.value.some(req => !req.success)
-    );
+    const history = useRequestHistory();
 
     const recordRequest = (type: string, success: boolean, data: ResultData): void => {
-      requestHistory.addRequest({
+      history.addRequest({
         timestamp: new Date().toLocaleTimeString(),
         type,
         success,
@@ -140,10 +135,6 @@ export default defineComponent({
       }
     };
 
-    const clearHistory = (): void => {
-      requestHistory.requestHistory.value = [];
-    };
-
     const getStatusColor = (): string => {
       if (statusMessage.value.includes('✓')) return 'green';
       if (statusMessage.value.includes('✗')) return 'red';
@@ -158,12 +149,9 @@ export default defineComponent({
       statusMessage,
       resultData,
       isLoading,
-      requestHistory,
-      requestCount,
-      hasErrors,
+      history,
       testBackendConnection,
       fetchCapturableBases,
-      clearHistory,
       getStatusColor,
       formatResult
     };

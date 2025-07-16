@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import {computed, readonly, ref} from 'vue'
 
 export interface Request {
   timestamp: string
@@ -10,6 +10,14 @@ export interface Request {
 const requestHistory = ref<Request[]>([])
 
 export function useRequestHistory() {
+  const requestCount = computed(() => {
+    return requestHistory.value.length;
+  });
+
+  const hasErrors = computed(() => {
+    return requestHistory.value.some(req => !req.success);
+  });
+
   const addRequest = (request: Request) => {
     requestHistory.value.push(request)
   }
@@ -19,8 +27,10 @@ export function useRequestHistory() {
   }
 
   return {
-    requestHistory,
+    requestHistory: readonly(requestHistory),
     addRequest,
-    clearHistory
+    clearHistory,
+    requestCount,
+    hasErrors,
   }
 }

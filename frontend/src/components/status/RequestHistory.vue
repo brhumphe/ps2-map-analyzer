@@ -1,13 +1,13 @@
 <template>
-  <div v-if="requestHistory.length > 0" style="margin: 20px 0;">
+  <div v-if="history.requestCount.value > 0" style="margin: 20px 0;">
     <h3>Request History:</h3>
     <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; border-radius: 5px;">
       <div
-          v-for="(request, index) in requestHistory"
+          v-for="(request, index) in history.requestHistory.value"
           :key="index"
           :style="{
             padding: '10px',
-            borderBottom: index < requestHistory.length - 1 ? '1px solid #eee' : 'none',
+            borderBottom: index < history.requestHistory.value.length - 1 ? '1px solid #eee' : 'none',
             backgroundColor: request.success ? '#f0fff0' : '#fff0f0'
           }">
         <strong>{{ request.timestamp }}</strong> - {{ request.type }}:
@@ -20,8 +20,7 @@
 </template>
 
 <script setup lang="ts">
+import { useRequestHistory } from "./useRequestHistory";
 
-import {useRequestHistory} from "./useRequestHistory";
-
-const { requestHistory } = useRequestHistory()
+const history = useRequestHistory()
 </script>
