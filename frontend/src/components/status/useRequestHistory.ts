@@ -1,13 +1,7 @@
 import {computed, readonly, ref} from 'vue'
+import {ApiRequest, ResultData} from "@/components/status/status_types.js";
 
-export interface Request {
-  timestamp: string
-  type: string
-  data: string
-  success: boolean
-}
-
-const requestHistory = ref<Request[]>([])
+const requestHistory = ref<ApiRequest[]>([])
 
 export function useRequestHistory() {
   const requestCount = computed(() => {
@@ -18,19 +12,24 @@ export function useRequestHistory() {
     return requestHistory.value.some(req => !req.success);
   });
 
-  const addRequest = (request: Request) => {
-    requestHistory.value.push(request)
-  }
-
   const clearHistory = () => {
     requestHistory.value = []
   }
 
+  const recordRequest = (type: string, success: boolean, data: ResultData): void => {
+    requestHistory.value.push({
+      timestamp: new Date().toLocaleTimeString(),
+      type,
+      success,
+      data: success ? 'Success' : data.error || 'Unknown error'
+    })
+  };
+
   return {
     requestHistory: readonly(requestHistory),
-    addRequest,
     clearHistory,
     requestCount,
     hasErrors,
+    recordRequest,
   }
 }

@@ -55,12 +55,7 @@
 import {defineComponent, ref} from 'vue';
 import RequestHistory from "@/components/status/RequestHistory.vue";
 import {useRequestHistory} from "@/components/status/useRequestHistory";
-
-interface ResultData {
-  error?: string;
-  message?: string;
-  status?: string;
-}
+import {ResultData} from "@/components/status/status_types.js";
 
 const API_BASE = 'http://localhost:8000';
 
@@ -71,15 +66,6 @@ export default defineComponent({
     const resultData = ref<ResultData | null>(null);
     const isLoading = ref<boolean>(false);
     const history = useRequestHistory();
-
-    const recordRequest = (type: string, success: boolean, data: ResultData): void => {
-      history.addRequest({
-        timestamp: new Date().toLocaleTimeString(),
-        type,
-        success,
-        data: success ? 'Success' : data.error || 'Unknown error'
-      });
-    };
 
     const testBackendConnection = async (): Promise<void> => {
       try {
@@ -92,14 +78,14 @@ export default defineComponent({
 
         statusMessage.value = '✓ Backend connection successful!';
         resultData.value = data;
-        recordRequest('Backend Test', true, data);
+        history.recordRequest('Backend Test', true, data);
       } catch (error) {
         const errorData: ResultData = {
           error: error instanceof Error ? error.message : 'Unknown error'
         };
         statusMessage.value = '✗ Backend connection failed!';
         resultData.value = errorData;
-        recordRequest('Backend Test', false, errorData);
+        history.recordRequest('Backend Test', false, errorData);
       } finally {
         isLoading.value = false;
       }
@@ -122,14 +108,14 @@ export default defineComponent({
 
         statusMessage.value = '✓ Data fetched successfully!';
         resultData.value = data;
-        recordRequest('Capturable Bases', true, data);
+        history.recordRequest('Capturable Bases', true, data);
       } catch (error) {
         const errorData: ResultData = {
           error: error instanceof Error ? error.message : 'Unknown error'
         };
         statusMessage.value = '✗ Failed to fetch data!';
         resultData.value = errorData;
-        recordRequest('Capturable Bases', false, errorData);
+        history.recordRequest('Capturable Bases', false, errorData);
       } finally {
         isLoading.value = false;
       }
