@@ -53,15 +53,8 @@
 
 <script lang="ts">
 import {computed, defineComponent, ref} from 'vue';
-import RequestHistory from "./RequestHistory.vue";
-import {useRequestHistory} from "./useRequestHistory";
-
-interface RequestHistoryEntry {
-  timestamp: string;
-  type: string;
-  success: boolean;
-  data: string;
-}
+import RequestHistory from "@/components/status/RequestHistory.vue";
+import {useRequestHistory} from "@/components/status/useRequestHistory";
 
 interface ResultData {
   error?: string;
@@ -148,7 +141,7 @@ export default defineComponent({
     };
 
     const clearHistory = (): void => {
-      requestHistory.value = [];
+      requestHistory.requestHistory.value = [];
     };
 
     const getStatusColor = (): string => {
@@ -177,4 +170,3 @@ export default defineComponent({
   }
 });
 </script>
-

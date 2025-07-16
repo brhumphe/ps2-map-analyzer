@@ -15,6 +15,9 @@
     "outDir": "./frontend/dist",
     "rootDir": "./frontend/src",
     "baseUrl": "./",
+    "paths": {
+      "@/*": ["frontend/src/*"]
+    },
     "declaration": true,
     "sourceMap": true,
     "removeComments": false,
