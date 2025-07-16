@@ -6,3 +6,6 @@
 /frontend/tests/**/*.test.js
 /frontend/tests/**/*.test.d.ts
 /frontend/tests/**/*.test.js.map
+/vite.config.d.ts
+/vite.config.js
+/vite.config.js.map
