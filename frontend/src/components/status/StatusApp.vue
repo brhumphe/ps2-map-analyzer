@@ -2,51 +2,53 @@
   <v-app>
     <v-app-bar title="PS2 Map State Application - Vue Version"></v-app-bar>
 
-<v-main>
-    <!-- Request statistics that automatically update -->
-    <v-container>
-      <h3>Request Statistics</h3>
-      <p>Total Requests: {{ history.requestCount }}</p>
-      <p :style="{ color: history.hasErrors.value ? 'red' : 'green' }">
-        Status: {{ history.hasErrors.value ? 'Some requests failed' : 'All requests successful' }}
-      </p>
-    </v-container>
+    <v-main>
+      <!-- Request statistics that automatically update -->
+      <v-container>
+        <h3>Request Statistics</h3>
+        <p>Total Requests: {{ history.requestCount }}</p>
+        <p :style="{ color: history.hasErrors.value ? 'red' : 'green' }">
+          Status: {{ history.hasErrors.value ? 'Some requests failed' : 'All requests successful' }}
+        </p>
+      </v-container>
 
-    <v-container>
-      <v-btn
-        @click="testBackendConnection"
-        :disabled="isLoading">
-        Test Backend Connection
-      </v-btn>
+      <v-container>
+        <v-btn
+            @click="testBackendConnection"
+            :disabled="isLoading">
+          Test Backend Connection
+        </v-btn>
 
-      <v-btn
-        @click="fetchCapturableBases"
-        :disabled="isLoading">
-        Get Capturable Bases
-      </v-btn>
+        <v-btn
+            @click="fetchCapturableBases"
+            :disabled="isLoading">
+          Get Capturable Bases
+        </v-btn>
 
-      <v-btn
-        @click="history.clearHistory"
-        :disabled="isLoading">
-        Clear History
-      </v-btn>
-    </v-container>
+        <v-btn
+            @click="history.clearHistory"
+            :disabled="isLoading">
+          Clear History
+        </v-btn>
+      </v-container>
 
-    <!-- Status display -->
-    <v-container>
-      <p :style="{ color: getStatusColor() }">{{ statusMessage }}</p>
-      <p v-if="isLoading" style="color: #666;">Loading...</p>
-    </v-container>
+      <!-- Status display -->
+      <v-container>
+        <p :style="{ color: getStatusColor() }">{{ statusMessage }}</p>
+        <p v-if="isLoading" style="color: #666;">Loading...</p>
+      </v-container>
 
-    <!-- Current result -->
-    <v-card v-if="resultData">
-      <v-card-title>Current Result:</v-card-title>
-     <v-card-text> <pre>{{ formatResult(resultData) }}</pre></v-card-text>
-    </v-card>
+      <!-- Current result -->
+      <v-card v-if="resultData">
+        <v-card-title>Current Result:</v-card-title>
+        <v-card-text>
+          <v-code>{{ formatResult(resultData) }}</v-code>
+        </v-card-text>
+      </v-card>
 
-    <!-- Request history that automatically updates -->
-    <RequestHistory :request-history="history"/>
-  </v-main>
+      <!-- Request history that automatically updates -->
+      <RequestHistory :request-history="history"/>
+    </v-main>
   </v-app>
 </template>
 
