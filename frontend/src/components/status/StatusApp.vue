@@ -1,54 +1,53 @@
 <template>
-  <div style="padding: 20px; font-family: Arial, sans-serif;">
-    <h1>PS2 Map State Application - Vue Version</h1>
+  <v-app>
+    <v-app-bar title="PS2 Map State Application - Vue Version"></v-app-bar>
 
+<v-main>
     <!-- Request statistics that automatically update -->
-    <div style="background: #f0f0f0; padding: 15px; margin: 20px 0; border-radius: 5px;">
+    <v-container>
       <h3>Request Statistics</h3>
       <p>Total Requests: {{ history.requestCount }}</p>
       <p :style="{ color: history.hasErrors.value ? 'red' : 'green' }">
         Status: {{ history.hasErrors.value ? 'Some requests failed' : 'All requests successful' }}
       </p>
-    </div>
+    </v-container>
 
-    <div style="margin: 20px 0;">
-      <button
+    <v-container>
+      <v-btn
         @click="testBackendConnection"
-        :disabled="isLoading"
-        style="margin-right: 10px; padding: 10px 20px;">
+        :disabled="isLoading">
         Test Backend Connection
-      </button>
+      </v-btn>
 
-      <button
+      <v-btn
         @click="fetchCapturableBases"
-        :disabled="isLoading"
-        style="margin-right: 10px; padding: 10px 20px;">
+        :disabled="isLoading">
         Get Capturable Bases
-      </button>
+      </v-btn>
 
-      <button
+      <v-btn
         @click="history.clearHistory"
-        :disabled="isLoading"
-        style="padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 3px;">
+        :disabled="isLoading">
         Clear History
-      </button>
-    </div>
+      </v-btn>
+    </v-container>
 
     <!-- Status display -->
-    <div style="margin: 20px 0; font-weight: bold;">
+    <v-container>
       <p :style="{ color: getStatusColor() }">{{ statusMessage }}</p>
       <p v-if="isLoading" style="color: #666;">Loading...</p>
-    </div>
+    </v-container>
 
     <!-- Current result -->
-    <div v-if="resultData" style="margin: 20px 0;">
-      <h3>Current Result:</h3>
-      <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto;">{{ formatResult(resultData) }}</pre>
-    </div>
+    <v-card v-if="resultData">
+      <v-card-title>Current Result:</v-card-title>
+     <v-card-text> <pre>{{ formatResult(resultData) }}</pre></v-card-text>
+    </v-card>
 
     <!-- Request history that automatically updates -->
     <RequestHistory :request-history="history"/>
-  </div>
+  </v-main>
+  </v-app>
 </template>
 
 <script lang="ts">

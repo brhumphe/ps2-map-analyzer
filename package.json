@@ -2,7 +2,8 @@
   "type": "module",
   "dependencies": {
     "leaflet": "^1.9.4",
-    "vue": "^3.5.17"
+    "vue": "^3.5.17",
+    "vuetify": "^3.9.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",

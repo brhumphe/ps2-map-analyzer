@@ -16,7 +16,7 @@ export default defineConfig({
         }
       }
     }),
-    vueDevTools(),
+    vueDevTools({launchEditor:'pycharm'}),
   ],
   root: 'frontend',
   build: {

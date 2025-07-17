@@ -1,7 +1,7 @@
 <template>
-  <div v-if="history.requestCount.value > 0" style="margin: 20px 0;">
+  <v-card v-if="history.requestCount.value > 0">
     <h3>Request History:</h3>
-    <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; border-radius: 5px;">
+    <v-container>
       <div
           v-for="(request, index) in history.requestHistory.value"
           :key="index"
@@ -15,8 +15,8 @@
             {{ request.data }}
           </span>
       </div>
-    </div>
-  </div>
+    </v-container>
+  </v-card>
 </template>
 
 <script setup lang="ts">
