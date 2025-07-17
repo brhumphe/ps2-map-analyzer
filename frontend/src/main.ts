@@ -262,6 +262,27 @@ function extractRegionHexCoords(zone:Zone, regionId: RegionID): HexCoordinate[] 
 }
 
 
+function drawRegion(zone: Zone, regionId: RegionID, leafletMap: L.Map, options?: L.PolylineOptions): Polygon | undefined {
+    const geometry = new HexGeometry(zone.hex_size)
+    const hexCoordinates = extractRegionHexCoords(zone, regionId)
+    try {
+        const vertices = geometry.getBoundaryVertices(hexCoordinates);
+        const hexagonLatLngPoints = vertices.map(coord => world_to_latLng(coord));
+        console.log({"zoneID": zone.zone_id, "regionID": regionId, "hexCoordinates": hexCoordinates, "vertices":vertices})
+        return L.polygon(hexagonLatLngPoints, {
+            color: 'white',
+            fillColor: 'purple',
+            fillOpacity: 0.3,
+            weight: 2,
+            ...options
+        }).addTo(leafletMap);
+    } catch (e) {
+        console.log(e, {"zoneID": zone.zone_id, "regionID": regionId, "hexCoordinates": hexCoordinates})
+        return undefined
+    }
+
+}
+
 
 // Map creation
 const map = L.map('map_div', {
@@ -276,29 +297,7 @@ const zone = await zoneService.fetchZone(Continent.INDAR);
 placeRegionMarkers(zone, map);
 drawLattice(zone, map);
 
-
-function drawRegion(zone: Zone, regionId: RegionID, options?: L.PolylineOptions): Polygon | undefined {
-    const geometry = new HexGeometry(zone.hex_size)
-    const hexCoordinates = extractRegionHexCoords(zone, regionId)
-    try {
-        const vertices = geometry.getBoundaryVertices(hexCoordinates);
-        const hexagonLatLngPoints = vertices.map(coord => world_to_latLng(coord));
-        console.log({"zoneID": zone.zone_id, "regionID": regionId, "hexCoordinates": hexCoordinates, "vertices":vertices})
-        return L.polygon(hexagonLatLngPoints, {
-            color: 'white',
-            fillColor: 'purple',
-            fillOpacity: 0.3,
-            weight: 2,
-            ...options
-        }).addTo(map);
-    } catch (e) {
-        console.log(e, {"zoneID": zone.zone_id, "regionID": regionId, "hexCoordinates": hexCoordinates})
-        return undefined
-    }
-
+for (const region of zone.regions) {
+    drawRegion(zone, region.map_region_id, map)
 }
-
-// for (const region of zone.regions) {
-//     drawRegion(zone, region.map_region_id)
-// }
-drawRegion(zone, 2419)
+// drawRegion(zone, 2419, map)
