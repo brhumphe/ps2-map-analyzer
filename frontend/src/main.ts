@@ -1,29 +1,32 @@
-import * as L from 'leaflet';
-import {ZoneService} from "@/services/zone_service";
-import {Continent} from "@/types/common";
-import {
-  configureMapTileLayer,
-  drawLattice,
-  drawRegion,
-  initMouseCoordinatesPopup,
-  placeRegionMarkers
-} from "@/utilities/leaflet_utils"
+import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
+import 'vuetify/styles'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
+// Import Vuetify components
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-// Map creation
-const map = L.map('map_div', {
-  crs: L.CRS.Simple, center: [0, 0],
-}).setView([-2250, -2250], 0);
-initMouseCoordinatesPopup(map);
-configureMapTileLayer(map);
+// Import your main map component
+import MapApp from '@/components/map/MapApp.vue'
 
-// Fetch map data
-const zoneService = new ZoneService();
-const zone = await zoneService.fetchZone(Continent.INDAR);
-placeRegionMarkers(zone, map);
-drawLattice(zone, map);
+// Configure Vuetify
+const vuetify = createVuetify({
+  components,
+  directives,
+  icons: {
+    defaultSet: 'mdi',
+    aliases,
+    sets: {
+      mdi,
+    },
+  },
+  theme: {
+    defaultTheme: 'dark' // Optional: PS2 feels like a dark theme app
+  }
+})
 
-for (const region of zone.regions) {
-  drawRegion(zone, region.map_region_id, map)
-}
-// drawRegion(zone, 2419, map)
+// Create and mount the app directly with MapApp
+const app = createApp(MapApp)
+app.use(vuetify)
+app.mount('#app')
