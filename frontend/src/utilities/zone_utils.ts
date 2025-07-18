@@ -1,7 +1,7 @@
 // Create a new file: src/utils/zone_utils.ts
 
-import {Zone, RegionHex, Region, WorldCoordinate} from '@/types/zone_types';
-import { RegionID } from '@/types/common';
+import {Zone, RegionHex, Region, WorldCoordinate, FacilityLink, FacilityLinkKey} from '@/types/zone_types';
+import {FacilityID, RegionID} from '@/types/common';
 import {HexCoordinate} from "@/utilities/hexagons";
 
 /**
@@ -73,4 +73,15 @@ export const zoneUtils = {
         }
         return facility_coords;
     },
+
+      /**
+   * Generate canonical key for a lattice link
+   * Ensures consistent ordering regardless of input order
+   */
+  getLinkKey(link:FacilityLink): FacilityLinkKey {
+      const facilityA = link.facility_id_a;
+      const facilityB = link.facility_id_b;
+      const [lower, higher] = facilityA < facilityB ? [facilityA, facilityB] : [facilityB, facilityA];
+      return `${lower}-${higher}` as FacilityLinkKey;
+  },
 } as const;  // Make the object immutable

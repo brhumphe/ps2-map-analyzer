@@ -40,6 +40,8 @@ export interface FacilityLink {
   zone_id: Continent;
 }
 
+export type FacilityLinkKey = `${number}-${number}` & { readonly __brand: 'LinkKey' }
+
 /**
  * Represents a zone (continent) with all its regions and facility links
  */
