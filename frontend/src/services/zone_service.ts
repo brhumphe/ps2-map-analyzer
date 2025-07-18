@@ -1,5 +1,5 @@
-import { Zone, Region, FacilityLink } from '../types/zone_types';
-import { Continent } from '../types/common';
+import { Zone, Region, FacilityLink } from '@/types/zone_types';
+import { Continent } from '@/types/common';
 
 // API response types (matching the raw API structure)
 export interface ZoneResponse {

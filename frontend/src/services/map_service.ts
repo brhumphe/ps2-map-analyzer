@@ -1,4 +1,4 @@
-import {Continent, Faction, RegionID, WorldID} from "../types/common";
+import {Continent, Faction, RegionID, WorldID} from "@/types/common";
 
 // API response types
 export interface RegionStateResponse {

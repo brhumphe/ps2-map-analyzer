@@ -1,4 +1,4 @@
-import {WorldCoordinate} from "../types/zone_types";
+import {WorldCoordinate} from "@/types/zone_types";
 
 type VertexCoordinate = WorldCoordinate
 

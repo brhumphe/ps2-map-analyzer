@@ -1,7 +1,7 @@
 // Create a new file: src/utils/zone_utils.ts
 
-import {Zone, RegionHex, Region} from '../types/zone_types';
-import { RegionID } from '../types/common';
+import {Zone, RegionHex, Region} from '@/types/zone_types';
+import { RegionID } from '@/types/common';
 
 /**
  * Utility functions for working with Zone data

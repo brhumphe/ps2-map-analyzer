@@ -1,4 +1,4 @@
-import {Continent, FacilityID, RegionID} from "./common";
+import {Continent, FacilityID, RegionID} from "@/types/common";
 
 /**
  * Represents coordinates in the game world coordinate system.
