@@ -80,7 +80,7 @@ onMounted(async () => {
   if (currentZone.value) {
     // Initialize region polygons first (background layer)
     initializeRegionPolygons(currentZone.value, {
-      color: 'white',
+      color: 'black',
       fillColor: 'purple',
       fillOpacity: 0.3,
       weight: 2
@@ -89,8 +89,8 @@ onMounted(async () => {
     // Initialize lattice links on top
     initializeLatticeLinks(currentZone.value, {
       color: 'yellow',
-      weight: 2,
-      opacity: 0.8
+      weight: 4,
+      opacity: 1
     })
   }
 })
