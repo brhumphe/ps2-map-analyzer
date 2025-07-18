@@ -56,7 +56,7 @@ export function useLeafletMap() {
 
       // Add map features
       placeRegionMarkers(zone, leafletMap)
-      drawLattice(zone, leafletMap)
+      // drawLattice(zone, leafletMap)
 
       // Draw all regions
       for (const region of zone.regions) {
@@ -102,9 +102,10 @@ export function useLeafletMap() {
   }
 
   return {
-    // State
-    map: readonly(map),
-    currentZone: readonly(currentZone),
+    // State. Not intended to be mutated, but `readonly` can erase types which cause
+    // erroneous type errors
+    map,
+    currentZone: currentZone,
     isLoading: readonly(isLoading),
     error: readonly(error),
 

@@ -101,8 +101,8 @@ export function useLatticeLinks() {
   const linkCount = computed(() => latticeLinks.size)
 
   return {
-    // State (readonly to prevent external mutation)
-    latticeLinks: readonly(latticeLinks),
+    // State
+    latticeLinks,
     linkCount,
 
     // Actions
