@@ -41,7 +41,7 @@ const createPolyline = () => {
     // Store reference
     polyline.value = newPolyline
 
-    console.debug(`PolylineEntity[${props.id}]: Created polyline with ${props.points.length} points`)
+    // console.debug(`PolylineEntity[${props.id}]: Created polyline with ${props.points.length} points`)
   } catch (error) {
     console.error(`PolylineEntity[${props.id}]: Failed to create polyline:`, error)
   }
@@ -52,7 +52,7 @@ const removePolyline = () => {
   if (polyline.value && props.map) {
     try {
       props.map.removeLayer(polyline.value)
-      console.debug(`PolylineEntity[${props.id}]: Removed polyline from map`)
+      // console.debug(`PolylineEntity[${props.id}]: Removed polyline from map`)
     } catch (error) {
       console.error(`PolylineEntity[${props.id}]: Failed to remove polyline:`, error)
     }
@@ -71,7 +71,7 @@ const updatePoints = (newPoints: L.LatLng[]) => {
 
   try {
     polyline.value.setLatLngs(newPoints)
-    console.debug(`PolylineEntity[${props.id}]: Updated points (${newPoints.length} points)`)
+    // console.debug(`PolylineEntity[${props.id}]: Updated points (${newPoints.length} points)`)
   } catch (error) {
     console.error(`PolylineEntity[${props.id}]: Failed to update points:`, error)
   }
@@ -83,7 +83,7 @@ const updateStyle = (newStyle: L.PolylineOptions) => {
 
   try {
     polyline.value.setStyle(newStyle)
-    console.debug(`PolylineEntity[${props.id}]: Updated style`)
+    // console.debug(`PolylineEntity[${props.id}]: Updated style`)
   } catch (error) {
     console.error(`PolylineEntity[${props.id}]: Failed to update style:`, error)
   }
