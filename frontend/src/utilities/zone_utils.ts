@@ -1,7 +1,8 @@
 // Create a new file: src/utils/zone_utils.ts
 
-import {Zone, RegionHex, Region} from '@/types/zone_types';
+import {Zone, RegionHex, Region, WorldCoordinate} from '@/types/zone_types';
 import { RegionID } from '@/types/common';
+import {HexCoordinate} from "@/utilities/hexagons";
 
 /**
  * Utility functions for working with Zone data
@@ -34,5 +35,42 @@ export const zoneUtils = {
      */
     getRegion(zone: Zone, regionId: RegionID): Region | undefined {
         return zone.regions.find(region => region.map_region_id === regionId);
-    }
+    },
+
+    extractRegionHexCoords(zone:Zone, regionId: RegionID): HexCoordinate[] {
+        let coords: HexCoordinate[] = []
+        for (const region of zone.regions) {
+            if (regionId === region.map_region_id){
+                for (const regionHex of region.hexes) {
+                    coords.push({x: regionHex.x, y: regionHex.y})
+                }
+            }
+        }
+        return coords
+    },
+
+    extractAllZoneHexCoords(zone:Zone) {
+        let coords: HexCoordinate[] = []
+        for (const region of zone.regions) {
+            for (const regionHex of region.hexes) {
+                coords.push({x: regionHex.x, y: regionHex.y})
+            }
+        }
+        return coords
+    },
+
+
+    /**
+     * Extracts the facility coordinates from a given zone object.
+     * Iterates through the regions of the zone and retrieves the coordinates for each facility.
+     */
+    extractFacilityCoordinates(zone: Zone):Record<number, WorldCoordinate> {
+        const facility_coords = {};
+        for (const obj of zone["regions"]) {
+            if (obj["location_x"] !== undefined && obj["location_z"] !== undefined) {
+                facility_coords[obj["facility_id"]] = {x: obj["location_x"], z:obj["location_z"]};
+            }
+        }
+        return facility_coords;
+    },
 } as const;  // Make the object immutable
