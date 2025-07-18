@@ -8,6 +8,18 @@
       <!-- Map container -->
       <div id="map_div" ref="mapContainer" class="map-container"></div>
 
+      <!-- Region Polygons - rendered as headless components -->
+      <template v-if="map && currentZone">
+        <PolygonEntity
+          v-for="[regionKey, regionData] in regionPolygons"
+          :key="regionKey"
+          :id="regionKey"
+          :points="regionData.points"
+          :style="regionData.style as Partial<L.PolylineOptions>"
+          :map="map"
+        />
+      </template>
+
       <!-- Lattice Links - rendered as headless components -->
       <template v-if="map && currentZone">
         <PolylineEntity
@@ -35,11 +47,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useLeafletMap } from '@/composables/useLeafletMap'
 import { useLatticeLinks } from '@/composables/useLatticeLinks'
+import { useRegionPolygons } from '@/composables/useRegionPolygons'
 import { Continent } from '@/types/common'
 import PolylineEntity from '@/components/map/PolylineEntity.vue'
+import PolygonEntity from '@/components/map/PolygonEntity.vue'
 
 // Map container reference
 const mapContainer = ref<HTMLElement>()
@@ -50,18 +64,8 @@ const { map, currentZone, isLoading, error, initializeMap, cleanupMap } = useLea
 // Use the lattice links composable
 const { latticeLinks, initializeLatticeLinks, clearLinks } = useLatticeLinks()
 
-// Initialize lattice links when zone data is loaded
-watch(currentZone, (zone) => {
-  if (zone) {
-    initializeLatticeLinks(zone, {
-      color: 'yellow',
-      weight: 2,
-      opacity: 0.8
-    })
-  } else {
-    clearLinks()
-  }
-})
+// Use the region polygons composable
+const { regionPolygons, initializeRegionPolygons, clearRegions } = useRegionPolygons()
 
 // Initialize the map when the component mounts
 onMounted(async () => {
@@ -71,10 +75,29 @@ onMounted(async () => {
   }
 
   await initializeMap(mapContainer.value, Continent.INDAR)
+
+  // Initialize map content after map and zone data are loaded
+  if (currentZone.value) {
+    // Initialize region polygons first (background layer)
+    initializeRegionPolygons(currentZone.value, {
+      color: 'white',
+      fillColor: 'purple',
+      fillOpacity: 0.3,
+      weight: 2
+    })
+
+    // Initialize lattice links on top
+    initializeLatticeLinks(currentZone.value, {
+      color: 'yellow',
+      weight: 2,
+      opacity: 0.8
+    })
+  }
 })
 
 // Clean up when the component unmounts
 onUnmounted(() => {
+  clearRegions()
   clearLinks()
   cleanupMap()
 })

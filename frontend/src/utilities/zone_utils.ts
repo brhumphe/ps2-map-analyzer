@@ -1,6 +1,14 @@
 // Create a new file: src/utils/zone_utils.ts
 
-import {Zone, RegionHex, Region, WorldCoordinate, FacilityLink, FacilityLinkKey} from '@/types/zone_types';
+import {
+    Zone,
+    RegionHex,
+    Region,
+    WorldCoordinate,
+    FacilityLink,
+    FacilityLinkKey,
+    type RegionKey
+} from '@/types/zone_types';
 import {FacilityID, RegionID} from '@/types/common';
 import {HexCoordinate} from "@/utilities/hexagons";
 
@@ -84,4 +92,12 @@ export const zoneUtils = {
       const [lower, higher] = facilityA < facilityB ? [facilityA, facilityB] : [facilityB, facilityA];
       return `${lower}-${higher}` as FacilityLinkKey;
   },
+
+    /**
+   * Generate key for a region id for use in maps
+   */
+  getRegionKey(regionId: RegionID): RegionKey {
+    return `region_${regionId}` as RegionKey
+  },
+
 } as const;  // Make the object immutable

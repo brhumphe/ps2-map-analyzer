@@ -59,9 +59,9 @@ export function useLeafletMap() {
       // drawLattice(zone, leafletMap)
 
       // Draw all regions
-      for (const region of zone.regions) {
-        drawRegion(zone, region.map_region_id, leafletMap)
-      }
+      // for (const region of zone.regions) {
+      //   drawRegion(zone, region.map_region_id, leafletMap)
+      // }
 
       console.log('Map initialized successfully for continent:', continent)
     } catch (err) {
