@@ -1,53 +1,110 @@
 <template>
   <v-app>
-    <v-app-bar title="PS2 Map State Application - Vue Version"></v-app-bar>
+    <v-app-bar color="primary" dark>
+      <v-app-bar-title>PS2 Map State Application - Vue Version</v-app-bar-title>
+    </v-app-bar>
 
     <v-main>
-      <!-- Request statistics that automatically update -->
-      <v-container>
-        <h3>Request Statistics</h3>
-        <p>Total Requests: {{ history.requestCount }}</p>
-        <p :style="{ color: history.hasErrors.value ? 'red' : 'green' }">
-          Status: {{ history.hasErrors.value ? 'Some requests failed' : 'All requests successful' }}
-        </p>
+      <v-container fluid>
+        <v-row>
+          <!-- Left column - Controls and Status -->
+          <v-col cols="12" md="6">
+            <!-- Stats Card -->
+            <v-card class="mb-4" elevation="2">
+              <v-card-title>
+                <v-icon class="mr-2">mdi-chart-line</v-icon>
+                Request Statistics
+              </v-card-title>
+              <v-card-text>
+                <v-chip
+                  class="mr-2"
+                  color="info"
+                  variant="flat"
+                  prepend-icon="mdi-counter">
+                  {{ history.requestCount }} Total
+                </v-chip>
+                <v-chip
+                  :color="history.hasErrors.value ? 'error' : 'success'"
+                  variant="flat"
+                  :prepend-icon="history.hasErrors.value ? 'mdi-alert' : 'mdi-check-circle'">
+                  {{ history.hasErrors.value ? 'Some Failed' : 'All Successful' }}
+                </v-chip>
+              </v-card-text>
+            </v-card>
+
+            <!-- Controls Card -->
+            <v-card class="mb-4" elevation="2">
+              <v-card-title>
+                <v-icon class="mr-2">mdi-play-circle</v-icon>
+                Actions
+              </v-card-title>
+              <v-card-text>
+                <div class="d-flex flex-column ga-2">
+                  <v-btn
+                    @click="testBackendConnection"
+                    :loading="isLoading"
+                    color="primary"
+                    variant="flat"
+                    prepend-icon="mdi-lan-connect">
+                    Test Backend Connection
+                  </v-btn>
+
+                  <v-btn
+                    @click="fetchCapturableBases"
+                    :loading="isLoading"
+                    color="secondary"
+                    variant="flat"
+                    prepend-icon="mdi-database-search">
+                    Get Capturable Bases
+                  </v-btn>
+
+                  <v-btn
+                    @click="history.clearHistory"
+                    :disabled="isLoading"
+                    color="warning"
+                    variant="outlined"
+                    prepend-icon="mdi-delete">
+                    Clear History
+                  </v-btn>
+                </div>
+              </v-card-text>
+            </v-card>
+
+            <!-- Status Message -->
+            <v-alert
+              v-if="statusMessage !== 'Ready'"
+              :type="getAlertType()"
+              :icon="getAlertIcon()"
+              class="mb-4">
+              {{ statusMessage }}
+            </v-alert>
+
+            <v-progress-linear
+              v-if="isLoading"
+              indeterminate
+              color="primary"
+              class="mb-4">
+            </v-progress-linear>
+          </v-col>
+
+          <!-- Right column - Results and History -->
+          <v-col cols="12" md="6">
+            <!-- Current Result -->
+            <v-card v-if="resultData" class="mb-4" elevation="2">
+              <v-card-title>
+                <v-icon class="mr-2">mdi-code-json</v-icon>
+                Current Result
+              </v-card-title>
+              <v-card-text>
+                <v-code class="d-block">{{ formatResult(resultData) }}</v-code>
+              </v-card-text>
+            </v-card>
+
+            <!-- Request History -->
+            <RequestHistory />
+          </v-col>
+        </v-row>
       </v-container>
-
-      <v-container>
-        <v-btn
-            @click="testBackendConnection"
-            :disabled="isLoading">
-          Test Backend Connection
-        </v-btn>
-
-        <v-btn
-            @click="fetchCapturableBases"
-            :disabled="isLoading">
-          Get Capturable Bases
-        </v-btn>
-
-        <v-btn
-            @click="history.clearHistory"
-            :disabled="isLoading">
-          Clear History
-        </v-btn>
-      </v-container>
-
-      <!-- Status display -->
-      <v-container>
-        <p :style="{ color: getStatusColor() }">{{ statusMessage }}</p>
-        <p v-if="isLoading" style="color: #666;">Loading...</p>
-      </v-container>
-
-      <!-- Current result -->
-      <v-card v-if="resultData">
-        <v-card-title>Current Result:</v-card-title>
-        <v-card-text>
-          <v-code>{{ formatResult(resultData) }}</v-code>
-        </v-card-text>
-      </v-card>
-
-      <!-- Request history that automatically updates -->
-      <RequestHistory :request-history="history"/>
     </v-main>
   </v-app>
 </template>
@@ -122,10 +179,16 @@ export default defineComponent({
       }
     };
 
-    const getStatusColor = (): string => {
-      if (statusMessage.value.includes('✓')) return 'green';
-      if (statusMessage.value.includes('✗')) return 'red';
-      return 'black';
+    const getAlertType = (): 'success' | 'error' | 'info' => {
+      if (statusMessage.value.includes('✓')) return 'success';
+      if (statusMessage.value.includes('✗')) return 'error';
+      return 'info';
+    };
+
+    const getAlertIcon = (): string => {
+      if (statusMessage.value.includes('✓')) return 'mdi-check-circle';
+      if (statusMessage.value.includes('✗')) return 'mdi-alert-circle';
+      return 'mdi-information';
     };
 
     const formatResult = (data: ResultData | null): string => {
@@ -139,7 +202,8 @@ export default defineComponent({
       history,
       testBackendConnection,
       fetchCapturableBases,
-      getStatusColor,
+      getAlertType,
+      getAlertIcon,
       formatResult
     };
   }
