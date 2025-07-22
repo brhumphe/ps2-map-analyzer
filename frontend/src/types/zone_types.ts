@@ -1,4 +1,4 @@
-import {Continent, FacilityID, RegionID} from "@/types/common";
+import { Continent, FacilityID, RegionID } from '@/types/common';
 
 /**
  * Represents coordinates in the game world coordinate system.
@@ -40,8 +40,10 @@ export interface FacilityLink {
   zone_id: Continent;
 }
 
-export type FacilityLinkKey = `${number}-${number}` & { readonly __brand: 'FacilityLinkKey' }
-export type RegionKey = `region_${number}` & { readonly __brand: 'RegionKey' }
+export type FacilityLinkKey = `${number}-${number}` & {
+  readonly __brand: 'FacilityLinkKey';
+};
+export type RegionKey = `region_${number}` & { readonly __brand: 'RegionKey' };
 
 /**
  * Represents a zone (continent) with all its regions and facility links

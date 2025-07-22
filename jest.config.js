@@ -4,13 +4,14 @@ module.exports = {
   testEnvironment: 'node',
   moduleFileExtensions: ['ts', 'js'],
   transform: {
-    '^.+\\.ts$': ['ts-jest', {
-      tsconfig: 'tsconfig.json',
-    }],
+    '^.+\\.ts$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.json',
+      },
+    ],
   },
-  testMatch: [
-    '**/frontend/tests/**/*.test.ts',
-  ],
+  testMatch: ['**/frontend/tests/**/*.test.ts'],
   moduleNameMapper: {
     '^src/(.*)$': '<rootDir>/frontend/src/$1',
   },

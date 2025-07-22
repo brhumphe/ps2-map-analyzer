@@ -10,9 +10,10 @@ import {
   edgeToString,
   getNonSharedEdges,
   parseEdgeString,
-  orderEdges, getOrderedVertices
+  orderEdges,
+  getOrderedVertices,
 } from '../src/utilities/hexagons';
-import {WorldCoordinate} from "../src/types/zone_types";
+import { WorldCoordinate } from '../src/types/zone_types';
 
 describe('hexToCubeCoords', () => {
   test('converts origin hex coordinates to cube coordinates', () => {
@@ -48,10 +49,10 @@ describe('hexToCubeCoords', () => {
       { x: 5, y: 10 },
       { x: -3, y: -7 },
       { x: 2, y: -4 },
-      { x: -8, y: 3 }
+      { x: -8, y: 3 },
     ];
 
-    testCases.forEach(hexCoord => {
+    testCases.forEach((hexCoord) => {
       const cube = hexToCubeCoords(hexCoord);
       expect(cube.q + cube.r + cube.s).toBeCloseTo(0, 10); // Using toBeCloseTo for floating point precision
     });
@@ -91,10 +92,10 @@ describe('cubeToHexCoords', () => {
       { x: 5, y: 10 },
       { x: -3, y: -7 },
       { x: 2, y: -4 },
-      { x: -8, y: 3 }
+      { x: -8, y: 3 },
     ];
 
-    testCases.forEach(original => {
+    testCases.forEach((original) => {
       const cube = hexToCubeCoords(original);
       const roundTrip = cubeToHexCoords(cube);
       expect(roundTrip).toEqual(original);
@@ -102,14 +103,14 @@ describe('cubeToHexCoords', () => {
   });
 });
 
-describe("hex <-> cube coordinates round-trip", () => {
-  test("cube <-> hex roundtrip", () => {
+describe('hex <-> cube coordinates round-trip', () => {
+  test('cube <-> hex roundtrip', () => {
     const hexCoord: HexCoordinate = { x: 5, y: -5 };
     const cube = hexToCubeCoords(hexCoord);
     const roundTrip = cubeToHexCoords(cube);
     expect(roundTrip).toEqual(hexCoord);
   });
-})
+});
 
 describe('hexCoordsToWorld', () => {
   test('converts origin hex coordinates to world coordinates with default inner diameter', () => {
@@ -145,7 +146,7 @@ describe('hexCoordsToWorld', () => {
     // outerRadius = 200 / sqrt(3) ≈ 115.47
     // x = 115.47 * 2 + 2 * 115.47 * (2 + 1) + 115.47 / 2 ≈ 981.50
     // z = (2 * x + y) * innerRadius = (2 * 3 + 5) * 100 = 1100
-    expect(result.x).toBeCloseTo(981.50, 2);
+    expect(result.x).toBeCloseTo(981.5, 2);
     expect(result.z).toBeCloseTo(1100, 2);
   });
 
@@ -195,7 +196,7 @@ describe('getNonSharedEdges', () => {
     expect(result.length).toBe(6);
 
     // Verify each edge is valid by parsing it
-    result.forEach(edgeStr => {
+    result.forEach((edgeStr) => {
       const edge = parseEdgeString(edgeStr);
       expect(edge).toHaveProperty('start');
       expect(edge).toHaveProperty('end');
@@ -213,11 +214,11 @@ describe('getNonSharedEdges', () => {
     expect(result.length).toBe(10);
 
     // Get all edges for each hexagon
-    const hex1Edges = geometry.hexEdges(hex1).map(edge => edgeToString(edge));
-    const hex2Edges = geometry.hexEdges(hex2).map(edge => edgeToString(edge));
+    const hex1Edges = geometry.hexEdges(hex1).map((edge) => edgeToString(edge));
+    const hex2Edges = geometry.hexEdges(hex2).map((edge) => edgeToString(edge));
 
     // Verify that each returned edge belongs to exactly one of the hexagons
-    result.forEach(edgeStr => {
+    result.forEach((edgeStr) => {
       const inHex1 = hex1Edges.includes(edgeStr);
       const inHex2 = hex2Edges.includes(edgeStr);
 
@@ -242,12 +243,12 @@ describe('getNonSharedEdges', () => {
     expect(result.length).toBe(12);
 
     // Get all edges for each hexagon
-    const hex1Edges = geometry.hexEdges(hex1).map(edge => edgeToString(edge));
-    const hex2Edges = geometry.hexEdges(hex2).map(edge => edgeToString(edge));
-    const hex3Edges = geometry.hexEdges(hex3).map(edge => edgeToString(edge));
+    const hex1Edges = geometry.hexEdges(hex1).map((edge) => edgeToString(edge));
+    const hex2Edges = geometry.hexEdges(hex2).map((edge) => edgeToString(edge));
+    const hex3Edges = geometry.hexEdges(hex3).map((edge) => edgeToString(edge));
 
     // Count how many hexagons each edge belongs to
-    result.forEach(edgeStr => {
+    result.forEach((edgeStr) => {
       let count = 0;
       if (hex1Edges.includes(edgeStr)) count++;
       if (hex2Edges.includes(edgeStr)) count++;
@@ -258,17 +259,17 @@ describe('getNonSharedEdges', () => {
     });
   });
 
-  test("handle Ti Alloys", ()=>{
+  test('handle Ti Alloys', () => {
     const hexCoordinates: HexCoordinate[] = [
-      {"x": 0, "y": -3},
-      {"x": 1,"y": -3},
-      {"x": 1,"y": -4},
-      {"x": 0,"y": -2},
-      {"x": 1,"y": -2},
-      {"x": -1,"y": -2},
-      {"x": -1,"y": -1},
-      {"x": 0,"y": -1}
-    ]
+      { x: 0, y: -3 },
+      { x: 1, y: -3 },
+      { x: 1, y: -4 },
+      { x: 0, y: -2 },
+      { x: 1, y: -2 },
+      { x: -1, y: -2 },
+      { x: -1, y: -1 },
+      { x: 0, y: -1 },
+    ];
     const result = getNonSharedEdges(hexCoordinates, geometry);
     expect(result.length).toBe(20);
   });
@@ -316,7 +317,7 @@ describe('orderEdges', () => {
       '(0.00,0.00)|(1.00,0.00)', // bottom edge
       '(1.00,0.00)|(1.00,1.00)', // right edge
       '(1.00,1.00)|(0.00,1.00)', // top edge
-      '(0.00,1.00)|(0.00,0.00)'  // left edge
+      '(0.00,1.00)|(0.00,0.00)', // left edge
     ];
 
     const result = orderEdges(edges);
@@ -336,7 +337,7 @@ describe('orderEdges', () => {
     const edges = [
       '(0.00,0.00)|(1.00,0.00)', // bottom edge
       '(1.00,0.00)|(0.00,1.00)', // diagonal edge
-      '(0.00,1.00)|(0.00,0.00)'  // left edge
+      '(0.00,1.00)|(0.00,0.00)', // left edge
     ];
 
     // Create different permutations of the edges
@@ -368,10 +369,12 @@ describe('orderEdges', () => {
     // Create disconnected edges
     const edges = [
       '(0.00,0.00)|(1.00,0.00)',
-      '(2.00,2.00)|(3.00,2.00)' // This edge doesn't connect to the first one
+      '(2.00,2.00)|(3.00,2.00)', // This edge doesn't connect to the first one
     ];
 
-    expect(() => orderEdges(edges)).toThrow('Edges do not form a continuous boundary');
+    expect(() => orderEdges(edges)).toThrow(
+      'Edges do not form a continuous boundary'
+    );
   });
 
   test('throws error for edges that do not form a closed loop', () => {
@@ -379,7 +382,7 @@ describe('orderEdges', () => {
     const edges = [
       '(0.00,0.00)|(1.00,0.00)',
       '(1.00,0.00)|(1.00,1.00)',
-      '(1.00,1.00)|(0.00,1.00)'
+      '(1.00,1.00)|(0.00,1.00)',
       // Missing the edge from (0.00,1.00) to (0.00,0.00) to close the loop
     ];
 
@@ -395,7 +398,7 @@ describe('orderEdges', () => {
     const hexEdges = hexGeometry.hexEdges(hexCoord);
 
     // Convert edges to canonical string form (this will be unordered)
-    const canonicalEdges = hexEdges.map(edge => edgeToString(edge));
+    const canonicalEdges = hexEdges.map((edge) => edgeToString(edge));
 
     // Shuffle the edges to simulate them being in random order (deterministic)
     const shuffledEdges = [
@@ -404,7 +407,7 @@ describe('orderEdges', () => {
       canonicalEdges[1],
       canonicalEdges[4],
       canonicalEdges[0],
-      canonicalEdges[3]
+      canonicalEdges[3],
     ];
 
     // Order the edges
@@ -424,9 +427,9 @@ describe('orderEdges', () => {
     // Create a simple triangle with known vertices in canonical form
     // Triangle vertices: (0,0), (1,0), (0.5,0.87)
     const triangleEdges = [
-      "(0.00,0.00)|(1.00,0.00)", // bottom edge
-      "(0.50,0.87)|(1.00,0.00)", // right edge (canonical form: smaller vertex first)
-      "(0.00,0.00)|(0.50,0.87)"  // left edge
+      '(0.00,0.00)|(1.00,0.00)', // bottom edge
+      '(0.50,0.87)|(1.00,0.00)', // right edge (canonical form: smaller vertex first)
+      '(0.00,0.00)|(0.50,0.87)', // left edge
     ];
 
     const orderedEdges = orderEdges(triangleEdges);
@@ -445,43 +448,57 @@ describe('orderEdges', () => {
     expect(orderEdges([])).toEqual([]);
 
     // Single edge
-    const singleEdge = ["(0.00,0.00)|(1.00,0.00)"];
+    const singleEdge = ['(0.00,0.00)|(1.00,0.00)'];
     expect(orderEdges(singleEdge)).toEqual(singleEdge);
   });
 
   it('should throw error for disconnected edges', () => {
     // Two separate edges that don't connect
     const disconnectedEdges = [
-      "(0.00,0.00)|(1.00,0.00)",
-      "(2.00,0.00)|(3.00,0.00)"
+      '(0.00,0.00)|(1.00,0.00)',
+      '(2.00,0.00)|(3.00,0.00)',
     ];
 
-    expect(() => orderEdges(disconnectedEdges)).toThrow('Edges do not form a continuous boundary');
+    expect(() => orderEdges(disconnectedEdges)).toThrow(
+      'Edges do not form a continuous boundary'
+    );
   });
 
-  it('should throw error for edges that don\'t form a closed loop', () => {
+  it("should throw error for edges that don't form a closed loop", () => {
     // Three edges that form a path but not a loop
     const openPathEdges = [
-      "(0.00,0.00)|(1.00,0.00)",
-      "(1.00,0.00)|(2.00,0.00)",
-      "(2.00,0.00)|(3.00,0.00)"
+      '(0.00,0.00)|(1.00,0.00)',
+      '(1.00,0.00)|(2.00,0.00)',
+      '(2.00,0.00)|(3.00,0.00)',
     ];
 
-    expect(() => orderEdges(openPathEdges)).toThrow('Edges do not form a closed loop');
+    expect(() => orderEdges(openPathEdges)).toThrow(
+      'Edges do not form a closed loop'
+    );
   });
 
   it('should produce consistent ordering regardless of input order', () => {
     // Create a simple square
     const squareEdges = [
-      "(0.00,0.00)|(1.00,0.00)",
-      "(1.00,0.00)|(1.00,1.00)",
-      "(0.00,1.00)|(1.00,1.00)",
-      "(0.00,0.00)|(0.00,1.00)"
+      '(0.00,0.00)|(1.00,0.00)',
+      '(1.00,0.00)|(1.00,1.00)',
+      '(0.00,1.00)|(1.00,1.00)',
+      '(0.00,0.00)|(0.00,1.00)',
     ];
 
     // Try different permutations of the same edges
-    const permutation1 = [squareEdges[0], squareEdges[2], squareEdges[1], squareEdges[3]];
-    const permutation2 = [squareEdges[3], squareEdges[1], squareEdges[0], squareEdges[2]];
+    const permutation1 = [
+      squareEdges[0],
+      squareEdges[2],
+      squareEdges[1],
+      squareEdges[3],
+    ];
+    const permutation2 = [
+      squareEdges[3],
+      squareEdges[1],
+      squareEdges[0],
+      squareEdges[2],
+    ];
 
     const ordered1 = orderEdges(permutation1);
     const ordered2 = orderEdges(permutation2);
@@ -504,10 +521,10 @@ describe('getOrderedVertices', () => {
     // Define a square with vertices at (0,0), (1,0), (1,1), (0,1)
     // Edges in canonical form (lexicographically smaller vertex first):
     const squareEdges = [
-      "(0.00,0.00)|(1.00,0.00)", // bottom edge
-      "(1.00,0.00)|(1.00,1.00)", // right edge
-      "(0.00,1.00)|(1.00,1.00)", // top edge (reordered to canonical form)
-      "(0.00,0.00)|(0.00,1.00)"  // left edge
+      '(0.00,0.00)|(1.00,0.00)', // bottom edge
+      '(1.00,0.00)|(1.00,1.00)', // right edge
+      '(0.00,1.00)|(1.00,1.00)', // top edge (reordered to canonical form)
+      '(0.00,0.00)|(0.00,1.00)', // left edge
     ];
 
     const orderedVertices = getOrderedVertices(squareEdges);
@@ -517,7 +534,10 @@ describe('getOrderedVertices', () => {
 
     // All expected vertices should be present
     const expectedVertices = [
-      "(0.00,0.00)", "(1.00,0.00)", "(1.00,1.00)", "(0.00,1.00)"
+      '(0.00,0.00)',
+      '(1.00,0.00)',
+      '(1.00,1.00)',
+      '(0.00,1.00)',
     ];
 
     for (const vertex of expectedVertices) {
@@ -531,10 +551,12 @@ describe('getOrderedVertices', () => {
       const nextVertex = orderedVertices[(i + 1) % orderedVertices.length];
 
       // Check that there's an edge connecting these vertices in our input
-      const edgeExists = squareEdges.some(edge => {
+      const edgeExists = squareEdges.some((edge) => {
         const [start, end] = edge.split('|');
-        return (start === currentVertex && end === nextVertex) ||
-               (start === nextVertex && end === currentVertex);
+        return (
+          (start === currentVertex && end === nextVertex) ||
+          (start === nextVertex && end === currentVertex)
+        );
       });
 
       expect(edgeExists).toBe(true);
@@ -547,9 +569,9 @@ describe('getOrderedVertices', () => {
   });
 
   it('should handle single edge', () => {
-    const singleEdge = ["(0.00,0.00)|(1.00,0.00)"];
+    const singleEdge = ['(0.00,0.00)|(1.00,0.00)'];
     const result = getOrderedVertices(singleEdge);
-    expect(result).toEqual(["(0.00,0.00)", "(1.00,0.00)"]);
+    expect(result).toEqual(['(0.00,0.00)', '(1.00,0.00)']);
   });
 });
 
@@ -570,7 +592,7 @@ describe('HexGeometry.getBoundaryVertices', () => {
     expect(boundaryVertices).toHaveLength(6);
 
     // All vertices should be WorldCoordinate objects with x and z properties
-    boundaryVertices.forEach(vertex => {
+    boundaryVertices.forEach((vertex) => {
       expect(vertex).toHaveProperty('x');
       expect(vertex).toHaveProperty('z');
       expect(typeof vertex.x).toBe('number');
@@ -581,7 +603,7 @@ describe('HexGeometry.getBoundaryVertices', () => {
   it('should return boundary vertices for two adjacent hexes', () => {
     const adjacentHexes: HexCoordinate[] = [
       { x: 0, y: 0 },
-      { x: 1, y: 0 }
+      { x: 1, y: 0 },
     ];
 
     const boundaryVertices = hexGeometry.getBoundaryVertices(adjacentHexes);
@@ -592,7 +614,7 @@ describe('HexGeometry.getBoundaryVertices', () => {
     expect(boundaryVertices.length).toBeGreaterThan(6);
 
     // Verify all vertices are valid WorldCoordinates
-    boundaryVertices.forEach(vertex => {
+    boundaryVertices.forEach((vertex) => {
       expect(vertex).toHaveProperty('x');
       expect(vertex).toHaveProperty('z');
       expect(typeof vertex.x).toBe('number');
@@ -604,7 +626,7 @@ describe('HexGeometry.getBoundaryVertices', () => {
     const triangleHexes: HexCoordinate[] = [
       { x: 0, y: 0 },
       { x: 1, y: 0 },
-      { x: 0, y: 1 }
+      { x: 0, y: 1 },
     ];
 
     const boundaryVertices = hexGeometry.getBoundaryVertices(triangleHexes);
@@ -614,7 +636,7 @@ describe('HexGeometry.getBoundaryVertices', () => {
     expect(boundaryVertices.length).toBeLessThan(18); // Less than 3*6
 
     // Verify all vertices are valid WorldCoordinates
-    boundaryVertices.forEach(vertex => {
+    boundaryVertices.forEach((vertex) => {
       expect(vertex).toHaveProperty('x');
       expect(vertex).toHaveProperty('z');
       expect(typeof vertex.x).toBe('number');
@@ -626,7 +648,7 @@ describe('HexGeometry.getBoundaryVertices', () => {
     const lineHexes: HexCoordinate[] = [
       { x: 0, y: 0 },
       { x: 1, y: 0 },
-      { x: 2, y: 0 }
+      { x: 2, y: 0 },
     ];
 
     const boundaryVertices = hexGeometry.getBoundaryVertices(lineHexes);
@@ -635,7 +657,7 @@ describe('HexGeometry.getBoundaryVertices', () => {
     expect(boundaryVertices.length).toBeGreaterThan(6);
 
     // All vertices should be WorldCoordinate objects
-    boundaryVertices.forEach(vertex => {
+    boundaryVertices.forEach((vertex) => {
       expect(vertex).toHaveProperty('x');
       expect(vertex).toHaveProperty('z');
       expect(typeof vertex.x).toBe('number');
@@ -655,7 +677,7 @@ describe('HexGeometry.getBoundaryVertices', () => {
   it('should return vertices in a connected order', () => {
     const hexes: HexCoordinate[] = [
       { x: 0, y: 0 },
-      { x: 1, y: 0 }
+      { x: 1, y: 0 },
     ];
 
     const boundaryVertices = hexGeometry.getBoundaryVertices(hexes);
@@ -686,12 +708,12 @@ describe('HexGeometry.getBoundaryVertices', () => {
   it('should produce different results for different hex arrangements', () => {
     const arrangement1: HexCoordinate[] = [
       { x: 0, y: 0 },
-      { x: 1, y: 0 }
+      { x: 1, y: 0 },
     ];
 
     const arrangement2: HexCoordinate[] = [
       { x: 0, y: 0 },
-      { x: 0, y: 1 }
+      { x: 0, y: 1 },
     ];
 
     const boundary1 = hexGeometry.getBoundaryVertices(arrangement1);
@@ -703,8 +725,12 @@ describe('HexGeometry.getBoundaryVertices', () => {
     expect(boundary2.length).toBeGreaterThan(0);
 
     // At least some vertices should be different
-    const vertices1Set = new Set(boundary1.map(v => `${v.x.toFixed(2)},${v.z.toFixed(2)}`));
-    const vertices2Set = new Set(boundary2.map(v => `${v.x.toFixed(2)},${v.z.toFixed(2)}`));
+    const vertices1Set = new Set(
+      boundary1.map((v) => `${v.x.toFixed(2)},${v.z.toFixed(2)}`)
+    );
+    const vertices2Set = new Set(
+      boundary2.map((v) => `${v.x.toFixed(2)},${v.z.toFixed(2)}`)
+    );
 
     expect(vertices1Set).not.toEqual(vertices2Set);
   });

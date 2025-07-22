@@ -9,16 +9,18 @@
         <v-list-item
           v-for="(request, index) in history.requestHistory.value"
           :key="index"
-          class="border-b">
-
+          class="border-b"
+        >
           <template #prepend>
             <v-avatar
               size="small"
               :color="request.success ? 'success' : 'error'"
-              class="mr-3">
+              class="mr-3"
+            >
               <v-icon
                 :icon="request.success ? 'mdi-check' : 'mdi-close'"
-                size="small">
+                size="small"
+              >
               </v-icon>
             </v-avatar>
           </template>
@@ -31,16 +33,17 @@
               size="small"
               :color="request.success ? 'success' : 'error'"
               variant="flat"
-              density="compact">
+              density="compact"
+            >
               {{ request.type }}
             </v-chip>
           </v-list-item-title>
 
           <v-list-item-subtitle
-            :class="request.success ? 'text-success' : 'text-error'">
+            :class="request.success ? 'text-success' : 'text-error'"
+          >
             {{ request.data }}
           </v-list-item-subtitle>
-
         </v-list-item>
       </v-list>
     </v-card-text>
@@ -48,9 +51,9 @@
 </template>
 
 <script setup lang="ts">
-import {useRequestHistory} from "./useRequestHistory";
+import { useRequestHistory } from './useRequestHistory';
 
-const history = useRequestHistory()
+const history = useRequestHistory();
 </script>
 
 <style scoped>

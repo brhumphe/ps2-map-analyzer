@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-app-bar color="primary" dark>
-      <v-app-bar-title>PS2 Map State Application - Territory Analyzer</v-app-bar-title>
+      <v-app-bar-title
+        >PS2 Map State Application - Territory Analyzer</v-app-bar-title
+      >
     </v-app-bar>
 
     <v-main>
@@ -47,34 +49,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { useLeafletMap } from '@/composables/useLeafletMap'
-import { useLatticeLinks } from '@/composables/useLatticeLinks'
-import { useRegionPolygons } from '@/composables/useRegionPolygons'
-import { Continent } from '@/types/common'
-import PolylineEntity from '@/components/map/PolylineEntity.vue'
-import PolygonEntity from '@/components/map/PolygonEntity.vue'
+import { ref, onMounted, onUnmounted } from 'vue';
+import { useLeafletMap } from '@/composables/useLeafletMap';
+import { useLatticeLinks } from '@/composables/useLatticeLinks';
+import { useRegionPolygons } from '@/composables/useRegionPolygons';
+import { Continent } from '@/types/common';
+import PolylineEntity from '@/components/map/PolylineEntity.vue';
+import PolygonEntity from '@/components/map/PolygonEntity.vue';
 
 // Map container reference
-const mapContainer = ref<HTMLElement>()
+const mapContainer = ref<HTMLElement>();
 
 // Use the map initialization composable
-const { map, currentZone, isLoading, error, initializeMap, cleanupMap } = useLeafletMap()
+const { map, currentZone, isLoading, error, initializeMap, cleanupMap } =
+  useLeafletMap();
 
 // Use the lattice links composable
-const { latticeLinks, initializeLatticeLinks, clearLinks } = useLatticeLinks()
+const { latticeLinks, initializeLatticeLinks, clearLinks } = useLatticeLinks();
 
 // Use the region polygons composable
-const { regionPolygons, initializeRegionPolygons, clearRegions } = useRegionPolygons()
+const { regionPolygons, initializeRegionPolygons, clearRegions } =
+  useRegionPolygons();
 
 // Initialize the map when the component mounts
 onMounted(async () => {
   if (!mapContainer.value) {
-    console.error('Map container not found')
-    return
+    console.error('Map container not found');
+    return;
   }
 
-  await initializeMap(mapContainer.value, Continent.INDAR)
+  await initializeMap(mapContainer.value, Continent.INDAR);
 
   // Initialize map content after map and zone data are loaded
   if (currentZone.value) {
@@ -83,24 +87,24 @@ onMounted(async () => {
       color: 'black',
       fillColor: 'purple',
       fillOpacity: 0.3,
-      weight: 2
-    })
+      weight: 2,
+    });
 
     // Initialize lattice links on top
     initializeLatticeLinks(currentZone.value, {
       color: 'yellow',
       weight: 4,
-      opacity: 1
-    })
+      opacity: 1,
+    });
   }
-})
+});
 
 // Clean up when the component unmounts
 onUnmounted(() => {
-  clearRegions()
-  clearLinks()
-  cleanupMap()
-})
+  clearRegions();
+  clearLinks();
+  cleanupMap();
+});
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
-import {WorldCoordinate} from "@/types/zone_types";
+import { WorldCoordinate } from '@/types/zone_types';
 
-type VertexCoordinate = WorldCoordinate
+type VertexCoordinate = WorldCoordinate;
 
 /**
  * Represents an edge between two vertices of a hexagon.
@@ -12,28 +12,27 @@ export interface HexEdge {
 }
 
 function snapToGrid(value: number, gridSize: number = 1): number {
-    return Math.round(value / gridSize) * gridSize;
+  return Math.round(value / gridSize) * gridSize;
 }
 
 /**
  * Converts a VertexCoordinate to a canonical string representation.
  * Nearby vertices are merged by snapping to a grid
- * 
+ *
  * @param vertex - The vertex coordinate to convert
  * @returns A string in the format "(x,z)" with values snapped to a grid
  */
 export function vertexToString(vertex: VertexCoordinate): string {
-    // Use grid size of 5 for snapping vertices - this was determined empirically
-    // based on hexagon geometry with an inner diameter of 200 units.
-    // This prevents floating-point imprecision from creating duplicate edges
-    // while being small enough to maintain distinct vertices
+  // Use grid size of 5 for snapping vertices - this was determined empirically
+  // based on hexagon geometry with an inner diameter of 200 units.
+  // This prevents floating-point imprecision from creating duplicate edges
+  // while being small enough to maintain distinct vertices
 
-    const gridSize = 5;
-    const snappedX = snapToGrid(vertex.x, gridSize);
-    const snappedZ = snapToGrid(vertex.z, gridSize);
-    return `(${snappedX},${snappedZ})`;
+  const gridSize = 5;
+  const snappedX = snapToGrid(vertex.x, gridSize);
+  const snappedZ = snapToGrid(vertex.z, gridSize);
+  return `(${snappedX},${snappedZ})`;
 }
-
 
 /**
  * Parses a string representation of a vertex coordinate back into a VertexCoordinate object.
@@ -47,7 +46,9 @@ export function parseVertexString(str: string): VertexCoordinate {
   // Validate basic format using regex
   const matches = str.match(/^\((-?\d*\.?\d+),(-?\d*\.?\d+)\)$/);
   if (!matches) {
-    throw new Error('Invalid vertex string format. Expected "(x,z)" where x and z are numbers');
+    throw new Error(
+      'Invalid vertex string format. Expected "(x,z)" where x and z are numbers'
+    );
   }
 
   const x = parseFloat(matches[1]);
@@ -63,14 +64,14 @@ export function parseVertexString(str: string): VertexCoordinate {
 /**
  * Creates a canonical string representation of an edge.
  * Ensures consistent ordering for bidirectional edges by placing the lexicographically smaller vertex first.
- * 
+ *
  * @param edge - The edge to convert to string
  * @returns A string representation in the format "vertex1|vertex2"
  */
 export function edgeToString(edge: HexEdge): string {
   const startString = vertexToString(edge.start);
   const endString = vertexToString(edge.end);
-  
+
   // Ensure consistent ordering by placing the lexicographically smaller vertex first
   if (startString <= endString) {
     return `${startString}|${endString}`;
@@ -102,7 +103,7 @@ export function parseEdgeString(str: string): HexEdge {
     // (since edgeToString already handles canonical ordering)
     return {
       start: vertex1,
-      end: vertex2
+      end: vertex2,
     };
   } catch (error: any) {
     throw new Error(`Invalid edge string format: ${error.message}`);
@@ -115,7 +116,7 @@ const HexDirection = {
   NW: [-1, 1],
   W: [-1, 0],
   SW: [0, -1],
-  SE: [1, -1]
+  SE: [1, -1],
 } as const;
 
 /**
@@ -133,8 +134,8 @@ const HexDirection = {
  *
  */
 export interface HexCoordinate {
-    readonly x: number;
-    readonly y: number;
+  readonly x: number;
+  readonly y: number;
 }
 
 /**
@@ -156,11 +157,14 @@ export interface CubeCoordinate {
   readonly s: number;
 }
 
-function hexInDirection(coord: HexCoordinate, dir: keyof typeof HexDirection): HexCoordinate {
+function hexInDirection(
+  coord: HexCoordinate,
+  dir: keyof typeof HexDirection
+): HexCoordinate {
   const [dx, dy] = HexDirection[dir];
   return {
     x: coord.x + dx,
-    y: coord.y + dy
+    y: coord.y + dy,
   };
 }
 
@@ -182,10 +186,10 @@ function hexInDirection(coord: HexCoordinate, dir: keyof typeof HexDirection): H
  * @return {CubeCoordinate} The equivalent cube coordinate with properties `q`, `r`, and `s`.
  */
 export function hexToCubeCoords(coord: HexCoordinate): CubeCoordinate {
-  const q = coord.x+coord.y;
+  const q = coord.x + coord.y;
   const r = -coord.y;
   const s = -coord.x;
-  return {q, r, s};
+  return { q, r, s };
 }
 
 /**
@@ -195,7 +199,7 @@ export function hexToCubeCoords(coord: HexCoordinate): CubeCoordinate {
  * @return {HexCoordinate} Returns a hexagonal coordinate object with `x` and `y` attributes.
  */
 export function cubeToHexCoords(cord: CubeCoordinate): HexCoordinate {
-  return {x: -cord.s, y: -cord.r};
+  return { x: -cord.s, y: -cord.r };
 }
 
 /**
@@ -214,25 +218,27 @@ export function cubeToHexCoords(cord: CubeCoordinate): HexCoordinate {
  * @param innerDiameter - Inner diameter of the hexagon
  * @returns WorldCoordinate locating the center of the hex.
  */
-export function hexCoordsToWorld(coords: HexCoordinate, innerDiameter: number): WorldCoordinate {
-    const hexScale = 1.0; // 1./32.
-    const hexSize = hexScale * innerDiameter;
-    const innerRadius = hexSize / 2;
-    const outerRadius = hexSize / Math.sqrt(3);
+export function hexCoordsToWorld(
+  coords: HexCoordinate,
+  innerDiameter: number
+): WorldCoordinate {
+  const hexScale = 1.0; // 1./32.
+  const hexSize = hexScale * innerDiameter;
+  const innerRadius = hexSize / 2;
+  const outerRadius = hexSize / Math.sqrt(3);
 
-    let x: number;
-    if (coords.y % 2 === 1) {
-        const t = Math.floor(coords.y / 2);
-        x = outerRadius * t + 2 * outerRadius * (t + 1) + outerRadius / 2;
-    } else {
-        x = (3 * outerRadius * coords.y) / 2 + outerRadius;
-    }
+  let x: number;
+  if (coords.y % 2 === 1) {
+    const t = Math.floor(coords.y / 2);
+    x = outerRadius * t + 2 * outerRadius * (t + 1) + outerRadius / 2;
+  } else {
+    x = (3 * outerRadius * coords.y) / 2 + outerRadius;
+  }
 
-    const z = (2 * coords.x + coords.y) * innerRadius;
+  const z = (2 * coords.x + coords.y) * innerRadius;
 
-    return { x, z };
+  return { x, z };
 }
-
 
 /**
  * Returns all non-shared (boundary) edges for a group of hexagons in canonical form.
@@ -242,7 +248,10 @@ export function hexCoordsToWorld(coords: HexCoordinate, innerDiameter: number): 
  * @param geometry - HexGeometry instance to use for edge calculations
  * @returns Array of canonical string representations of non-shared edges
  */
-export function getNonSharedEdges(hexCoords: HexCoordinate[], geometry: HexGeometry): string[] {
+export function getNonSharedEdges(
+  hexCoords: HexCoordinate[],
+  geometry: HexGeometry
+): string[] {
   // Map to store edge counts, using canonical edge string as the key
   const edgeCounts = new Map<string, number>();
 
@@ -251,10 +260,7 @@ export function getNonSharedEdges(hexCoords: HexCoordinate[], geometry: HexGeome
     const edges = geometry.hexEdges(coord);
     for (const edge of edges) {
       const canonicalEdge = edgeToString(edge);
-      edgeCounts.set(
-        canonicalEdge,
-        (edgeCounts.get(canonicalEdge) || 0) + 1
-      );
+      edgeCounts.set(canonicalEdge, (edgeCounts.get(canonicalEdge) || 0) + 1);
     }
   }
 
@@ -294,7 +300,7 @@ export function orderEdges(edges: string[]): string[] {
 
   while (remainingEdges.size > 0) {
     // Find an edge that connects to our current endpoint
-    const nextEdge = Array.from(remainingEdges).find(edge => {
+    const nextEdge = Array.from(remainingEdges).find((edge) => {
       const [start, end] = edge.split('|');
       return start === nextVertex || end === nextVertex;
     });
@@ -385,7 +391,6 @@ export function getOrderedVertices(orderedEdges: string[]): string[] {
   return vertices;
 }
 
-
 export class HexGeometry {
   private readonly innerDiameter: number;
   private readonly radius: number;
@@ -408,8 +413,8 @@ export class HexGeometry {
     for (let i = 0; i < 6; i++) {
       const angle = i * this.rotationAngle;
       const x = worldCenter.x + this.radius * Math.cos(angle);
-        const z = worldCenter.z + this.radius * Math.sin(angle);
-        hexVertices.push({x, z});
+      const z = worldCenter.z + this.radius * Math.sin(angle);
+      hexVertices.push({ x, z });
     }
     return hexVertices;
   }
@@ -417,21 +422,21 @@ export class HexGeometry {
   /**
    * Returns all edges for a hexagon at the given coordinates.
    * Each edge connects two adjacent vertices of the hexagon.
-   * 
+   *
    * @param coords - The hexagonal coordinate to get edges for
    * @returns An array of 6 edges, each representing a side of the hexagon
    */
   hexEdges(coords: HexCoordinate): HexEdge[] {
     const vertices = this.hexVertices(coords);
     const edges: HexEdge[] = [];
-    
+
     // Connect each vertex to the next one, with the last vertex connecting back to the first
     for (let i = 0; i < vertices.length; i++) {
       const start = vertices[i];
       const end = vertices[(i + 1) % vertices.length];
       edges.push({ start, end });
     }
-    
+
     return edges;
   }
 
@@ -446,14 +451,13 @@ export class HexGeometry {
     const orderedVertexStrings = getOrderedVertices(orderedEdges);
 
     // Convert canonical vertex strings back to WorldCoordinate
-    return orderedVertexStrings.map(vertexString => {
-        // Remove parentheses and split by comma
-        const [x, z] = vertexString
-            .substring(1, vertexString.length - 1)
-            .split(',')
-            .map(Number);
-        return { x, z };
+    return orderedVertexStrings.map((vertexString) => {
+      // Remove parentheses and split by comma
+      const [x, z] = vertexString
+        .substring(1, vertexString.length - 1)
+        .split(',')
+        .map(Number);
+      return { x, z };
     });
-}
-
+  }
 }

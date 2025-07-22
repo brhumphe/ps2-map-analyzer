@@ -20,14 +20,20 @@
                   class="mr-2"
                   color="info"
                   variant="flat"
-                  prepend-icon="mdi-counter">
+                  prepend-icon="mdi-counter"
+                >
                   {{ history.requestCount }} Total
                 </v-chip>
                 <v-chip
                   :color="history.hasErrors.value ? 'error' : 'success'"
                   variant="flat"
-                  :prepend-icon="history.hasErrors.value ? 'mdi-alert' : 'mdi-check-circle'">
-                  {{ history.hasErrors.value ? 'Some Failed' : 'All Successful' }}
+                  :prepend-icon="
+                    history.hasErrors.value ? 'mdi-alert' : 'mdi-check-circle'
+                  "
+                >
+                  {{
+                    history.hasErrors.value ? 'Some Failed' : 'All Successful'
+                  }}
                 </v-chip>
               </v-card-text>
             </v-card>
@@ -45,7 +51,8 @@
                     :loading="isLoading"
                     color="primary"
                     variant="flat"
-                    prepend-icon="mdi-lan-connect">
+                    prepend-icon="mdi-lan-connect"
+                  >
                     Test Backend Connection
                   </v-btn>
 
@@ -54,7 +61,8 @@
                     :loading="isLoading"
                     color="secondary"
                     variant="flat"
-                    prepend-icon="mdi-database-search">
+                    prepend-icon="mdi-database-search"
+                  >
                     Get Capturable Bases
                   </v-btn>
 
@@ -63,7 +71,8 @@
                     :disabled="isLoading"
                     color="warning"
                     variant="outlined"
-                    prepend-icon="mdi-delete">
+                    prepend-icon="mdi-delete"
+                  >
                     Clear History
                   </v-btn>
                 </div>
@@ -75,7 +84,8 @@
               v-if="statusMessage !== 'Ready'"
               :type="getAlertType()"
               :icon="getAlertIcon()"
-              class="mb-4">
+              class="mb-4"
+            >
               {{ statusMessage }}
             </v-alert>
 
@@ -83,7 +93,8 @@
               v-if="isLoading"
               indeterminate
               color="primary"
-              class="mb-4">
+              class="mb-4"
+            >
             </v-progress-linear>
           </v-col>
 
@@ -110,15 +121,15 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from 'vue';
-import RequestHistory from "@/components/status/RequestHistory.vue";
-import {useRequestHistory} from "@/components/status/useRequestHistory";
-import {ResultData} from "@/components/status/status_types.js";
+import { defineComponent, ref } from 'vue';
+import RequestHistory from '@/components/status/RequestHistory.vue';
+import { useRequestHistory } from '@/components/status/useRequestHistory';
+import { ResultData } from '@/components/status/status_types.js';
 
 const API_BASE = 'http://localhost:8000';
 
 export default defineComponent({
-  components: {RequestHistory},
+  components: { RequestHistory },
   setup() {
     const statusMessage = ref<string>('Ready');
     const resultData = ref<ResultData | null>(null);
@@ -139,7 +150,7 @@ export default defineComponent({
         history.recordRequest('Backend Test', true, data);
       } catch (error) {
         const errorData: ResultData = {
-          error: error instanceof Error ? error.message : 'Unknown error'
+          error: error instanceof Error ? error.message : 'Unknown error',
         };
         statusMessage.value = '✗ Backend connection failed!';
         resultData.value = errorData;
@@ -158,10 +169,12 @@ export default defineComponent({
         const params = new URLSearchParams({
           world_id: '1',
           zone_id: '2',
-          faction_id: '1'
+          faction_id: '1',
         });
 
-        const response = await fetch(`${API_BASE}/api/capturable-bases/?${params}`);
+        const response = await fetch(
+          `${API_BASE}/api/capturable-bases/?${params}`
+        );
         const data: ResultData = await response.json();
 
         statusMessage.value = '✓ Data fetched successfully!';
@@ -169,7 +182,7 @@ export default defineComponent({
         history.recordRequest('Capturable Bases', true, data);
       } catch (error) {
         const errorData: ResultData = {
-          error: error instanceof Error ? error.message : 'Unknown error'
+          error: error instanceof Error ? error.message : 'Unknown error',
         };
         statusMessage.value = '✗ Failed to fetch data!';
         resultData.value = errorData;
@@ -204,8 +217,8 @@ export default defineComponent({
       fetchCapturableBases,
       getAlertType,
       getAlertIcon,
-      formatResult
+      formatResult,
     };
-  }
+  },
 });
 </script>

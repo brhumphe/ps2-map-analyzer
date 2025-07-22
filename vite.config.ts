@@ -13,10 +13,10 @@ export default defineConfig({
       template: {
         compilerOptions: {
           // Add compiler options if needed
-        }
-      }
+        },
+      },
     }),
-    vueDevTools({launchEditor:'pycharm'}),
+    vueDevTools({ launchEditor: 'pycharm' }),
   ],
   root: 'frontend',
   build: {
@@ -26,22 +26,22 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'frontend/index.html'),
-        status: resolve(__dirname, 'frontend/status.html')
-      }
-    }
+        status: resolve(__dirname, 'frontend/status.html'),
+      },
+    },
   },
   resolve: {
     alias: {
-      'vue': 'vue/dist/vue.esm-bundler.js',
-      '@': resolve(__dirname, 'frontend/src')
-    }
+      vue: 'vue/dist/vue.esm-bundler.js',
+      '@': resolve(__dirname, 'frontend/src'),
+    },
   },
   define: {
     __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
     __VUE_OPTIONS_API__: 'true',
-    __VUE_PROD_DEVTOOLS__: 'false'
+    __VUE_PROD_DEVTOOLS__: 'false',
   },
   server: {
-    open: '/status.html'
-  }
+    open: '/status.html',
+  },
 });

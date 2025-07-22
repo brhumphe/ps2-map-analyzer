@@ -1,45 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="data:,">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:," />
     <title>Map View</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin=""/>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
     <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin="" language="JavaScript"></script>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+      language="JavaScript"
+    ></script>
     <script type="importmap">
-    {
+      {
         "imports": {
-            "leaflet": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js"
+          "leaflet": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js"
         }
-    }
+      }
     </script>
 
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
 
-        #app {
-            height: 100vh;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
+      #app {
+        height: 100vh;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
     </style>
-</head>
-<body>
-<div id="app"></div>
-<script type="module" src="src/main.ts"></script>
-</body>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="src/main.ts"></script>
+  </body>
 </html>

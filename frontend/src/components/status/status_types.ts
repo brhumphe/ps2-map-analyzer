@@ -1,8 +1,8 @@
 export interface ApiRequest {
-  timestamp: string
-  type: string
-  data: string
-  success: boolean
+  timestamp: string;
+  type: string;
+  data: string;
+  success: boolean;
 }
 
 export interface ResultData {
