@@ -28,7 +28,6 @@ export function useLinkAnalysis(
    */
   const linkStates = computed<Map<FacilityLinkKey, LinkState>>(() => {
     if (!territorySnapshot.value || !currentZone.value) {
-      console.log('useLinkAnalysis: No territory or zone data available');
       return new Map();
     }
     
@@ -42,7 +41,6 @@ export function useLinkAnalysis(
    */
   const linkStyles = computed<Map<FacilityLinkKey, Partial<L.PolylineOptions>>>(() => {
     if (linkStates.value.size === 0) {
-      console.log('useLinkAnalysis: No link states available');
       return new Map();
     }
     
@@ -53,7 +51,6 @@ export function useLinkAnalysis(
       styles.set(linkKey, style);
     });
     
-    console.log(`useLinkAnalysis: Generated ${styles.size} link styles`);
     return styles;
   });
   

@@ -44,7 +44,6 @@ export function useRegionAnalysis(
    */
   const regionStyles = computed<Map<RegionKey, Partial<L.PolylineOptions>>>(() => {
     if (regionStates.value.size === 0) {
-      console.log('useRegionAnalysis: No region states available');
       return new Map();
     }
     
@@ -56,8 +55,6 @@ export function useRegionAnalysis(
       styles.set(regionKey, style);
     });
     
-    console.log(`useRegionAnalysis: Generated ${styles.size} region styles`);
-    console.log('Style region keys:', Array.from(styles.keys()).slice(0, 10));
     return styles;
   });
   

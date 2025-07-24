@@ -29,9 +29,6 @@ export class RegionOwnershipAnalyzer implements RegionAnalysisProvider {
   analyzeRegionStates(territory: TerritorySnapshot, zone: Zone): Map<RegionID, RegionState> {
     const regionStates = new Map<RegionID, RegionState>();
     
-    console.log(`RegionOwnershipAnalyzer: Analyzing ${zone.regions.length} regions from zone data`);
-    console.log(`RegionOwnershipAnalyzer: Territory data has ${Object.keys(territory.region_ownership).length} regions`);
-    
     // Get all regions from zone data to ensure we cover all regions
     zone.regions.forEach((region) => {
       const regionId = region.map_region_id;
@@ -61,7 +58,6 @@ export class RegionOwnershipAnalyzer implements RegionAnalysisProvider {
       regionStates.set(regionId, regionState);
     });
     
-    console.log(`RegionOwnershipAnalyzer: Generated ${regionStates.size} region states`);
     return regionStates;
   }
 }

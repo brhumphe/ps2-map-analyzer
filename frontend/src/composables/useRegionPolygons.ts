@@ -24,18 +24,8 @@ export function useRegionPolygons(
     watch(
       regionStyles,
       (newStyles) => {
-        console.log(
-          `useRegionPolygons: Received ${newStyles?.size || 0} new styles`
-        );
         if (newStyles && newStyles.size > 0 && regionPolygons.size > 0) {
-          console.log(
-            `useRegionPolygons: Applying styles to ${regionPolygons.size} existing polygons`
-          );
           applyRegionStyles(newStyles);
-        } else if (newStyles && newStyles.size > 0) {
-          console.log(
-            'useRegionPolygons: Deferring style application - polygons not ready'
-          );
         }
       },
       { deep: true, immediate: true }
@@ -56,13 +46,8 @@ export function useRegionPolygons(
         // Replace the entire style object to ensure reactivity
         region.style = { ...style };
         appliedCount++;
-      } else {
-        console.warn(
-          `useRegionPolygons: Region ${regionKey} not found for styling`
-        );
       }
     });
-    console.log(`useRegionPolygons: Applied styles to ${appliedCount} regions`);
   };
 
   /**
@@ -91,9 +76,6 @@ export function useRegionPolygons(
         );
 
         if (hexCoordinates.length === 0) {
-          console.warn(
-            `No hex coordinates found for region ${region.map_region_id}`
-          );
           continue;
         }
 
@@ -112,24 +94,13 @@ export function useRegionPolygons(
           facilityName: region.facility_name,
         });
       } catch (error) {
-        console.warn(
-          `Failed to create polygon for region ${region.map_region_id}:`,
-          error
-        );
+        // Skip regions that can't be created
+        continue;
       }
     }
 
-    console.log(`Initialized ${regionPolygons.size} region polygons`);
-    console.log(
-      'Available region keys:',
-      Array.from(regionPolygons.keys()).slice(0, 10)
-    );
-
     // Apply any pending styles after initialization
     if (regionStyles && regionStyles.value && regionStyles.value.size > 0) {
-      console.log(
-        'useRegionPolygons: Applying pending styles after initialization'
-      );
       applyRegionStyles(regionStyles.value);
     }
   };
@@ -147,8 +118,6 @@ export function useRegionPolygons(
     if (region) {
       // Merge new style with existing style
       Object.assign(region.style, style);
-    } else {
-      console.warn(`Region ${regionId} not found`);
     }
   };
 
@@ -181,8 +150,6 @@ export function useRegionPolygons(
     const factionStyle = factionColors[factionId as keyof typeof factionColors];
     if (factionStyle) {
       updateRegionStyle(regionId, factionStyle);
-    } else {
-      console.warn(`Unknown faction ID: ${factionId}`);
     }
   };
 

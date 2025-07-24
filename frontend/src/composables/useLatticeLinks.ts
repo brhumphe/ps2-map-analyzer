@@ -22,12 +22,8 @@ export function useLatticeLinks(
     watch(
       linkStyles,
       (newStyles) => {
-        console.log(`useLatticeLinks: Received ${newStyles?.size || 0} new styles`);
         if (newStyles && newStyles.size > 0 && latticeLinks.size > 0) {
-          console.log(`useLatticeLinks: Applying styles to ${latticeLinks.size} existing links`);
           applyLinkStyles(newStyles);
-        } else if (newStyles && newStyles.size > 0) {
-          console.log('useLatticeLinks: Deferring style application - links not ready');
         }
       },
       { deep: true, immediate: true }
@@ -46,11 +42,8 @@ export function useLatticeLinks(
         // Replace the entire style object to ensure reactivity
         link.style = { ...link.style, ...style };
         appliedCount++;
-      } else {
-        console.warn(`useLatticeLinks: Link ${linkKey} not found for styling`);
       }
     });
-    console.log(`useLatticeLinks: Applied styles to ${appliedCount} links`);
   };
 
   /**
@@ -74,7 +67,6 @@ export function useLatticeLinks(
       const coordsB = facilityCoords[facilityB];
 
       if (!coordsA || !coordsB) {
-        console.warn(`Missing coordinates for link ${facilityA}-${facilityB}`);
         continue;
       }
 
@@ -92,12 +84,8 @@ export function useLatticeLinks(
       });
     }
 
-    console.log(`Initialized ${latticeLinks.size} lattice links`);
-    console.log('Available link keys:', Array.from(latticeLinks.keys()).slice(0, 10));
-    
     // Apply any pending styles after initialization
     if (linkStyles && linkStyles.value && linkStyles.value.size > 0) {
-      console.log('useLatticeLinks: Applying pending styles after initialization');
       applyLinkStyles(linkStyles.value);
     }
   };
@@ -115,8 +103,6 @@ export function useLatticeLinks(
     if (link) {
       // Merge new style with existing style
       Object.assign(link.style, style);
-    } else {
-      console.warn(`Lattice link ${linkKey} not found`);
     }
   };
 
