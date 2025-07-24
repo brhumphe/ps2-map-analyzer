@@ -1,4 +1,4 @@
-import { reactive, computed } from 'vue';
+import { reactive, computed, watch, type Ref } from 'vue';
 import * as L from 'leaflet';
 import type { RegionKey, Zone } from '@/types/zone_types';
 import type { RegionID } from '@/types/common';
@@ -13,9 +13,57 @@ interface RegionPolygon {
   facilityName: string;
 }
 
-export function useRegionPolygons() {
+export function useRegionPolygons(
+  regionStyles?: Ref<Map<RegionKey, Partial<L.PolylineOptions>>>
+) {
   // Reactive collection of region polygons
   const regionPolygons = reactive(new Map<RegionKey, RegionPolygon>());
+
+  // Watch for region style changes and apply them automatically
+  if (regionStyles) {
+    watch(
+      regionStyles,
+      (newStyles) => {
+        console.log(
+          `useRegionPolygons: Received ${newStyles?.size || 0} new styles`
+        );
+        if (newStyles && newStyles.size > 0 && regionPolygons.size > 0) {
+          console.log(
+            `useRegionPolygons: Applying styles to ${regionPolygons.size} existing polygons`
+          );
+          applyRegionStyles(newStyles);
+        } else if (newStyles && newStyles.size > 0) {
+          console.log(
+            'useRegionPolygons: Deferring style application - polygons not ready'
+          );
+        }
+      },
+      { deep: true, immediate: true }
+    );
+  }
+
+  /**
+   * Apply styles from the analysis pipeline to regions
+   */
+  const applyRegionStyles = (
+    styles: Map<RegionKey, Partial<L.PolylineOptions>>
+  ) => {
+    let appliedCount = 0;
+    styles.forEach((style, regionKey) => {
+      const region = regionPolygons.get(regionKey);
+
+      if (region) {
+        // Replace the entire style object to ensure reactivity
+        region.style = { ...style };
+        appliedCount++;
+      } else {
+        console.warn(
+          `useRegionPolygons: Region ${regionKey} not found for styling`
+        );
+      }
+    });
+    console.log(`useRegionPolygons: Applied styles to ${appliedCount} regions`);
+  };
 
   /**
    * Initialize region polygons from zone data
@@ -72,6 +120,18 @@ export function useRegionPolygons() {
     }
 
     console.log(`Initialized ${regionPolygons.size} region polygons`);
+    console.log(
+      'Available region keys:',
+      Array.from(regionPolygons.keys()).slice(0, 10)
+    );
+
+    // Apply any pending styles after initialization
+    if (regionStyles && regionStyles.value && regionStyles.value.size > 0) {
+      console.log(
+        'useRegionPolygons: Applying pending styles after initialization'
+      );
+      applyRegionStyles(regionStyles.value);
+    }
   };
 
   /**

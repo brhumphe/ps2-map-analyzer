@@ -7,6 +7,18 @@
     </v-app-bar>
 
     <v-main>
+      <!-- Loading overlay -->
+      <v-overlay v-if="isLoading || territoryLoading" contained>
+        <v-progress-circular indeterminate size="64"></v-progress-circular>
+        <div class="mt-4">
+          {{ isLoading ? 'Loading map data...' : 'Loading territory data...' }}
+        </div>
+      </v-overlay>
+
+      <!-- Error display -->
+      <v-alert v-if="error || territoryError" type="error" class="ma-4">
+        {{ error || territoryError }}
+      </v-alert>
       <!-- Map container -->
       <div id="map_div" ref="mapContainer" class="map-container"></div>
 
@@ -33,17 +45,6 @@
           :map="map"
         />
       </template>
-
-      <!-- Loading overlay -->
-      <v-overlay v-if="isLoading" contained>
-        <v-progress-circular indeterminate size="64"></v-progress-circular>
-        <div class="mt-4">Loading map data...</div>
-      </v-overlay>
-
-      <!-- Error display -->
-      <v-alert v-if="error" type="error" class="ma-4">
-        {{ error }}
-      </v-alert>
     </v-main>
   </v-app>
 </template>
@@ -53,6 +54,9 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { useLeafletMap } from '@/composables/useLeafletMap';
 import { useLatticeLinks } from '@/composables/useLatticeLinks';
 import { useRegionPolygons } from '@/composables/useRegionPolygons';
+import { useTerritoryData } from '@/composables/useTerritoryData';
+import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
+import { useLinkAnalysis } from '@/composables/useLinkAnalysis';
 import { Continent } from '@/types/common';
 import PolylineEntity from '@/components/map/PolylineEntity.vue';
 import PolygonEntity from '@/components/map/PolygonEntity.vue';
@@ -64,12 +68,26 @@ const mapContainer = ref<HTMLElement>();
 const { map, currentZone, isLoading, error, initializeMap, cleanupMap } =
   useLeafletMap();
 
-// Use the lattice links composable
-const { latticeLinks, initializeLatticeLinks, clearLinks } = useLatticeLinks();
+// Use the territory data composable
+const {
+  territorySnapshot,
+  isLoading: territoryLoading,
+  error: territoryError,
+  fetchTerritoryData,
+} = useTerritoryData();
 
-// Use the region polygons composable
+// Use region analysis to get faction-based styling
+const { regionStyles } = useRegionAnalysis(territorySnapshot, currentZone);
+
+// Use link analysis to get contestable link styling
+const { linkStyles } = useLinkAnalysis(territorySnapshot, currentZone);
+
+// Use the region polygons composable with analysis-based styling
 const { regionPolygons, initializeRegionPolygons, clearRegions } =
-  useRegionPolygons();
+  useRegionPolygons(regionStyles);
+
+// Use the lattice links composable with analysis-based styling
+const { latticeLinks, initializeLatticeLinks, clearLinks } = useLatticeLinks(linkStyles);
 
 // Initialize the map when the component mounts
 onMounted(async () => {
@@ -80,22 +98,18 @@ onMounted(async () => {
 
   await initializeMap(mapContainer.value, Continent.INDAR);
 
+  // Fetch territory data for Connery server (world ID 1)
+  await fetchTerritoryData(1, Continent.INDAR);
+
   // Initialize map content after map and zone data are loaded
   if (currentZone.value) {
     // Initialize region polygons first (background layer)
-    initializeRegionPolygons(currentZone.value, {
-      color: 'black',
-      fillColor: 'purple',
-      fillOpacity: 0.3,
-      weight: 2,
-    });
+    // Note: Styles will be applied automatically from region analysis
+    initializeRegionPolygons(currentZone.value);
 
     // Initialize lattice links on top
-    initializeLatticeLinks(currentZone.value, {
-      color: 'yellow',
-      weight: 4,
-      opacity: 1,
-    });
+    // Note: Styles will be applied automatically from link analysis
+    initializeLatticeLinks(currentZone.value);
   }
 });
 

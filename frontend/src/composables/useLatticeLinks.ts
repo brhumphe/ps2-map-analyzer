@@ -1,4 +1,4 @@
-import { reactive, computed, readonly } from 'vue';
+import { reactive, computed, watch, type Ref } from 'vue';
 import * as L from 'leaflet';
 import type { FacilityLinkKey, Zone } from '@/types/zone_types';
 import { world_to_latLng } from '@/utilities/coordinates';
@@ -11,9 +11,47 @@ interface LatticeLink {
   facilityB: number;
 }
 
-export function useLatticeLinks() {
+export function useLatticeLinks(
+  linkStyles?: Ref<Map<FacilityLinkKey, Partial<L.PolylineOptions>>>
+) {
   // Reactive collection of lattice links
-  const latticeLinks = reactive(new Map<string, LatticeLink>());
+  const latticeLinks = reactive(new Map<FacilityLinkKey, LatticeLink>());
+
+  // Watch for link style changes and apply them automatically
+  if (linkStyles) {
+    watch(
+      linkStyles,
+      (newStyles) => {
+        console.log(`useLatticeLinks: Received ${newStyles?.size || 0} new styles`);
+        if (newStyles && newStyles.size > 0 && latticeLinks.size > 0) {
+          console.log(`useLatticeLinks: Applying styles to ${latticeLinks.size} existing links`);
+          applyLinkStyles(newStyles);
+        } else if (newStyles && newStyles.size > 0) {
+          console.log('useLatticeLinks: Deferring style application - links not ready');
+        }
+      },
+      { deep: true, immediate: true }
+    );
+  }
+
+  /**
+   * Apply styles from the analysis pipeline to links
+   */
+  const applyLinkStyles = (styles: Map<FacilityLinkKey, Partial<L.PolylineOptions>>) => {
+    let appliedCount = 0;
+    styles.forEach((style, linkKey) => {
+      const link = latticeLinks.get(linkKey);
+      
+      if (link) {
+        // Replace the entire style object to ensure reactivity
+        link.style = { ...link.style, ...style };
+        appliedCount++;
+      } else {
+        console.warn(`useLatticeLinks: Link ${linkKey} not found for styling`);
+      }
+    });
+    console.log(`useLatticeLinks: Applied styles to ${appliedCount} links`);
+  };
 
   /**
    * Initialize lattice links from zone data
@@ -55,6 +93,13 @@ export function useLatticeLinks() {
     }
 
     console.log(`Initialized ${latticeLinks.size} lattice links`);
+    console.log('Available link keys:', Array.from(latticeLinks.keys()).slice(0, 10));
+    
+    // Apply any pending styles after initialization
+    if (linkStyles && linkStyles.value && linkStyles.value.size > 0) {
+      console.log('useLatticeLinks: Applying pending styles after initialization');
+      applyLinkStyles(linkStyles.value);
+    }
   };
 
   /**
