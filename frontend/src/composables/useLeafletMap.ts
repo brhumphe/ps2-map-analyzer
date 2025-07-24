@@ -25,7 +25,7 @@ import {
 export function useLeafletMap() {
   // Reactive state
   const map = ref<LMap>();
-  const currentZone = ref<Zone>();
+  const currentZone = ref<Zone | null>(null);
   const isLoading = ref(false);
   const error = ref<string>();
 
@@ -85,7 +85,7 @@ export function useLeafletMap() {
       map.value.remove();
       map.value = undefined;
     }
-    currentZone.value = undefined;
+    currentZone.value = null;
     error.value = undefined;
   }
 
