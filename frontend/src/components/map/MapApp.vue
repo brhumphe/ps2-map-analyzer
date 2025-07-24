@@ -45,6 +45,19 @@
           :map="map"
         />
       </template>
+
+      <!-- Region Markers - rendered as headless components -->
+      <template v-if="map && currentZone">
+        <MarkerEntity
+          v-for="[regionKey, markerData] in regionMarkers"
+          :key="regionKey"
+          :id="regionKey"
+          :position="markerData.position"
+          :popup="markerData.popup"
+          :options="markerData.options"
+          :map="map"
+        />
+      </template>
     </v-main>
   </v-app>
 </template>
@@ -57,9 +70,11 @@ import { useRegionPolygons } from '@/composables/useRegionPolygons';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
 import { useLinkAnalysis } from '@/composables/useLinkAnalysis';
+import { useRegionMarkers } from '@/composables/useRegionMarkers';
 import { Continent } from '@/types/common';
 import PolylineEntity from '@/components/map/PolylineEntity.vue';
 import PolygonEntity from '@/components/map/PolygonEntity.vue';
+import MarkerEntity from '@/components/map/MarkerEntity.vue';
 
 // Map container reference
 const mapContainer = ref<HTMLElement>();
@@ -89,6 +104,9 @@ const { regionPolygons, initializeRegionPolygons, clearRegions } =
 // Use the lattice links composable with analysis-based styling
 const { latticeLinks, initializeLatticeLinks, clearLinks } = useLatticeLinks(linkStyles);
 
+// Use the region markers composable
+const { regionMarkers, initializeRegionMarkers, clearMarkers } = useRegionMarkers();
+
 // Initialize the map when the component mounts
 onMounted(async () => {
   if (!mapContainer.value) {
@@ -110,13 +128,23 @@ onMounted(async () => {
     // Initialize lattice links on top
     // Note: Styles will be applied automatically from link analysis
     initializeLatticeLinks(currentZone.value);
+
+    // Initialize region markers
+    initializeRegionMarkers(currentZone.value);
   }
 });
 
 // Clean up when the component unmounts
 onUnmounted(() => {
-  clearRegions();
-  clearLinks();
+  // Clean up map elements first, then the map itself
+  // This ensures proper cleanup order and prevents stale references
+  try {
+    clearMarkers();
+    clearLinks();
+    clearRegions();
+  } catch (error) {
+    console.warn('Error during component cleanup:', error);
+  }
   cleanupMap();
 });
 </script>

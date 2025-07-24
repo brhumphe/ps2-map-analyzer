@@ -6,10 +6,7 @@ import { Continent } from '@/types/common';
 import type { Zone } from '@/types/zone_types';
 import {
   configureMapTileLayer,
-  drawLattice,
-  drawRegion,
   initMouseCoordinatesPopup,
-  placeRegionMarkers,
 } from '@/utilities/leaflet_utils';
 
 // export interface LeafletMap {
@@ -57,9 +54,9 @@ export function useLeafletMap() {
       const zone = await zoneService.fetchZone(continent);
       currentZone.value = zone;
 
-      // Add map features
-      placeRegionMarkers(zone, leafletMap);
-      // drawLattice(zone, leafletMap)
+      // Map features are now handled by Vue components in MapApp
+      // placeRegionMarkers(zone, leafletMap); // Removed - now using MarkerEntity components
+      // drawLattice(zone, leafletMap) // Removed - now using PolylineEntity components
 
       // Draw all regions
       // for (const region of zone.regions) {
@@ -82,7 +79,16 @@ export function useLeafletMap() {
    */
   function cleanupMap() {
     if (map.value) {
-      map.value.remove();
+      try {
+        // Close any open popups before removing the map
+        map.value.closePopup();
+        // Stop any ongoing animations
+        map.value.stop();
+        // Remove the map
+        map.value.remove();
+      } catch (error) {
+        console.warn('Error during map cleanup:', error);
+      }
       map.value = undefined;
     }
     currentZone.value = null;

@@ -56,12 +56,15 @@ const createPolygon = () => {
 const removePolygon = () => {
   if (polygon.value && props.map) {
     try {
-      props.map.removeLayer(polygon.value);
-      // console.debug(`PolygonEntity[${props.id}]: Removed polygon from map`)
+      // Check if map is still valid before attempting removal
+      if (props.map.getContainer()) {
+        props.map.removeLayer(polygon.value);
+      }
     } catch (error) {
-      console.error(
-        `PolygonEntity[${props.id}]: Failed to remove polygon:`,
-        error
+      // Map may have already been cleaned up, ignore the error
+      console.debug(
+        `PolygonEntity[${props.id}]: Map cleanup race condition (expected):`,
+        error.message
       );
     }
   }

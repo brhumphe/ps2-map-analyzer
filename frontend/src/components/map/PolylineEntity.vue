@@ -56,12 +56,15 @@ const createPolyline = () => {
 const removePolyline = () => {
   if (polyline.value && props.map) {
     try {
-      props.map.removeLayer(polyline.value);
-      // console.debug(`PolylineEntity[${props.id}]: Removed polyline from map`)
+      // Check if map is still valid before attempting removal
+      if (props.map.getContainer()) {
+        props.map.removeLayer(polyline.value);
+      }
     } catch (error) {
-      console.error(
-        `PolylineEntity[${props.id}]: Failed to remove polyline:`,
-        error
+      // Map may have already been cleaned up, ignore the error
+      console.debug(
+        `PolylineEntity[${props.id}]: Map cleanup race condition (expected):`,
+        error.message
       );
     }
   }
