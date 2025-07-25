@@ -19,7 +19,22 @@ export enum Continent {
   HOSSIN = 4,
   AMERISH = 6,
   ESAMIR = 8,
+  OSHUR = 344,
 }
+
+export enum World {
+  Osprey = 1,
+  Wainwright = 10,
+  Jaeger = 19,
+  SolTech = 40,
+}
+
+export const WorldName = new Map<World, string>([
+  [World.Osprey, 'Osprey'],
+  [World.Wainwright, 'Wainwright'],
+  [World.Jaeger, 'Jaeger'],
+  [World.SolTech, 'SolTech'],
+]);
 
 export type RegionID = number;
 export type WorldID = number;

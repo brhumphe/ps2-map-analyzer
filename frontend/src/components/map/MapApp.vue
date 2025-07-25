@@ -1,9 +1,12 @@
 <template>
   <v-app>
-    <v-app-bar color="primary" dark>
+    <v-app-bar theme="dark">
       <v-app-bar-title
         >PS2 Map State Application - Territory Analyzer</v-app-bar-title
       >
+      <template v-slot:append>
+        <WorldDropdown />
+      </template>
     </v-app-bar>
 
     <v-main>
@@ -63,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { useLeafletMap } from '@/composables/useLeafletMap';
 import { useLatticeLinks } from '@/composables/useLatticeLinks';
 import { useRegionPolygons } from '@/composables/useRegionPolygons';
@@ -74,6 +77,7 @@ import { useRegionMarkers } from '@/composables/useRegionMarkers';
 import { Continent } from '@/types/common';
 import PolylineEntity from '@/components/map/PolylineEntity.vue';
 import PolygonEntity from '@/components/map/PolygonEntity.vue';
+import WorldDropdown from '@/components/map/WorldDropdown.vue';
 import MarkerEntity from '@/components/map/MarkerEntity.vue';
 
 // Map container reference
@@ -106,7 +110,8 @@ const { latticeLinks, initializeLatticeLinks, clearLinks } =
   useLatticeLinks(linkStyles);
 
 // Use the region markers composable
-const { regionMarkers, initializeRegionMarkers, clearMarkers } = useRegionMarkers();
+const { regionMarkers, initializeRegionMarkers, clearMarkers } =
+  useRegionMarkers();
 
 // Initialize the map when the component mounts
 onMounted(async () => {
