@@ -102,7 +102,8 @@ const { regionPolygons, initializeRegionPolygons, clearRegions } =
   useRegionPolygons(regionStyles);
 
 // Use the lattice links composable with analysis-based styling
-const { latticeLinks, initializeLatticeLinks, clearLinks } = useLatticeLinks(linkStyles);
+const { latticeLinks, initializeLatticeLinks, clearLinks } =
+  useLatticeLinks(linkStyles);
 
 // Use the region markers composable
 const { regionMarkers, initializeRegionMarkers, clearMarkers } = useRegionMarkers();
@@ -154,6 +155,7 @@ onUnmounted(() => {
   height: calc(100vh - 64px);
   width: 100%;
   position: relative;
+  background-color: #051110;
 }
 
 :deep(.hex-label) {

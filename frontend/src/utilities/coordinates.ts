@@ -1,6 +1,10 @@
 import { WorldCoordinate } from '@/types/zone_types.js';
 import * as L from 'leaflet';
 
+// This scale factor is just how the math works out to get leaflet to request
+// the correct tiles from Honu. There's nothing deeper to it then that.
+const SCALE = 32;
+
 /**
  * Converts game world coordinates to latitude and longitude coordinates.
  *
@@ -15,7 +19,7 @@ export const world_to_latLng = function (coords: WorldCoordinate): L.LatLng {
     coords.x * Math.cos(rotationAngle) + coords.z * Math.sin(rotationAngle);
   let newY =
     coords.x * Math.sin(rotationAngle) - coords.z * Math.cos(rotationAngle);
-  return L.latLng(newY, newX);
+  return L.latLng(newY / SCALE, newX / SCALE);
 };
 
 /**
@@ -26,10 +30,10 @@ export const latLng_to_world = function (latLng: L.LatLng): WorldCoordinate {
   return {
     x:
       latLng.lng * Math.cos(rotationAngle) -
-      latLng.lat * Math.sin(rotationAngle),
+      latLng.lat * Math.sin(rotationAngle) * SCALE,
     z: -(
       latLng.lng * Math.sin(rotationAngle) +
-      latLng.lat * Math.cos(rotationAngle)
+      latLng.lat * Math.cos(rotationAngle) * SCALE
     ),
   };
 };

@@ -9,16 +9,6 @@ import {
   initMouseCoordinatesPopup,
 } from '@/utilities/leaflet_utils';
 
-// export interface LeafletMap {
-//   initializeMap(container: HTMLElement, continent: Continent): Promise<void>
-//   cleanupMap(): void
-//   switchContinent(continent: Continent): Promise<void>
-//   readonly map: Readonly<Ref<LMap | undefined>>
-//   readonly currentZone: Ref<Zone> | undefined
-//   readonly isLoading: Ref<boolean> | undefined
-//   readonly error: Ref<string> | undefined
-// }
-
 export function useLeafletMap() {
   // Reactive state
   const map = ref<LMap>();
@@ -37,6 +27,11 @@ export function useLeafletMap() {
       isLoading.value = true;
       error.value = undefined;
 
+      // Fetch and display zone data
+      const zoneService = new ZoneService();
+      const zone = await zoneService.fetchZone(continent);
+      currentZone.value = zone;
+
       // Create the Leaflet map
       const leafletMap = L.map(container, {
         crs: L.CRS.Simple,
@@ -46,22 +41,9 @@ export function useLeafletMap() {
       map.value = leafletMap;
 
       // Initialize map features
+      // initMouseCoordinatesPopup(leafletMap);
+      configureMapTileLayer(leafletMap, zone.code.toLowerCase());
       initMouseCoordinatesPopup(leafletMap);
-      configureMapTileLayer(leafletMap);
-
-      // Fetch and display zone data
-      const zoneService = new ZoneService();
-      const zone = await zoneService.fetchZone(continent);
-      currentZone.value = zone;
-
-      // Map features are now handled by Vue components in MapApp
-      // placeRegionMarkers(zone, leafletMap); // Removed - now using MarkerEntity components
-      // drawLattice(zone, leafletMap) // Removed - now using PolylineEntity components
-
-      // Draw all regions
-      // for (const region of zone.regions) {
-      //   drawRegion(zone, region.map_region_id, leafletMap)
-      // }
 
       console.log('Map initialized successfully for continent:', continent);
     } catch (err) {

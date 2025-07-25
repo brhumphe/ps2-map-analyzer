@@ -11,41 +11,20 @@ import { zoneUtils } from '@/utilities/zone_utils';
  * @param {L.Map} map - The Leaflet map instance to which the custom tile layer will be added.
  * @return {void}
  */
-export function configureMapTileLayer(map: L.Map): void {
+export function configureMapTileLayer(map: L.Map, zoneCode: string): void {
   // Create custom tile layer
-  const customTileLayer = L.tileLayer('', {
-    minZoom: -50,
-    maxZoom: 2,
-    tileSize: 256,
-    minNativeZoom: 0,
-    maxNativeZoom: 0,
-    noWrap: true,
-    attribution: 'Map images copyright Daybreak Games',
-    bounds: [
-      [-4096, -4096],
-      [4096, 4096],
-    ],
-  });
-
-  // Override the tile URL creation
-  customTileLayer.getTileUrl = function (coords) {
-    const z = coords.z;
-    // Transform Leaflet coordinates to tile names
-    // Leaflet gives 0,1,2,3... but need 0,4,8,12... (increment by 4)
-    const tileX = coords.x * 4;
-    // -4 to offset which row is being requested to match the names.
-    const tileY = -coords.y * 4 - 4;
-
-    // Format as 3-digit zero-padded strings
-    let xStr = Math.abs(tileX).toString().padStart(3, '0');
-    let yStr = Math.abs(tileY).toString().padStart(3, '0');
-
-    // Negative coordinates are padded less to account for the inclusion of the negative sign.
-    if (tileX < 0) xStr = '-' + Math.abs(tileX).toString().padStart(2, '0');
-    if (tileY < 0) yStr = '-' + Math.abs(tileY).toString().padStart(2, '0');
-
-    return `tiles/indar/Indar_Tile_${xStr}_${yStr}_LOD${z}.png`;
-  };
+  const customTileLayer = L.tileLayer(
+    `https://wt.honu.pw/img/zones/${zoneCode}/zoom{z}/${zoneCode}_{z}_{x}_{y}.jpg`,
+    {
+      minZoom: 1,
+      maxZoom: 32,
+      minNativeZoom: 1,
+      maxNativeZoom: 5,
+      noWrap: true,
+      attribution: 'Map images copyright Daybreak Games',
+      bounds: L.latLngBounds(L.latLng(-128, -128), L.latLng(128, 128)),
+    }
+  );
 
   // Add to map
   customTileLayer.addTo(map);
