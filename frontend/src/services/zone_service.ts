@@ -2,7 +2,7 @@ import { Zone, Region, FacilityLink } from '@/types/zone_types';
 import { Continent } from '@/types/common';
 
 // API response types (matching the raw API structure)
-export interface ZoneResponse {
+interface ZoneResponse {
   zone_id: Continent;
   code: string;
   name: string;
@@ -11,7 +11,7 @@ export interface ZoneResponse {
   links: FacilityLink[];
 }
 
-export interface ZoneDataResponse {
+interface ZoneDataResponse {
   zone_list: ZoneResponse[];
 }
 

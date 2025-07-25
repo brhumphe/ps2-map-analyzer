@@ -2,7 +2,7 @@
 GET https://census.lithafalcon.cc/get/ps2?c:censusJSON=false
 
 ### GET world
-GET https://census.lithafalcon.cc/get/ps2/world?c:censusJSON=false
+GET https://census.lithafalcon.cc/get/ps2/world?c:lang=en&c:censusJSON=false
 
 ### GET map_hex
 GET https://census.lithafalcon.cc/get/ps2/map_hex?c:censusJSON=false
