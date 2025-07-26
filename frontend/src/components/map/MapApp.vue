@@ -5,7 +5,10 @@
         >PS2 Map State Application - Territory Analyzer</v-app-bar-title
       >
       <template v-slot:append>
-        <WorldDropdown />
+        <div class="d-flex ga-2">
+          <ContinentDropdown />
+          <WorldDropdown />
+        </div>
       </template>
     </v-app-bar>
 
@@ -66,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { useLeafletMap } from '@/composables/useLeafletMap';
 import { useLatticeLinks } from '@/composables/useLatticeLinks';
 import { useRegionPolygons } from '@/composables/useRegionPolygons';
@@ -74,18 +77,29 @@ import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
 import { useLinkAnalysis } from '@/composables/useLinkAnalysis';
 import { useRegionMarkers } from '@/composables/useRegionMarkers';
-import { Continent } from '@/types/common';
+import { useAppState } from '@/composables/useAppState';
 import PolylineEntity from '@/components/map/PolylineEntity.vue';
 import PolygonEntity from '@/components/map/PolygonEntity.vue';
 import WorldDropdown from '@/components/map/WorldDropdown.vue';
+import ContinentDropdown from '@/components/map/ContinentDropdown.vue';
 import MarkerEntity from '@/components/map/MarkerEntity.vue';
 
 // Map container reference
 const mapContainer = ref<HTMLElement>();
 
+// Use app state for world/continent selection
+const { selectedWorld, selectedContinent } = useAppState();
+
 // Use the map initialization composable
-const { map, currentZone, isLoading, error, initializeMap, cleanupMap } =
-  useLeafletMap();
+const {
+  map,
+  currentZone,
+  isLoading,
+  error,
+  initializeMap,
+  cleanupMap,
+  switchContinent,
+} = useLeafletMap();
 
 // Use the territory data composable
 const {
@@ -113,32 +127,62 @@ const { latticeLinks, initializeLatticeLinks, clearLinks } =
 const { regionMarkers, initializeRegionMarkers, clearMarkers } =
   useRegionMarkers();
 
-// Initialize the map when the component mounts
-onMounted(async () => {
-  if (!mapContainer.value) {
-    console.error('Map container not found');
-    return;
-  }
+// Function to completely rebuild map and content
+const rebuildMap = async () => {
+  if (!mapContainer.value) return;
 
-  await initializeMap(mapContainer.value, Continent.INDAR);
+  // Destroy existing map completely
+  cleanupMap();
 
-  // Fetch territory data for Connery server (world ID 1)
-  await fetchTerritoryData(1, Continent.INDAR);
+  // Create fresh map with selected continent
+  await initializeMap(mapContainer.value, selectedContinent.value);
+
+  // Fetch territory data for selected world/continent
+  await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
 
   // Initialize map content after map and zone data are loaded
   if (currentZone.value) {
-    // Initialize region polygons first (background layer)
-    // Note: Styles will be applied automatically from region analysis
     initializeRegionPolygons(currentZone.value);
-
-    // Initialize lattice links on top
-    // Note: Styles will be applied automatically from link analysis
     initializeLatticeLinks(currentZone.value);
-
-    // Initialize region markers
     initializeRegionMarkers(currentZone.value);
   }
+};
+
+// Function to rebuild map content when zone changes
+const rebuildMapContent = async () => {
+  if (!currentZone.value) return;
+
+  // Fetch territory data for current world/continent
+  await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
+
+  // Initialize map content
+  initializeRegionPolygons(currentZone.value);
+  initializeLatticeLinks(currentZone.value);
+  initializeRegionMarkers(currentZone.value);
+};
+
+// Watch for continent changes - switch continent and load new zone
+watch(selectedContinent, async (newContinent) => {
+  if (map.value) {
+    // Clear existing content immediately to avoid lingering
+    clearMarkers();
+    clearLinks();
+    clearRegions();
+
+    await switchContinent(newContinent);
+  }
 });
+
+// Watch for zone changes - rebuild map content
+watch(currentZone, rebuildMapContent);
+
+// Watch for world changes - only update territory data
+watch(selectedWorld, async () => {
+  await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
+});
+
+// Initialize the map when the component mounts
+onMounted(rebuildMap);
 
 // Clean up when the component unmounts
 onUnmounted(() => {

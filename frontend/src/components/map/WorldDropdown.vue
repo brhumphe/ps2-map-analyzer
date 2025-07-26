@@ -19,9 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { World, WorldName } from '@/types/common';
 import { useAppState } from '@/composables/useAppState';
+
 const { setWorld, selectedWorld } = useAppState();
 
 const items = [
@@ -30,16 +31,12 @@ const items = [
   { name: 'Jaeger', world_id: World.Jaeger },
   { name: 'SolTech', world_id: World.SolTech },
 ];
-console.log(selectedWorld.value, WorldName, WorldName.get(selectedWorld.value));
-const selectedWorldName = ref(
-  WorldName.get(selectedWorld.value) || 'Select World'
+
+const selectedWorldName = computed(
+  () => WorldName.get(selectedWorld.value) || 'Select World'
 );
 
 const selectWorld = (item: { name: string; world_id: World }) => {
-  // Call setWorld with the selected world's ID
   setWorld(item.world_id);
-
-  // Update the button label
-  selectedWorldName.value = item.name;
 };
 </script>

@@ -73,7 +73,6 @@ export function useLeafletMap() {
       }
       map.value = undefined;
     }
-    currentZone.value = null;
     error.value = undefined;
   }
 

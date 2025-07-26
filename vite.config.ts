@@ -42,6 +42,6 @@ export default defineConfig({
     __VUE_PROD_DEVTOOLS__: 'false',
   },
   server: {
-    open: '/status.html',
+    open: '/index.html',
   },
 });
