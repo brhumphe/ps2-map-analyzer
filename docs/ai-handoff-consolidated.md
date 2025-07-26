@@ -117,13 +117,22 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 - **Style Calculation Layers**: Separate styling systems for regions and links
 - **Reactive Integration**: Automatic updates when territory data changes
 - **Timing Issue Resolution**: Fixed initialization order and style application timing
+- **World/Continent Selection**: Fully functional dropdown menus with reactive integration
+- **Component Architecture Refactoring**: Separated MapApp.vue (UI chrome) from MapComponent.vue (map lifecycle)
+- **Map Lifecycle Management**: Resolved Leaflet container reinitialization errors with destroy/recreate pattern
+- **External Tile Integration**: Working integration with Honu tile server (CORS warnings resolved/ignored)
+- **Reactive Prop Flow**: Clean props-down data flow for world/continent changes
+- **Zone Watcher Pattern**: Centralized content rebuilding triggered by currentZone changes
 
 ### 🎯 Next Steps Available
-1. **User Controls** - Continent/world selection, display mode switching
-2. **Auto-refresh System** - Periodic territory data updates from live API
+1. **Display Live state from game** - Periodic territory data updates from live API
+2. **Base name labels** - Show names of bases on the map, controllable by state (only frontline bases etc.)
 3. **Additional Analysis Modes** - Front-line detection, strategic value scoring
 4. **UI Polish** - Remove debug logs, add legend, territory statistics display
 5. **Performance Optimization** - Caching, selective updates, analysis throttling
+6. **Dev mode data** - Add sample state for each continent for development
+7. **Improved map loading responsiveness** - Load and display regions with default style faster during continent switch
+8. **Display Mode Controls** - Toggle between analysis modes (contestable links, faction control, etc.)
 
 ## Technical Challenges & Solutions
 
@@ -133,6 +142,9 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 3. **Z-ordering Issues**: Used Leaflet panes system for predictable layer ordering
 4. **Performance with Bulk Updates**: Individual reactive objects perform better than large nested structures
 5. **Leaflet Lifecycle Management**: Headless components bridge Vue reactivity with Leaflet object lifecycle
+6. **Map Container Reinitialization**: Leaflet throws "container already initialized" errors - solved with complete cleanup/recreate pattern
+7. **Component Architecture Complexity**: Large monolithic MapApp component - solved by separating concerns into MapApp (UI) + MapComponent (map logic)
+8. **CORS with External Tiles**: Browser blocks cross-origin tile requests - resolved by accepting console warnings (tiles still load correctly)
 
 ### Critical Implementation Notes
 - **Coordinate Conversion**: ALL spatial data must go through `world_to_latLng()` utilities
