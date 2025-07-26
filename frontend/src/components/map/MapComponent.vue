@@ -1,53 +1,84 @@
 <template>
-  <v-app>
-    <v-app-bar theme="dark">
-      <v-app-bar-title
-        >PS2 Map State Application - Territory Analyzer</v-app-bar-title
-      >
-      <template v-slot:append>
-        <div class="d-flex ga-2">
-          <ContinentDropdown />
-          <WorldDropdown />
-        </div>
-      </template>
-    </v-app-bar>
+  <!-- Loading overlay -->
+  <v-overlay v-if="isLoading || territoryLoading" contained>
+    <v-progress-circular indeterminate size="64"></v-progress-circular>
+    <div class="mt-4">
+      {{ isLoading ? 'Loading map data...' : 'Loading territory data...' }}
+    </div>
+  </v-overlay>
 
-    <v-main>
-      <MapComponent :world="selectedWorld" :continent="selectedContinent" />
-    </v-main>
-  </v-app>
+  <!-- Error display -->
+  <v-alert v-if="error || territoryError" type="error" class="ma-4">
+    {{ error || territoryError }}
+  </v-alert>
+
+  <!-- Map container -->
+  <div id="map_div" ref="mapContainer" class="map-container"></div>
+
+  <!-- Region Polygons - rendered as headless components -->
+  <template v-if="map && currentZone">
+    <PolygonEntity
+      v-for="[regionKey, regionData] in regionPolygons"
+      :key="regionKey"
+      :id="regionKey"
+      :points="regionData.points"
+      :style="regionData.style as Partial<L.PolylineOptions>"
+      :map="map"
+    />
+  </template>
+
+  <!-- Lattice Links - rendered as headless components -->
+  <template v-if="map && currentZone">
+    <PolylineEntity
+      v-for="[linkId, linkData] in latticeLinks"
+      :key="linkId"
+      :id="linkId"
+      :points="linkData.points"
+      :style="linkData.style as Partial<L.PolylineOptions>"
+      :map="map"
+    />
+  </template>
+
+  <!-- Region Markers - rendered as headless components -->
+  <template v-if="map && currentZone">
+    <MarkerEntity
+      v-for="[regionKey, markerData] in regionMarkers"
+      :key="regionKey"
+      :id="regionKey"
+      :position="markerData.position"
+      :popup="markerData.popup"
+      :options="markerData.options"
+      :map="map"
+    />
+  </template>
 </template>
 
 <script setup lang="ts">
-import { useAppState } from '@/composables/useAppState';
-import WorldDropdown from '@/components/map/WorldDropdown.vue';
-import ContinentDropdown from '@/components/map/ContinentDropdown.vue';
-import MapComponent from '@/components/map/MapComponent.vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { useLeafletMap } from '@/composables/useLeafletMap';
+import { useLatticeLinks } from '@/composables/useLatticeLinks';
+import { useRegionPolygons } from '@/composables/useRegionPolygons';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
 import { useLinkAnalysis } from '@/composables/useLinkAnalysis';
-import { useRegionPolygons } from '@/composables/useRegionPolygons';
-import { useLatticeLinks } from '@/composables/useLatticeLinks';
 import { useRegionMarkers } from '@/composables/useRegionMarkers';
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { Continent, World } from '@/types/common';
+import PolylineEntity from '@/components/map/PolylineEntity.vue';
+import PolygonEntity from '@/components/map/PolygonEntity.vue';
+import MarkerEntity from '@/components/map/MarkerEntity.vue';
+
+// Props from parent
+const props = defineProps<{
+  world: World;
+  continent: Continent;
+}>();
 
 // Map container reference
 const mapContainer = ref<HTMLElement>();
 
-// Use app state for world/continent selection
-const { selectedWorld, selectedContinent } = useAppState();
-
 // Use the map initialization composable
-const {
-  map,
-  currentZone,
-  isLoading,
-  error,
-  initializeMap,
-  cleanupMap,
-  switchContinent,
-} = useLeafletMap();
+const { map, currentZone, isLoading, error, initializeMap, cleanupMap, switchContinent } =
+  useLeafletMap();
 
 // Use the territory data composable
 const {
@@ -72,8 +103,7 @@ const { latticeLinks, initializeLatticeLinks, clearLinks } =
   useLatticeLinks(linkStyles);
 
 // Use the region markers composable
-const { regionMarkers, initializeRegionMarkers, clearMarkers } =
-  useRegionMarkers();
+const { regionMarkers, initializeRegionMarkers, clearMarkers } = useRegionMarkers();
 
 // Function to completely rebuild map and content
 const rebuildMap = async () => {
@@ -83,10 +113,10 @@ const rebuildMap = async () => {
   cleanupMap();
 
   // Create fresh map with selected continent
-  await initializeMap(mapContainer.value, selectedContinent.value);
+  await initializeMap(mapContainer.value, props.continent);
 
   // Fetch territory data for selected world/continent
-  await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
+  await fetchTerritoryData(props.world, props.continent);
 
   // Initialize map content after map and zone data are loaded
   if (currentZone.value) {
@@ -99,9 +129,9 @@ const rebuildMap = async () => {
 // Function to rebuild map content when zone changes
 const rebuildMapContent = async () => {
   if (!currentZone.value) return;
-
+  
   // Fetch territory data for current world/continent
-  await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
+  await fetchTerritoryData(props.world, props.continent);
 
   // Initialize map content
   initializeRegionPolygons(currentZone.value);
@@ -110,13 +140,13 @@ const rebuildMapContent = async () => {
 };
 
 // Watch for continent changes - switch continent and load new zone
-watch(selectedContinent, async (newContinent) => {
+watch(() => props.continent, async (newContinent) => {
   if (map.value) {
     // Clear existing content immediately to avoid lingering
     clearMarkers();
     clearLinks();
     clearRegions();
-
+    
     await switchContinent(newContinent);
   }
 });
@@ -125,8 +155,8 @@ watch(selectedContinent, async (newContinent) => {
 watch(currentZone, rebuildMapContent);
 
 // Watch for world changes - only update territory data
-watch(selectedWorld, async () => {
-  await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
+watch(() => props.world, async () => {
+  await fetchTerritoryData(props.world, props.continent);
 });
 
 // Initialize the map when the component mounts
@@ -146,3 +176,21 @@ onUnmounted(() => {
   cleanupMap();
 });
 </script>
+
+<style scoped>
+.map-container {
+  height: calc(100vh - 64px);
+  width: 100%;
+  position: relative;
+  background-color: #051110;
+}
+
+:deep(.hex-label) {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 10px;
+  text-align: center;
+  padding: 2px;
+}
+</style>
