@@ -2,7 +2,13 @@
 import { ref, computed } from 'vue';
 import { MapStateService } from '@/services/map_service';
 import type { TerritorySnapshot } from '@/types/territory';
-import type { Continent, WorldID, RegionID, Faction } from '@/types/common';
+import {
+  Continent,
+  WorldID,
+  RegionID,
+  Faction,
+  ContinentName,
+} from '@/types/common';
 
 /**
  * Composable for managing territory control data with Vue reactivity
@@ -32,7 +38,9 @@ export function useTerritoryData() {
   ): Promise<void> => {
     try {
       // Load local JSON file from public directory
-      const response = await fetch('/indar-map_state.json');
+      const response = await fetch(
+        `/${ContinentName.get(continent)?.toLowerCase()}-map_state.json`
+      );
       if (!response.ok) {
         throw new Error(`Failed to load development data: ${response.status}`);
       }

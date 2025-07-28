@@ -22,6 +22,14 @@ export enum Continent {
   OSHUR = 344,
 }
 
+export const ContinentName = new Map<Continent, string>([
+  [Continent.INDAR, 'Indar'],
+  [Continent.HOSSIN, 'Hossin'],
+  [Continent.AMERISH, 'Amerish'],
+  [Continent.ESAMIR, 'Esamir'],
+  [Continent.OSHUR, 'Oshur'],
+]);
+
 export enum World {
   Osprey = 1,
   Wainwright = 10,
