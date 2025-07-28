@@ -2,20 +2,14 @@
 import { ref, computed } from 'vue';
 import { MapStateService } from '@/services/map_service';
 import type { TerritorySnapshot } from '@/types/territory';
-import {
-  Continent,
-  WorldID,
-  RegionID,
-  Faction,
-  ContinentName,
-} from '@/types/common';
+import { Continent, WorldID, RegionID } from '@/types/common';
 
 /**
  * Composable for managing territory control data with Vue reactivity
  *
- * This composable bridges the imperative MapStateService with Vue's reactive system,
- * transforming raw API responses into the normalized TerritorySnapshot format
- * optimized for frontend analysis and visualization.
+ * This composable provides reactive state management for territory data,
+ * delegating data fetching and transformation to the MapStateService
+ * while maintaining Vue-specific concerns like loading states and computed properties.
  */
 export function useTerritoryData() {
   // Reactive state
@@ -27,50 +21,7 @@ export function useTerritoryData() {
   const mapStateService = new MapStateService();
 
   /**
-   * Load territory data from local development file
-   *
-   * @param world World/server ID (e.g., 1 for Connery)
-   * @param continent Continent ID (e.g., 2 for Indar)
-   */
-  const loadDevelopmentData = async (
-    world: WorldID,
-    continent: Continent
-  ): Promise<void> => {
-    try {
-      // Load local JSON file from public directory
-      const response = await fetch(
-        `/${ContinentName.get(continent)?.toLowerCase()}-map_state.json`
-      );
-      if (!response.ok) {
-        throw new Error(`Failed to load development data: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      // Transform API response format to TerritorySnapshot
-      const regionOwnership: Record<RegionID, Faction> = {};
-
-      if (data.map_state_list) {
-        data.map_state_list.forEach((region: any) => {
-          regionOwnership[region.map_region_id] = region.owning_faction_id;
-        });
-      }
-
-      territorySnapshot.value = {
-        timestamp: Math.floor(Date.now() / 1000),
-        continent: continent,
-        world: world,
-        region_ownership: regionOwnership,
-      };
-    } catch (err) {
-      throw new Error(
-        `Development data load failed: ${err instanceof Error ? err.message : 'Unknown error'}`
-      );
-    }
-  };
-
-  /**
-   * Fetch territory data and transform it into TerritorySnapshot format
+   * Fetch territory data using the service layer
    *
    * @param world World/server ID (e.g., 1 for Connery)
    * @param continent Continent ID (e.g., 2 for Indar)
@@ -83,32 +34,11 @@ export function useTerritoryData() {
     error.value = null;
 
     try {
-      // Check if running in development mode
-      const isDevelopment =
-        import.meta.env.DEV || import.meta.env.VITE_USE_MOCK_DATA === 'true';
-
-      if (isDevelopment) {
-        console.log('Using development territory data from local file');
-        await loadDevelopmentData(world, continent);
-      } else {
-        // Fetch raw map state from service
-        const mapState = await mapStateService.fetchMapState(world, continent);
-
-        // Transform to TerritorySnapshot format
-        const regionOwnership: Record<RegionID, Faction> = {};
-
-        mapState.regionStates.forEach((regionState, regionId) => {
-          regionOwnership[regionId] = regionState.owning_faction_id;
-        });
-
-        // Create normalized snapshot
-        territorySnapshot.value = {
-          timestamp: Math.floor(Date.now() / 1000), // Current timestamp in seconds
-          continent: continent,
-          world: world,
-          region_ownership: regionOwnership,
-        };
-      }
+      // Delegate to service for data fetching and transformation
+      territorySnapshot.value = await mapStateService.fetchTerritorySnapshot(
+        world,
+        continent
+      );
     } catch (err) {
       error.value =
         err instanceof Error ? err.message : 'Failed to fetch territory data';

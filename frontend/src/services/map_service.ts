@@ -1,4 +1,11 @@
-import { Continent, Faction, RegionID, WorldID } from '@/types/common';
+import {
+  Continent,
+  Faction,
+  RegionID,
+  WorldID,
+  ContinentName,
+} from '@/types/common';
+import type { TerritorySnapshot } from '@/types/territory';
 
 // API response types
 export interface RegionStateResponse {
@@ -58,6 +65,88 @@ export class MapStateService {
     } catch (error) {
       console.error('Error fetching map state:', error);
       throw error;
+    }
+  }
+
+  /**
+   * Load territory data from local development file
+   *
+   * @param world World/server ID (e.g., 1 for Osprey)
+   * @param continent Continent ID (e.g., 2 for Indar)
+   */
+  private async loadDevelopmentData(
+    world: WorldID,
+    continent: Continent
+  ): Promise<TerritorySnapshot> {
+    try {
+      // Load local JSON file from public directory
+      const response = await fetch(
+        `/${ContinentName.get(continent)?.toLowerCase()}-map_state.json`
+      );
+      if (!response.ok) {
+        throw new Error(`Failed to load development data: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Transform API response format to TerritorySnapshot
+      const regionOwnership: Record<RegionID, Faction> = {};
+
+      if (data.map_state_list) {
+        data.map_state_list.forEach((region: any) => {
+          regionOwnership[region.map_region_id] = region.owning_faction_id;
+        });
+      }
+
+      return {
+        timestamp: Math.floor(Date.now() / 1000),
+        continent: continent,
+        world: world,
+        region_ownership: regionOwnership,
+      };
+    } catch (err) {
+      throw new Error(
+        `Development data load failed: ${err instanceof Error ? err.message : 'Unknown error'}`
+      );
+    }
+  }
+
+  /**
+   * Fetch territory data and transform it into TerritorySnapshot format
+   * Automatically handles development vs production data sources
+   *
+   * @param world World/server ID (e.g., 1 for Connery)
+   * @param continent Continent ID (e.g., 2 for Indar)
+   */
+  async fetchTerritorySnapshot(
+    world: WorldID,
+    continent: Continent
+  ): Promise<TerritorySnapshot> {
+    // Check if running in development mode
+    const isDevelopment =
+      import.meta.env.DEV || import.meta.env.VITE_USE_MOCK_DATA === 'true';
+
+    if (isDevelopment) {
+      console.log('Using development territory data from local file');
+      return await this.loadDevelopmentData(world, continent);
+    } else {
+      // Fetch live data and transform to TerritorySnapshot format
+      const mapState = await this.fetchMapState(world, continent);
+
+      // Transform to TerritorySnapshot format
+      const regionOwnership: Record<RegionID, Faction> = {};
+
+      mapState.regionStates.forEach((regionState, regionId) => {
+        regionOwnership[regionId] = regionState.owning_faction_id;
+      });
+
+      // Create normalized snapshot
+      return {
+        timestamp: Math.floor(Date.now() / 1000), // Current timestamp in seconds
+        continent: continent,
+        world: world,
+        region_ownership: regionOwnership,
+      };
     }
   }
 }
