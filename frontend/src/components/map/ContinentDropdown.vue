@@ -32,6 +32,7 @@ const items = [
   { name: 'Hossin', continent: Continent.HOSSIN },
   { name: 'Amerish', continent: Continent.AMERISH },
   { name: 'Esamir', continent: Continent.ESAMIR },
+  { name: 'Oshur', continent: Continent.OSHUR },
 ];
 
 const continentNames = new Map([
@@ -39,6 +40,7 @@ const continentNames = new Map([
   [Continent.HOSSIN, 'Hossin'],
   [Continent.AMERISH, 'Amerish'],
   [Continent.ESAMIR, 'Esamir'],
+  [Continent.OSHUR, 'Oshur'],
 ]);
 
 const selectedContinentName = computed(
