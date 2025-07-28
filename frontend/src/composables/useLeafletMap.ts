@@ -96,7 +96,7 @@ export function useLeafletMap() {
     // State. Not intended to be mutated, but `readonly` can erase types which cause
     // erroneous type errors
     map,
-    currentZone: currentZone,
+    currentZone,
     isLoading: readonly(isLoading),
     error: readonly(error),
 

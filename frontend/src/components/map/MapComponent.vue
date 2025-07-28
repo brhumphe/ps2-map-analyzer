@@ -47,7 +47,7 @@
       :id="regionKey"
       :position="markerData.position"
       :popup="markerData.popup"
-      :options="markerData.options"
+      :options="markerData.options as Partial<L.MarkerOptions>"
       :map="map"
     />
   </template>
@@ -66,6 +66,7 @@ import { Continent, World } from '@/types/common';
 import PolylineEntity from '@/components/map/PolylineEntity.vue';
 import PolygonEntity from '@/components/map/PolygonEntity.vue';
 import MarkerEntity from '@/components/map/MarkerEntity.vue';
+import * as L from 'leaflet';
 
 // Props from parent
 const props = defineProps<{
@@ -77,8 +78,15 @@ const props = defineProps<{
 const mapContainer = ref<HTMLElement>();
 
 // Use the map initialization composable
-const { map, currentZone, isLoading, error, initializeMap, cleanupMap, switchContinent } =
-  useLeafletMap();
+const {
+  map,
+  currentZone,
+  isLoading,
+  error,
+  initializeMap,
+  cleanupMap,
+  switchContinent,
+} = useLeafletMap();
 
 // Use the territory data composable
 const {
@@ -103,7 +111,8 @@ const { latticeLinks, initializeLatticeLinks, clearLinks } =
   useLatticeLinks(linkStyles);
 
 // Use the region markers composable
-const { regionMarkers, initializeRegionMarkers, clearMarkers } = useRegionMarkers();
+const { regionMarkers, initializeRegionMarkers, clearMarkers } =
+  useRegionMarkers();
 
 // Function to completely rebuild map and content
 const rebuildMap = async () => {
@@ -129,7 +138,7 @@ const rebuildMap = async () => {
 // Function to rebuild map content when zone changes
 const rebuildMapContent = async () => {
   if (!currentZone.value) return;
-  
+
   // Fetch territory data for current world/continent
   await fetchTerritoryData(props.world, props.continent);
 
@@ -140,24 +149,30 @@ const rebuildMapContent = async () => {
 };
 
 // Watch for continent changes - switch continent and load new zone
-watch(() => props.continent, async (newContinent) => {
-  if (map.value) {
-    // Clear existing content immediately to avoid lingering
-    clearMarkers();
-    clearLinks();
-    clearRegions();
-    
-    await switchContinent(newContinent);
+watch(
+  () => props.continent,
+  async (newContinent) => {
+    if (map.value) {
+      // Clear existing content immediately to avoid lingering
+      clearMarkers();
+      clearLinks();
+      clearRegions();
+
+      await switchContinent(newContinent);
+    }
   }
-});
+);
 
 // Watch for zone changes - rebuild map content
 watch(currentZone, rebuildMapContent);
 
 // Watch for world changes - only update territory data
-watch(() => props.world, async () => {
-  await fetchTerritoryData(props.world, props.continent);
-});
+watch(
+  () => props.world,
+  async () => {
+    await fetchTerritoryData(props.world, props.continent);
+  }
+);
 
 // Initialize the map when the component mounts
 onMounted(rebuildMap);
