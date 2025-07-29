@@ -19,6 +19,9 @@ GET https://census.lithafalcon.cc/get/ps2/map_region?c:show=map_region_id,facili
 ### GET map_state Osprey Esamir
 GET https://census.lithafalcon.cc/get/ps2/map_state?world_id=1&zone_id=8&c:censusJSON=false
 
+### GET map state from census (can't use sanctuary for jaeger)
+GET https://census.daybreakgames.com/get/ps2:v2/map?world_id=19&zone_ids=2
+
 ### GET faction
 GET https://census.lithafalcon.cc/get/ps2/faction?c:lang=en&c:hide=description&c:censusJSON=false
 
