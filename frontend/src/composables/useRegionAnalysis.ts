@@ -1,6 +1,6 @@
 import { computed, type Ref } from 'vue';
-import { RegionOwnershipAnalyzer } from '@/services/analysis/RegionOwnershipAnalyzer';
-import { RegionStyleCalculator } from '@/services/styling/RegionStyleCalculator';
+import { RegionOwnershipAnalyzer } from '@/providers/analysis/RegionOwnershipAnalyzer';
+import { RegionStyleCalculator } from '@/providers/styling/RegionStyleCalculator';
 import type { TerritorySnapshot } from '@/types/territory';
 import type { Zone, RegionKey } from '@/types/zone_types';
 import type { RegionState } from '@/types/region_analysis';
