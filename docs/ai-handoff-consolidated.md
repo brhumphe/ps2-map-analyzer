@@ -123,10 +123,11 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 - **External Tile Integration**: Working integration with Honu tile server (CORS warnings resolved/ignored)
 - **Reactive Prop Flow**: Clean props-down data flow for world/continent changes
 - **Zone Watcher Pattern**: Centralized content rebuilding triggered by currentZone changes
+- **Base Name Labels**: MarkerEntity component enhanced with tooltip support for always-visible facility labels
 
 ### 🎯 Next Steps Available
 1. **Display Live state from game** - Periodic territory data updates from live API
-2. **Base name labels** - Show names of bases on the map, controllable by state (only frontline bases etc.)
+2. **Label Display Controls** - Toggle base name labels on/off, filter by frontline/contested bases only
 3. **Additional Analysis Modes** - Front-line detection, strategic value scoring
 4. **UI Polish** - Remove debug logs, add legend, territory statistics display
 5. **Performance Optimization** - Caching, selective updates, analysis throttling
@@ -145,6 +146,7 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 6. **Map Container Reinitialization**: Leaflet throws "container already initialized" errors - solved with complete cleanup/recreate pattern
 7. **Component Architecture Complexity**: Large monolithic MapApp component - solved by separating concerns into MapApp (UI) + MapComponent (map logic)
 8. **CORS with External Tiles**: Browser blocks cross-origin tile requests - resolved by accepting console warnings (tiles still load correctly)
+9. **Leaflet Label Implementation**: Created always-visible facility labels using MarkerEntity with permanent tooltips and invisible markers
 
 ### Critical Implementation Notes
 - **Coordinate Conversion**: ALL spatial data must go through `world_to_latLng()` utilities
