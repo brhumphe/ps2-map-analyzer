@@ -48,6 +48,8 @@
       :position="markerData.position"
       :popup="markerData.popup"
       :options="markerData.options as Partial<L.MarkerOptions>"
+      :tooltip="markerData.facilityName"
+      :tooltipOptions="{ permanent: true, direction: 'bottom' }"
       :map="map"
     />
   </template>
@@ -209,3 +211,4 @@ onUnmounted(() => {
   padding: 2px;
 }
 </style>
+<script setup lang="ts"></script>

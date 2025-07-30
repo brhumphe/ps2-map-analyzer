@@ -12,6 +12,8 @@ interface Props {
   position: L.LatLng;
   options?: L.MarkerOptions;
   popup?: string;
+  tooltip?: string;
+  tooltipOptions?: L.TooltipOptions;
   map: L.Map;
 }
 
@@ -41,16 +43,23 @@ const createMarker = () => {
       newMarker.bindPopup(props.popup);
     }
 
+    // Add tooltip if provided
+    if (props.tooltip) {
+      const tooltipOptions: L.TooltipOptions = {
+        permanent: false,
+        direction: 'center',
+        ...props.tooltipOptions,
+      };
+      newMarker.bindTooltip(props.tooltip, tooltipOptions);
+    }
+
     // Add to map
     newMarker.addTo(props.map);
 
     // Store reference
     marker.value = newMarker;
   } catch (error) {
-    console.error(
-      `MarkerEntity[${props.id}]: Failed to create marker:`,
-      error
-    );
+    console.error(`MarkerEntity[${props.id}]: Failed to create marker:`, error);
   }
 };
 
@@ -62,9 +71,10 @@ const removeMarker = () => {
       if (marker.value.isPopupOpen()) {
         marker.value.closePopup();
       }
-      // Unbind popup to prevent lingering references
+      // Unbind popup and tooltip to prevent lingering references
       marker.value.unbindPopup();
-      
+      marker.value.unbindTooltip();
+
       // Check if map is still valid before attempting removal
       if (props.map.getContainer()) {
         props.map.removeLayer(marker.value);
@@ -105,8 +115,28 @@ const updatePopup = (newPopup: string | undefined) => {
       marker.value.unbindPopup();
     }
   } catch (error) {
+    console.error(`MarkerEntity[${props.id}]: Failed to update popup:`, error);
+  }
+};
+
+// Update marker tooltip
+const updateTooltip = (newTooltip: string | undefined) => {
+  if (!marker.value) return;
+
+  try {
+    if (newTooltip) {
+      const tooltipOptions: L.TooltipOptions = {
+        permanent: false,
+        direction: 'top',
+        ...props.tooltipOptions,
+      };
+      marker.value.bindTooltip(newTooltip, tooltipOptions);
+    } else {
+      marker.value.unbindTooltip();
+    }
+  } catch (error) {
     console.error(
-      `MarkerEntity[${props.id}]: Failed to update popup:`,
+      `MarkerEntity[${props.id}]: Failed to update tooltip:`,
       error
     );
   }
@@ -128,6 +158,13 @@ watch(
   }
 );
 
+watch(
+  () => props.tooltip,
+  (newTooltip) => {
+    updateTooltip(newTooltip);
+  }
+);
+
 // Lifecycle hooks
 onMounted(() => {
   createMarker();
@@ -137,3 +174,10 @@ onUnmounted(() => {
   removeMarker();
 });
 </script>
+
+<style>
+/* Hide tooltip arrows */
+.leaflet-tooltip::before {
+  display: none !important;
+}
+</style>

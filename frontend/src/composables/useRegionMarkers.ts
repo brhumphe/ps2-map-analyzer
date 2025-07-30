@@ -22,17 +22,14 @@ export function useRegionMarkers() {
    */
   const initializeRegionMarkers = (
     zone: Zone,
-    defaultOptions: L.MarkerOptions = {}
+    defaultOptions: L.MarkerOptions = { opacity: 0, interactive: false }
   ) => {
     // Clear existing markers
     regionMarkers.clear();
 
     for (const region of zone.regions) {
       // Skip regions without location data
-      if (
-        region.location_x === undefined ||
-        region.location_z === undefined
-      ) {
+      if (region.location_x === undefined || region.location_z === undefined) {
         continue;
       }
 
