@@ -1,0 +1,463 @@
+{
+  "map_list": [
+    {
+      "ZoneId": "344",
+      "Regions": {
+        "IsList": "1",
+        "Row": [
+          {
+            "RowData": {
+              "RegionId": "18263",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18264",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18328",
+              "FactionId": "0"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18265",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18329",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18266",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18330",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18267",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18331",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18268",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18269",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18270",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18271",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18272",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18273",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18274",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18275",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18276",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18277",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18278",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18279",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18343",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18280",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18344",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18281",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18282",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18346",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18283",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18347",
+              "FactionId": "0"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18284",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18285",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18286",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18287",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18351",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18288",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18352",
+              "FactionId": "0"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18289",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18353",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18290",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18354",
+              "FactionId": "0"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18291",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18292",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18356",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18293",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18357",
+              "FactionId": "0"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18294",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18358",
+              "FactionId": "0"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18295",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18359",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18296",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18360",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18297",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18361",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18298",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18299",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18300",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18301",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18302",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18303",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18304",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18305",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18307",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18308",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18309",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18362",
+              "FactionId": "3"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18363",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18364",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18365",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18366",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18367",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18368",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18369",
+              "FactionId": "2"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18370",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18375",
+              "FactionId": "1"
+            }
+          },
+          {
+            "RowData": {
+              "RegionId": "18376",
+              "FactionId": "3"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "returned": 1
+}
