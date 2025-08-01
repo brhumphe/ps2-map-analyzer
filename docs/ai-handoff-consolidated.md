@@ -35,13 +35,8 @@
 
 **Portfolio Context**: Project demonstrates refactoring skills by migrating from procedural TypeScript to reactive Vue architecture. Differentiates from typical CRUD applications through interactive data visualization, real-time strategic analysis, and complex state management across multiple data sources.
 
-### Domain Context (Critical for AI Understanding)
-- **PlanetSide 2**: Large-scale online warfare game with territorial control mechanics
-- **Continents**: 4 large map areas (Indar, Amerish, Esamir, Hossin) with ~89 regions each
-- **Factions**: 4 competing teams (VS=1, NC=2, TR=3, NSO=4) fighting for territorial control
-- **Lattice Links**: Strategic connections between facilities (~129 links per continent)
-- **Territory Control**: Real-time ownership that changes during gameplay (2-3 changes per minute)
-- **Tactical Significance**: "Contestable" links (connecting enemy facilities) represent tactical opportunities
+### Domain Context
+For complete PlanetSide 2 game mechanics, facility types, and strategic concepts, see `docs/domain-knowledge.md`.
 
 ### Technical Stack
 - **Frontend**: Vue 3 + Composition API + TypeScript + Vuetify + Leaflet.js
