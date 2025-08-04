@@ -1,5 +1,6 @@
 import type { RegionState } from '@/types/region_analysis';
 import type L from 'leaflet';
+import { Faction } from '@/types/common';
 
 /**
  * Region style calculator that converts region states into visual properties
@@ -30,51 +31,42 @@ export class RegionStyleCalculator {
       fillOpacity: 0.6,
     };
 
-    switch (regionState) {
-      case 'VS':
+    switch (regionState.owning_faction_id) {
+      case Faction.VS:
         return {
           ...baseStyle,
           color: '#2a1a4a', // Dark purple border
           fillColor: '#441c7a', // VS purple fill
         };
 
-      case 'NC':
+      case Faction.NC:
         return {
           ...baseStyle,
           color: '#003380', // Dark blue border
           fillColor: '#004bad', // NC blue fill
         };
 
-      case 'TR':
+      case Faction.TR:
         return {
           ...baseStyle,
           color: '#661a17', // Dark red border
           fillColor: '#9d2621', // TR red fill
         };
 
-      case 'NSO':
+      case Faction.NSO:
         return {
           ...baseStyle,
           color: '#3a3a35', // Dark gray border
           fillColor: '#565851', // NSO gray fill
         };
 
-      case 'none':
+      case Faction.NONE:
         return {
           ...baseStyle,
           color: '#373737', // Medium gray border
           opacity: 0.7,
           fillColor: '#373737', // Light gray fill
           fillOpacity: 0.7, // Lower opacity for neutral
-        };
-
-      case 'unknown':
-        return {
-          ...baseStyle,
-          color: '#333333', // Dark gray border
-          fillColor: '#999999', // Medium gray fill
-          fillOpacity: 0.4,
-          dashArray: '5, 5', // Dashed border to indicate uncertainty
         };
 
       default:
