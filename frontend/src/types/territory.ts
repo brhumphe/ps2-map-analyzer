@@ -28,7 +28,7 @@ export type LinkState =
  */
 export interface TerritorySnapshot {
   /** Unix timestamp when this snapshot was captured */
-  timestamp: number;
+  timestamp: number | undefined;
 
   /** Continent/zone identifier (2=Indar, 6=Amerish, etc.) */
   continent: Continent;
@@ -46,17 +46,20 @@ export interface TerritorySnapshot {
 
 /**
  * Core analysis provider interface that converts territory data into link states
- * 
+ *
  * This interface enables swappable analysis strategies for different tactical
  * perspectives (e.g., contestable links, faction control analysis, etc.)
  */
 export interface TerritoryAnalysisProvider {
   /**
    * Analyze lattice links based on current territory control
-   * 
+   *
    * @param territory Current territory snapshot with region ownership
    * @param zone Zone data containing lattice links and facility information
    * @returns Map of facility link keys to their strategic states
    */
-  analyzeLinkStates(territory: TerritorySnapshot, zone: Zone): Map<FacilityLinkKey, LinkState>;
+  analyzeLinkStates(
+    territory: TerritorySnapshot,
+    zone: Zone
+  ): Map<FacilityLinkKey, LinkState>;
 }

@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
 import { ref, computed } from 'vue';
-import { MapStateService } from '@/services/map_service';
 import type { TerritorySnapshot } from '@/types/territory';
 import { Continent, WorldID, RegionID } from '@/types/common';
+import { DataSourceProvider } from '@/providers/data';
 
 /**
  * Composable for managing territory control data with Vue reactivity
@@ -18,7 +18,8 @@ export function useTerritoryData() {
   const error = ref<string | null>(null);
 
   // Service instance
-  const mapStateService = new MapStateService();
+  const dataProvider = new DataSourceProvider();
+  const mapStateService = dataProvider.getDataService();
 
   /**
    * Fetch territory data using the service layer
@@ -35,10 +36,8 @@ export function useTerritoryData() {
 
     try {
       // Delegate to service for data fetching and transformation
-      territorySnapshot.value = await mapStateService.fetchTerritorySnapshot(
-        world,
-        continent
-      );
+      territorySnapshot.value =
+        await mapStateService.getCurrentTerritorySnapshot(continent, world);
     } catch (err) {
       error.value =
         err instanceof Error ? err.message : 'Failed to fetch territory data';
@@ -106,7 +105,8 @@ export function useTerritoryData() {
    * Get age of current territory data in seconds
    */
   const dataAge = computed(() => {
-    if (!territorySnapshot.value) return null;
+    if (!territorySnapshot.value || !territorySnapshot.value?.timestamp)
+      return null;
     return Math.floor(Date.now() / 1000) - territorySnapshot.value.timestamp;
   });
 

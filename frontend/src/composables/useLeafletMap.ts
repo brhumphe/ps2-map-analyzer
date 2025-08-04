@@ -1,13 +1,13 @@
 import { readonly, ref } from 'vue';
 import type { Map as LMap } from 'leaflet';
 import * as L from 'leaflet';
-import { ZoneService } from '@/services/zone_service';
 import { Continent } from '@/types/common';
 import type { Zone } from '@/types/zone_types';
 import {
   configureMapTileLayer,
   initMouseCoordinatesPopup,
 } from '@/utilities/leaflet_utils';
+import { DataSourceProvider } from '@/providers/data';
 
 export function useLeafletMap() {
   // Reactive state
@@ -28,8 +28,9 @@ export function useLeafletMap() {
       error.value = undefined;
 
       // Fetch and display zone data
-      const zoneService = new ZoneService();
-      const zone = await zoneService.fetchZone(continent);
+      const serviceProvider = new DataSourceProvider();
+      const zoneService = serviceProvider.getDataService();
+      const zone = await zoneService.getZoneData(continent);
       currentZone.value = zone;
 
       // Create the Leaflet map

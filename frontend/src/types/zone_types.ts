@@ -46,7 +46,8 @@ export type FacilityLinkKey = `${number}-${number}` & {
 export type RegionKey = `region_${number}` & { readonly __brand: 'RegionKey' };
 
 /**
- * Represents a zone (continent) with all its regions and facility links
+ * Represents a zone (continent) with all its regions and facility links.
+ * This is static data that should not change unless developers revise maps.
  */
 export interface Zone {
   zone_id: Continent;
