@@ -5,6 +5,7 @@ import { TerritorySnapshot } from '@/types/territory';
 import { Zone } from '@/types/zone_types';
 import { CensusDataService } from '@/services/census';
 import { DevelopmentDataService } from '@/services/dev_data';
+import config from '@/config.json';
 
 const useDevData = ref(false);
 
@@ -12,8 +13,8 @@ class CensusData implements PS2DataService {
   census: CensusDataService;
   dev: DevelopmentDataService;
 
-  constructor(serviceID: string = 'example') {
-    this.census = new CensusDataService(serviceID);
+  constructor() {
+    this.census = new CensusDataService(config.censusServiceId);
     this.dev = new DevelopmentDataService();
   }
 
@@ -40,7 +41,7 @@ class CensusData implements PS2DataService {
 /**
  * Factory for getting the appropriate PS2DataService
  */
-export function useCensusData(serviceID: string = 'darkfurnace') {
-  const dataService = new CensusData(serviceID);
+export function useCensusData() {
+  const dataService = new CensusData();
   return { dataService, useDevData };
 }

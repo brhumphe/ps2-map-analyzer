@@ -50,7 +50,7 @@ export function extractCensusMapState(
 
 export class CensusDataService implements PS2DataService {
   baseUrl: string;
-  constructor(serviceID: string = 'example') {
+  constructor(serviceID: string) {
     this.baseUrl = `https://census.daybreakgames.com/s:${serviceID}/get/ps2:v2`;
   }
 
@@ -92,25 +92,20 @@ export class CensusDataService implements PS2DataService {
     world: World = World.Osprey
   ) {
     const url = `${this.baseUrl}/map?world_id=${world}&zone_ids=${continent}`;
-    try {
-      // Load local JSON file from public directory
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(
-          `Failed to load territory control from Census: ${response.status}`
-        );
-      }
-
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error);
-      }
-      console.debug(`Loaded territory control from Census`, data, url);
-      return extractCensusMapState(data, continent, world);
-    } catch (err) {
+    // Load local JSON file from public directory
+    const response = await fetch(url);
+    if (!response.ok) {
       throw new Error(
-        `Development data load failed: ${err instanceof Error ? err.message : 'Unknown error'}`
+        `Failed to load territory control from Census: ${response.status}`
       );
     }
+
+    const data = await response.json();
+    if (data.error) {
+      console.error(`Territories data load failed:`, data, url);
+      throw new Error(data.error);
+    }
+    console.debug(`Loaded territory control from Census`, data, url);
+    return extractCensusMapState(data, continent, world);
   }
 }

@@ -18,6 +18,10 @@ interface ZoneDataResponse {
 }
 
 export class DevelopmentDataService extends CensusDataService {
+  constructor(serviceId: string = 'dev') {
+    super(serviceId);
+  }
+
   async getZoneData(continent: Continent): Promise<Zone> {
     const url = `/public/${ContinentName.get(continent)?.toLowerCase()}-zone.json`;
     let data: ZoneDataResponse;
