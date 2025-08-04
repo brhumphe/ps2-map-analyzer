@@ -1,0 +1,7016 @@
+{
+  "zone_list": [
+    {
+      "zone_id": 8,
+      "code": "Esamir",
+      "hex_size": 200,
+      "geometry_id": 8,
+      "type": "Static",
+      "dynamic": false,
+      "links": [
+        {
+          "facility_id_a": 230000,
+          "facility_id_b": 258000
+        },
+        {
+          "facility_id_a": 231000,
+          "facility_id_b": 230000
+        },
+        {
+          "facility_id_a": 231000,
+          "facility_id_b": 232000
+        },
+        {
+          "facility_id_a": 231000,
+          "facility_id_b": 253000
+        },
+        {
+          "facility_id_a": 231000,
+          "facility_id_b": 258000
+        },
+        {
+          "facility_id_a": 232000,
+          "facility_id_b": 255010
+        },
+        {
+          "facility_id_a": 232000,
+          "facility_id_b": 258000
+        },
+        {
+          "facility_id_a": 234000,
+          "facility_id_b": 235000
+        },
+        {
+          "facility_id_a": 234000,
+          "facility_id_b": 244620
+        },
+        {
+          "facility_id_a": 234000,
+          "facility_id_b": 255030
+        },
+        {
+          "facility_id_a": 235000,
+          "facility_id_b": 247000
+        },
+        {
+          "facility_id_a": 235000,
+          "facility_id_b": 400315
+        },
+        {
+          "facility_id_a": 237000,
+          "facility_id_b": 246000
+        },
+        {
+          "facility_id_a": 239000,
+          "facility_id_b": 246000
+        },
+        {
+          "facility_id_a": 240000,
+          "facility_id_b": 244300
+        },
+        {
+          "facility_id_a": 240000,
+          "facility_id_b": 252010
+        },
+        {
+          "facility_id_a": 240000,
+          "facility_id_b": 259000
+        },
+        {
+          "facility_id_a": 243000,
+          "facility_id_b": 252010
+        },
+        {
+          "facility_id_a": 243000,
+          "facility_id_b": 400328
+        },
+        {
+          "facility_id_a": 244000,
+          "facility_id_b": 242000
+        },
+        {
+          "facility_id_a": 244000,
+          "facility_id_b": 257000
+        },
+        {
+          "facility_id_a": 244000,
+          "facility_id_b": 260010
+        },
+        {
+          "facility_id_a": 244100,
+          "facility_id_b": 248000
+        },
+        {
+          "facility_id_a": 244100,
+          "facility_id_b": 249000
+        },
+        {
+          "facility_id_a": 244200,
+          "facility_id_b": 249000
+        },
+        {
+          "facility_id_a": 244200,
+          "facility_id_b": 252010
+        },
+        {
+          "facility_id_a": 244300,
+          "facility_id_b": 259000
+        },
+        {
+          "facility_id_a": 244500,
+          "facility_id_b": 251030
+        },
+        {
+          "facility_id_a": 244500,
+          "facility_id_b": 400134
+        },
+        {
+          "facility_id_a": 244600,
+          "facility_id_b": 244300
+        },
+        {
+          "facility_id_a": 244600,
+          "facility_id_b": 244500
+        },
+        {
+          "facility_id_a": 244600,
+          "facility_id_b": 259000
+        },
+        {
+          "facility_id_a": 244610,
+          "facility_id_b": 233000
+        },
+        {
+          "facility_id_a": 244610,
+          "facility_id_b": 234000
+        },
+        {
+          "facility_id_a": 244620,
+          "facility_id_b": 236000
+        },
+        {
+          "facility_id_a": 244620,
+          "facility_id_b": 248000
+        },
+        {
+          "facility_id_a": 245000,
+          "facility_id_b": 230000
+        },
+        {
+          "facility_id_a": 245000,
+          "facility_id_b": 237000
+        },
+        {
+          "facility_id_a": 245000,
+          "facility_id_b": 251010
+        },
+        {
+          "facility_id_a": 248000,
+          "facility_id_b": 244610
+        },
+        {
+          "facility_id_a": 253000,
+          "facility_id_b": 233000
+        },
+        {
+          "facility_id_a": 253000,
+          "facility_id_b": 237000
+        },
+        {
+          "facility_id_a": 254000,
+          "facility_id_b": 244610
+        },
+        {
+          "facility_id_a": 254000,
+          "facility_id_b": 246000
+        },
+        {
+          "facility_id_a": 254000,
+          "facility_id_b": 248000
+        },
+        {
+          "facility_id_a": 254000,
+          "facility_id_b": 249000
+        },
+        {
+          "facility_id_a": 255010,
+          "facility_id_b": 255020
+        },
+        {
+          "facility_id_a": 255020,
+          "facility_id_b": 247000
+        },
+        {
+          "facility_id_a": 255030,
+          "facility_id_b": 233000
+        },
+        {
+          "facility_id_a": 255030,
+          "facility_id_b": 255020
+        },
+        {
+          "facility_id_a": 256000,
+          "facility_id_b": 236000
+        },
+        {
+          "facility_id_a": 256000,
+          "facility_id_b": 242000
+        },
+        {
+          "facility_id_a": 256000,
+          "facility_id_b": 256030
+        },
+        {
+          "facility_id_a": 256000,
+          "facility_id_b": 260000
+        },
+        {
+          "facility_id_a": 256030,
+          "facility_id_b": 248000
+        },
+        {
+          "facility_id_a": 260000,
+          "facility_id_b": 236000
+        },
+        {
+          "facility_id_a": 260000,
+          "facility_id_b": 242000
+        },
+        {
+          "facility_id_a": 260010,
+          "facility_id_b": 400328
+        },
+        {
+          "facility_id_a": 400133,
+          "facility_id_b": 260010
+        },
+        {
+          "facility_id_a": 400134,
+          "facility_id_b": 237000
+        },
+        {
+          "facility_id_a": 400134,
+          "facility_id_b": 239000
+        },
+        {
+          "facility_id_a": 400135,
+          "facility_id_b": 244610
+        },
+        {
+          "facility_id_a": 400135,
+          "facility_id_b": 246000
+        },
+        {
+          "facility_id_a": 400314,
+          "facility_id_b": 239000
+        },
+        {
+          "facility_id_a": 400314,
+          "facility_id_b": 244300
+        },
+        {
+          "facility_id_a": 400314,
+          "facility_id_b": 249000
+        },
+        {
+          "facility_id_a": 400315,
+          "facility_id_b": 236000
+        },
+        {
+          "facility_id_a": 400317,
+          "facility_id_b": 244100
+        },
+        {
+          "facility_id_a": 400317,
+          "facility_id_b": 400133
+        },
+        {
+          "facility_id_a": 400326,
+          "facility_id_b": 251010
+        },
+        {
+          "facility_id_a": 400326,
+          "facility_id_b": 251030
+        },
+        {
+          "facility_id_a": 400326,
+          "facility_id_b": 400134
+        },
+        {
+          "facility_id_a": 400327,
+          "facility_id_b": 243000
+        },
+        {
+          "facility_id_a": 400327,
+          "facility_id_b": 257000
+        },
+        {
+          "facility_id_a": 400327,
+          "facility_id_b": 260010
+        },
+        {
+          "facility_id_a": 400328,
+          "facility_id_b": 400317
+        }
+      ],
+      "regions": [
+        {
+          "map_region_id": 18001,
+          "facility_id": 230000,
+          "facility_name": "Palos Solar Array",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 1369.664,
+          "location_y": 76.02497,
+          "location_z": -2438.761,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -18,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -17,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -16,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -14,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -18,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -17,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -16,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -18,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -17,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -16,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -18,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -17,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -16,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18033,
+          "facility_id": 244200,
+          "facility_name": "Bridge-ward",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -1130.017,
+          "location_y": 22.80325,
+          "location_z": 9.949173,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 2,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18017,
+          "facility_id": 246000,
+          "facility_name": "Mattherson's Triumph",
+          "facility_type_id": 5,
+          "facility_type": "Large Outpost",
+          "location_x": 161.4596,
+          "location_y": 125.3721,
+          "location_z": -785.2059,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 25
+          },
+          "image_set_id": 7918,
+          "image_id": 9122,
+          "image_path": "/files/ps2/images/static/9122.png",
+          "hexes": [
+            {
+              "x": -3,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18209,
+          "facility_id": 400134,
+          "facility_name": "Tapp Waystation",
+          "facility_type_id": 9,
+          "facility_type": "Construction Outpost",
+          "location_x": -342.5693,
+          "location_y": 117.1061,
+          "location_z": -1751.917,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 3
+          },
+          "image_set_id": 805614,
+          "image_id": 91363,
+          "image_path": "/files/ps2/images/static/91363.png",
+          "hexes": [
+            {
+              "x": -10,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18002,
+          "facility_id": 231000,
+          "facility_name": "Crystal Ridge Comm Array",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 1511.381,
+          "location_y": 80.96583,
+          "location_z": -1661.209,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -11,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -14,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -14,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18034,
+          "facility_id": 244300,
+          "facility_name": "Frostbite Harbor",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -1470.94,
+          "location_y": 4.942247,
+          "location_z": -939.5569,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 2,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18018,
+          "facility_id": 247000,
+          "facility_name": "Northpoint Ruins",
+          "facility_type_id": 9,
+          "facility_type": "Construction Outpost",
+          "location_x": 2612.332,
+          "location_y": 84.41334,
+          "location_z": 1121.946,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 3
+          },
+          "image_set_id": 805614,
+          "image_id": 91363,
+          "image_path": "/files/ps2/images/static/91363.png",
+          "hexes": [
+            {
+              "x": -3,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18210,
+          "facility_id": 400135,
+          "facility_name": "Untapped Reservoir",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 757.12,
+          "location_y": 139.73,
+          "location_z": -407.94,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 805614,
+          "image_id": 91363,
+          "image_path": "/files/ps2/images/static/91363.png",
+          "hexes": [
+            {
+              "x": -6,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18003,
+          "facility_id": 232000,
+          "facility_name": "Haven Outpost",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 2265.325,
+          "location_y": 107.0744,
+          "location_z": -687.7246,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -13,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18067,
+          "facility_id": 244610,
+          "facility_name": "Rime Analytics",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 723.092,
+          "location_y": 130.515,
+          "location_z": 60.08346,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -4,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18004,
+          "facility_id": 233000,
+          "facility_name": "Aurora Materials Lab",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 1431.57,
+          "location_y": 123.9783,
+          "location_z": -501.5452,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -7,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18068,
+          "facility_id": 244620,
+          "facility_name": "The Rink",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 716.0898,
+          "location_y": 102.7103,
+          "location_z": 986.1397,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 2,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18036,
+          "facility_id": 244500,
+          "facility_name": "Jaeger's Fist",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -839.5956,
+          "location_y": 32.10573,
+          "location_z": -2175.328,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -9,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18005,
+          "facility_id": 234000,
+          "facility_name": "Mani Containment Site",
+          "facility_type_id": 11,
+          "facility_type": "Containment Site",
+          "location_x": 1099.279,
+          "location_y": 135.9144,
+          "location_z": 409.8246,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 8
+          },
+          "image_set_id": 806656,
+          "image_id": 93456,
+          "image_path": "/files/ps2/images/static/93456.png",
+          "hexes": [
+            {
+              "x": -2,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18261,
+          "facility_id": 400328,
+          "facility_name": "Spral Oasis",
+          "facility_type_id": 9,
+          "facility_type": "Construction Outpost",
+          "location_x": -1454.66,
+          "location_y": 82.26,
+          "location_z": 1098.23,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 3
+          },
+          "image_set_id": 805614,
+          "image_id": 91363,
+          "image_path": "/files/ps2/images/static/91363.png",
+          "hexes": [
+            {
+              "x": 10,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18037,
+          "facility_id": 244600,
+          "facility_name": "Two Stone Beach",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -1604.49,
+          "location_y": 42.64167,
+          "location_z": -2181.709,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -9,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18006,
+          "facility_id": 235000,
+          "facility_name": "Stillwater Watch",
+          "facility_type_id": 9,
+          "facility_type": "Construction Outpost",
+          "location_x": 1871.567,
+          "location_y": 71.16946,
+          "location_z": 1174.458,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 3
+          },
+          "image_set_id": 805614,
+          "image_id": 91363,
+          "image_path": "/files/ps2/images/static/91363.png",
+          "hexes": [
+            {
+              "x": -2,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18262,
+          "facility_name": "The Shattered Warpgate",
+          "facility_type_id": 0,
+          "hexes": [
+            {
+              "x": 2,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 14,
+              "hex_type": 1,
+              "type_name": "Unknown"
+            },
+            {
+              "x": 2,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 13,
+              "hex_type": 1,
+              "type_name": "Unknown"
+            },
+            {
+              "x": 2,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 12,
+              "hex_type": 1,
+              "type_name": "Unknown"
+            },
+            {
+              "x": 10,
+              "y": 11,
+              "hex_type": 1,
+              "type_name": "Unknown"
+            },
+            {
+              "x": 9,
+              "y": 11,
+              "hex_type": 1,
+              "type_name": "Unknown"
+            },
+            {
+              "x": 8,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": 10,
+              "hex_type": 1,
+              "type_name": "Unknown"
+            },
+            {
+              "x": 5,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": 9,
+              "hex_type": 1,
+              "type_name": "Unknown"
+            },
+            {
+              "x": 1,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 15,
+              "hex_type": 1,
+              "type_name": "Unknown"
+            },
+            {
+              "x": 6,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18038,
+          "facility_id": 260010,
+          "facility_name": "Terran BL-4 Crash Site",
+          "facility_type_id": 5,
+          "facility_type": "Large Outpost",
+          "location_x": -1181.333,
+          "location_y": 43.25488,
+          "location_z": 1897.884,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 25
+          },
+          "image_set_id": 7918,
+          "image_id": 9122,
+          "image_path": "/files/ps2/images/static/9122.png",
+          "hexes": [
+            {
+              "x": 13,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18007,
+          "facility_id": 236000,
+          "facility_name": "Grey Heron Shipping",
+          "facility_type_id": 5,
+          "facility_type": "Large Outpost",
+          "location_x": 915.4762,
+          "location_y": 12.00377,
+          "location_z": 1883.58,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 25
+          },
+          "image_set_id": 7918,
+          "image_id": 9122,
+          "image_path": "/files/ps2/images/static/9122.png",
+          "hexes": [
+            {
+              "x": 5,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18008,
+          "facility_id": 237000,
+          "facility_name": "The Traverse",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 311.3915,
+          "location_y": 64.40758,
+          "location_z": -1349.821,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -9,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18010,
+          "facility_id": 239000,
+          "facility_name": "Pale Canyon Chemical",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -477.7838,
+          "location_y": 123.2229,
+          "location_z": -1071.929,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -5,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18011,
+          "facility_id": 240000,
+          "facility_name": "Old Shore Checkpoint",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -1711.926,
+          "location_y": 17.19081,
+          "location_z": -370.127,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 3,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18013,
+          "facility_id": 242000,
+          "facility_name": "Eastwake Harborage",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -750.882,
+          "location_y": 73.2487,
+          "location_z": 2838.586,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 12,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18014,
+          "facility_id": 243000,
+          "facility_name": "Elli Forest Pass",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -1904.355,
+          "location_y": 112.771,
+          "location_z": 648.9725,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 9,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18046,
+          "facility_id": 251010,
+          "facility_name": "Andvari Barracks",
+          "facility_type_id": 15,
+          "facility_type": "Small Outpost (CTF)",
+          "location_x": 458.4646,
+          "location_y": 102.1348,
+          "location_z": -2380.4,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 807456,
+          "image_id": 95674,
+          "image_path": "/files/ps2/images/static/95674.png",
+          "hexes": [
+            {
+              "x": -11,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -16,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -14,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -16,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -14,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18015,
+          "facility_id": 244000,
+          "facility_name": "Frostfall Overlook",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -1216.208,
+          "location_y": 78.38409,
+          "location_z": 2576.946,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 16,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18016,
+          "facility_id": 245000,
+          "facility_name": "Snowshear Fort",
+          "facility_type_id": 5,
+          "facility_type": "Large Outpost",
+          "location_x": 1003.725,
+          "location_y": 103.55,
+          "location_z": -2011.889,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 25
+          },
+          "image_set_id": 7918,
+          "image_id": 9122,
+          "image_path": "/files/ps2/images/static/9122.png",
+          "hexes": [
+            {
+              "x": -14,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -17,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -16,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -14,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -16,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -14,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18208,
+          "facility_id": 400133,
+          "facility_name": "BL-4 Recovery Point",
+          "facility_type_id": 9,
+          "facility_type": "Construction Outpost",
+          "location_x": -694.31,
+          "location_y": 25.4,
+          "location_z": 1670.95,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 3
+          },
+          "image_set_id": 805614,
+          "image_id": 91363,
+          "image_path": "/files/ps2/images/static/91363.png",
+          "hexes": [
+            {
+              "x": 10,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18019,
+          "facility_id": 248000,
+          "facility_name": "Saerro Listening Post",
+          "facility_type_id": 5,
+          "facility_type": "Large Outpost",
+          "location_x": 220.3131,
+          "location_y": 120.4251,
+          "location_z": 590.7097,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 25
+          },
+          "image_set_id": 7918,
+          "image_id": 9122,
+          "image_path": "/files/ps2/images/static/9122.png",
+          "hexes": [
+            {
+              "x": 1,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18020,
+          "facility_id": 249000,
+          "facility_name": "Waterson's Redemption",
+          "facility_type_id": 5,
+          "facility_type": "Large Outpost",
+          "location_x": -688.1417,
+          "location_y": 113.9208,
+          "location_z": 124.2897,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 25
+          },
+          "image_set_id": 7918,
+          "image_id": 9122,
+          "image_path": "/files/ps2/images/static/9122.png",
+          "hexes": [
+            {
+              "x": 0,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18022,
+          "facility_id": 400326,
+          "facility_name": "Andvari Containment Site",
+          "facility_type_id": 11,
+          "facility_type": "Containment Site",
+          "location_x": 82,
+          "location_y": 112,
+          "location_z": -2490,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 8
+          },
+          "image_set_id": 806656,
+          "image_id": 93456,
+          "image_path": "/files/ps2/images/static/93456.png",
+          "hexes": [
+            {
+              "x": -14,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -16,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -14,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -16,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -15,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -14,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18024,
+          "facility_id": 253000,
+          "facility_name": "Freyr",
+          "facility_type_id": 2,
+          "facility_type": "Amp Station",
+          "location_x": 1123.68,
+          "location_y": 146.75,
+          "location_z": -1020.97,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 8
+          },
+          "image_set_id": 3116,
+          "image_id": 9119,
+          "image_path": "/files/ps2/images/static/9119.png",
+          "hexes": [
+            {
+              "x": -8,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18025,
+          "facility_id": 254000,
+          "facility_name": "Eisa",
+          "facility_type_id": 4,
+          "facility_type": "Tech Plant",
+          "location_x": 70.71258,
+          "location_y": 139.8272,
+          "location_z": -80.92983,
+          "capture_reward": {
+            "Description": "Polystellarite - Rare",
+            "Amount": 2
+          },
+          "image_set_id": 7916,
+          "image_id": 9125,
+          "image_path": "/files/ps2/images/static/9125.png",
+          "reward_currency_id": 1000,
+          "reward_amount": 1,
+          "hexes": [
+            {
+              "x": -2,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 2,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18027,
+          "facility_id": 256000,
+          "facility_name": "Nott Communications",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -40.15068,
+          "location_y": 59.4545,
+          "location_z": 1964.311,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 8,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18028,
+          "facility_id": 257000,
+          "facility_name": "Ymir",
+          "facility_type_id": 9,
+          "facility_type": "Construction Outpost",
+          "location_x": -1953.992,
+          "location_y": 83.76463,
+          "location_z": 2135.37,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 3
+          },
+          "image_set_id": 805614,
+          "image_id": 91363,
+          "image_path": "/files/ps2/images/static/91363.png",
+          "hexes": [
+            {
+              "x": 16,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18029,
+          "facility_id": 258000,
+          "facility_name": "Esamir Northern Warpgate",
+          "facility_type_id": 7,
+          "facility_type": "Warpgate",
+          "location_x": 2250.667,
+          "location_y": 99.214,
+          "location_z": -2389.306,
+          "image_set_id": 7917,
+          "image_id": 9124,
+          "image_path": "/files/ps2/images/static/9124.png",
+          "reward_currency_id": 4,
+          "reward_amount": 50,
+          "hexes": [
+            {
+              "x": -20,
+              "y": 14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -19,
+              "y": 14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -18,
+              "y": 14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -17,
+              "y": 14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -16,
+              "y": 14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -15,
+              "y": 14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -14,
+              "y": 14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -20,
+              "y": 13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -19,
+              "y": 13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -18,
+              "y": 13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -17,
+              "y": 13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -16,
+              "y": 13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -15,
+              "y": 13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -14,
+              "y": 13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -20,
+              "y": 12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -19,
+              "y": 12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -18,
+              "y": 12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -17,
+              "y": 12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -16,
+              "y": 12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -15,
+              "y": 12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -14,
+              "y": 12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -20,
+              "y": 11,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -19,
+              "y": 11,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -18,
+              "y": 11,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -17,
+              "y": 11,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -16,
+              "y": 11,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -15,
+              "y": 11,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -14,
+              "y": 11,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -19,
+              "y": 10,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -18,
+              "y": 10,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -17,
+              "y": 10,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -16,
+              "y": 10,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -15,
+              "y": 10,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -14,
+              "y": 10,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18030,
+          "facility_id": 259000,
+          "facility_name": "Esamir Southern Warpgate",
+          "facility_type_id": 7,
+          "facility_type": "Warpgate",
+          "location_x": -2387.216,
+          "location_y": 89.134,
+          "location_z": -1999.223,
+          "image_set_id": 7917,
+          "image_id": 9124,
+          "image_path": "/files/ps2/images/static/9124.png",
+          "reward_currency_id": 4,
+          "reward_amount": 50,
+          "hexes": [
+            {
+              "x": -8,
+              "y": -12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -7,
+              "y": -12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -6,
+              "y": -12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -5,
+              "y": -12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -4,
+              "y": -12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -3,
+              "y": -12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -2,
+              "y": -12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -1,
+              "y": -12,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -7,
+              "y": -13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -6,
+              "y": -13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -5,
+              "y": -13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -4,
+              "y": -13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -3,
+              "y": -13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -2,
+              "y": -13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -1,
+              "y": -13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 0,
+              "y": -13,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -6,
+              "y": -14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -5,
+              "y": -14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -4,
+              "y": -14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -3,
+              "y": -14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -2,
+              "y": -14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -1,
+              "y": -14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 0,
+              "y": -14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 1,
+              "y": -14,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -5,
+              "y": -15,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -4,
+              "y": -15,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -3,
+              "y": -15,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -2,
+              "y": -15,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -1,
+              "y": -15,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 0,
+              "y": -15,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 1,
+              "y": -15,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 2,
+              "y": -15,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 3,
+              "y": -15,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 4,
+              "y": -15,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -4,
+              "y": -16,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -3,
+              "y": -16,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -2,
+              "y": -16,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -1,
+              "y": -16,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 0,
+              "y": -16,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 1,
+              "y": -16,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 2,
+              "y": -16,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 3,
+              "y": -16,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 4,
+              "y": -16,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -3,
+              "y": -17,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -2,
+              "y": -17,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -1,
+              "y": -17,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 0,
+              "y": -17,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 1,
+              "y": -17,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 2,
+              "y": -17,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 3,
+              "y": -17,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 4,
+              "y": -17,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -2,
+              "y": -18,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": -1,
+              "y": -18,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 0,
+              "y": -18,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 1,
+              "y": -18,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 2,
+              "y": -18,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 3,
+              "y": -18,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 4,
+              "y": -18,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18032,
+          "facility_id": 244100,
+          "facility_name": "Echo Valley Substation",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -342.9638,
+          "location_y": 168.7661,
+          "location_z": 524.3127,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 4,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18048,
+          "facility_id": 251030,
+          "facility_name": "Andvari South Bank",
+          "facility_type_id": 15,
+          "facility_type": "Small Outpost (CTF)",
+          "location_x": -349.21,
+          "location_y": 100.75,
+          "location_z": -2356.23,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 807456,
+          "image_id": 95674,
+          "image_path": "/files/ps2/images/static/95674.png",
+          "hexes": [
+            {
+              "x": -10,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -14,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -13,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -12,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -11,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18049,
+          "facility_id": 252010,
+          "facility_name": "Elli Tower",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": -1730.97,
+          "location_y": 84.17827,
+          "location_z": 242.9768,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 5,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18058,
+          "facility_id": 255010,
+          "facility_name": "Steelshore Processing",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 2416.213,
+          "location_y": 88.19893,
+          "location_z": -211.8569,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -9,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -8,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -9,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -10,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18250,
+          "facility_id": 400314,
+          "facility_name": "Baldur",
+          "facility_type_id": 2,
+          "facility_type": "Amp Station",
+          "location_x": -828.2235,
+          "location_y": 121.1476,
+          "location_z": -559.6824,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 8
+          },
+          "image_set_id": 3116,
+          "image_id": 9119,
+          "image_path": "/files/ps2/images/static/9119.png",
+          "hexes": [
+            {
+              "x": -1,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -1,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 0,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 1,
+              "y": -7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18059,
+          "facility_id": 255020,
+          "facility_name": "Steelshore Reconstruction",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 2578.249,
+          "location_y": 36.13608,
+          "location_z": 304.5212,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -6,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -2,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18251,
+          "facility_id": 400315,
+          "facility_name": "Vidar Observation Site",
+          "facility_type_id": 9,
+          "facility_type": "Construction Outpost",
+          "location_x": 1342.113,
+          "location_y": 24.76406,
+          "location_z": 2176.018,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 3
+          },
+          "image_set_id": 805614,
+          "image_id": 91363,
+          "image_path": "/files/ps2/images/static/91363.png",
+          "hexes": [
+            {
+              "x": 6,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 7,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 3,
+              "y": 6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18060,
+          "facility_id": 255030,
+          "facility_name": "Esper Research Station",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 1860.761,
+          "location_y": 123.973,
+          "location_z": -42.99902,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": -5,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -7,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -6,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -5,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -3,
+              "y": 9,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": -4,
+              "y": 8,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18252,
+          "facility_id": 400327,
+          "facility_name": "Ymir Containment Site",
+          "facility_type_id": 11,
+          "facility_type": "Containment Site",
+          "location_x": -2047.06,
+          "location_y": 103.53,
+          "location_z": 1556.34,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 8
+          },
+          "image_set_id": 806656,
+          "image_id": 93456,
+          "image_path": "/files/ps2/images/static/93456.png",
+          "hexes": [
+            {
+              "x": 12,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -12,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -13,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -11,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -10,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18062,
+          "facility_id": 260000,
+          "facility_name": "Esamir Eastern Warpgate",
+          "facility_type_id": 7,
+          "facility_type": "Warpgate",
+          "location_x": 233.935,
+          "location_y": 10.17865,
+          "location_z": 2658.075,
+          "image_set_id": 7917,
+          "image_id": 9124,
+          "image_path": "/files/ps2/images/static/9124.png",
+          "reward_currency_id": 4,
+          "reward_amount": 50,
+          "hexes": [
+            {
+              "x": 12,
+              "y": 1,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 11,
+              "y": 1,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 13,
+              "y": 1,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 14,
+              "y": 1,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 12,
+              "y": 0,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 13,
+              "y": 0,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 14,
+              "y": 0,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 13,
+              "y": -1,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 14,
+              "y": -1,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 14,
+              "y": -2,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 15,
+              "y": -2,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 10,
+              "y": 2,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 11,
+              "y": 2,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 12,
+              "y": 2,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 13,
+              "y": 2,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 10,
+              "y": 3,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 11,
+              "y": 3,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            },
+            {
+              "x": 12,
+              "y": 3,
+              "hex_type": 2,
+              "type_name": "Restricted by faction"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18063,
+          "facility_id": 256030,
+          "facility_name": "Genudine Gardens",
+          "facility_type_id": 6,
+          "facility_type": "Small Outpost",
+          "location_x": 310.7213,
+          "location_y": 120.9679,
+          "location_z": 1348.024,
+          "capture_reward": {
+            "Description": "Auraxium - Common",
+            "Amount": 5
+          },
+          "image_set_id": 7919,
+          "image_id": 9123,
+          "image_path": "/files/ps2/images/static/9123.png",
+          "hexes": [
+            {
+              "x": 7,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 4,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 0,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -1,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": 2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18249,
+          "facility_name": "The Wash",
+          "facility_type_id": 0,
+          "hexes": [
+            {
+              "x": 7,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -14,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -15,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -16,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 12,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 13,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 14,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 15,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 16,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 17,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 18,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 19,
+              "y": -17,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 5,
+              "y": -18,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -18,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -18,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -18,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -18,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 10,
+              "y": -18,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 11,
+              "y": -18,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        },
+        {
+          "map_region_id": 18253,
+          "facility_id": 400317,
+          "facility_name": "Jord",
+          "facility_type_id": 16,
+          "facility_type": "Amp Station (CTF)",
+          "location_x": -440.2296,
+          "location_y": 156.2466,
+          "location_z": 1150.347,
+          "capture_reward": {
+            "Description": "Synthium - Uncommon",
+            "Amount": 8
+          },
+          "image_set_id": 807450,
+          "image_id": 95656,
+          "image_path": "/files/ps2/images/static/95656.png",
+          "hexes": [
+            {
+              "x": 8,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -2,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -3,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -4,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -5,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 6,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 7,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 8,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            },
+            {
+              "x": 9,
+              "y": -6,
+              "hex_type": 0,
+              "type_name": "Unrestricted access"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "returned": 1
+}
