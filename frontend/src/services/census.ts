@@ -49,24 +49,68 @@ export function extractCensusMapState(
 }
 
 export class CensusDataService implements PS2DataService {
-  serviceID: string;
-
+  baseUrl: string;
   constructor(serviceID: string = 'example') {
-    this.serviceID = serviceID;
+    this.baseUrl = `https://census.daybreakgames.com/s:${serviceID}/get/ps2:v2`;
   }
 
-  getZoneData(continent: Continent): Promise<Zone> {
-    return new Promise((resolve, reject) => {
-      reject('Not implemented');
-    });
+  async getZoneData(continent: Continent): Promise<Zone> {
+    // Always use sanctuary for this to avoid literally thousands of calls to parseInt
+    const baseUrl = 'https://census.lithafalcon.cc/get/ps2/zone';
+    const url = `${baseUrl}?zone_id=${continent}&c:join=facility_link^on:zone_id^to:zone_id^list:1^inject_at:links^hide:description'zone_id,map_region^list:1^inject_at:regions^hide:zone_id'localized_facility_name(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&c:lang=en&c:hide=name,description&c:censusJSON=false`;
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP Error: ${response.status} - ${response.statusText}`
+        );
+      }
+
+      const data = await response.json();
+      return data.zone_list[0];
+    } catch (error) {
+      console.error('Error fetching zone data:', error);
+      throw error;
+    }
   }
 
-  getCurrentTerritorySnapshot(
+  async getCurrentTerritorySnapshot(
     continent: Continent,
     world: World
   ): Promise<TerritorySnapshot> {
-    return new Promise((resolve, reject) => {
-      reject('Not implemented');
-    });
+    return await this.getCensusMapState(continent, world);
+  }
+
+  private async getCensusMapState(
+    continent: Continent = Continent.INDAR,
+    world: World = World.Osprey
+  ) {
+    const url = `${this.baseUrl}/map?world_id=${world}&zone_ids=${continent}`;
+    try {
+      // Load local JSON file from public directory
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(
+          `Failed to load territory control from Census: ${response.status}`
+        );
+      }
+
+      const data = await response.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      console.debug(`Loaded territory control from Census`, data, url);
+      return extractCensusMapState(data, continent, world);
+    } catch (err) {
+      throw new Error(
+        `Development data load failed: ${err instanceof Error ? err.message : 'Unknown error'}`
+      );
+    }
   }
 }

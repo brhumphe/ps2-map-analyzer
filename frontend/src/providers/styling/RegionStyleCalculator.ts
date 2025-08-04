@@ -70,10 +70,14 @@ export class RegionStyleCalculator {
         };
 
       default:
+        console.warn(
+          `Failed to set style of ${regionState.region_id}`,
+          regionState
+        );
         // Fallback for any new states
         return {
           ...baseStyle,
-          color: '#ff0000', // Red border to indicate error
+          color: '#ff00ff', // Red border to indicate error
           fillColor: '#ffcccc', // Light red fill
           fillOpacity: 0.5,
         };

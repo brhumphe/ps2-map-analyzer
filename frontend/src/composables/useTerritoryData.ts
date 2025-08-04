@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue';
 import type { TerritorySnapshot } from '@/types/territory';
 import { Continent, WorldID, RegionID } from '@/types/common';
-import { DataSourceProvider } from '@/providers/data';
+import { useCensusData } from '@/composables/useCensusData';
 
 /**
  * Composable for managing territory control data with Vue reactivity
@@ -18,8 +18,7 @@ export function useTerritoryData() {
   const error = ref<string | null>(null);
 
   // Service instance
-  const dataProvider = new DataSourceProvider();
-  const mapStateService = dataProvider.getDataService();
+  const { dataService } = useCensusData();
 
   /**
    * Fetch territory data using the service layer
@@ -36,8 +35,10 @@ export function useTerritoryData() {
 
     try {
       // Delegate to service for data fetching and transformation
-      territorySnapshot.value =
-        await mapStateService.getCurrentTerritorySnapshot(continent, world);
+      territorySnapshot.value = await dataService.getCurrentTerritorySnapshot(
+        continent,
+        world
+      );
     } catch (err) {
       error.value =
         err instanceof Error ? err.message : 'Failed to fetch territory data';

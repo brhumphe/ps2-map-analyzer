@@ -1,8 +1,7 @@
 import { Continent, ContinentName, World } from '@/types/common';
 import { FacilityLink, Region, Zone } from '@/types/zone_types';
 import { TerritorySnapshot } from '@/types/territory';
-import { extractCensusMapState } from '@/services/census';
-import { PS2DataService } from '@/types/services';
+import { CensusDataService, extractCensusMapState } from '@/services/census';
 
 // API response types (matching the raw API structure)
 interface ZoneResponse {
@@ -18,13 +17,7 @@ interface ZoneDataResponse {
   zone_list: ZoneResponse[];
 }
 
-export class DevelopmentDataService implements PS2DataService {
-  serviceID: string;
-
-  constructor(serviceID: string = 'development') {
-    this.serviceID = serviceID;
-  }
-
+export class DevelopmentDataService extends CensusDataService {
   async getZoneData(continent: Continent): Promise<Zone> {
     const url = `/public/${ContinentName.get(continent)?.toLowerCase()}-zone.json`;
     let data: ZoneDataResponse;
@@ -60,11 +53,10 @@ export class DevelopmentDataService implements PS2DataService {
     continent: Continent,
     world: World
   ): Promise<TerritorySnapshot> {
+    const url = `/${ContinentName.get(continent)?.toLowerCase()}-map-census.json`;
     try {
       // Load local JSON file from public directory
-      const response = await fetch(
-        `/${ContinentName.get(continent)?.toLowerCase()}-map-census.json`
-      );
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Failed to load development data: ${response.status}`);
       }

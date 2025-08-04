@@ -35,6 +35,7 @@ export class RegionOwnershipAnalyzer implements RegionAnalysisProvider {
       const factionId = territory.region_ownership[regionId];
       const state: RegionState = {
         owning_faction_id: factionId,
+        region_id: regionId,
       };
 
       regionStates.set(regionId, state);

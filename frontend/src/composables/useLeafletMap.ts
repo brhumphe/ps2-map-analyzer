@@ -7,7 +7,7 @@ import {
   configureMapTileLayer,
   initMouseCoordinatesPopup,
 } from '@/utilities/leaflet_utils';
-import { DataSourceProvider } from '@/providers/data';
+import { useCensusData } from '@/composables/useCensusData';
 
 export function useLeafletMap() {
   // Reactive state
@@ -15,6 +15,7 @@ export function useLeafletMap() {
   const currentZone = ref<Zone | null>(null);
   const isLoading = ref(false);
   const error = ref<string>();
+  const { dataService } = useCensusData();
 
   /**
    * Initialize the Leaflet map and load zone data
@@ -28,9 +29,7 @@ export function useLeafletMap() {
       error.value = undefined;
 
       // Fetch and display zone data
-      const serviceProvider = new DataSourceProvider();
-      const zoneService = serviceProvider.getDataService();
-      const zone = await zoneService.getZoneData(continent);
+      const zone = await dataService.getZoneData(continent);
       currentZone.value = zone;
 
       // Create the Leaflet map

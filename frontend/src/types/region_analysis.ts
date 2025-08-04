@@ -10,6 +10,7 @@ import type { Zone } from '@/types/zone_types';
  */
 export interface RegionState {
   owning_faction_id: Faction;
+  region_id: RegionID;
 }
 
 /**
