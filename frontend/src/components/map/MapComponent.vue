@@ -34,7 +34,6 @@
       :id="linkId"
       :points="linkData.points"
       :style="linkData.style as Partial<L.PolylineOptions>"
-      :map="map"
     />
   </template>
 
@@ -49,7 +48,6 @@
   <!--      :options="markerData.options as Partial<L.MarkerOptions>"-->
   <!--      :tooltip="markerData.facilityName"-->
   <!--      :tooltipOptions="{ permanent: true, direction: 'bottom' }"-->
-  <!--      :map="map"-->
   <!--    />-->
   <!--  </template>-->
 </template>

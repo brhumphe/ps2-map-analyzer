@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue';
 import * as L from 'leaflet';
+import { useLeafletMap } from '@/composables/useLeafletMap';
 
 // Component props
 interface Props {
@@ -14,20 +15,25 @@ interface Props {
   popup?: string;
   tooltip?: string;
   tooltipOptions?: L.TooltipOptions;
-  map: L.Map;
 }
 
 const props = defineProps<Props>();
+
+// Get map utilities from the singleton
+const { getMap, hasMap } = useLeafletMap();
 
 // Leaflet marker instance
 const marker = ref<L.Marker>();
 
 // Create the marker and add it to the map
 const createMarker = () => {
-  if (!props.map) {
-    console.error(`MarkerEntity[${props.id}]: Map not provided`);
+  // Check if map is available
+  if (!hasMap()) {
+    console.debug(`MarkerEntity[${props.id}]: Map not yet initialized`);
     return;
   }
+
+  const map = getMap();
 
   if (!props.position) {
     console.error(`MarkerEntity[${props.id}]: Position not provided`);
@@ -54,7 +60,7 @@ const createMarker = () => {
     }
 
     // Add to map
-    newMarker.addTo(props.map);
+    newMarker.addTo(map);
 
     // Store reference
     marker.value = newMarker;
@@ -65,8 +71,10 @@ const createMarker = () => {
 
 // Remove the marker from the map
 const removeMarker = () => {
-  if (marker.value && props.map) {
+  if (marker.value && hasMap()) {
     try {
+      const map = getMap();
+
       // Close any open popup before removing the marker
       if (marker.value.isPopupOpen()) {
         marker.value.closePopup();
@@ -76,14 +84,14 @@ const removeMarker = () => {
       marker.value.unbindTooltip();
 
       // Check if map is still valid before attempting removal
-      if (props.map.getContainer()) {
-        props.map.removeLayer(marker.value);
+      if (map.getContainer()) {
+        map.removeLayer(marker.value);
       }
     } catch (error) {
       // Map may have already been cleaned up, ignore the error
       console.debug(
         `MarkerEntity[${props.id}]: Map cleanup race condition (expected):`,
-        error.message
+        error instanceof Error ? error.message : error
       );
     }
   }

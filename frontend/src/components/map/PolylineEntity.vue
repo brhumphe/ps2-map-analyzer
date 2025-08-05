@@ -5,26 +5,32 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue';
 import * as L from 'leaflet';
+import { useLeafletMap } from '@/composables/useLeafletMap';
 
-// Component props
+// Component props - no map prop needed!
 interface Props {
   id: string;
   points: L.LatLng[];
   style: L.PolylineOptions;
-  map: L.Map;
 }
 
 const props = defineProps<Props>();
+
+// Get map utilities from the singleton
+const { getMap, hasMap } = useLeafletMap();
 
 // Leaflet polyline instance
 const polyline = ref<L.Polyline>();
 
 // Create the polyline and add it to the map
 const createPolyline = () => {
-  if (!props.map) {
-    console.error(`PolylineEntity[${props.id}]: Map not provided`);
+  // Check if map is available
+  if (!hasMap()) {
+    console.debug(`PolylineEntity[${props.id}]: Map not yet initialized`);
     return;
   }
+
+  const map = getMap();
 
   if (props.points.length < 2) {
     console.error(
@@ -38,7 +44,7 @@ const createPolyline = () => {
     const newPolyline = L.polyline(props.points, props.style);
 
     // Add to map
-    newPolyline.addTo(props.map);
+    newPolyline.addTo(map);
 
     // Store reference
     polyline.value = newPolyline;
@@ -54,17 +60,18 @@ const createPolyline = () => {
 
 // Remove the polyline from the map
 const removePolyline = () => {
-  if (polyline.value && props.map) {
+  if (polyline.value && hasMap()) {
     try {
+      const map = getMap();
       // Check if map is still valid before attempting removal
-      if (props.map.getContainer()) {
-        props.map.removeLayer(polyline.value);
+      if (map.getContainer()) {
+        map.removeLayer(polyline.value);
       }
     } catch (error) {
       // Map may have already been cleaned up, ignore the error
       console.debug(
         `PolylineEntity[${props.id}]: Map cleanup race condition (expected):`,
-        error.message
+        error instanceof Error ? error.message : error
       );
     }
   }
