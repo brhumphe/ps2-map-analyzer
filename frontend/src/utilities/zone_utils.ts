@@ -103,4 +103,62 @@ export const zoneUtils = {
   getRegionKey(regionId: RegionID): RegionKey {
     return `region_${regionId}` as RegionKey;
   },
+
+  /**
+   * Creates a mapping of region IDs to their neighboring region IDs using facility links
+   * @param zone - The zone containing regions and facility links
+   * @returns Map where key is a region ID and value is a Set of neighboring region IDs
+   */
+  getRegionNeighborsMap(zone: Zone): Map<RegionID, Set<RegionID>> {
+    const neighbors = new Map<RegionID, Set<RegionID>>();
+
+    // Initialize empty sets for all regions
+    zone.regions.forEach((region) => {
+      neighbors.set(region.map_region_id, new Set<RegionID>());
+    });
+
+    // Use facility links to determine neighbors
+    zone.links?.forEach((link) => {
+      const regionA = zone.regions.find(
+        (r) => r.facility_id === link.facility_id_a
+      )?.map_region_id;
+      const regionB = zone.regions.find(
+        (r) => r.facility_id === link.facility_id_b
+      )?.map_region_id;
+
+      if (regionA && regionB) {
+        neighbors.get(regionA)?.add(regionB);
+        neighbors.get(regionB)?.add(regionA);
+      }
+    });
+
+    return neighbors;
+  },
+
+  /**
+   * Creates a mapping of facility IDs to their neighboring facility IDs using facility links
+   * @param zone - The zone containing facilities and facility links
+   * @returns Map where key is a facility ID and value is a Set of neighboring facility IDs
+   */
+  getFacilityNeighborsMap(zone: Zone): Map<FacilityID, Set<FacilityID>> {
+    const neighbors = new Map<FacilityID, Set<FacilityID>>();
+
+    // Initialize empty sets for all facilities
+    zone.regions.forEach((region) => {
+      if (region.facility_id) {
+        neighbors.set(region.facility_id, new Set<FacilityID>());
+      }
+    });
+
+    // Use facility links to determine neighbors
+    zone.links?.forEach((link) => {
+      const facilityA = link.facility_id_a;
+      const facilityB = link.facility_id_b;
+
+      neighbors.get(facilityA)?.add(facilityB);
+      neighbors.get(facilityB)?.add(facilityA);
+    });
+
+    return neighbors;
+  },
 } as const; // Make the object immutable

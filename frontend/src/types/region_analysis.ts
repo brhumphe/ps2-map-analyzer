@@ -10,7 +10,12 @@ import type { Zone } from '@/types/zone_types';
  */
 export interface RegionState {
   owning_faction_id: Faction;
+  // Mostly for debugging purposes
   region_id: RegionID;
+  // Factions who control adjacent regions. Used to determine capturability
+  adjacent_faction_ids?: Set<Faction>;
+  can_steal?: boolean;
+  can_capture?: boolean;
 }
 
 /**
