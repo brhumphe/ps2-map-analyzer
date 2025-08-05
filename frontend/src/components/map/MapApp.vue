@@ -13,17 +13,13 @@
     </v-app-bar>
 
     <v-main>
-      <MapComponent :world="selectedWorld" :continent="selectedContinent" />
+      <MapComponent />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-import { useAppState } from '@/composables/useAppState';
 import WorldDropdown from '@/components/map/WorldDropdown.vue';
 import ContinentDropdown from '@/components/map/ContinentDropdown.vue';
 import MapComponent from '@/components/map/MapComponent.vue';
-
-// Use app state for world/continent selection
-const { selectedWorld, selectedContinent } = useAppState();
 </script>

@@ -5,16 +5,19 @@ import { Continent } from '@/types/common';
 import type { Zone } from '@/types/zone_types';
 import {
   configureMapTileLayer,
-  initMouseCoordinatesPopup,
+  // initMouseCoordinatesPopup,
 } from '@/utilities/leaflet_utils';
 import { useCensusData } from '@/composables/useCensusData';
 
+// ============================================
+// SINGLETON STATE - Shared across all components
+// ============================================
+const map = ref<LMap>();
+const currentZone = ref<Zone | null>(null);
+const isLoading = ref(false);
+const error = ref<string>();
+
 export function useLeafletMap() {
-  // Reactive state
-  const map = ref<LMap>();
-  const currentZone = ref<Zone | null>(null);
-  const isLoading = ref(false);
-  const error = ref<string>();
   const { dataService } = useCensusData();
 
   /**
@@ -91,17 +94,39 @@ export function useLeafletMap() {
     await initializeMap(container, continent);
   }
 
+  /**
+   * Get the map instance with runtime validation
+   * Useful for child components that require the map
+   */
+  function getMap(): LMap {
+    if (!map.value) {
+      throw new Error('Map not initialized. Ensure MapComponent is mounted.');
+    }
+    return map.value;
+  }
+
+  /**
+   * Check if map is initialized
+   */
+  function hasMap(): boolean {
+    return !!map.value;
+  }
+
   return {
-    // State. Not intended to be mutated, but `readonly` can erase types which cause
-    // erroneous type errors
+    // State - shared across all components
+    // These should not be mutated directly! Using readonly was causing type inference errors
     map,
     currentZone,
-    isLoading: readonly(isLoading),
-    error: readonly(error),
+    isLoading,
+    error,
 
     // Actions
     initializeMap,
     cleanupMap,
     switchContinent,
+
+    // Utilities for child components
+    getMap,
+    hasMap,
   };
 }

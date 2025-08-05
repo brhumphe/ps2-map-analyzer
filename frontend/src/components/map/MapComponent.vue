@@ -23,7 +23,6 @@
       :id="regionKey"
       :points="regionData.points"
       :style="regionData.style as Partial<L.PolylineOptions>"
-      :map="map"
     />
   </template>
 
@@ -57,6 +56,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { useAppState } from '@/composables/useAppState';
 import { useLeafletMap } from '@/composables/useLeafletMap';
 import { useLatticeLinks } from '@/composables/useLatticeLinks';
 import { useRegionPolygons } from '@/composables/useRegionPolygons';
@@ -70,11 +70,7 @@ import PolygonEntity from '@/components/map/PolygonEntity.vue';
 import MarkerEntity from '@/components/map/MarkerEntity.vue';
 import * as L from 'leaflet';
 
-// Props from parent
-const props = defineProps<{
-  world: World;
-  continent: Continent;
-}>();
+const { selectedWorld, selectedContinent } = useAppState();
 
 // Map container reference
 const mapContainer = ref<HTMLElement>();
@@ -124,10 +120,10 @@ const rebuildMap = async () => {
   cleanupMap();
 
   // Create fresh map with selected continent
-  await initializeMap(mapContainer.value, props.continent);
+  await initializeMap(mapContainer.value, selectedContinent.value);
 
   // Fetch territory data for selected world/continent
-  await fetchTerritoryData(props.world, props.continent);
+  await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
 
   // Initialize map content after map and zone data are loaded
   if (currentZone.value) {
@@ -142,7 +138,7 @@ const rebuildMapContent = async () => {
   if (!currentZone.value) return;
 
   // Fetch territory data for current world/continent
-  await fetchTerritoryData(props.world, props.continent);
+  await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
 
   // Initialize map content
   initializeRegionPolygons(currentZone.value);
@@ -152,7 +148,7 @@ const rebuildMapContent = async () => {
 
 // Watch for continent changes - switch continent and load new zone
 watch(
-  () => props.continent,
+  () => selectedContinent.value,
   async (newContinent) => {
     if (map.value) {
       // Clear existing content immediately to avoid lingering
@@ -170,9 +166,9 @@ watch(currentZone, rebuildMapContent);
 
 // Watch for world changes - only update territory data
 watch(
-  () => props.world,
+  () => selectedWorld.value,
   async () => {
-    await fetchTerritoryData(props.world, props.continent);
+    await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
   }
 );
 
@@ -211,4 +207,3 @@ onUnmounted(() => {
   padding: 2px;
 }
 </style>
-<script setup lang="ts"></script>

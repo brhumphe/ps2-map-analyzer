@@ -5,24 +5,31 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue';
 import * as L from 'leaflet';
+import { useLeafletMap } from '@/composables/useLeafletMap';
 
-// Component props
+// Component props - notice no map prop needed
 interface Props {
   id: string;
   points: L.LatLng[];
-  style: Partial<L.PolylineOptions>; // Polygons use the same style interface as polylines
-  map: L.Map;
+  style: Partial<L.PolylineOptions>;
 }
 
 const props = defineProps<Props>();
+
+// Get map from context instead of props
+const { getMap } = useLeafletMap();
 
 // Leaflet polygon instance
 const polygon = ref<L.Polygon>();
 
 // Create the polygon and add it to the map
 const createPolygon = () => {
-  if (!props.map) {
-    console.error(`PolygonEntity[${props.id}]: Map not provided`);
+  let map: L.Map;
+
+  try {
+    map = getMap() as L.Map; // Will throw if map not ready
+  } catch (error) {
+    console.debug(`PolygonEntity[${props.id}]: Map not yet initialized`);
     return;
   }
 
@@ -38,12 +45,10 @@ const createPolygon = () => {
     const newPolygon = L.polygon(props.points, props.style);
 
     // Add to map
-    newPolygon.addTo(props.map);
+    newPolygon.addTo(map);
 
     // Store reference
     polygon.value = newPolygon;
-
-    // console.debug(`PolygonEntity[${props.id}]: Created polygon with ${props.points.length} points`)
   } catch (error) {
     console.error(
       `PolygonEntity[${props.id}]: Failed to create polygon:`,
@@ -54,17 +59,18 @@ const createPolygon = () => {
 
 // Remove the polygon from the map
 const removePolygon = () => {
-  if (polygon.value && props.map) {
+  const map = getMap() as L.Map;
+  if (polygon.value && map) {
     try {
       // Check if map is still valid before attempting removal
-      if (props.map.getContainer()) {
-        props.map.removeLayer(polygon.value);
+      if (map.getContainer()) {
+        map.removeLayer(polygon.value);
       }
     } catch (error) {
       // Map may have already been cleaned up, ignore the error
       console.debug(
         `PolygonEntity[${props.id}]: Map cleanup race condition (expected):`,
-        error.message
+        error instanceof Error ? error.message : error
       );
     }
   }
