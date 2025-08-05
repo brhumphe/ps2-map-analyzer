@@ -136,24 +136,6 @@ export function useRegionPolygons(
   };
 
   /**
-   * Update region style based on faction control
-   * This is where territory control logic will hook in
-   */
-  const updateRegionFactionStyle = (regionId: RegionID, factionId: number) => {
-    // Faction color mapping - this could be moved to a separate utility
-    const factionColors = {
-      1: { fillColor: '#9932CC', color: '#6A0DAD' }, // VS - Purple
-      2: { fillColor: '#4169E1', color: '#0000CD' }, // NC - Blue
-      3: { fillColor: '#DC143C', color: '#8B0000' }, // TR - Red
-    };
-
-    const factionStyle = factionColors[factionId as keyof typeof factionColors];
-    if (factionStyle) {
-      updateRegionStyle(regionId, factionStyle);
-    }
-  };
-
-  /**
    * Get a specific region polygon
    */
   const getRegion = (regionId: RegionID) => {
@@ -190,7 +172,6 @@ export function useRegionPolygons(
     initializeRegionPolygons,
     updateRegionStyle,
     updateMultipleRegionStyles,
-    updateRegionFactionStyle,
     getRegion,
     clearRegions,
   };
