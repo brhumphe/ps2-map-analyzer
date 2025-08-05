@@ -17,7 +17,7 @@ interface Props {
 const props = defineProps<Props>();
 
 // Get map from context instead of props
-const { getMap } = useLeafletMap();
+const { getMap, hasMap } = useLeafletMap();
 
 // Leaflet polygon instance
 const polygon = ref<L.Polygon>();
@@ -63,7 +63,7 @@ const removePolygon = () => {
   if (polygon.value && map) {
     try {
       // Check if map is still valid before attempting removal
-      if (map.getContainer()) {
+      if (hasMap()) {
         map.removeLayer(polygon.value);
       }
     } catch (error) {

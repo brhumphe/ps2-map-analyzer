@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useAppState } from '@/composables/useAppState';
 import { useLeafletMap } from '@/composables/useLeafletMap';
 import { useLatticeLinks } from '@/composables/useLatticeLinks';
@@ -154,6 +154,13 @@ watch(
       clearLinks();
       clearRegions();
 
+      // Set currentZone to null to unmount entity components
+      currentZone.value = null;
+
+      // Wait for Vue to process unmounting
+      await nextTick();
+
+      // Now switch continent
       await switchContinent(newContinent);
     }
   }
