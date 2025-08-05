@@ -7,7 +7,7 @@ import { CensusDataService } from '@/services/census';
 import { DevelopmentDataService } from '@/services/dev_data';
 import config from '@/config.json';
 
-const useDevData = ref(false);
+const useDevData = ref(true);
 
 class CensusData implements PS2DataService {
   census: CensusDataService;

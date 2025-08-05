@@ -43,7 +43,6 @@ export function useLeafletMap() {
       // Initialize map features
       // initMouseCoordinatesPopup(leafletMap);
       configureMapTileLayer(leafletMap, zone.code.toLowerCase());
-      initMouseCoordinatesPopup(leafletMap);
 
       console.log('Map initialized successfully for continent:', continent);
     } catch (err) {

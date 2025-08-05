@@ -1,6 +1,16 @@
 import type { RegionState } from '@/types/region_analysis';
 import type L from 'leaflet';
 import { Faction } from '@/types/common';
+import { setColorBrightness, unpackIntToHex } from '@/utilities/colors';
+
+// Census gives these packed int representations instead of hex strings
+const FactionColor = new Map<Faction, string>([
+  [Faction.NONE, unpackIntToHex(7500402)],
+  [Faction.VS, unpackIntToHex(4460130)],
+  [Faction.NC, unpackIntToHex(19328)],
+  [Faction.TR, unpackIntToHex(10357519)],
+  [Faction.NSO, unpackIntToHex(5662067)],
+]);
 
 /**
  * Region style calculator that converts region states into visual properties
@@ -31,56 +41,21 @@ export class RegionStyleCalculator {
       fillOpacity: 0.6,
     };
 
-    switch (regionState.owning_faction_id) {
-      case Faction.VS:
-        return {
-          ...baseStyle,
-          color: '#2a1a4a', // Dark purple border
-          fillColor: '#441c7a', // VS purple fill
-        };
+    const faction_color: string =
+      FactionColor.get(regionState.owning_faction_id) || '#ff00ff';
+    let border_color = faction_color;
+    let fill_color: string = setColorBrightness(border_color, 0.7);
 
-      case Faction.NC:
-        return {
-          ...baseStyle,
-          color: '#003380', // Dark blue border
-          fillColor: '#004bad', // NC blue fill
-        };
-
-      case Faction.TR:
-        return {
-          ...baseStyle,
-          color: '#661a17', // Dark red border
-          fillColor: '#9d2621', // TR red fill
-        };
-
-      case Faction.NSO:
-        return {
-          ...baseStyle,
-          color: '#3a3a35', // Dark gray border
-          fillColor: '#565851', // NSO gray fill
-        };
-
-      case Faction.NONE:
-        return {
-          ...baseStyle,
-          color: '#373737', // Medium gray border
-          opacity: 0.7,
-          fillColor: '#373737', // Light gray fill
-          fillOpacity: 0.7, // Lower opacity for neutral
-        };
-
-      default:
-        console.warn(
-          `Failed to set style of ${regionState.region_id}`,
-          regionState
-        );
-        // Fallback for any new states
-        return {
-          ...baseStyle,
-          color: '#ff00ff', // Red border to indicate error
-          fillColor: '#ffcccc', // Light red fill
-          fillOpacity: 0.5,
-        };
+    if (!regionState.can_capture) {
+      fill_color = setColorBrightness(faction_color, 0.2);
     }
+    if (regionState.can_steal) {
+      border_color = '#2eff00';
+    }
+    return {
+      ...baseStyle,
+      color: border_color,
+      fillColor: fill_color,
+    };
   }
 }

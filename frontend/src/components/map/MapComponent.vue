@@ -40,19 +40,19 @@
   </template>
 
   <!-- Region Markers - rendered as headless components -->
-  <template v-if="map && currentZone">
-    <MarkerEntity
-      v-for="[regionKey, markerData] in regionMarkers"
-      :key="regionKey"
-      :id="regionKey"
-      :position="markerData.position"
-      :popup="markerData.popup"
-      :options="markerData.options as Partial<L.MarkerOptions>"
-      :tooltip="markerData.facilityName"
-      :tooltipOptions="{ permanent: true, direction: 'bottom' }"
-      :map="map"
-    />
-  </template>
+  <!--  <template v-if="map && currentZone">-->
+  <!--    <MarkerEntity-->
+  <!--      v-for="[regionKey, markerData] in regionMarkers"-->
+  <!--      :key="regionKey"-->
+  <!--      :id="regionKey"-->
+  <!--      :position="markerData.position"-->
+  <!--      :popup="markerData.popup"-->
+  <!--      :options="markerData.options as Partial<L.MarkerOptions>"-->
+  <!--      :tooltip="markerData.facilityName"-->
+  <!--      :tooltipOptions="{ permanent: true, direction: 'bottom' }"-->
+  <!--      :map="map"-->
+  <!--    />-->
+  <!--  </template>-->
 </template>
 
 <script setup lang="ts">
