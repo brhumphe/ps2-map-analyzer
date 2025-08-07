@@ -5,9 +5,10 @@
         >PS2 Map State Application - Territory Analyzer</v-app-bar-title
       >
       <template v-slot:append>
-        <div class="d-flex ga-2">
+        <div class="d-flex align-center ga-2">
           <ContinentDropdown />
           <WorldDropdown />
+          <MapSettingsMenu />
         </div>
       </template>
     </v-app-bar>
@@ -22,4 +23,5 @@
 import WorldDropdown from '@/components/map/WorldDropdown.vue';
 import ContinentDropdown from '@/components/map/ContinentDropdown.vue';
 import MapComponent from '@/components/map/MapComponent.vue';
+import MapSettingsMenu from '@/components/map/MapSettingsMenu.vue';
 </script>

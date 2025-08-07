@@ -37,19 +37,19 @@
     />
   </template>
 
-  <!-- Region Markers - rendered as headless components -->
-  <!--  <template v-if="map && currentZone">-->
-  <!--    <MarkerEntity-->
-  <!--      v-for="[regionKey, markerData] in regionMarkers"-->
-  <!--      :key="regionKey"-->
-  <!--      :id="regionKey"-->
-  <!--      :position="markerData.position"-->
-  <!--      :popup="markerData.popup"-->
-  <!--      :options="markerData.options as Partial<L.MarkerOptions>"-->
-  <!--      :tooltip="markerData.facilityName"-->
-  <!--      :tooltipOptions="{ permanent: true, direction: 'bottom' }"-->
-  <!--    />-->
-  <!--  </template>-->
+  <!--  Region Markers - rendered as headless components-->
+  <template v-if="map && currentZone">
+    <MarkerEntity
+      v-for="[regionKey, markerData] in regionMarkers"
+      :key="regionKey"
+      :id="regionKey"
+      :position="markerData.position"
+      :popup="markerData.popup"
+      :options="markerData.options as Partial<L.MarkerOptions>"
+      :tooltip="markerData.regionId.toString()"
+      :tooltipOptions="{ permanent: true, direction: 'bottom' }"
+    />
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -62,7 +62,6 @@ import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
 import { useLinkAnalysis } from '@/composables/useLinkAnalysis';
 import { useRegionMarkers } from '@/composables/useRegionMarkers';
-import { Continent, World } from '@/types/common';
 import PolylineEntity from '@/components/map/PolylineEntity.vue';
 import PolygonEntity from '@/components/map/PolygonEntity.vue';
 import MarkerEntity from '@/components/map/MarkerEntity.vue';
