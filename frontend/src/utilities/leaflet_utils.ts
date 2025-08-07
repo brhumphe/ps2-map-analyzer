@@ -225,3 +225,26 @@ export function drawLattice(
     }).addTo(leafletMap);
   }
 }
+
+export enum RegionPane {
+  BASE = 'baseRegions',
+  CONTESTED = 'contestedRegions',
+  PRIORITY = 'priorityRegions',
+  FRONTLINE = 'frontlineRegions',
+}
+
+export enum LatticePane {
+  BASE = 'latticeBase',
+  FRONTLINE = 'latticeFrontline',
+}
+
+export function createCustomPanes(map: L.Map) {
+  // Create panes with specific z-index values
+  map.createPane(RegionPane.BASE).style.zIndex = '410'; // Just above overlayPane
+  map.createPane(RegionPane.CONTESTED).style.zIndex = '420'; // Above base regions
+  map.createPane(RegionPane.FRONTLINE).style.zIndex = '425'; // Between contested and priority
+  map.createPane(RegionPane.PRIORITY).style.zIndex = '430'; // Highest priority
+  // Keep lattice above regions
+  map.createPane(LatticePane.BASE).style.zIndex = '440';
+  map.createPane(LatticePane.FRONTLINE).style.zIndex = '450';
+}

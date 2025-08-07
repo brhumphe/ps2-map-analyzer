@@ -5,6 +5,7 @@ import { Continent } from '@/types/common';
 import type { Zone } from '@/types/zone_types';
 import {
   configureMapTileLayer,
+  createCustomPanes,
   // initMouseCoordinatesPopup,
 } from '@/utilities/leaflet_utils';
 import { useCensusData } from '@/composables/useCensusData';
@@ -40,6 +41,7 @@ export function useLeafletMap() {
         crs: L.CRS.Simple,
         center: [0, 0],
       }).setView([0, 0], 0);
+      createCustomPanes(leafletMap);
 
       map.value = leafletMap;
 

@@ -98,6 +98,93 @@ export function setColorBrightness(color: string, brightness: number): string {
 }
 
 /**
+ * Adjust the lightness and saturation of a hex color
+ * @param hex Hex color string (e.g. '#441c7a')
+ * @param lightnessAdjustment Amount to adjust lightness (-1 to 1, where -1 is black, 1 is white)
+ * @param saturationAdjustment Amount to adjust saturation (-1 to 1, where -1 removes all color, 1 maximizes saturation)
+ * @returns Hex color string with adjusted lightness and saturation
+ */
+export function adjustColorLightnessSaturation(
+  hex: string,
+  lightnessAdjustment: number = 0,
+  saturationAdjustment: number = 0
+): string {
+  // Clamp adjustments to valid ranges
+  lightnessAdjustment = Math.min(1, Math.max(-1, lightnessAdjustment));
+  saturationAdjustment = Math.min(1, Math.max(-1, saturationAdjustment));
+
+  // Convert to HSL
+  const { h, s, l } = hexToHSL(hex);
+
+  // Calculate new lightness
+  let newLightness: number;
+  if (lightnessAdjustment >= 0) {
+    // Positive adjustment: blend towards white (1.0)
+    newLightness = l + (1 - l) * lightnessAdjustment;
+  } else {
+    // Negative adjustment: blend towards black (0.0)
+    newLightness = l + l * lightnessAdjustment;
+  }
+
+  // Calculate new saturation
+  let newSaturation: number;
+  if (saturationAdjustment >= 0) {
+    // Positive adjustment: blend towards maximum saturation (1.0)
+    newSaturation = s + (1 - s) * saturationAdjustment;
+  } else {
+    // Negative adjustment: blend towards no saturation (0.0)
+    newSaturation = s + s * saturationAdjustment;
+  }
+
+  // Ensure values stay within bounds (should already be guaranteed by the math above)
+  newLightness = Math.min(1, Math.max(0, newLightness));
+  newSaturation = Math.min(1, Math.max(0, newSaturation));
+
+  // Convert back to hex
+  return hslToHex(h, newSaturation, newLightness);
+}
+
+/**
+ * Create a lighter version of a color
+ * @param hex Hex color string
+ * @param amount Amount to lighten (0-1, where 1 makes it white)
+ * @returns Lightened hex color string
+ */
+export function lightenColor(hex: string, amount: number): string {
+  return adjustColorLightnessSaturation(hex, Math.abs(amount), 0);
+}
+
+/**
+ * Create a darker version of a color
+ * @param hex Hex color string
+ * @param amount Amount to darken (0-1, where 1 makes it black)
+ * @returns Darkened hex color string
+ */
+export function darkenColor(hex: string, amount: number): string {
+  return adjustColorLightnessSaturation(hex, -Math.abs(amount), 0);
+}
+
+/**
+ * Create a more saturated version of a color
+ * @param hex Hex color string
+ * @param amount Amount to saturate (0-1, where 1 maximizes saturation)
+ * @returns More saturated hex color string
+ */
+export function saturateColor(hex: string, amount: number): string {
+  return adjustColorLightnessSaturation(hex, 0, Math.abs(amount));
+}
+
+/**
+ * Create a less saturated (more gray) version of a color
+ * @param hex Hex color string
+ * @param amount Amount to desaturate (0-1, where 1 makes it completely gray)
+ * @returns Less saturated hex color string
+ */
+export function desaturateColor(hex: string, amount: number): string {
+  return adjustColorLightnessSaturation(hex, 0, -Math.abs(amount));
+}
+
+/**
  * Converts an integer to a hexadecimal color code string.
  *
  * @param {number} packed - The integer value to convert to a hexadecimal color code.

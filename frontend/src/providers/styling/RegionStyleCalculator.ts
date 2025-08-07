@@ -1,7 +1,11 @@
 import type { RegionState } from '@/types/region_analysis';
 import type L from 'leaflet';
 import { Faction } from '@/types/common';
-import { setColorBrightness, unpackIntToHex } from '@/utilities/colors';
+import {
+  adjustColorLightnessSaturation,
+  unpackIntToHex,
+} from '@/utilities/colors';
+import { RegionPane } from '@/utilities/leaflet_utils';
 
 // Census gives these packed int representations instead of hex strings
 const FactionColor = new Map<Faction, string>([
@@ -35,27 +39,37 @@ export class RegionStyleCalculator {
    * @returns Leaflet PolylineOptions for styling the region polygon
    */
   calculateRegionStyle(regionState: RegionState): Partial<L.PolylineOptions> {
-    const baseStyle: Partial<L.PolylineOptions> = {
-      weight: 2,
-      opacity: 1,
-      fillOpacity: 0.6,
-    };
+    let weight = 1;
+    let opacity = 0.7;
+    let fillOpacity = 0.6;
+    let pane: RegionPane;
 
     const faction_color: string =
       FactionColor.get(regionState.owning_faction_id) || '#ff00ff';
-    let border_color = faction_color;
-    let fill_color: string = setColorBrightness(border_color, 0.7);
+    let border_color = '#404040';
+    let fillColor: string;
 
-    if (!regionState.can_capture) {
-      fill_color = setColorBrightness(faction_color, 0.2);
+    if (regionState.can_capture) {
+      fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
+      fillOpacity = 0.8;
+      pane = RegionPane.FRONTLINE;
+    } else {
+      fillColor = adjustColorLightnessSaturation(faction_color, -0.7, 0);
+      fillOpacity = 0.6;
+      pane = RegionPane.BASE;
     }
     if (regionState.can_steal) {
       border_color = '#2eff00';
+      pane = RegionPane.PRIORITY;
+      weight = 4;
     }
     return {
-      ...baseStyle,
+      weight,
+      opacity,
+      fillOpacity,
       color: border_color,
-      fillColor: fill_color,
+      fillColor: fillColor,
+      pane,
     };
   }
 }
