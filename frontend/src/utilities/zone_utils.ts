@@ -72,8 +72,8 @@ export const zoneUtils = {
    * Extracts the facility coordinates from a given zone object.
    * Iterates through the regions of the zone and retrieves the coordinates for each facility.
    */
-  extractFacilityCoordinates(zone: Zone): Record<number, WorldCoordinate> {
-    const facility_coords = {};
+  extractFacilityCoordinates(zone: Zone): Record<FacilityID, WorldCoordinate> {
+    const facility_coords: Record<FacilityID, WorldCoordinate> = {};
     for (const obj of zone['regions']) {
       if (obj['location_x'] !== undefined && obj['location_z'] !== undefined) {
         facility_coords[obj['facility_id']] = {
