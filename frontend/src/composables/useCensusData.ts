@@ -1,8 +1,8 @@
 import { ref } from 'vue';
-import { PS2DataService } from '@/types/services';
+import type { PS2DataService } from '@/types/services';
 import { Continent, World } from '@/types/common';
-import { TerritorySnapshot } from '@/types/territory';
-import { Zone } from '@/types/zone_types';
+import type { TerritorySnapshot } from '@/types/territory';
+import type { Zone } from '@/types/zone_types';
 import { CensusDataService } from '@/services/census';
 import { DevelopmentDataService } from '@/services/dev_data';
 import config from '@/config.json';

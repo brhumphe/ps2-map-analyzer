@@ -6,13 +6,15 @@
 
 **Decision**: Wrap existing TypeScript logic in Vue's composition API initially, then gradually extract components and introduce reactive state management.
 
-**Reasoning**: 
+**Reasoning**:
+
 - Preserve complex working code (coordinate conversion, hexagon geometry, Leaflet integration)
 - Reduce migration risk by avoiding "big bang" rewrites
 - Enable learning Vue patterns without breaking existing functionality
 - Allow gradual introduction of Vue benefits (reactivity, component lifecycle)
 
-**Impact**: 
+**Impact**:
+
 - Faster initial migration with a working Vue application
 - Lower risk of introducing bugs in complex mathematical code
 - Established foundation for incremental feature extraction
@@ -23,6 +25,7 @@
 **Decision**: Create headless Vue components (`PolylineEntity`, `PolygonEntity`) that manage individual Leaflet objects without visual templates.
 
 **Reasoning**:
+
 - Separate Leaflet object lifecycle from business logic
 - Enable reactive updates to individual map elements
 - Leverage Vue's component system for object management
@@ -30,6 +33,7 @@
 - Allow individual object updates without full map re-renders
 
 **Impact**:
+
 - Clean separation between Vue reactivity and Leaflet object management
 - Efficient updates (only changed objects re-render)
 - Reusable pattern for any map visualization needs
@@ -41,6 +45,7 @@
 **Decision**: Use interface-based providers (`ILinkAnalysisProvider`, `ILinkStyleProvider`) for swappable implementations.
 
 **Reasoning**:
+
 - Enable switching between client-side and remote analysis
 - Support multiple visualization modes without code changes
 - Facilitate testing with mock implementations
@@ -48,6 +53,7 @@
 - Future-proof for unknown analysis requirements
 
 **Impact**:
+
 - Easy to add new visualization modes
 - Testable analysis logic independent of UI
 - Clear contracts between analysis and presentation layers
@@ -59,6 +65,7 @@
 **Decision**: Use separate reactive objects for different concerns (regions, links, UI state) rather than one large nested reactive structure.
 
 **Reasoning**:
+
 - Better performance for frequent updates (avoid deep watching)
 - Clearer separation of concerns
 - Minimize component re-renders when only specific data changes
@@ -66,6 +73,7 @@
 - Enable granular control over what triggers reactivity
 
 **Impact**:
+
 - Efficient handling of bulk API responses (100+ regions)
 - Reduced unnecessary component updates
 - Clearer data ownership and responsibility boundaries
@@ -77,6 +85,7 @@
 **Decision**: Default to client-side territory analysis with optional backend processing via provider pattern.
 
 **Reasoning**:
+
 - Network latency (50-200ms) dominates computation time for small datasets (89 nodes)
 - Better user experience with immediate responsiveness
 - Simpler deployment and demonstration
@@ -84,6 +93,7 @@
 - Architecture supports backend when actually beneficial
 
 **Impact**:
+
 - Immediate tactical feedback for users
 - Simpler development and deployment workflow
 - Demonstrates performance-conscious architectural decisions
@@ -97,17 +107,20 @@
 **Decision**: Create a unidirectional data flow from territory data through analysis to styling to visual rendering.
 
 **Reasoning**:
+
 - Predictable state updates following Vue's reactive philosophy
 - Clear data transformation stages
 - Easy debugging with explicit pipeline stages
 - Separation of pure functions from reactive state management
 
 **Impact**:
+
 ```
 Territory Data → Analysis → Styling → Components → Leaflet Objects
      ↓              ↓         ↓          ↓              ↓
 Reactive State → Computed → Computed → Props → Watchers
 ```
+
 - Automatic updates when territory changes
 - Clear debugging path for visual issues
 - Testable transformation stages
@@ -118,12 +131,14 @@ Reactive State → Computed → Computed → Props → Watchers
 **Decision**: Use composables for coordination rather than business logic, with services handling pure domain operations.
 
 **Reasoning**:
+
 - Composables excel at reactive state management and Vue integration
 - Business logic belongs in testable, framework-agnostic services
 - Clear separation between "what to do" and "how Vue should react"
 - Maintains testability of core domain logic
 
 **Impact**:
+
 ```typescript
 // Composable: Vue integration + coordination
 export function useLinkVisualization() {
@@ -131,6 +146,7 @@ export function useLinkVisualization() {
   const linkStyles = computed(() => analyzer.analyze(...)) // Reactive coordination
 }
 ```
+
 - Business logic testable without Vue
 - Clear responsibility boundaries
 - Reusable domain logic across different UI frameworks
@@ -141,15 +157,18 @@ export function useLinkVisualization() {
 **Decision**: Use branded types (`FacilityLinkKey`) for domain-specific identifiers to prevent type confusion.
 
 **Reasoning**:
+
 - Prevent accidental string mixing between different key types
 - Maintain runtime performance (zero overhead)
 - Clear semantic meaning in type system
 - Enable future extension without breaking changes
 
 **Impact**:
+
 ```typescript
-type FacilityLinkKey = `${number}-${number}` & { readonly __brand: 'LinkKey' }
+type FacilityLinkKey = `${number}-${number}` & { readonly __brand: 'LinkKey' };
 ```
+
 - Compile-time safety for map key operations
 - Clear documentation of expected string formats
 - Prevention of hard-to-debug identifier mixups
@@ -160,12 +179,14 @@ type FacilityLinkKey = `${number}-${number}` & { readonly __brand: 'LinkKey' }
 **Decision**: Define provider interfaces before implementations, establishing contracts early.
 
 **Reasoning**:
+
 - Clear API boundaries before implementation details
 - Enable parallel development of different providers
 - Force consideration of abstraction level
 - Support test-driven development approach
 
 **Impact**:
+
 - Well-defined contracts prevent coupling issues
 - Easy to add new implementations
 - Clear expectations for provider behavior
@@ -178,19 +199,22 @@ type FacilityLinkKey = `${number}-${number}` & { readonly __brand: 'LinkKey' }
 **Decision**: Transform API responses into normalized frontend-optimized formats (`TerritorySnapshot`).
 
 **Reasoning**:
+
 - API data structures optimized for server concerns, not frontend consumption
 - Normalize for efficient frontend operations (O(1) lookups)
 - Abstract away API format changes
 - Optimize for Vue reactivity and template rendering
 
 **Impact**:
+
 ```typescript
 // API Format (server-optimized)
 { map_state_list: [{ map_region_id: 123, owning_faction_id: 1, last_updated: ... }] }
 
-// Frontend Format (client-optimized)  
+// Frontend Format (client-optimized)
 { regions: { 123: 1, 124: 2, 125: 1 }, timestamp: ..., continent: ... }
 ```
+
 - Fast region ownership lookups
 - Template-friendly iteration
 - Resilient to API changes
@@ -201,17 +225,20 @@ type FacilityLinkKey = `${number}-${number}` & { readonly __brand: 'LinkKey' }
 **Decision**: Use Vue's computed properties to automatically propagate style changes through the component tree.
 
 **Reasoning**:
+
 - Leverage Vue's automatic dependency tracking
 - Minimize manual update coordination
 - Ensure visual consistency with data state
 - Optimize re-computation through Vue's caching
 
 **Impact**:
+
 ```typescript
 const linkStyles = computed(() => {
-  return calculateStyles(territoryData.value, displayMode.value)
-})
+  return calculateStyles(territoryData.value, displayMode.value);
+});
 ```
+
 - Automatic updates when territory or mode changes
 - Efficient re-computation (only when dependencies change)
 - No manual event handling or update coordination
@@ -222,16 +249,19 @@ const linkStyles = computed(() => {
 **Decision**: Use Leaflet panes for z-ordering rather than manual layer management.
 
 **Reasoning**:
+
 - Leverage Leaflet's built-in layer management
 - Avoid complex manual z-index coordination
 - Predictable rendering order
 - Better performance than manual layer manipulation
 
 **Impact**:
+
 ```typescript
 // Regions render on overlayPane (z-index: 200)
 // Links render on markerPane (z-index: 600)
 ```
+
 - Consistent visual layering
 - No z-index conflicts
 - Leverages Leaflet optimizations
@@ -246,6 +276,7 @@ const linkStyles = computed(() => {
 **Resolution**: Accept near-duplication for component clarity.
 
 **Reasoning**:
+
 - Components might diverge (polygons may need click handlers, selection)
 - Shared abstraction would be complex for minimal duplication
 - Clear component responsibility more valuable than DRY principle
@@ -260,6 +291,7 @@ const linkStyles = computed(() => {
 **Resolution**: Skip readonly wrapper for Maps, rely on composable API for mutation control.
 
 **Reasoning**:
+
 - Template layer is read-only by nature
 - Mutation control happens at composable level
 - readonly wrapper complexity not worth theoretical protection
@@ -274,6 +306,7 @@ const linkStyles = computed(() => {
 **Resolution**: Start client-only, add backend later for different reasons (API integration, caching).
 
 **Reasoning**:
+
 - Building architecture just for "enterprise appearance" is poor engineering
 - Network latency objectively worse than client computation for this scale
 - Better portfolio story: "made performance-conscious decisions"
@@ -288,6 +321,7 @@ const linkStyles = computed(() => {
 **Resolution**: Separate components for different Leaflet object types.
 
 **Reasoning**:
+
 - Different Leaflet APIs (polyline vs polygon)
 - Likely divergent feature needs
 - Generic solution would require complex type handling
@@ -302,6 +336,7 @@ const linkStyles = computed(() => {
 **Resolution**: Single shared enumeration for all providers.
 
 **Reasoning**:
+
 - All providers analyzing same domain (lattice links)
 - Swappable providers need common interface
 - Style providers can interpret any link state
@@ -316,12 +351,14 @@ const linkStyles = computed(() => {
 **Resolution**: Layer-based organization with clear provider separation.
 
 **Reasoning**:
+
 - Architecture should be visible in file structure
 - Easy to find related functionality
 - Clear separation of concerns
 - Scales well with feature growth
 
-**Impact**: 
+**Impact**:
+
 ```
 composables/
 ├── map/           # Leaflet management
@@ -330,6 +367,7 @@ composables/
     ├── analysis/
     └── styling/
 ```
+
 - Self-documenting architecture
 - Easy to locate related code
 - Clear responsibility boundaries

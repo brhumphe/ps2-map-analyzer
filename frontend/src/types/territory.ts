@@ -1,6 +1,11 @@
 // types/territory.ts
 
-import { Continent, Faction, RegionID, WorldID } from '@/types/common';
+import {
+  Continent,
+  Faction,
+  type RegionID,
+  type WorldID,
+} from '@/types/common';
 import type { FacilityLinkKey, Zone } from '@/types/zone_types';
 
 /**

@@ -1,6 +1,6 @@
 import { Continent, ContinentName, World } from '@/types/common';
-import { FacilityLink, Region, Zone } from '@/types/zone_types';
-import { TerritorySnapshot } from '@/types/territory';
+import type { FacilityLink, Region, Zone } from '@/types/zone_types';
+import type { TerritorySnapshot } from '@/types/territory';
 import { CensusDataService, extractCensusMapState } from '@/services/census';
 
 // API response types (matching the raw API structure)

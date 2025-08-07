@@ -1,8 +1,36 @@
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    # Ruff version.
-    rev: v0.12.0
+  # Python formatting and linting
+  #  - repo: https://github.com/astral-sh/ruff-pre-commit
+  #    rev: v0.12.8
+  #    hooks:
+  #      - id: ruff
+  #        args: [--fix, --exit-non-zero-on-fix]
+  #      - id: ruff-format
+
+  # JavaScript/TypeScript/Vue formatting
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
     hooks:
-      - id: ruff
-        # Run on all files and fail if issues are found
-      - id: ruff-format
+      - id: prettier
+        files: \.(js|ts|vue|json|yaml|yml|md|css|scss|html)$
+
+  # TypeScript type checking
+  - repo: local
+    hooks:
+      - id: typescript-check
+        name: TypeScript type check
+        entry: npm run type-check
+        language: system
+        files: \.(ts|vue)$
+        pass_filenames: false
+        stages: [pre-commit]
+
+  # General file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict

@@ -1,16 +1,16 @@
 // Create a new file: src/utils/zone_utils.ts
 
-import {
+import type {
   Zone,
   RegionHex,
   Region,
   WorldCoordinate,
   FacilityLink,
   FacilityLinkKey,
-  type RegionKey,
+  RegionKey,
 } from '@/types/zone_types';
-import { FacilityID, RegionID } from '@/types/common';
-import { HexCoordinate } from '@/utilities/hexagons';
+import type { FacilityID, RegionID } from '@/types/common';
+import type { HexCoordinate } from '@/utilities/hexagons';
 
 /**
  * Utility functions for working with Zone data

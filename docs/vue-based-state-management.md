@@ -98,7 +98,7 @@ const capturableRegions = computed(() => {
   if (!territoryState.size || !currentContinentData.value) {
     return new Map();
   }
-  
+
   // Dijkstra's algorithm runs automatically when dependencies change
   return calculateCapturableRegions(territoryState, currentContinentData.value);
 });
@@ -118,7 +118,7 @@ Vue's reactivity works by creating proxy objects that track when properties are 
 // Vue automatically tracks that this computed property depends on territoryState
 const factionTerritoryCount = computed(() => {
   const counts = { TR: 0, NC: 0, VS: 0 };
-  territoryState.forEach(faction => {
+  territoryState.forEach((faction) => {
     counts[faction]++;
   });
   return counts;
@@ -140,21 +140,29 @@ The solution involves using Vue's `watch` function to create explicit bridges be
 // Reactive data that drives visual appearance
 const regionVisualProperties = computed(() => {
   // Complex computation that combines territory, analysis, and user preferences
-  return calculateVisualProperties(territoryState, analysisResults, displayMode);
+  return calculateVisualProperties(
+    territoryState,
+    analysisResults,
+    displayMode
+  );
 });
 
 // Bridge to imperative Leaflet API
-watch(regionVisualProperties, (newProperties) => {
-  newProperties.forEach((properties, regionId) => {
-    const leafletPolygon = regionPolygons.get(regionId);
-    if (leafletPolygon) {
-      leafletPolygon.setStyle({
-        fillColor: properties.fillColor,
-        opacity: properties.opacity
-      });
-    }
-  });
-}, { deep: true });
+watch(
+  regionVisualProperties,
+  (newProperties) => {
+    newProperties.forEach((properties, regionId) => {
+      const leafletPolygon = regionPolygons.get(regionId);
+      if (leafletPolygon) {
+        leafletPolygon.setStyle({
+          fillColor: properties.fillColor,
+          opacity: properties.opacity,
+        });
+      }
+    });
+  },
+  { deep: true }
+);
 ```
 
 This pattern allows the application to leverage Vue's automatic dependency tracking while still maintaining full control over when and how Leaflet objects are updated.
@@ -190,7 +198,7 @@ Business logic is encapsulated in composables, which are functions that use Vue'
 export function useZoneData() {
   const currentZone = ref<Zone | null>(null);
   const isLoading = ref<boolean>(false);
-  
+
   const loadZone = async (continent: Continent) => {
     isLoading.value = true;
     try {
@@ -199,11 +207,11 @@ export function useZoneData() {
       isLoading.value = false;
     }
   };
-  
+
   // Computed views of the data
   const regions = computed(() => currentZone.value?.regions || []);
   const latticeLinks = computed(() => currentZone.value?.links || []);
-  
+
   return { currentZone, isLoading, loadZone, regions, latticeLinks };
 }
 ```
@@ -233,24 +241,29 @@ export default {
     const { territoryState } = useTerritoryControl();
     const { analysisResults } = useAnalysisResults();
     const { displayMode } = useUIState();
-    
+
     // Leaflet object management
     const leafletMap = ref<L.Map>();
     const regionPolygons = ref<Map<string, L.Polygon>>(new Map());
-    
+
     // Computed visual properties combine all data sources
     const regionVisualProperties = computed(() => {
-      return combineDataSources(regions, territoryState, analysisResults, displayMode);
+      return combineDataSources(
+        regions,
+        territoryState,
+        analysisResults,
+        displayMode
+      );
     });
-    
+
     // Reactive updates to Leaflet
     watch(regionVisualProperties, updateLeafletObjects);
-    
+
     return {
       regionVisualProperties,
       // ... other reactive properties for template
     };
-  }
+  },
 };
 ```
 
@@ -279,7 +292,7 @@ const createRegionPolygon = (region: Region): L.Polygon => {
 
 // Cleanup when component unmounts or continent changes
 const clearAllObjects = () => {
-  regionPolygons.value.forEach(polygon => {
+  regionPolygons.value.forEach((polygon) => {
     leafletMap.value.removeLayer(polygon);
   });
   regionPolygons.value.clear();
@@ -303,7 +316,7 @@ watch(regionVisualProperties, (newProperties) => {
       // Update existing object rather than recreating
       existingPolygon.setStyle({
         fillColor: properties.fillColor,
-        opacity: properties.opacity
+        opacity: properties.opacity,
       });
     }
   });
@@ -318,7 +331,7 @@ watch(selectedContinent, () => {
   clearAllObjects();
   // Wait for new continent data to load, then rebuild everything
   nextTick(() => {
-    regions.value.forEach(region => {
+    regions.value.forEach((region) => {
       createRegionPolygon(region);
     });
   });

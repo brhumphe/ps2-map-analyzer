@@ -1,4 +1,4 @@
-import { Faction, RegionID } from '@/types/common';
+import { Faction, type RegionID } from '@/types/common';
 import type { TerritorySnapshot } from '@/types/territory';
 import type { Zone } from '@/types/zone_types';
 import type {

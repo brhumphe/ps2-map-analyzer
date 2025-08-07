@@ -5,8 +5,9 @@ A tactical visualization tool for PlanetSide 2 that helps players make strategic
 ## Why This Tool?
 
 Existing PlanetSide 2 community tools (Fisu, Honu, Voidwell) excel at showing historical data but lack strategic analysis:
+
 - **Static Information**: Display current territory control without strategic context
-- **Limited Predictive Value**: No analysis of what territories *could* be captured  
+- **Limited Predictive Value**: No analysis of what territories _could_ be captured
 - **Missing Time Constraints**: Don't account for alert time limits in strategic planning
 
 This tool focuses on **predictive analysis** and **strategic planning** to answer questions like "What's our best path to 40% territory before this alert ends?"
@@ -15,7 +16,7 @@ This tool focuses on **predictive analysis** and **strategic planning** to answe
 
 - **Real-time Territory Visualization**: Interactive maps showing current faction control
 - **Tactical Analysis**: Identify contestable lattice links and strategic opportunities
-- **Strategic Intelligence**: 
+- **Strategic Intelligence**:
   - Time-based territory projection capabilities
   - Vulnerability analysis for critical territorial nodes
   - Cut-off territory detection and reconnection opportunities
@@ -41,6 +42,7 @@ This tool focuses on **predictive analysis** and **strategic planning** to answe
 ### Frontend Development (Primary)
 
 1. **Clone and install**:
+
    ```bash
    git clone https://github.com/yourusername/PS2MapState.git
    cd PS2MapState
@@ -48,15 +50,17 @@ This tool focuses on **predictive analysis** and **strategic planning** to answe
    ```
 
 2. **Start development server**:
+
    ```bash
    npm run dev
    ```
+
    Frontend will be available at `http://localhost:5173`
 
 3. **Other commands**:
    ```bash
    npm run build        # Production build
-   npm run type-check   # TypeScript checking  
+   npm run type-check   # TypeScript checking
    npm run format       # Code formatting with Prettier
    npm run test         # Run Jest tests
    ```
@@ -66,12 +70,14 @@ This tool focuses on **predictive analysis** and **strategic planning** to answe
 Originally designed as backend-focused, development revealed that client-side processing better serves this use case. The backend remains available for experimentation:
 
 1. **Install Python dependencies**:
+
    ```bash
    uv pip install -e .
    uv pip install -e ".[dev]"
    ```
 
 2. **Set up pre-commit hooks**:
+
    ```bash
    pre-commit install
    ```
@@ -95,22 +101,24 @@ This project demonstrates **iterative architectural decision-making** by evolvin
 This evolution showcases **evidence-based architecture decisions** that prioritize user experience over technical preferences.
 
 ### Key Components
+
 - **Interactive Maps**: Leaflet.js integration with custom PlanetSide 2 coordinate systems
 - **Headless Architecture**: Individual Vue components manage Leaflet objects (polygons, polylines)
 - **Provider Pattern**: Swappable analysis and styling providers for different visualization modes
 - **Reactive Pipeline**: Vue reactivity drives updates through the entire visualization chain
 
 ### Project Structure
+
 ```
 frontend/
   src/
     components/        # Vue components (headless map entities)
-    composables/       # Vue composables for coordination logic  
+    composables/       # Vue composables for coordination logic
     services/          # Business logic and API integration
     utilities/         # Pure functions (coordinates, geometry)
     types/            # TypeScript definitions
   tiles/              # Custom PlanetSide 2 map tiles
-  
+
 backend/              # Optional Python/FastAPI backend
   analysis/           # Territory analysis algorithms
   services/           # API service integrations
@@ -122,12 +130,14 @@ docs/                 # Architecture and development documentation
 ## Domain Context
 
 ### PlanetSide 2 Game Mechanics
+
 - **4 Continents**: Indar, Amerish, Esamir, Hossin (each ~89 capturable regions)
-- **4 Factions**: VS (Purple), NC (Blue), TR (Red), NSO (Gray)  
+- **4 Factions**: VS (Purple), NC (Blue), TR (Red), NSO (Gray)
 - **Lattice System**: Strategic connections between facilities (~129 links per continent)
 - **Territory Control**: Real-time ownership changes during large-scale battles
 
 ### Tactical Value
+
 - **Contestable Links**: Connections between enemy facilities represent tactical opportunities
 - **Territory Flow**: Visual analysis of faction control and strategic positioning
 - **Real-time Updates**: Current territory status for immediate tactical decision-making
@@ -135,11 +145,13 @@ docs/                 # Architecture and development documentation
 ## Development
 
 ### Code Quality
+
 - **Pre-commit hooks**: Automatic code formatting (Prettier) and linting (Ruff)
 - **TypeScript**: Full type safety with strict configuration
 - **Testing**: Jest for frontend, pytest for backend
 
 ### Architecture Patterns
+
 - **Composition API**: Modern Vue 3 reactive patterns
 - **Interface-based Design**: Provider pattern for extensibility
 - **Pure Functions**: Testable utilities for coordinates and geometry
@@ -158,6 +170,7 @@ This project showcases several advanced development practices:
 ## Contributing
 
 This project demonstrates modern frontend architecture patterns and would benefit from:
+
 - Additional territory analysis algorithms
 - Enhanced visualization modes
 - Performance optimizations for large datasets

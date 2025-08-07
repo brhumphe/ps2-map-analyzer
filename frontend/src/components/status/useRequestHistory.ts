@@ -1,5 +1,8 @@
 import { computed, readonly, ref } from 'vue';
-import { ApiRequest, ResultData } from '@/components/status/status_types.js';
+import type {
+  ApiRequest,
+  ResultData,
+} from '@/components/status/status_types.js';
 
 const requestHistory = ref<ApiRequest[]>([]);
 

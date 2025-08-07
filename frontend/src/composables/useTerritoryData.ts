@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 import { ref, computed } from 'vue';
 import type { TerritorySnapshot } from '@/types/territory';
-import { Continent, WorldID, RegionID } from '@/types/common';
+import type { Continent, WorldID, RegionID } from '@/types/common';
 import { useCensusData } from '@/composables/useCensusData';
 
 /**

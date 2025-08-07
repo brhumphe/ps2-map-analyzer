@@ -1,9 +1,9 @@
 import * as L from 'leaflet';
 import { latLng_to_world, world_to_latLng } from '@/utilities/coordinates';
-import { WorldCoordinate, Zone } from '@/types/zone_types';
-import { RegionID } from '@/types/common';
+import type { WorldCoordinate, Zone } from '@/types/zone_types';
+import type { RegionID } from '@/types/common';
 import { Polygon } from 'leaflet';
-import { HexCoordinate, HexGeometry } from '@/utilities/hexagons';
+import { type HexCoordinate, HexGeometry } from '@/utilities/hexagons';
 import { zoneUtils } from '@/utilities/zone_utils';
 
 /**

@@ -1,7 +1,7 @@
-import { Continent, Faction, RegionID, World } from '@/types/common';
-import { Zone } from '@/types/zone_types';
-import { TerritorySnapshot } from '@/types/territory';
-import { PS2DataService } from '@/types/services';
+import { Continent, Faction, type RegionID, World } from '@/types/common';
+import type { Zone } from '@/types/zone_types';
+import type { TerritorySnapshot } from '@/types/territory';
+import type { PS2DataService } from '@/types/services';
 
 // The map collection in Census has a very weird format.
 interface RowDataResponse {

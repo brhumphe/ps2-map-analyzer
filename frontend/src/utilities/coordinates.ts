@@ -1,4 +1,4 @@
-import { WorldCoordinate } from '@/types/zone_types.js';
+import type { WorldCoordinate } from '@/types/zone_types.js';
 import * as L from 'leaflet';
 
 // This scale factor is just how the math works out to get leaflet to request
