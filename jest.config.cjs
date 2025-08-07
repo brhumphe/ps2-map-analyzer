@@ -14,5 +14,6 @@ module.exports = {
   testMatch: ['**/frontend/tests/**/*.test.ts'],
   moduleNameMapper: {
     '^src/(.*)$': '<rootDir>/frontend/src/$1',
+    '^@/(.*)$': '<rootDir>/frontend/src/$1',
   },
 };
