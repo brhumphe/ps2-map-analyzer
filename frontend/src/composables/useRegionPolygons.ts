@@ -67,7 +67,7 @@ export function useRegionPolygons(
 
     const geometry = new HexGeometry(zone.hex_size);
 
-    for (const region of zone.regions) {
+    for (const region of zone.regions.values()) {
       try {
         // Extract hex coordinates for this region
         const hexCoordinates = zoneUtils.extractRegionHexCoords(

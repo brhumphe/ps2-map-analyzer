@@ -1,7 +1,39 @@
 import { Continent, Faction, type RegionID, World } from '@/types/common';
-import type { Zone } from '@/types/zone_types';
+import type {
+  FacilityLink,
+  FacilityLinkKey,
+  Region,
+  Zone,
+} from '@/types/zone_types';
 import type { TerritorySnapshot } from '@/types/territory';
 import type { PS2DataService } from '@/types/services';
+import { zoneUtils } from '@/utilities/zone_utils';
+
+// API response types (matching the raw API structure)
+interface RegionResponse {
+  map_region_id: RegionID;
+  location_x: number;
+  location_z: number;
+  facility_id: number;
+  facility_type_id: number;
+  localized_facility_name: string;
+  hexes: {
+    x: number;
+    y: number;
+  }[];
+}
+interface ZoneResponse {
+  zone_id: Continent;
+  code: string;
+  name: string;
+  hex_size: number;
+  regions: RegionResponse[];
+  links: FacilityLink[];
+}
+
+export interface ZoneDataResponse {
+  zone_list: ZoneResponse[];
+}
 
 // The map collection in Census has a very weird format.
 interface RowDataResponse {
@@ -73,11 +105,82 @@ export class CensusDataService implements PS2DataService {
       }
 
       const data = await response.json();
-      return data.zone_list[0];
+      return this.parseZoneFromZoneResponse(data);
     } catch (error) {
       console.error('Error fetching zone data:', error);
       throw error;
     }
+  }
+
+  protected parseZoneFromZoneResponse(response: ZoneResponse): Zone {
+    // Convert region array to a Map with region_id as key
+    const regions = new Map<RegionID, Region>();
+    for (const region of response.regions) {
+      regions.set(region.map_region_id, {
+        map_region_id: region.map_region_id,
+        facility_id: region.facility_id,
+        facility_type_id: region.facility_type_id,
+        facility_name: region.localized_facility_name,
+        location: {
+          x: region.location_x,
+          z: region.location_z,
+        },
+        zone_id: response.zone_id,
+        hexes: region.hexes,
+      });
+    }
+
+    const links = new Map<FacilityLinkKey, FacilityLink>();
+    response.links.forEach((link) => {
+      links.set(zoneUtils.getLinkKey(link), link);
+    });
+
+    // Calculate neighbors based on facility connections
+    const neighbors = new Map<RegionID, Set<RegionID>>();
+
+    // Initialize empty sets for all regions
+    response.regions.forEach((region) => {
+      neighbors.set(region.map_region_id, new Set<RegionID>());
+    });
+
+    // Build neighbor relationships from facility links
+    response.links.forEach((link) => {
+      // Find which regions contain these facilities
+      const regionA = response.regions.find(
+        (r) => r.facility_id === link.facility_id_a
+      );
+      const regionB = response.regions.find(
+        (r) => r.facility_id === link.facility_id_b
+      );
+
+      if (
+        regionA &&
+        regionB &&
+        regionA.map_region_id !== regionB.map_region_id
+      ) {
+        // Add bidirectional neighbor relationship
+        neighbors.get(regionA.map_region_id)?.add(regionB.map_region_id);
+        neighbors.get(regionB.map_region_id)?.add(regionA.map_region_id);
+      }
+    });
+
+    const facility_to_region_map = new Map<number, RegionID>();
+    response.regions.forEach((region) => {
+      if (region.facility_id) {
+        facility_to_region_map.set(region.facility_id, region.map_region_id);
+      }
+    });
+
+    return {
+      zone_id: response.zone_id,
+      code: response.code,
+      name: response.name,
+      hex_size: response.hex_size,
+      regions,
+      links,
+      neighbors,
+      facility_to_region_map,
+    };
   }
 
   async getCurrentTerritorySnapshot(

@@ -214,9 +214,9 @@ export function drawLattice(
   options?: L.PolylineOptions
 ): void {
   let facility_coords = zoneUtils.extractFacilityCoordinates(zone);
-  for (const link of zone.links) {
-    let loc_a = facility_coords[link['facility_id_a']];
-    let loc_b = facility_coords[link['facility_id_b']];
+  for (const link of zone.links.values()) {
+    let loc_a = facility_coords[link.facility_id_a];
+    let loc_b = facility_coords[link.facility_id_b];
     const translatedCoordsA = world_to_latLng(loc_a);
     const translatedCoordsB = world_to_latLng(loc_b);
     L.polyline([translatedCoordsA, translatedCoordsB], {

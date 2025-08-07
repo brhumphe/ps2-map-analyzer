@@ -36,16 +36,19 @@ export class ContestableLinksAnalyzer implements TerritoryAnalysisProvider {
       const linkKey = zoneUtils.getLinkKey(link);
 
       // Get region ownership for both connected facilities
-      const regionA = zone.regions.find(
-        (r) => r.facility_id === link.facility_id_a
-      );
-      const regionB = zone.regions.find(
-        (r) => r.facility_id === link.facility_id_b
-      );
+      const regionA_id = zone.facility_to_region_map.get(link.facility_id_a);
+      const regionB_id = zone.facility_to_region_map.get(link.facility_id_b);
+      if (!regionA_id || !regionB_id) {
+        console.warn(`Link ${linkKey} has missing region IDs`);
+        return;
+      }
+      const regionA = zone.regions.get(regionA_id);
+      const regionB = zone.regions.get(regionB_id);
 
       if (!regionA || !regionB) {
         // Can't analyze if we don't have region data for both facilities
         linkStates.set(linkKey, 'inactive');
+        console.warn(`Link ${linkKey} has missing region data`);
         return;
       }
 

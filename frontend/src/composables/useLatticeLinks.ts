@@ -60,7 +60,7 @@ export function useLatticeLinks(
 
     const facilityCoords = zoneUtils.extractFacilityCoordinates(zone);
 
-    for (const link of zone.links) {
+    for (const link of zone.links.values()) {
       const facilityA = link.facility_id_a;
       const facilityB = link.facility_id_b;
 

@@ -12,8 +12,8 @@ export interface WorldCoordinate {
 export interface RegionHex {
   x: number;
   y: number;
-  hex_type: number;
-  type_name: string;
+  // hex_type: number; // Currently unused
+  // type_name: string; // Currently unused
 }
 
 /**
@@ -24,9 +24,7 @@ export interface Region {
   facility_name: string;
   facility_type_id: number;
   map_region_id: RegionID;
-  location_x?: number;
-  location_y?: number;
-  location_z?: number;
+  location: WorldCoordinate;
   zone_id: Continent;
   hexes: RegionHex[];
 }
@@ -54,6 +52,8 @@ export interface Zone {
   code: string;
   name: string;
   hex_size: number;
-  regions: Region[];
-  links: FacilityLink[];
+  regions: Map<RegionID, Region>;
+  links: Map<FacilityLinkKey, FacilityLink>;
+  neighbors: Map<RegionID, Set<RegionID>>;
+  facility_to_region_map: Map<FacilityID, RegionID>;
 }

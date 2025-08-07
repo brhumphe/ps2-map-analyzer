@@ -1,21 +1,11 @@
 import { Continent, ContinentName, World } from '@/types/common';
-import type { FacilityLink, Region, Zone } from '@/types/zone_types';
+import type { Zone } from '@/types/zone_types';
 import type { TerritorySnapshot } from '@/types/territory';
-import { CensusDataService, extractCensusMapState } from '@/services/census';
-
-// API response types (matching the raw API structure)
-interface ZoneResponse {
-  zone_id: Continent;
-  code: string;
-  name: string;
-  hex_size: number;
-  regions: Region[];
-  links: FacilityLink[];
-}
-
-interface ZoneDataResponse {
-  zone_list: ZoneResponse[];
-}
+import {
+  CensusDataService,
+  extractCensusMapState,
+  type ZoneDataResponse,
+} from '@/services/census';
 
 export class DevelopmentDataService extends CensusDataService {
   constructor(serviceId: string = 'dev') {
@@ -50,7 +40,7 @@ export class DevelopmentDataService extends CensusDataService {
       throw new Error(`No zone data found for zone_id: ${continent}`);
     }
 
-    return data.zone_list[0];
+    return this.parseZoneFromZoneResponse(data.zone_list[0]);
   }
 
   async getCurrentTerritorySnapshot(

@@ -23,8 +23,7 @@ export const zoneUtils = {
    * @returns Array of RegionHex objects for the region, or undefined if region not found
    */
   getRegionHexes(zone: Zone, regionId: RegionID): RegionHex[] | undefined {
-    return zone.regions.find((region) => region.map_region_id === regionId)
-      ?.hexes;
+    return zone.regions.get(regionId)?.hexes;
   },
 
   /**
@@ -33,7 +32,16 @@ export const zoneUtils = {
    * @returns Array of RegionHex objects from all regions
    */
   getAllHexes(zone: Zone): RegionHex[] {
-    return zone.regions.flatMap((region) => region.hexes);
+    const regionHexes: RegionHex[] = [];
+    for (const region of zone.regions.values()) {
+      regionHexes.flatMap(() =>
+        region.hexes.map((hex) => ({
+          ...hex,
+          // region_id: region.map_region_id,
+        }))
+      );
+    }
+    return regionHexes;
   },
 
   /**
@@ -43,12 +51,12 @@ export const zoneUtils = {
    * @returns The Region object if found, undefined otherwise
    */
   getRegion(zone: Zone, regionId: RegionID): Region | undefined {
-    return zone.regions.find((region) => region.map_region_id === regionId);
+    return zone.regions.get(regionId);
   },
 
   extractRegionHexCoords(zone: Zone, regionId: RegionID): HexCoordinate[] {
     let coords: HexCoordinate[] = [];
-    for (const region of zone.regions) {
+    for (const region of zone.regions.values()) {
       if (regionId === region.map_region_id) {
         for (const regionHex of region.hexes) {
           coords.push({ x: regionHex.x, y: regionHex.y });
@@ -60,7 +68,7 @@ export const zoneUtils = {
 
   extractAllZoneHexCoords(zone: Zone) {
     let coords: HexCoordinate[] = [];
-    for (const region of zone.regions) {
+    for (const region of zone.regions.values()) {
       for (const regionHex of region.hexes) {
         coords.push({ x: regionHex.x, y: regionHex.y });
       }
@@ -74,13 +82,8 @@ export const zoneUtils = {
    */
   extractFacilityCoordinates(zone: Zone): Record<FacilityID, WorldCoordinate> {
     const facility_coords: Record<FacilityID, WorldCoordinate> = {};
-    for (const obj of zone['regions']) {
-      if (obj['location_x'] !== undefined && obj['location_z'] !== undefined) {
-        facility_coords[obj['facility_id']] = {
-          x: obj['location_x'],
-          z: obj['location_z'],
-        };
-      }
+    for (const region of zone.regions.values()) {
+      facility_coords[region.facility_id] = region.location;
     }
     return facility_coords;
   },
@@ -119,19 +122,20 @@ export const zoneUtils = {
 
     // Use facility links to determine neighbors
     zone.links?.forEach((link) => {
-      const regionA = zone.regions.find(
-        (r) => r.facility_id === link.facility_id_a
-      )?.map_region_id;
-      const regionB = zone.regions.find(
-        (r) => r.facility_id === link.facility_id_b
-      )?.map_region_id;
+      const regionA_id = zone.facility_to_region_map.get(link.facility_id_a)!;
+      const regionA = zone.regions.get(regionA_id);
+      const regionB_id = zone.facility_to_region_map.get(link.facility_id_b)!;
+      const regionB = zone.regions.get(regionB_id);
 
       if (regionA && regionB) {
-        neighbors.get(regionA)?.add(regionB);
-        neighbors.get(regionB)?.add(regionA);
+        neighbors.get(regionA_id)?.add(regionB_id);
+        neighbors.get(regionB_id)?.add(regionA_id);
+      } else {
+        console.warn('Invalid link', link);
       }
     });
-
+    console.debug('zone links', zone.links);
+    console.debug('neighbors', neighbors);
     return neighbors;
   },
 

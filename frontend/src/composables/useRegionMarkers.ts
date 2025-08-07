@@ -27,21 +27,13 @@ export function useRegionMarkers() {
     // Clear existing markers
     regionMarkers.clear();
 
-    for (const region of zone.regions) {
-      // Skip regions without location data
-      if (region.location_x === undefined || region.location_z === undefined) {
-        continue;
-      }
-
+    for (const region of zone.regions.values()) {
       try {
         // Convert coordinates to Leaflet position
-        const position = world_to_latLng({
-          x: region.location_x,
-          z: region.location_z,
-        });
+        const position = world_to_latLng(region.location);
 
         // Create popup content
-        const popup = `Region ${region.facility_name} regionID:${region.map_region_id} @ ${region.location_x}, ${region.location_z}`;
+        const popup = `Region ${region.facility_name} regionID:${region.map_region_id} @ ${region.location.x}, ${region.location.z}`;
 
         // Create marker entry
         const key = zoneUtils.getRegionKey(region.map_region_id);
