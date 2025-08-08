@@ -48,12 +48,13 @@
       :options="markerData.options as Partial<L.MarkerOptions>"
       :tooltip="markerData.facilityName"
       :tooltipOptions="{ permanent: true, direction: 'bottom' }"
+      :visible="isMarkerVisible(markerData.regionId)"
     />
   </template>
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useAppState } from '@/composables/useAppState';
 import { useLeafletMap } from '@/composables/useLeafletMap';
 import { useLatticeLinks } from '@/composables/useLatticeLinks';
@@ -67,6 +68,7 @@ import PolygonEntity from '@/components/map/PolygonEntity.vue';
 import MarkerEntity from '@/components/map/MarkerEntity.vue';
 import * as L from 'leaflet';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
+import type { RegionID } from '@/types/common.ts';
 
 const { selectedWorld, selectedContinent } = useAppState();
 
@@ -93,7 +95,10 @@ const {
 } = useTerritoryData();
 
 // Use region analysis to get faction-based styling
-const { regionStyles } = useRegionAnalysis(territorySnapshot, currentZone);
+const { regionStyles, getRegionState } = useRegionAnalysis(
+  territorySnapshot,
+  currentZone
+);
 
 // Use link analysis to get contestable link styling
 const { linkStyles } = useLinkAnalysis(territorySnapshot, currentZone);
@@ -146,6 +151,13 @@ const rebuildMapContent = async () => {
   initializeLatticeLinks(currentZone.value);
   initializeRegionMarkers(currentZone.value);
 };
+
+const isMarkerVisible = computed(() => {
+  return (regionId: RegionID) => {
+    const regionState = getRegionState.value(regionId);
+    return regionState?.can_capture ?? false;
+  };
+});
 
 // Watch for continent changes - switch continent and load new zone
 watch(

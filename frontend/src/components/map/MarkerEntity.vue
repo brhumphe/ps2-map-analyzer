@@ -15,6 +15,7 @@ interface Props {
   popup?: string;
   tooltip?: string;
   tooltipOptions?: L.TooltipOptions;
+  visible: boolean;
 }
 
 const props = defineProps<Props>();
@@ -173,9 +174,22 @@ watch(
   }
 );
 
+watch(
+  () => props.visible,
+  (newVisible) => {
+    if (newVisible) {
+      createMarker();
+    } else {
+      removeMarker();
+    }
+  }
+);
+
 // Lifecycle hooks
 onMounted(() => {
-  createMarker();
+  if (props.visible) {
+    createMarker();
+  }
 });
 
 onUnmounted(() => {
