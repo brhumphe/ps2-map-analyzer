@@ -46,7 +46,7 @@
       :position="markerData.position"
       :popup="markerData.popup"
       :options="markerData.options as Partial<L.MarkerOptions>"
-      :tooltip="markerData.regionId.toString()"
+      :tooltip="markerData.facilityName"
       :tooltipOptions="{ permanent: true, direction: 'bottom' }"
     />
   </template>

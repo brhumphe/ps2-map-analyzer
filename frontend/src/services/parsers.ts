@@ -15,7 +15,7 @@ export interface RegionResponse {
   location_z: number;
   facility_id: number;
   facility_type_id: number;
-  localized_facility_name: string;
+  facility_name: string;
   hexes: {
     x: number;
     y: number;
@@ -69,7 +69,7 @@ export function parseZoneFromZoneResponse(response: ZoneResponse): Zone {
       map_region_id: region.map_region_id,
       facility_id: region.facility_id,
       facility_type_id: region.facility_type_id,
-      facility_name: region.localized_facility_name,
+      facility_name: region.facility_name,
       location: {
         x: region.location_x,
         z: region.location_z,
