@@ -1,11 +1,12 @@
 import { Continent, ContinentName, World } from '@/types/common';
 import type { Zone } from '@/types/zone_types';
 import type { TerritorySnapshot } from '@/types/territory';
+import { CensusDataService } from '@/services/census';
 import {
-  CensusDataService,
   extractCensusMapState,
+  parseZoneFromZoneResponse,
   type ZoneDataResponse,
-} from '@/services/census';
+} from '@/services/parsers.ts';
 
 export class DevelopmentDataService extends CensusDataService {
   constructor(serviceId: string = 'dev') {
@@ -40,7 +41,7 @@ export class DevelopmentDataService extends CensusDataService {
       throw new Error(`No zone data found for zone_id: ${continent}`);
     }
 
-    return this.parseZoneFromZoneResponse(data.zone_list[0]);
+    return parseZoneFromZoneResponse(data.zone_list[0]);
   }
 
   async getCurrentTerritorySnapshot(

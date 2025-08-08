@@ -1,4 +1,4 @@
-import { extractCensusMapState } from '../src/services/census';
+import { extractCensusMapState } from '../src/services/parsers';
 import { Continent, World } from '../src/types/common';
 
 describe('services', () => {

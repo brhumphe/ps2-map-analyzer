@@ -2,18 +2,15 @@ import {
   hexToCubeCoords,
   cubeToHexCoords,
   hexCoordsToWorld,
-  HexCoordinate,
-  CubeCoordinate,
+  type HexCoordinate,
+  type CubeCoordinate,
   HexGeometry,
-  HexEdge,
-  vertexToString,
   edgeToString,
   getNonSharedEdges,
   parseEdgeString,
   orderEdges,
   getOrderedVertices,
 } from '../src/utilities/hexagons';
-import { WorldCoordinate } from '../src/types/zone_types';
 
 describe('hexToCubeCoords', () => {
   test('converts origin hex coordinates to cube coordinates', () => {
