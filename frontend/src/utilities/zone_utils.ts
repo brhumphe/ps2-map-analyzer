@@ -134,8 +134,8 @@ export const zoneUtils = {
         console.warn('Invalid link', link);
       }
     });
-    console.debug('zone links', zone.links);
-    console.debug('neighbors', neighbors);
+    // console.debug('zone links', zone.links);
+    // console.debug('neighbors', neighbors);
     return neighbors;
   },
 

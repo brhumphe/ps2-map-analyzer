@@ -47,8 +47,9 @@ export class RegionOwnershipAnalyzer implements RegionAnalysisProvider {
       const hostile_neighbors = new Set(neighbor_ownership);
       hostile_neighbors.delete(factionId);
       hostile_neighbors.delete(Faction.NONE);
-      const can_capture = hostile_neighbors.size > 0;
-      const can_steal = hostile_neighbors.size > 1;
+      const can_capture =
+        hostile_neighbors.size > 0 && factionId != Faction.NONE;
+      const can_steal = can_capture && hostile_neighbors.size > 1;
 
       const state: RegionState = {
         owning_faction_id: factionId,
