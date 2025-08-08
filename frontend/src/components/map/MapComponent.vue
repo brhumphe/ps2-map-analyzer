@@ -27,7 +27,7 @@
   </template>
 
   <!-- Lattice Links - rendered as headless components -->
-  <template v-if="map && currentZone">
+  <template v-if="map && currentZone && mapDisplaySettings.showLatticeLinks">
     <PolylineEntity
       v-for="[linkId, linkData] in latticeLinks"
       :key="linkId"
@@ -38,7 +38,7 @@
   </template>
 
   <!--  Region Markers - rendered as headless components-->
-  <template v-if="map && currentZone">
+  <template v-if="map && currentZone && mapDisplaySettings.showMarkers">
     <MarkerEntity
       v-for="[regionKey, markerData] in regionMarkers"
       :key="regionKey"
@@ -66,6 +66,7 @@ import PolylineEntity from '@/components/map/PolylineEntity.vue';
 import PolygonEntity from '@/components/map/PolygonEntity.vue';
 import MarkerEntity from '@/components/map/MarkerEntity.vue';
 import * as L from 'leaflet';
+import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
 
 const { selectedWorld, selectedContinent } = useAppState();
 
@@ -108,6 +109,9 @@ const { latticeLinks, initializeLatticeLinks, clearLinks } =
 // Use the region markers composable
 const { regionMarkers, initializeRegionMarkers, clearMarkers } =
   useRegionMarkers();
+
+// Usee map display settings
+const { mapDisplaySettings } = useMapDisplaySettings();
 
 // Function to completely rebuild map and content
 const rebuildMap = async () => {
