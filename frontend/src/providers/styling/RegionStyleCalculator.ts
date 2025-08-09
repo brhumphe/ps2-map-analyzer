@@ -64,6 +64,7 @@ export class RegionStyleCalculator {
     } else if (regionState.is_active) {
       fillColor = adjustColorLightnessSaturation(faction_color, -0.7, 0);
       fillOpacity = 0.6;
+      opacity = 1.0;
       pane = RegionPane.BASE;
     } else {
       pane = RegionPane.INACTIVE;
