@@ -61,14 +61,14 @@ export class RegionStyleCalculator {
       opacity = 1.0;
       pane = RegionPane.FRONTLINE;
       border_color = '#000000';
-    } else if (!regionState.is_active) {
-      pane = RegionPane.INACTIVE;
-      opacity = 0;
-      fillOpacity = 0;
-    } else {
+    } else if (regionState.is_active) {
       fillColor = adjustColorLightnessSaturation(faction_color, -0.7, 0);
       fillOpacity = 0.6;
       pane = RegionPane.BASE;
+    } else {
+      pane = RegionPane.INACTIVE;
+      opacity = 0;
+      fillOpacity = 0;
     }
 
     return {
