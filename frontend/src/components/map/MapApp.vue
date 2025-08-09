@@ -6,6 +6,15 @@
       >
       <template v-slot:append>
         <div class="d-flex align-center ga-2">
+          <v-btn
+            icon="mdi-refresh"
+            variant="text"
+            :loading="isRefreshing"
+            :disabled="isRefreshing"
+            @click="handleRefresh"
+            title="Refresh territory data"
+          >
+          </v-btn>
           <ContinentDropdown />
           <WorldDropdown />
           <MapSettingsMenu />
@@ -24,4 +33,11 @@ import WorldDropdown from '@/components/map/WorldDropdown.vue';
 import ContinentDropdown from '@/components/map/ContinentDropdown.vue';
 import MapComponent from '@/components/map/MapComponent.vue';
 import MapSettingsMenu from '@/components/map/MapSettingsMenu.vue';
+import { useTerritoryData } from '@/composables/useTerritoryData';
+
+const { refreshTerritoryData, isRefreshing } = useTerritoryData();
+
+const handleRefresh = async () => {
+  await refreshTerritoryData();
+};
 </script>

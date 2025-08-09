@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 import type { TerritorySnapshot } from '@/types/territory';
 import type { Continent, WorldID, RegionID } from '@/types/common';
 import { useCensusData } from '@/composables/useCensusData';
+import { useAppState } from '@/composables/useAppState';
 
 /**
  * Composable for managing territory control data with Vue reactivity
@@ -15,10 +16,12 @@ export function useTerritoryData() {
   // Reactive state
   const territorySnapshot = ref<TerritorySnapshot | null>(null);
   const isLoading = ref(false);
+  const isRefreshing = ref(false);
   const error = ref<string | null>(null);
 
-  // Service instance
+  // Dependencies
   const { dataService } = useCensusData();
+  const { selectedWorld, selectedContinent } = useAppState();
 
   /**
    * Fetch territory data using the service layer
@@ -45,6 +48,36 @@ export function useTerritoryData() {
       console.error('Territory data fetch error:', err);
     } finally {
       isLoading.value = false;
+    }
+  };
+
+  /**
+   * Refresh territory data using current app state
+   * Uses separate loading state to distinguish from initial loading
+   */
+  const refreshTerritoryData = async (): Promise<void> => {
+    if (!selectedWorld.value || !selectedContinent.value) {
+      console.warn(
+        'Cannot refresh territory data: world or continent not selected'
+      );
+      return;
+    }
+
+    isRefreshing.value = true;
+    error.value = null;
+
+    try {
+      // Delegate to service for data fetching and transformation
+      territorySnapshot.value = await dataService.getCurrentTerritorySnapshot(
+        selectedContinent.value,
+        selectedWorld.value
+      );
+    } catch (err) {
+      error.value =
+        err instanceof Error ? err.message : 'Failed to refresh territory data';
+      console.error('Territory data refresh error:', err);
+    } finally {
+      isRefreshing.value = false;
     }
   };
 
@@ -115,10 +148,12 @@ export function useTerritoryData() {
     // Reactive state
     territorySnapshot,
     isLoading,
+    isRefreshing,
     error,
 
     // Actions
     fetchTerritoryData,
+    refreshTerritoryData,
 
     // Computed helpers
     getRegionOwner,

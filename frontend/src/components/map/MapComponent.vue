@@ -1,9 +1,18 @@
 <template>
   <!-- Loading overlay -->
-  <v-overlay v-if="isLoading || territoryLoading" contained>
+  <v-overlay
+    v-if="isLoading || territoryLoading || territoryRefreshing"
+    contained
+  >
     <v-progress-circular indeterminate size="64"></v-progress-circular>
     <div class="mt-4">
-      {{ isLoading ? 'Loading map data...' : 'Loading territory data...' }}
+      {{
+        isLoading
+          ? 'Loading map data...'
+          : territoryRefreshing
+            ? 'Refreshing territory data...'
+            : 'Loading territory data...'
+      }}
     </div>
   </v-overlay>
 
@@ -90,8 +99,9 @@ const {
 const {
   territorySnapshot,
   isLoading: territoryLoading,
+  isRefreshing: territoryRefreshing,
   error: territoryError,
-  fetchTerritoryData,
+  refreshTerritoryData,
 } = useTerritoryData();
 
 // Use region analysis to get faction-based styling
@@ -128,8 +138,8 @@ const rebuildMap = async () => {
   // Create fresh map with selected continent
   await initializeMap(mapContainer.value, selectedContinent.value);
 
-  // Fetch territory data for selected world/continent
-  await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
+  // Fetch territory data using current app state
+  await refreshTerritoryData();
 
   // Initialize map content after map and zone data are loaded
   if (currentZone.value) {
@@ -143,8 +153,8 @@ const rebuildMap = async () => {
 const rebuildMapContent = async () => {
   if (!currentZone.value) return;
 
-  // Fetch territory data for current world/continent
-  await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
+  // Refresh territory data using current app state
+  await refreshTerritoryData();
 
   // Initialize map content
   initializeRegionPolygons(currentZone.value);
@@ -188,7 +198,7 @@ watch(currentZone, rebuildMapContent);
 watch(
   () => selectedWorld.value,
   async () => {
-    await fetchTerritoryData(selectedWorld.value, selectedContinent.value);
+    await refreshTerritoryData();
   }
 );
 
