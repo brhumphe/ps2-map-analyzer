@@ -232,9 +232,12 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 ### User Preferences
 
 - **Incremental development**: Make small changes, verify they work, then continue
-- **Type-first approach**: Add type definitions before implementations
+- **Type-first approach**: Add type definitions before implementations, clearly define interfaces and responsibilities
+- **Question-First Approach**: User questions assumptions before accepting solutions
+- **Incremental Validation**: Prefers to understand each step before proceeding
+- **Trade-off Analysis**: Values understanding "why" over "what" or "how"
 - **Performance considerations**: Always consider user experience impact
-- **Educational explanations**: Help build understanding of Vue patterns, not just solve immediate problems
+- **Educational Focus**: Learns best through explanation of underlying concepts
 - **Risk management**: Avoid suggesting large refactors or "big bang" changes
 
 ### Avoid These Approaches
@@ -256,6 +259,7 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 - **Portfolio Strategy**: Balance technical sophistication with development timeline
 - **Performance Trade-offs**: Address when optimization complexity is worth the benefit
 - **Type Safety**: Emphasize TypeScript patterns - aligns with user's language preferences
+- **Scope Creep Risk**: Consider how different approaches further the goal of shipping working code, not just architecture refinement
 
 ## Important Context for Continued Development
 
