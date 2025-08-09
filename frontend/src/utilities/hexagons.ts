@@ -460,4 +460,17 @@ export class HexGeometry {
       return { x, z };
     });
   }
+
+  getClusterCenter(hexCoords: HexCoordinate[]): WorldCoordinate {
+    const boundaryVertices = hexCoords.map((location) =>
+      this.hexCoordsToWorld(location)
+    );
+    const x =
+      boundaryVertices.reduce((acc, vertex) => acc + vertex.x, 0) /
+      boundaryVertices.length;
+    const z =
+      boundaryVertices.reduce((acc, vertex) => acc + vertex.z, 0) /
+      boundaryVertices.length;
+    return { x, z };
+  }
 }

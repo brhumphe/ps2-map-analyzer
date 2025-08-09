@@ -10,7 +10,7 @@ import type {
   RegionKey,
 } from '@/types/zone_types';
 import type { FacilityID, RegionID } from '@/types/common';
-import type { HexCoordinate } from '@/utilities/hexagons';
+import { type HexCoordinate, HexGeometry } from '@/utilities/hexagons';
 
 /**
  * Utility functions for working with Zone data
@@ -164,5 +164,14 @@ export const zoneUtils = {
     });
 
     return neighbors;
+  },
+
+  getRegionCenter(zone: Zone, regionId: RegionID): WorldCoordinate {
+    const region = zone.regions.get(regionId);
+    if (!region) {
+      throw new Error(`Region ${regionId} not found in zone`);
+    }
+    const hexGeometry = new HexGeometry(zone.hex_size);
+    return hexGeometry.getClusterCenter(region.hexes);
   },
 } as const; // Make the object immutable

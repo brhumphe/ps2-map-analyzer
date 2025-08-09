@@ -2,8 +2,8 @@ import { reactive, computed } from 'vue';
 import * as L from 'leaflet';
 import type { RegionKey, Zone } from '@/types/zone_types';
 import type { RegionID } from '@/types/common';
-import { world_to_latLng } from '@/utilities/coordinates';
 import { zoneUtils } from '@/utilities/zone_utils';
+import { world_to_latLng } from '@/utilities/coordinates.ts';
 
 interface RegionMarker {
   position: L.LatLng;
@@ -30,7 +30,9 @@ export function useRegionMarkers() {
     for (const region of zone.regions.values()) {
       try {
         // Convert coordinates to Leaflet position
-        const position = world_to_latLng(region.location);
+        const position = world_to_latLng(
+          zoneUtils.getRegionCenter(zone, region.map_region_id)
+        );
 
         // Create popup content
         const popup = `Region ${region.facility_name} regionID:${region.map_region_id} @ ${region.location.x}, ${region.location.z}`;
