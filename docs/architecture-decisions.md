@@ -22,7 +22,7 @@
 
 ### 2. Headless Component Architecture for Leaflet Objects
 
-**Decision**: Create headless Vue components (`PolylineEntity`, `PolygonEntity`) that manage individual Leaflet objects without visual templates.
+**Decision**: Create headless Vue components (`PolylineEntity`, `PolygonEntity`, `MarkerEntity`) that manage individual Leaflet objects without visual templates.
 
 **Reasoning**:
 
@@ -36,9 +36,9 @@
 
 - Clean separation between Vue reactivity and Leaflet object management
 - Efficient updates (only changed objects re-render)
-- Reusable pattern for any map visualization needs
+- Reusable pattern for any map visualization needs (polylines, polygons, markers)
 - Easy testing of individual object behavior
-- Foundation for complex map interactions
+- Foundation for complex map interactions and tooltip-based labels
 
 ### 3. Provider Pattern for Analysis and Styling
 
@@ -174,7 +174,35 @@ type FacilityLinkKey = `${number}-${number}` & { readonly __brand: 'LinkKey' };
 - Prevention of hard-to-debug identifier mixups
 - Foundation for multiple key types in same system
 
-### 4. Interface-First Design Pattern
+### 4. User Control Layer Pattern
+
+**Decision**: Implement display settings as a separate reactive layer (`MapSettingsMenu` + `useMapDisplaySettings`) that controls component visibility rather than embedding controls in individual components.
+
+**Reasoning**:
+
+- Centralized user control without component coupling
+- Consistent UI patterns for all display toggles
+- Clear separation between data rendering and user preferences
+- Enable bulk visibility changes without component coordination
+- Foundation for advanced display modes and filtering
+
+**Impact**:
+
+```typescript
+// Central settings control visibility
+const displaySettings = useMapDisplaySettings();
+
+// Components conditionally render based on settings
+<PolylineEntity v-if="displaySettings.showLatticeLinks" ... />
+<MarkerEntity v-if="displaySettings.showFacilityNames" ... />
+```
+
+- Unified user control interface for all map layers
+- Reactive visibility changes without component re-implementation
+- Clear architectural boundary between user preferences and data rendering
+- Extensible foundation for complex display modes
+
+### 5. Interface-First Design Pattern
 
 **Decision**: Define provider interfaces before implementations, establishing contracts early.
 

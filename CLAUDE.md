@@ -70,6 +70,7 @@ Individual Vue components manage single Leaflet objects:
 
 - `PolylineEntity` - Manages lattice links
 - `PolygonEntity` - Manages region polygons
+- `MarkerEntity` - Manages facility markers with tooltip-based labels
 - Components bridge Vue reactivity with Leaflet object lifecycle
 
 #### 2. Provider Pattern for Flexibility
@@ -80,7 +81,16 @@ Interface-based providers enable swappable implementations:
 - **Style Providers**: Multiple visualization modes
 - **Data Providers**: Client-side vs server-side processing
 
-#### 3. Reactive Data Pipeline
+#### 3. Singleton Composable State Management
+
+Centralized state management through specialized composables:
+
+- `useAppState` - World/continent selection, session-only state
+- `useMapDisplaySettings` - User display preferences with localStorage persistence
+- `useTerritoryData` - Territory data fetching and management
+- `useRegionMarkers` - Facility label management
+
+#### 4. Reactive Data Pipeline
 
 ```
 PS2 API → Territory Data Service → Analysis Provider → Style Provider → Vue Components → Leaflet Objects
@@ -100,13 +110,19 @@ Refer to `docs/domain-knowledge.md`
 - Leaflet map with custom PS2 tile layers (`frontend/tiles/indar/`)
 - Zone data loading and hexagon boundary calculation
 - Coordinate conversion utilities (`frontend/src/utilities/coordinates.ts`)
-- Headless component rendering for lattice links and region polygons
+- Headless component rendering for lattice links, region polygons, and facility markers
 - Territory data service integration with development mode
 - Reactive map updates through Vue reactivity system
 - **Complete territory analysis pipeline** with faction-based region coloring
 - **Contestable link detection** with strategic visual emphasis
 - **Automatic style updates** when territory data changes
 - **Development data loading** from local JSON files
+- **Live PS2 Census API integration** with proper data parsing
+- **Map Display Settings** with `MapSettingsMenu` and toggleable controls
+- **Facility Name Labels** using `MarkerEntity` with tooltip-based always-visible labels
+- **Centralized State Management** via `useAppState` and `useMapDisplaySettings`
+- **User Control Layer** with reactive visibility toggles for all map elements
+- **Selective State Persistence** - localStorage for preferences, session-only for app data
 
 ### 🔄 Recently Implemented
 
@@ -115,14 +131,20 @@ Refer to `docs/domain-knowledge.md`
 - Style calculation layers for regions and links
 - Reactive pipeline: territory data → analysis → styling → components
 - Timing resolution for initialization order and style application
+- **World/Continent Selection** with fully functional dropdown menus
+- **Component Architecture Refactoring** separating MapApp.vue (UI) from MapComponent.vue (map logic)
+- **Map Lifecycle Management** with destroy/recreate pattern for container reinitialization
+- **External Tile Integration** with Honu tile server
+- **Facility Label System** using MarkerEntity with permanent tooltips
 
 ### 🎯 Next Steps Available
 
-1. Add user controls: continent selector, world selector, display mode toggle
-2. Implement auto-refresh system for live territory data
-3. Create additional analysis modes (front-line detection, strategic value)
-4. Add UI polish: legend, territory statistics, debug log cleanup
-5. Performance optimization: caching, selective updates, analysis throttling
+1. **Auto-refresh System** - Periodic territory data updates from live API
+2. **Performance Optimization** - Caching, selective updates, analysis throttling
+3. **Additional Analysis Modes** - Front-line detection, strategic value scoring
+4. **UI Polish** - Remove debug logs, add legend, territory statistics display
+5. **Enhanced Display Modes** - More sophisticated analysis visualization options
+6. **User-Customizable Styles** - Allow user to customize region/link colors
 
 ## Critical Implementation Notes
 
@@ -234,6 +256,7 @@ Components silently fail if props are invalid:
 // These components REQUIRE:
 // - Valid Leaflet map instance
 // - At least 2 points (polyline) or 3 points (polygon)
+// - Valid position (markers)
 // - Non-null style object
 
 // ✅ Always validate before rendering
@@ -241,6 +264,11 @@ Components silently fail if props are invalid:
   v-if="map && linkData.points.length >= 2"
   :map="map"
   :points="linkData.points"
+/>
+<MarkerEntity
+  v-if="map && facilityPosition"
+  :map="map"
+  :position="facilityPosition"
 />
 ```
 
@@ -273,7 +301,11 @@ if (ownerA == null || ownerB == null) {
 
 - **`src/utilities/coordinates.ts`** - ALL spatial operations go through `world_to_latLng()`
 - **`src/utilities/zone_utils.ts`** - Link identifiers and facility coordinate mapping
-- **`src/components/map/MapApp.vue`** - Main orchestration point
+- **`src/components/map/MapApp.vue`** - Main UI orchestration and app bar
+- **`src/components/map/MapComponent.vue`** - Core map lifecycle and rendering logic
+- **`src/components/map/MapSettingsMenu.vue`** - User display controls
+- **`src/composables/useAppState.ts`** - Centralized world/continent state management
+- **`src/composables/useMapDisplaySettings.ts`** - User preference management with localStorage
 - **`src/composables/map/useLeafletMap.ts`** - Core map setup and management
 - **`src/services/MapStateService.ts`** - Territory data fetching and normalization
 

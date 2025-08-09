@@ -27,11 +27,11 @@ Vue's reactivity system drives updates through the entire pipeline, ensuring tha
 ```
 Raw Territory Data
         ↓
-Territory Data Service (Backend Integration)
+Territory Data Service
         ↓
-Link Analysis Provider (Configurable: Local or Remote)
+Region Analysis Provider
         ↓
-Link States (Domain Model)
+Region States (Domain Model)
         ↓
 Display Mode Processor (Style Calculation)
         ↓
@@ -192,6 +192,7 @@ const linkStyles = computed(() => {
 
 - `PolylineEntity`: Manages individual Leaflet polyline objects
 - `PolygonEntity`: Manages individual Leaflet polygon objects
+- `MarkerEntity`: Manages individual Leaflet marker objects with tooltip support
 
 **Reactive Props**:
 Each component receives reactive styling information and automatically updates the underlying Leaflet objects when styles change.
@@ -246,13 +247,18 @@ This entire pipeline executes automatically through Vue's reactive system, ensur
 
 ## Configuration and Deployment
 
-The system supports runtime configuration of analysis providers through environment variables or user preferences, allowing the same codebase to operate in different modes:
+The system supports runtime configuration through multiple layers:
 
-**Development Mode**: Local analysis for fast iteration
-**Production Mode**: Configurable based on performance requirements
-**Demo Mode**: Mock data providers for presentations
+### Analysis Provider Configuration
 
-This flexibility demonstrates architectural thinking while maintaining practical usability across different deployment scenarios.
+**Development Mode**: Local analysis with JSON mock data for fast iteration
+**Production Mode**: Live PS2 Census API integration with client-side analysis
+
+### Display Settings Configuration
+
+**User Preferences**: `useMapDisplaySettings` provides toggleable display options with localStorage persistence
+**Component Visibility**: Reactive display controls for markers, links, regions, and labels
+**Responsive Updates**: Immediate visual feedback when settings change
 
 ## Implementation Status
 
@@ -273,12 +279,18 @@ This flexibility demonstrates architectural thinking while maintaining practical
 - `useRegionAnalysis` (`composables/useRegionAnalysis.ts`): Coordinates region analysis and styling pipeline
 - `useLinkAnalysis` (`composables/useLinkAnalysis.ts`): Coordinates lattice link analysis and styling pipeline
 - `useTerritoryData` (`composables/useTerritoryData.ts`): Manages territory data fetching with development mode support
+- `useMapDisplaySettings` (`composables/useMapDisplaySettings.ts`): Manages user display preferences with localStorage persistence
+- `useAppState` (`composables/useAppState.ts`): Centralized application state management for world/continent selection
+- `useRegionMarkers` (`composables/useRegionMarkers.ts`): Manages facility name labels and marker display
 
 **Component Integration**:
 
 - Updated `useRegionPolygons` to accept and apply analysis-based styles
 - Updated `useLatticeLinks` to accept and apply analysis-based styles
+- Implemented `useRegionMarkers` for facility name label management
+- Added `MapSettingsMenu` Vue component for user display controls
 - Resolved timing issues with initialization order and style application
+- Integrated display settings with reactive visibility toggles
 
 ### Visual Results
 
@@ -296,4 +308,11 @@ This flexibility demonstrates architectural thinking while maintaining practical
 - Faction-controlled links: Faction colors, medium thickness
 - Inactive links: Dim gray (#666666), thin lines, low opacity
 
-The complete reactive pipeline is functional with automatic updates when territory data changes.
+The complete reactive pipeline is functional with automatic updates when territory data changes. User display preferences are managed through `useMapDisplaySettings` with localStorage persistence, allowing granular control over:
+
+- Facility markers and name labels
+- Lattice link visibility
+- Region polygon borders
+- Territory analysis overlays
+
+The display settings integrate seamlessly with the existing reactive pipeline, ensuring that visibility changes propagate immediately through all map components.

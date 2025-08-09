@@ -79,9 +79,9 @@ For complete PlanetSide 2 game mechanics, facility types, and strategic concepts
 
 #### 3. Headless Component Architecture
 
-- **Decision**: Individual Vue components manage single Leaflet objects (`PolylineEntity`, `PolygonEntity`)
+- **Decision**: Individual Vue components manage single Leaflet objects (`PolylineEntity`, `PolygonEntity`, `MarkerEntity`)
 - **Reasoning**: Separate Leaflet lifecycle from business logic, enable granular updates
-- **Status**: Implemented and working for lattice links and region polygons
+- **Status**: Implemented and working for lattice links, region polygons, and facility markers
 
 #### 4. Client-Side Analysis Default
 
@@ -93,7 +93,13 @@ For complete PlanetSide 2 game mechanics, facility types, and strategic concepts
 
 - **Decision**: Interface-based providers for analysis and styling to enable multiple visualization modes
 - **Reasoning**: Support different tactical analysis approaches, easy testing, portfolio demonstration
-- **Status**: Interfaces defined, some implementations started
+- **Status**: Established and working with complete analysis provider implementations
+
+#### 6. Composable-Based State Management
+
+- **Decision**: Centralized state management through specialized composables (`useAppState`, `useMapDisplaySettings`, etc.)
+- **Reasoning**: Provides reactive state sharing across components while maintaining clear separation of concerns
+- **Status**: Fully implemented with composables for app state, display settings, territory data, and map entities
 
 ### Data Flow Architecture
 
@@ -118,6 +124,13 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 - **Link analysis system** with contestable link detection
 - **Reactive styling pipeline** following architecture separation
 - **Development mode** with local JSON data loading
+- **Map Display Settings**: `MapSettingsMenu` component with toggleable controls for lattice links, region polygons, and facility markers
+- **Facility Name Labels**: `MarkerEntity` component with tooltip-based always-visible facility names
+- **Census Data Integration**: Working PS2 Census API integration with proper data parsing
+- **Advanced Composable Architecture**: Complete migration to composable-based state management (`useAppState`, `useMapDisplaySettings`, `useRegionMarkers`, etc.)
+- **TypeScript Strict Mode**: Enabled `noImplicitAny` for enhanced type safety across codebase
+- **Map Zone Data Refactoring**: Migrated from arrays to Map-based data structures for O(1) lookups
+- **Visibility Toggle System**: Granular control over map layer visibility with reactive updates
 
 ### 🔄 Recently Completed
 
@@ -134,17 +147,20 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 - **Reactive Prop Flow**: Clean props-down data flow for world/continent changes
 - **Zone Watcher Pattern**: Centralized content rebuilding triggered by currentZone changes
 - **Base Name Labels**: MarkerEntity component enhanced with tooltip support for always-visible facility labels
+- **Dev mode data** - Add sample state for each continent for development
+- **Front-line Analysis**: `FrontlineAnalyzer` identifying front-line tactical opportunities
 
 ### 🎯 Next Steps Available
 
-1. **Display Live state from game** - Periodic territory data updates from live API
-2. **Label Display Controls** - Toggle base name labels on/off, filter by frontline/contested bases only
-3. **Additional Analysis Modes** - Front-line detection, strategic value scoring
-4. **UI Polish** - Remove debug logs, add legend, territory statistics display
-5. **Performance Optimization** - Caching, selective updates, analysis throttling
-6. **Dev mode data** - Add sample state for each continent for development
-7. **Improved map loading responsiveness** - Load and display regions with default style faster during continent switch
-8. **Display Mode Controls** - Toggle between analysis modes (contestable links, faction control, etc.)
+- **Auto-refresh System** - Periodic territory data updates from live API **NEXT STEP**
+- **Performance Optimization** - Caching, selective updates, analysis throttling
+- **Additional Analysis Modes** - Strategic value scoring, cutoff identification
+- **Live Population Info** - Integrate population per region via Sanctuary
+- **UI Polish** - Remove debug logs, add legend, territory statistics display
+- **Enhanced Display Modes** - More sophisticated analysis visualization options
+- **Improved map loading responsiveness** - Load and display regions with default style faster during continent switch
+- **User-customizable Styles** - Allow user to customize region/link colors
+- **Integrate Routing for Zone and World selection** - Allow user to share urls to specific zones/continents
 
 ## Technical Challenges & Solutions
 
@@ -159,11 +175,13 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 7. **Component Architecture Complexity**: Large monolithic MapApp component - solved by separating concerns into MapApp (UI) + MapComponent (map logic)
 8. **CORS with External Tiles**: Browser blocks cross-origin tile requests - resolved by accepting console warnings (tiles still load correctly)
 9. **Leaflet Label Implementation**: Created always-visible facility labels using MarkerEntity with permanent tooltips and invisible markers
+10. **TypeScript Strict Mode Migration**: Successfully enabled `noImplicitAny` across entire codebase without breaking functionality
+11. **Data Structure Performance**: Migrated from array-based to Map-based zone data for O(1) region/link lookups and future graph analysis
+12. **Facility Label Visibility**: Implemented always-visible facility names using MarkerEntity with permanent tooltips
 
 ### Critical Implementation Notes
 
 - **Coordinate Conversion**: ALL spatial data must go through `world_to_latLng()` utilities
-- **Territory Data**: Null values indicate contested regions, not missing data
 - **Component Dependencies**: Headless components require valid props (map instance, sufficient points)
 - **Provider Interfaces**: Analysis needs both territory data AND zone data to function
 
@@ -243,9 +261,7 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 
 ### Domain Expertise Required
 
-- Understanding PlanetSide 2 tactical concepts (lattice system, faction warfare, territorial control)
-- Appreciation for real-time strategy game mechanics and user decision-making needs
-- Recognition that this is a tactical tool, not just a data visualization
+Refer to `docs/domain-knowledge.md` for a detailed description of the PS2 territory analyzer domain.
 
 ### Technical Constraints
 
