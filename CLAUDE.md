@@ -95,7 +95,7 @@ Centralized state management through specialized composables:
 ```
 PS2 API → Territory Data Service → Analysis Provider → Style Provider → Vue Components → Leaflet Objects
 ```
-Refer to vue-based-state-management.md for more details.
+Refer to `docs/analysis-style-separation.md` for more details.
 
 ## Key Domain Knowledge
 
