@@ -57,6 +57,7 @@ export class RegionOwnershipAnalyzer implements RegionAnalysisProvider {
         adjacent_faction_ids: neighbor_ownership,
         can_steal: can_steal,
         can_capture: can_capture,
+        is_active: factionId != Faction.NONE,
       };
 
       regionStates.set(regionId, state);

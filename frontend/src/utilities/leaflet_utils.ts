@@ -227,6 +227,7 @@ export function drawLattice(
 }
 
 export enum RegionPane {
+  INACTIVE = 'inactiveRegions',
   BASE = 'baseRegions',
   CONTESTED = 'contestedRegions',
   PRIORITY = 'priorityRegions',
@@ -240,7 +241,8 @@ export enum LatticePane {
 
 export function createCustomPanes(map: L.Map) {
   // Create panes with specific z-index values
-  map.createPane(RegionPane.BASE).style.zIndex = '410'; // Just above overlayPane
+  map.createPane(RegionPane.INACTIVE).style.zIndex = '410'; // Just above overlayPane
+  map.createPane(RegionPane.BASE).style.zIndex = '415'; // Above inactive but de-emphasized
   map.createPane(RegionPane.CONTESTED).style.zIndex = '420'; // Above base regions
   map.createPane(RegionPane.FRONTLINE).style.zIndex = '425'; // Between contested and priority
   map.createPane(RegionPane.PRIORITY).style.zIndex = '430'; // Highest priority

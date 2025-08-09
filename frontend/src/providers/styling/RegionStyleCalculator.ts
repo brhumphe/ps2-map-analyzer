@@ -47,12 +47,18 @@ export class RegionStyleCalculator {
     const faction_color: string =
       FactionColor.get(regionState.owning_faction_id) || '#ff00ff';
     let border_color = '#404040';
-    let fillColor: string;
+    let fillColor: string = FactionColor.get(Faction.NONE) || '#ff00ff';
 
     if (regionState.can_capture) {
       fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
       fillOpacity = 0.8;
+      opacity = 1.0;
       pane = RegionPane.FRONTLINE;
+      border_color = '#000000';
+    } else if (!regionState.is_active) {
+      pane = RegionPane.INACTIVE;
+      opacity = 0;
+      fillOpacity = 0;
     } else {
       fillColor = adjustColorLightnessSaturation(faction_color, -0.7, 0);
       fillOpacity = 0.6;
@@ -61,6 +67,7 @@ export class RegionStyleCalculator {
     if (regionState.can_steal) {
       border_color = '#2eff00';
       pane = RegionPane.PRIORITY;
+      opacity = 1.0;
       weight = 4;
     }
     return {

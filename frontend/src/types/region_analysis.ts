@@ -16,6 +16,7 @@ export interface RegionState {
   adjacent_faction_ids?: Set<Faction>;
   can_steal?: boolean;
   can_capture?: boolean;
+  is_active?: boolean;
 }
 
 /**
