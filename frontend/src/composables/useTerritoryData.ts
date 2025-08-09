@@ -5,20 +5,22 @@ import type { Continent, WorldID, RegionID } from '@/types/common';
 import { useCensusData } from '@/composables/useCensusData';
 import { useAppState } from '@/composables/useAppState';
 
+// Singleton state - shared across all component instances
+const territorySnapshot = ref<TerritorySnapshot | null>(null);
+const isLoading = ref(false);
+const isRefreshing = ref(false);
+const error = ref<string | null>(null);
+
 /**
  * Composable for managing territory control data with Vue reactivity
  *
  * This composable provides reactive state management for territory data,
  * delegating data fetching and transformation to the MapStateService
  * while maintaining Vue-specific concerns like loading states and computed properties.
+ *
+ * Uses singleton pattern to ensure all components share the same reactive state.
  */
 export function useTerritoryData() {
-  // Reactive state
-  const territorySnapshot = ref<TerritorySnapshot | null>(null);
-  const isLoading = ref(false);
-  const isRefreshing = ref(false);
-  const error = ref<string | null>(null);
-
   // Dependencies
   const { dataService } = useCensusData();
   const { selectedWorld, selectedContinent } = useAppState();

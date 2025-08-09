@@ -48,8 +48,14 @@ export class RegionStyleCalculator {
       FactionColor.get(regionState.owning_faction_id) || '#ff00ff';
     let border_color = '#404040';
     let fillColor: string = FactionColor.get(Faction.NONE) || '#ff00ff';
-
-    if (regionState.can_capture) {
+    if (regionState.can_steal) {
+      fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
+      fillOpacity = 0.8;
+      border_color = '#2eff00';
+      pane = RegionPane.PRIORITY;
+      opacity = 1.0;
+      weight = 4;
+    } else if (regionState.can_capture) {
       fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
       fillOpacity = 0.8;
       opacity = 1.0;
@@ -64,12 +70,7 @@ export class RegionStyleCalculator {
       fillOpacity = 0.6;
       pane = RegionPane.BASE;
     }
-    if (regionState.can_steal) {
-      border_color = '#2eff00';
-      pane = RegionPane.PRIORITY;
-      opacity = 1.0;
-      weight = 4;
-    }
+
     return {
       weight,
       opacity,

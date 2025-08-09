@@ -7,13 +7,14 @@
       <template v-slot:append>
         <div class="d-flex align-center ga-2">
           <v-btn
-            icon="mdi-refresh"
             variant="text"
-            :loading="isRefreshing"
             :disabled="isRefreshing"
             @click="handleRefresh"
             title="Refresh territory data"
           >
+            <v-icon :class="{ 'rotate-animation': isRefreshing }">
+              mdi-refresh
+            </v-icon>
           </v-btn>
           <ContinentDropdown />
           <WorldDropdown />
@@ -41,3 +42,18 @@ const handleRefresh = async () => {
   await refreshTerritoryData();
 };
 </script>
+
+<style scoped>
+.rotate-animation {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
