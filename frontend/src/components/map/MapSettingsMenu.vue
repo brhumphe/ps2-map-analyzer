@@ -56,9 +56,10 @@ const { mapDisplaySettings, resetToDefaults } = useMapDisplaySettings();
 
 // Define the settings configuration
 const displaySettingsList = [
-  { key: 'showMarkers', label: 'Show Facility Markers' },
+  // { key: 'showMarkers', label: 'Show Facility Markers' },
   { key: 'showLatticeLinks', label: 'Show Lattice Links' },
-  { key: 'showRegionBorders', label: 'Show Region Borders' },
+  // { key: 'showRegionBorders', label: 'Show Region Borders' },
   { key: 'showFacilityNames', label: 'Show Facility Names' },
+  { key: 'autoRefreshEnabled', label: 'Enable Auto-Refresh' },
 ] as const;
 </script>

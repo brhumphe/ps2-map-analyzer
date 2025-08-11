@@ -47,7 +47,7 @@
   </template>
 
   <!--  Region Markers - rendered as headless components-->
-  <template v-if="map && currentZone && mapDisplaySettings.showMarkers">
+  <template v-if="map && currentZone && mapDisplaySettings.showFacilityNames">
     <MarkerEntity
       v-for="[regionKey, markerData] in regionMarkers"
       :key="regionKey"

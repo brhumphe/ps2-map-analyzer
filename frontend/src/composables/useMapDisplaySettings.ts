@@ -2,7 +2,7 @@
 import { computed, ref, watch } from 'vue';
 
 interface MapDisplaySettings {
-  showMarkers: boolean;
+  // showMarkers: boolean;
   showLatticeLinks: boolean;
   showRegionBorders: boolean;
   showFacilityNames: boolean;
@@ -12,7 +12,7 @@ interface MapDisplaySettings {
 
 // Singleton state
 const settings = ref<MapDisplaySettings>({
-  showMarkers: true,
+  // showMarkers: true,
   showLatticeLinks: true,
   showRegionBorders: true,
   showFacilityNames: true,
@@ -52,7 +52,7 @@ export function useMapDisplaySettings() {
     mapDisplaySettings: settings,
 
     // Or expose individual settings if you prefer
-    showMarkers: computed(() => settings.value.showMarkers),
+    // showMarkers: computed(() => settings.value.showMarkers),
     showLatticeLinks: computed(() => settings.value.showLatticeLinks),
     showRegionBorders: computed(() => settings.value.showRegionBorders),
     showFacilityNames: computed(() => settings.value.showFacilityNames),
@@ -60,9 +60,9 @@ export function useMapDisplaySettings() {
     autoRefreshInterval: computed(() => settings.value.autoRefreshInterval),
 
     // Utility methods
-    toggleMarkers: () => {
-      settings.value.showMarkers = !settings.value.showMarkers;
-    },
+    // toggleMarkers: () => {
+    //   settings.value.showMarkers = !settings.value.showMarkers;
+    // },
 
     toggleAutoRefresh: () => {
       settings.value.autoRefreshEnabled = !settings.value.autoRefreshEnabled;
@@ -75,7 +75,7 @@ export function useMapDisplaySettings() {
 
     resetToDefaults: () => {
       settings.value = {
-        showMarkers: true,
+        // showMarkers: true,
         showLatticeLinks: true,
         showRegionBorders: true,
         showFacilityNames: true,
