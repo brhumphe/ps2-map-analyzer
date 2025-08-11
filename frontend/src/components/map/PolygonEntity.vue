@@ -6,10 +6,12 @@
 import { ref, watch, onMounted, onUnmounted } from 'vue';
 import * as L from 'leaflet';
 import { useLeafletMap } from '@/composables/useLeafletMap';
+import { useRegionHover } from '@/composables/useRegionHover';
+import type { RegionID } from '@/types/common.ts';
 
-// Component props - notice no map prop needed
 interface Props {
   id: string;
+  region_id: RegionID;
   points: L.LatLng[];
   style: Partial<L.PolylineOptions>;
 }
@@ -19,8 +21,20 @@ const props = defineProps<Props>();
 // Get map from context instead of props
 const { getMap, hasMap } = useLeafletMap();
 
+// Get hover state management
+const { setHoveredRegion, clearHoveredRegion } = useRegionHover();
+
 // Leaflet polygon instance
 const polygon = ref<L.Polygon>();
+
+// Mouse event handlers
+const handleMouseOver = () => {
+  setHoveredRegion(props.region_id);
+};
+
+const handleMouseOut = () => {
+  clearHoveredRegion();
+};
 
 // Create the polygon and add it to the map
 const createPolygon = () => {
@@ -44,6 +58,10 @@ const createPolygon = () => {
     // Create the Leaflet polygon
     const newPolygon = L.polygon(props.points, props.style);
 
+    // Add mouse event listeners
+    newPolygon.on('mouseover', handleMouseOver);
+    newPolygon.on('mouseout', handleMouseOut);
+
     // Add to map
     newPolygon.addTo(map);
 
@@ -62,6 +80,10 @@ const removePolygon = () => {
   const map = getMap() as L.Map;
   if (polygon.value && map) {
     try {
+      // Remove event listeners before removing from map
+      polygon.value.off('mouseover', handleMouseOver);
+      polygon.value.off('mouseout', handleMouseOut);
+
       // Check if map is still valid before attempting removal
       if (hasMap()) {
         map.removeLayer(polygon.value);

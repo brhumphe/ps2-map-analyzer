@@ -33,6 +33,7 @@
 
     <v-main>
       <MapComponent />
+      <RegionHoverDisplay />
     </v-main>
   </v-app>
 </template>
@@ -43,6 +44,7 @@ import WorldDropdown from '@/components/map/WorldDropdown.vue';
 import ContinentDropdown from '@/components/map/ContinentDropdown.vue';
 import MapComponent from '@/components/map/MapComponent.vue';
 import MapSettingsMenu from '@/components/map/MapSettingsMenu.vue';
+import RegionHoverDisplay from '@/components/map/RegionHoverDisplay.vue';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 
 const { refreshTerritoryData, isRefreshing, dataAge, territorySnapshot } =
