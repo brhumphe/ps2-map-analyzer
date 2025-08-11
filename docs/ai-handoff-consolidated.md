@@ -131,6 +131,7 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 - **TypeScript Strict Mode**: Enabled `noImplicitAny` for enhanced type safety across codebase
 - **Map Zone Data Refactoring**: Migrated from arrays to Map-based data structures for O(1) lookups
 - **Visibility Toggle System**: Granular control over map layer visibility with reactive updates
+- **Auto-refresh System**: Periodic territory data updates from live API with configurable intervals and pause/resume functionality
 
 ### 🔄 Recently Completed
 
@@ -149,10 +150,10 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 - **Base Name Labels**: MarkerEntity component enhanced with tooltip support for always-visible facility labels
 - **Dev mode data** - Add sample state for each continent for development
 - **Front-line Analysis**: `FrontlineAnalyzer` identifying front-line tactical opportunities
+- **Auto-refresh System**: Periodic territory data updates with user-configurable intervals, pause/resume controls, and automatic error handling
 
 ### 🎯 Next Steps Available
 
-- **Auto-refresh System** - Periodic territory data updates from live API **NEXT STEP**
 - **Performance Optimization** - Caching, selective updates, analysis throttling
 - **Additional Analysis Modes** - Strategic value scoring, cutoff identification
 - **Live Population Info** - Integrate population per region via Sanctuary

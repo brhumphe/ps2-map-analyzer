@@ -95,6 +95,7 @@ Centralized state management through specialized composables:
 ```
 PS2 API → Territory Data Service → Analysis Provider → Style Provider → Vue Components → Leaflet Objects
 ```
+
 Refer to `docs/analysis-style-separation.md` for more details.
 
 ## Key Domain Knowledge
@@ -124,6 +125,7 @@ Refer to `docs/domain-knowledge.md`
 - **Centralized State Management** via `useAppState` and `useMapDisplaySettings`
 - **User Control Layer** with reactive visibility toggles for all map elements
 - **Selective State Persistence** - localStorage for preferences, session-only for app data
+- **Auto-refresh System** - Periodic territory data updates from live API with configurable intervals
 
 ### 🔄 Recently Implemented
 
@@ -137,15 +139,15 @@ Refer to `docs/domain-knowledge.md`
 - **Map Lifecycle Management** with destroy/recreate pattern for container reinitialization
 - **External Tile Integration** with Honu tile server
 - **Facility Label System** using MarkerEntity with permanent tooltips
+- **Auto-refresh System** - Periodic territory data updates with user-configurable intervals and pause/resume controls
 
 ### 🎯 Next Steps Available
 
-1. **Auto-refresh System** - Periodic territory data updates from live API
-2. **Performance Optimization** - Caching, selective updates, analysis throttling
-3. **Additional Analysis Modes** - Front-line detection, strategic value scoring
-4. **UI Polish** - Remove debug logs, add legend, territory statistics display
-5. **Enhanced Display Modes** - More sophisticated analysis visualization options
-6. **User-Customizable Styles** - Allow user to customize region/link colors
+- **Performance Optimization** - Caching, selective updates, analysis throttling
+- **Additional Analysis Modes** - Front-line detection, strategic value scoring
+- **UI Polish** - Remove debug logs, add legend, territory statistics display
+- **Enhanced Display Modes** - More sophisticated analysis visualization options
+- **User-Customizable Styles** - Allow user to customize region/link colors
 
 ## Critical Implementation Notes
 
