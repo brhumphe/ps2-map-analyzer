@@ -6,16 +6,24 @@
       >
       <template v-slot:append>
         <div class="d-flex align-center ga-2">
-          <v-btn
-            variant="text"
-            :disabled="isRefreshing"
-            @click="handleRefresh"
-            title="Refresh territory data"
-          >
-            <v-icon :class="{ 'rotate-animation': isRefreshing }">
-              mdi-refresh
-            </v-icon>
-          </v-btn>
+          <div class="d-flex align-center ga-1">
+            <v-btn
+              variant="text"
+              :disabled="isRefreshing"
+              @click="handleRefresh"
+              title="Refresh territory data"
+            >
+              <v-icon :class="{ 'rotate-animation': isRefreshing }">
+                mdi-refresh
+              </v-icon>
+            </v-btn>
+            <span
+              class="text-caption text-medium-emphasis"
+              v-if="lastUpdatedText"
+            >
+              {{ lastUpdatedText }}
+            </span>
+          </div>
           <ContinentDropdown />
           <WorldDropdown />
           <MapSettingsMenu />
@@ -30,17 +38,31 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import WorldDropdown from '@/components/map/WorldDropdown.vue';
 import ContinentDropdown from '@/components/map/ContinentDropdown.vue';
 import MapComponent from '@/components/map/MapComponent.vue';
 import MapSettingsMenu from '@/components/map/MapSettingsMenu.vue';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 
-const { refreshTerritoryData, isRefreshing } = useTerritoryData();
+const { refreshTerritoryData, isRefreshing, dataAge, territorySnapshot } =
+  useTerritoryData();
 
 const handleRefresh = async () => {
   await refreshTerritoryData();
 };
+
+// Format the last updated timestamp for display
+const lastUpdatedText = computed(() => {
+  if (!territorySnapshot.value || !territorySnapshot.value.timestamp) {
+    return null;
+  }
+
+  const updateTime = new Date(territorySnapshot.value.timestamp * 1000);
+  const timeString = updateTime.toLocaleTimeString();
+
+  return `Updated: ${timeString}`;
+});
 </script>
 
 <style scoped>
