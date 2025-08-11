@@ -3,6 +3,7 @@ import type { RegionID } from '@/types/common';
 
 // Singleton state - shared across all component instances
 const hoveredRegion = ref<RegionID | null>(null);
+let hoverClearTimeout: NodeJS.Timeout | null = null;
 
 /**
  * Composable for managing region hover state with Vue reactivity
@@ -19,14 +20,28 @@ export function useRegionHover() {
    * @param regionId The region ID being hovered, or null to clear hover
    */
   const setHoveredRegion = (regionId: RegionID | null): void => {
+    // Cancel any pending clear operation
+    if (hoverClearTimeout) {
+      clearTimeout(hoverClearTimeout);
+      hoverClearTimeout = null;
+    }
     hoveredRegion.value = regionId;
   };
 
   /**
-   * Clear the hover state (convenience method)
+   * Clear the hover state with a small delay to handle brief movements over links
    */
   const clearHoveredRegion = (): void => {
-    hoveredRegion.value = null;
+    // Cancel any existing timeout
+    if (hoverClearTimeout) {
+      clearTimeout(hoverClearTimeout);
+    }
+
+    // Set a small delay before clearing to handle brief cursor movements over links
+    hoverClearTimeout = setTimeout(() => {
+      hoveredRegion.value = null;
+      hoverClearTimeout = null;
+    }, 200); // Delay in milliseconds
   };
 
   /**
