@@ -1,15 +1,20 @@
 /// <reference types="vite/client" />
-import { ref, computed } from 'vue';
+import { ref, computed, watch, onUnmounted } from 'vue';
 import type { TerritorySnapshot } from '@/types/territory';
 import type { Continent, WorldID, RegionID } from '@/types/common';
 import { useCensusData } from '@/composables/useCensusData';
 import { useAppState } from '@/composables/useAppState';
+import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 
 // Singleton state - shared across all component instances
 const territorySnapshot = ref<TerritorySnapshot | null>(null);
 const isLoading = ref(false);
 const isRefreshing = ref(false);
 const error = ref<string | null>(null);
+
+// Auto-refresh state
+const autoRefreshTimer = ref<NodeJS.Timeout | null>(null);
+const isAutoRefreshActive = ref(true);
 
 /**
  * Composable for managing territory control data with Vue reactivity
@@ -24,6 +29,7 @@ export function useTerritoryData() {
   // Dependencies
   const { dataService } = useCensusData();
   const { selectedWorld, selectedContinent } = useAppState();
+  const { autoRefreshEnabled, autoRefreshInterval } = useMapDisplaySettings();
 
   /**
    * Fetch territory data using the service layer
@@ -146,12 +152,55 @@ export function useTerritoryData() {
     return Math.floor(Date.now() / 1000) - territorySnapshot.value.timestamp;
   });
 
+  // Auto-refresh timer management
+  watch(
+    [autoRefreshEnabled, autoRefreshInterval, selectedWorld, selectedContinent],
+    () => {
+      // Clear existing timer
+      if (autoRefreshTimer.value) {
+        clearInterval(autoRefreshTimer.value);
+        autoRefreshTimer.value = null;
+        isAutoRefreshActive.value = false;
+      }
+
+      // Start new timer if enabled and we have valid world/continent
+      if (
+        autoRefreshEnabled.value &&
+        selectedWorld.value &&
+        selectedContinent.value
+      ) {
+        const intervalMs = autoRefreshInterval.value * 1000;
+        autoRefreshTimer.value = setInterval(async () => {
+          // Skip if already loading/refreshing
+          if (isLoading.value || isRefreshing.value) return;
+
+          try {
+            await refreshTerritoryData();
+          } catch (err) {
+            console.warn('Auto-refresh failed:', err);
+          }
+        }, intervalMs);
+        isAutoRefreshActive.value = true;
+      }
+    },
+    { immediate: true }
+  );
+
+  // Cleanup on unmount
+  onUnmounted(() => {
+    if (autoRefreshTimer.value) {
+      clearInterval(autoRefreshTimer.value);
+      autoRefreshTimer.value = null;
+    }
+  });
+
   return {
     // Reactive state
     territorySnapshot,
     isLoading,
     isRefreshing,
     error,
+    isAutoRefreshActive,
 
     // Actions
     fetchTerritoryData,

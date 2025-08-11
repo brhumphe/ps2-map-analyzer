@@ -6,6 +6,8 @@ interface MapDisplaySettings {
   showLatticeLinks: boolean;
   showRegionBorders: boolean;
   showFacilityNames: boolean;
+  autoRefreshEnabled: boolean;
+  autoRefreshInterval: number; // in seconds
 }
 
 // Singleton state
@@ -14,6 +16,8 @@ const settings = ref<MapDisplaySettings>({
   showLatticeLinks: true,
   showRegionBorders: true,
   showFacilityNames: true,
+  autoRefreshEnabled: true,
+  autoRefreshInterval: 10, // 10 seconds default
 });
 
 // Optional: Persist to localStorage
@@ -52,10 +56,21 @@ export function useMapDisplaySettings() {
     showLatticeLinks: computed(() => settings.value.showLatticeLinks),
     showRegionBorders: computed(() => settings.value.showRegionBorders),
     showFacilityNames: computed(() => settings.value.showFacilityNames),
+    autoRefreshEnabled: computed(() => settings.value.autoRefreshEnabled),
+    autoRefreshInterval: computed(() => settings.value.autoRefreshInterval),
 
     // Utility methods
     toggleMarkers: () => {
       settings.value.showMarkers = !settings.value.showMarkers;
+    },
+
+    toggleAutoRefresh: () => {
+      settings.value.autoRefreshEnabled = !settings.value.autoRefreshEnabled;
+    },
+
+    setAutoRefreshInterval: (seconds: number) => {
+      // Clamp to reasonable range (10 seconds to 10 minutes)
+      settings.value.autoRefreshInterval = Math.max(10, Math.min(600, seconds));
     },
 
     resetToDefaults: () => {
@@ -64,6 +79,8 @@ export function useMapDisplaySettings() {
         showLatticeLinks: true,
         showRegionBorders: true,
         showFacilityNames: true,
+        autoRefreshEnabled: true,
+        autoRefreshInterval: 10,
       };
     },
   };
