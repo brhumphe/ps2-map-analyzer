@@ -1,55 +1,67 @@
+@dbg_census = https://census.daybreakgames.com/c:{{serviceID}}/get/ps2:v2
+@sanctuary = https://census.lithafalcon.cc/get/ps2
+
 ### GET all lithafalcon collections
-GET https://census.lithafalcon.cc/get/ps2?c:censusJSON=false
+GET {{sanctuary}}?c:censusJSON=false
+
+### GET all census collections
+GET {{dbg_census}}
 
 ### GET world
-GET https://census.lithafalcon.cc/get/ps2/world?c:lang=en&c:censusJSON=false
+GET {{sanctuary}}/world?c:lang=en&c:censusJSON=false
 
 ### GET map_hex
-GET https://census.lithafalcon.cc/get/ps2/map_hex?c:censusJSON=false
+GET {{sanctuary}}/map_hex?c:censusJSON=false
 
 ### GET map_region
-GET https://census.lithafalcon.cc/get/ps2/map_region?c:hide=localized_facility_name&zone_id=8&c:censusJSON=false
+GET {{sanctuary}}/map_region?c:hide=localized_facility_name&zone_id=8&c:censusJSON=false
 
 ### GET map_region to facility_id
-GET https://census.lithafalcon.cc/get/ps2/map_region?zone_id=8&c:show=map_region_id,facility_id,zone_id&c:censusJSON=false
+GET {{sanctuary}}/map_region?zone_id=8&c:show=map_region_id,facility_id,zone_id&c:censusJSON=false
 
 ### GET map_region to facility_id for list of facility ids
-GET https://census.lithafalcon.cc/get/ps2/map_region?c:show=map_region_id,facility_id,zone_id&c:censusJSON=false&facility_id=400317,256030
+GET {{sanctuary}}/map_region?c:show=map_region_id,facility_id,zone_id&c:censusJSON=false&facility_id=400317,256030
 
 ### GET map_state Osprey Esamir
-GET https://census.lithafalcon.cc/get/ps2/map_state?world_id=1&zone_id=8&c:censusJSON=false
+GET {{sanctuary}}/map_state?world_id=1&zone_id=8&c:censusJSON=false
 
 ### GET map state from census (can't use sanctuary for jaeger)
-GET https://census.daybreakgames.com/get/ps2:v2/map?world_id=19&zone_ids=2
+GET {{dbg_census}}/map?world_id=19&zone_ids=2
 
 ### GET faction
-GET https://census.lithafalcon.cc/get/ps2/faction?c:lang=en&c:hide=description&c:censusJSON=false
+GET {{sanctuary}}/faction?c:lang=en&c:hide=description&c:censusJSON=false
 
 ### GET facility_type
-GET https://census.lithafalcon.cc/get/ps2/facility_type?c:censusJSON=false
+GET {{sanctuary}}/facility_type?c:censusJSON=false
 
 ### GET facility_link
-GET https://census.lithafalcon.cc/get/ps2/facility_link?zone_id=8&c:censusJSON=false
+GET {{sanctuary}}/facility_link?zone_id=8&c:censusJSON=false
 
 ### GET facility_info
-GET https://census.lithafalcon.cc/get/ps2/facility_info?c:lang=en&c:censusJSON=false&zone_id=4
+GET {{sanctuary}}/facility_info?c:lang=en&c:censusJSON=false&zone_id=4
 
 ### GET region name
 # Lightweight way to go from map_region_id to the name. map_region collection has far more info,
 # wheras region only has the zone_id and localized name.
-https://census.daybreakgames.com/get/ps2:v2/region?c:lang=en&region_id=2202
+GET {{dbg_census}}/region?c:lang=en&region_id=2202
 
 ### GET zone info
-GET https://census.lithafalcon.cc/get/ps2/zone?c:lang=en&c:hide=description&c:censusJSON=false
+GET {{sanctuary}}/zone?c:lang=en&c:hide=description&c:censusJSON=false
 
 ### GET map combined info
-GET https://census.daybreakgames.com/get/ps2:v2/zone?zone_id=2&c:join=map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&c:lang=en
+GET {{dbg_census}}/zone?zone_id=2&
+    c:join=map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&
+    c:lang=en
 
 ### GET map combined info from lithafalcon
-GET https://census.lithafalcon.cc/get/ps2/zone?zone_id=2&c:join=map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&c:lang=en&c:censusJSON=false
+GET {{sanctuary}}/zone?zone_id=2&
+    c:join=map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&
+    c:lang=en&c:censusJSON=false
 
 ### GET combined info with links from lithafalcon
-GET https://census.lithafalcon.cc/get/ps2/zone?zone_id=4&c:join=facility_link^on:zone_id^to:zone_id^list:1^inject_at:links^hide:description'zone_id,map_region^list:1^inject_at:regions^hide:zone_id'localized_facility_name(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&c:lang=en&c:hide=name,description&c:censusJSON=false
+GET {{sanctuary}}/zone?zone_id=4&
+    c:join=facility_link^on:zone_id^to:zone_id^list:1^inject_at:links^hide:description'zone_id,map_region^list:1^inject_at:regions^hide:zone_id'localized_facility_name(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&
+    c:lang=en&c:hide=name,description&c:censusJSON=false
 
 ### GET metagame info for world via metagame.ps2.live
 GET https://metagame.ps2.live/1
