@@ -17,6 +17,42 @@
           {{ factionName }}
         </v-chip>
       </div>
+
+      <!-- Add tactical information -->
+      <div v-if="hoveredRegionState" class="text-caption mt-2">
+        <v-chip
+          v-if="hoveredRegionState.can_steal"
+          color="success"
+          size="x-small"
+          class="mr-1 mb-1"
+        >
+          Priority Target
+        </v-chip>
+        <v-chip
+          v-else-if="hoveredRegionState.can_capture"
+          color="warning"
+          size="x-small"
+          class="mr-1 mb-1"
+        >
+          Capturable
+        </v-chip>
+        <v-chip
+          v-if="!hoveredRegionState.is_active"
+          color="grey"
+          size="x-small"
+          class="mr-1 mb-1"
+        >
+          Inactive
+        </v-chip>
+      </div>
+
+      <!-- Style information as JSON -->
+      <div v-if="hoveredRegionStyle" class="mt-2">
+        <div class="text-caption text-medium-emphasis mb-1">Region Style:</div>
+        <pre class="style-json">{{
+          JSON.stringify(hoveredRegionStyle, null, 2)
+        }}</pre>
+      </div>
     </v-card-text>
   </v-card>
 </template>
@@ -26,11 +62,19 @@ import { computed } from 'vue';
 import { useRegionHover } from '@/composables/useRegionHover';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useLeafletMap } from '@/composables/useLeafletMap';
+import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
+import { zoneUtils } from '@/utilities/zone_utils';
 import { Faction } from '@/types/common';
 
 const { currentHoveredRegion } = useRegionHover();
 const { territorySnapshot } = useTerritoryData();
 const { currentZone } = useLeafletMap();
+
+// Add region analysis for style and tactical information
+const { getRegionStyle, getRegionState } = useRegionAnalysis(
+  territorySnapshot,
+  currentZone
+);
 
 // Get region information for the currently hovered region
 const hoveredRegionInfo = computed(() => {
@@ -45,6 +89,25 @@ const hoveredRegionInfo = computed(() => {
   }
 
   return region;
+});
+
+// Get style information for the hovered region
+const hoveredRegionStyle = computed(() => {
+  if (!currentHoveredRegion.value) {
+    return null;
+  }
+
+  const regionKey = zoneUtils.getRegionKey(currentHoveredRegion.value);
+  return getRegionStyle.value(regionKey);
+});
+
+// Get analysis state for additional tactical info
+const hoveredRegionState = computed(() => {
+  if (!currentHoveredRegion.value) {
+    return null;
+  }
+
+  return getRegionState.value(currentHoveredRegion.value);
 });
 
 // Get the faction that controls the hovered region
@@ -93,7 +156,7 @@ const factionColor = computed(() => {
     case 4:
       return 'grey'; // Nanite Systems
     default:
-      return 'magenta'; // Contested
+      return 'magenta'; // Unknown/invalid
   }
 });
 </script>
@@ -106,5 +169,17 @@ const factionColor = computed(() => {
   min-width: 250px;
   z-index: 1000;
   pointer-events: none;
+}
+
+.style-json {
+  font-size: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  padding: 8px;
+  margin: 0;
+  overflow-x: auto;
+  white-space: pre;
+  font-family: 'Courier New', monospace;
 }
 </style>
