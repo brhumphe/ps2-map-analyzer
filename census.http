@@ -1,7 +1,7 @@
 @dbg_census = https://census.daybreakgames.com/c:{{serviceID}}/get/ps2:v2
 @sanctuary = https://census.lithafalcon.cc/get/ps2
 
-### GET all lithafalcon collections
+### GET all Sanctuary collections
 GET {{sanctuary}}?c:censusJSON=false
 
 ### GET all census collections
@@ -15,6 +15,12 @@ GET {{sanctuary}}/map_hex?c:censusJSON=false
 
 ### GET map_region
 GET {{sanctuary}}/map_region?c:hide=localized_facility_name&zone_id=8&c:censusJSON=false
+
+### GET facility_info
+GET {{sanctuary}}/facility_info?c:lang=en&c:censusJSON=false
+
+### GET facility type
+GET {{sanctuary}}/facility_type?c:censusJSON=false
 
 ### GET map_region to facility_id
 GET {{sanctuary}}/map_region?zone_id=8&c:show=map_region_id,facility_id,zone_id&c:censusJSON=false
@@ -48,12 +54,12 @@ GET {{dbg_census}}/region?c:lang=en&region_id=2202
 ### GET zone info
 GET {{sanctuary}}/zone?c:lang=en&c:hide=description&c:censusJSON=false
 
-### GET map combined info
+### GET map combined info (Regions + hexes)
 GET {{dbg_census}}/zone?zone_id=2&
     c:join=map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&
     c:lang=en
 
-### GET map combined info from lithafalcon
+### GET map combined info from lithafalcon (Regions + hexes) Recommended
 GET {{sanctuary}}/zone?zone_id=2&
     c:join=map_region^list:1^inject_at:regions^hide:zone_id(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&
     c:lang=en&c:censusJSON=false
@@ -68,3 +74,30 @@ GET https://metagame.ps2.live/1
 
 ### GET metagame info via honu
 GET https://wt.honu.pw/api/world/overview
+
+### Recent world events
+GET {{dbg_census}}/world_event?world_id=1&c:limit=100
+
+### Metagame (alert) types
+GET {{dbg_census}}/metagame_event?c:lang=en&c:limit=200
+
+### Metagame (alert) states
+GET {{dbg_census}}/metagame_event_state?c:limit=10
+
+### Facility type
+GET {{dbg_census}}/facility_type?c:limit=25
+
+### Target Type
+GET {{dbg_census}}/target_type?c:limit=10
+
+### World Population
+GET {{sanctuary}}/world_population
+
+### Zone Population
+GET {{sanctuary}}/zone_population_limits
+
+### Zone set mapping
+GET {{sanctuary}}/zone_set_mapping
+
+### No deploy area
+GET {{sanctuary}}/no_deploy_area
