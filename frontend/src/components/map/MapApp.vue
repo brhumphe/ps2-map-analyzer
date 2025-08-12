@@ -34,6 +34,9 @@
     <v-main>
       <MapComponent />
       <RegionHoverDisplay />
+
+      <!-- Continent statistics panel at bottom -->
+      <ContinentStatsPanel />
     </v-main>
   </v-app>
 </template>
@@ -45,9 +48,10 @@ import ContinentDropdown from '@/components/map/ContinentDropdown.vue';
 import MapComponent from '@/components/map/MapComponent.vue';
 import MapSettingsMenu from '@/components/map/MapSettingsMenu.vue';
 import RegionHoverDisplay from '@/components/map/RegionHoverDisplay.vue';
+import ContinentStatsPanel from '@/components/map/ContinentStatsPanel.vue';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 
-const { refreshTerritoryData, isRefreshing, dataAge, territorySnapshot } =
+const { refreshTerritoryData, isRefreshing, territorySnapshot } =
   useTerritoryData();
 
 const handleRefresh = async () => {

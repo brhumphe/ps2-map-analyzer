@@ -223,7 +223,9 @@ onUnmounted(() => {
 
 <style scoped>
 .map-container {
-  height: calc(100vh - 64px);
+  height: calc(
+    100vh - 64px - 56px
+  ); /* Account for app bar (64px) and stats panel (56px) */
   width: 100%;
   position: relative;
   background-color: #051110;
