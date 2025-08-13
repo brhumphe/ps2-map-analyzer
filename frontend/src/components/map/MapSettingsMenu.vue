@@ -60,6 +60,7 @@ const displaySettingsList = [
   { key: 'showLatticeLinks', label: 'Show Lattice Links' },
   // { key: 'showRegionBorders', label: 'Show Region Borders' },
   { key: 'showFacilityNames', label: 'Show Facility Names' },
+  { key: 'showRegionHover', label: 'Show Region Hover Info' },
   { key: 'autoRefreshEnabled', label: 'Enable Auto-Refresh' },
 ] as const;
 </script>

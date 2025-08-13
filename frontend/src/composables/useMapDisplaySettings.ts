@@ -6,6 +6,7 @@ interface MapDisplaySettings {
   showLatticeLinks: boolean;
   showRegionBorders: boolean;
   showFacilityNames: boolean;
+  showRegionHover: boolean;
   autoRefreshEnabled: boolean;
   autoRefreshInterval: number; // in seconds
 }
@@ -16,6 +17,7 @@ const settings = ref<MapDisplaySettings>({
   showLatticeLinks: true,
   showRegionBorders: true,
   showFacilityNames: true,
+  showRegionHover: true,
   autoRefreshEnabled: true,
   autoRefreshInterval: 10, // 10 seconds default
 });
@@ -56,6 +58,7 @@ export function useMapDisplaySettings() {
     showLatticeLinks: computed(() => settings.value.showLatticeLinks),
     showRegionBorders: computed(() => settings.value.showRegionBorders),
     showFacilityNames: computed(() => settings.value.showFacilityNames),
+    showRegionHover: computed(() => settings.value.showRegionHover),
     autoRefreshEnabled: computed(() => settings.value.autoRefreshEnabled),
     autoRefreshInterval: computed(() => settings.value.autoRefreshInterval),
 
@@ -79,6 +82,7 @@ export function useMapDisplaySettings() {
         showLatticeLinks: true,
         showRegionBorders: true,
         showFacilityNames: true,
+        showRegionHover: true,
         autoRefreshEnabled: true,
         autoRefreshInterval: 10,
       };

@@ -33,7 +33,7 @@
 
     <v-main>
       <MapComponent />
-      <RegionHoverDisplay />
+      <RegionHoverDisplay v-if="showRegionHover" />
 
       <!-- Continent statistics panel at bottom -->
       <ContinentStatsPanel />
@@ -50,9 +50,12 @@ import MapSettingsMenu from '@/components/map/MapSettingsMenu.vue';
 import RegionHoverDisplay from '@/components/map/RegionHoverDisplay.vue';
 import ContinentStatsPanel from '@/components/map/ContinentStatsPanel.vue';
 import { useTerritoryData } from '@/composables/useTerritoryData';
+import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 
 const { refreshTerritoryData, isRefreshing, territorySnapshot } =
   useTerritoryData();
+
+const { showRegionHover } = useMapDisplaySettings();
 
 const handleRefresh = async () => {
   await refreshTerritoryData();
