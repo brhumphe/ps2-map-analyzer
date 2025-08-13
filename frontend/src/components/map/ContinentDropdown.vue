@@ -10,31 +10,11 @@
             class="mr-2 mdi-spin"
           />
           <v-icon
-            v-else-if="isContinentLocked(selectedContinent)"
-            icon="mdi-lock"
-            size="small"
-            class="mr-2"
-          />
-          <v-icon
-            v-else-if="isContinentOpen(selectedContinent)"
-            icon="mdi-earth"
-            size="small"
-            color="success"
-            class="mr-2"
-          />
-          <v-icon
-            v-else-if="hasAlertInfo(selectedContinent)"
-            icon="mdi-alert"
-            size="small"
-            color="warning"
-            class="mr-2"
-          />
-          <v-icon
             v-else
-            icon="mdi-help-circle-outline"
+            :icon="getContinentIcon(selectedContinent).icon"
+            :color="getContinentIcon(selectedContinent).color"
             size="small"
             class="mr-2"
-            color="grey"
           />
 
           {{ selectedContinentName }}
@@ -60,23 +40,13 @@
         >
           <template v-slot:prepend>
             <v-icon
-              v-if="isContinentLocked(item.continent)"
-              icon="mdi-lock"
+              :icon="getContinentIcon(item.continent).icon"
+              :color="getContinentIcon(item.continent).color"
               size="small"
-            />
-            <v-icon
-              v-else-if="isContinentOpen(item.continent)"
-              icon="mdi-earth"
-              size="small"
-              color="success"
             />
           </template>
 
           <v-list-item-title>{{ item.name }}</v-list-item-title>
-
-          <template v-slot:append v-if="hasAlertInfo(item.continent)">
-            <v-icon icon="mdi-alert" size="small" color="warning" />
-          </template>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -160,11 +130,24 @@ const getContinentStatusClass = (continent: Continent): string => {
   if (isContinentLocked(continent)) {
     return 'text-disabled';
   } else if (hasAlertInfo(continent)) {
-    return 'text-warning';
+    return 'text-error';
   } else if (isContinentOpen(continent)) {
     return 'text-success';
   }
   return '';
+};
+
+const getContinentIcon = (
+  continent: Continent
+): { icon: string; color?: string } => {
+  if (isContinentLocked(continent)) {
+    return { icon: 'mdi-lock' };
+  } else if (isContinentOpen(continent) && hasAlertInfo(continent)) {
+    return { icon: 'mdi-alarm-light', color: 'error' };
+  } else if (isContinentOpen(continent)) {
+    return { icon: 'mdi-earth', color: 'success' };
+  }
+  return { icon: 'mdi-help-circle-outline', color: 'grey' };
 };
 
 const selectedContinentName = computed(
