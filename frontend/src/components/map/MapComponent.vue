@@ -1,18 +1,17 @@
 <template>
-  <!-- Loading overlay -->
+  <!-- Loading overlay for map rebuilding -->
   <v-overlay
-    v-if="isLoading || territoryLoading || territoryRefreshing"
+    v-model="isMapRebuilding"
     contained
+    class="map-loading-overlay d-flex align-center justify-center"
   >
-    <v-progress-circular indeterminate size="64"></v-progress-circular>
-    <div class="mt-4">
-      {{
-        isLoading
-          ? 'Loading map data...'
-          : territoryRefreshing
-            ? 'Refreshing territory data...'
-            : 'Loading territory data...'
-      }}
+    <div class="d-flex flex-column align-center">
+      <v-progress-circular
+        indeterminate
+        size="64"
+        color="primary"
+      ></v-progress-circular>
+      <div class="mt-4 text-h6">Loading</div>
     </div>
   </v-overlay>
 
@@ -85,6 +84,9 @@ const { selectedWorld, selectedContinent } = useAppState();
 // Map container reference
 const mapContainer = ref<HTMLElement>();
 
+// Track when we're rebuilding due to app state changes
+const isRebuildingFromStateChange = ref(false);
+
 // Use the map initialization composable
 const {
   map,
@@ -126,8 +128,22 @@ const { latticeLinks, initializeLatticeLinks, clearLinks } =
 const { regionMarkers, initializeRegionMarkers, clearMarkers } =
   useRegionMarkers();
 
-// Usee map display settings
+// Use map display settings
 const { mapDisplaySettings } = useMapDisplaySettings();
+
+// Computed property to determine if map is being rebuilt
+const isMapRebuilding = computed(() => {
+  // Show overlay if:
+  // 1. Map is loading (initial load or continent change)
+  // 2. We're rebuilding from a state change (world/continent) AND no content is loaded
+  return (
+    isLoading.value ||
+    (isRebuildingFromStateChange.value &&
+      map.value &&
+      currentZone.value &&
+      regionPolygons.size === 0)
+  );
+});
 
 // Function to completely rebuild map and content
 const rebuildMap = async () => {
@@ -148,6 +164,9 @@ const rebuildMap = async () => {
     initializeLatticeLinks(currentZone.value);
     initializeRegionMarkers(currentZone.value);
   }
+
+  // Clear rebuilding flag once everything is loaded
+  isRebuildingFromStateChange.value = false;
 };
 
 // Function to rebuild map content when zone changes
@@ -161,6 +180,9 @@ const rebuildMapContent = async () => {
   initializeRegionPolygons(currentZone.value);
   initializeLatticeLinks(currentZone.value);
   initializeRegionMarkers(currentZone.value);
+
+  // Clear rebuilding flag once everything is loaded
+  isRebuildingFromStateChange.value = false;
 };
 
 const isMarkerVisible = computed(() => {
@@ -175,6 +197,9 @@ watch(
   () => selectedContinent.value,
   async (newContinent) => {
     if (map.value) {
+      // Set rebuilding flag
+      isRebuildingFromStateChange.value = true;
+
       // Clear existing content immediately to avoid lingering
       clearMarkers();
       clearLinks();
@@ -195,11 +220,30 @@ watch(
 // Watch for zone changes - rebuild map content
 watch(currentZone, rebuildMapContent);
 
-// Watch for world changes - only update territory data
+// Watch for world changes - rebuild territory data and content
 watch(
   () => selectedWorld.value,
   async () => {
+    // Set rebuilding flag for world changes
+    isRebuildingFromStateChange.value = true;
+
+    // Clear existing content to show we're rebuilding
+    clearMarkers();
+    clearLinks();
+    clearRegions();
+
+    // Refresh territory data with new world
     await refreshTerritoryData();
+
+    // Rebuild content if zone is available
+    if (currentZone.value) {
+      initializeRegionPolygons(currentZone.value);
+      initializeLatticeLinks(currentZone.value);
+      initializeRegionMarkers(currentZone.value);
+    }
+
+    // Clear rebuilding flag once everything is loaded
+    isRebuildingFromStateChange.value = false;
   }
 );
 
@@ -229,6 +273,10 @@ onUnmounted(() => {
   width: 100%;
   position: relative;
   background-color: #051110;
+}
+
+.map-loading-overlay {
+  z-index: 1000;
 }
 
 :deep(.hex-label) {
