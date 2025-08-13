@@ -8,6 +8,7 @@ export type FactionTerritoryCount = {
   NC: number;
   TR: number;
   NSO: number;
+  None: number;
 };
 export type DominantFaction = keyof FactionTerritoryCount | null;
 
@@ -26,30 +27,36 @@ export function useContinentAnalysis(
    * Count of regions controlled by each faction
    */
   const factionTerritoryCount = computed(() => {
-    if (!territorySnapshot.value) {
-      return { VS: 0, NC: 0, TR: 0, NSO: 0 };
+    if (!territorySnapshot.value || !currentZone.value) {
+      return { VS: 0, NC: 0, TR: 0, NSO: 0, None: 0 };
     }
 
-    const counts = { VS: 0, NC: 0, TR: 0, NSO: 0 };
+    const counts = { VS: 0, NC: 0, TR: 0, NSO: 0, None: 0 };
 
-    Object.values(territorySnapshot.value.region_ownership).forEach(
-      (faction) => {
-        switch (faction) {
-          case 1:
-            counts.VS++;
-            break;
-          case 2:
-            counts.NC++;
-            break;
-          case 3:
-            counts.TR++;
-            break;
-          case 4:
-            counts.NSO++;
-            break;
-        }
+    // Count all regions that exist in the zone
+    currentZone.value.regions.forEach((region) => {
+      const regionId = region.map_region_id;
+      const faction = territorySnapshot.value!.region_ownership[regionId];
+
+      switch (faction) {
+        case 1:
+          counts.VS++;
+          break;
+        case 2:
+          counts.NC++;
+          break;
+        case 3:
+          counts.TR++;
+          break;
+        case 4:
+          counts.NSO++;
+          break;
+        default:
+          // null, undefined, or any other value means no faction controls it
+          counts.None++;
+          break;
       }
-    );
+    });
 
     return counts;
   });
@@ -78,8 +85,14 @@ export function useContinentAnalysis(
 
     if (trackedRegions.value === 0) return null;
 
-    const entries = Object.entries(counts) as [keyof typeof counts, number][];
-    const [dominantFaction] = entries.reduce((max, current) =>
+    // Exclude "None" from dominant faction calculation
+    const factionEntries = Object.entries(counts).filter(
+      ([faction]) => faction !== 'None'
+    ) as [keyof Omit<typeof counts, 'None'>, number][];
+
+    if (factionEntries.length === 0) return null;
+
+    const [dominantFaction] = factionEntries.reduce((max, current) =>
       current[1] > max[1] ? current : max
     );
 

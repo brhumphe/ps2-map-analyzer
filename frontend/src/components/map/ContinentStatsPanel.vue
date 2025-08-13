@@ -72,6 +72,24 @@
             continentAnalysis.factionTerritoryCount.value.NSO
           }}</span>
         </div>
+
+        <!-- None/Uncontrolled (only show if there are uncontrolled regions) -->
+        <div
+          v-if="continentAnalysis.factionTerritoryCount.value.None > 0"
+          class="faction-stat d-flex align-center ga-2"
+        >
+          <v-chip
+            size="x-small"
+            color="grey-darken-2"
+            variant="outlined"
+            class="faction-chip"
+          >
+            None
+          </v-chip>
+          <span class="faction-count text-h6">{{
+            continentAnalysis.factionTerritoryCount.value.None
+          }}</span>
+        </div>
       </div>
 
       <!-- Summary information -->
