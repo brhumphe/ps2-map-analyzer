@@ -1,17 +1,18 @@
 <template>
-  <!-- Loading overlay for map rebuilding -->
+  <!-- Loading overlay for map rebuilding - dims the entire map -->
   <v-overlay
     v-model="isMapRebuilding"
     contained
-    class="map-loading-overlay d-flex align-center justify-center"
+    class="map-loading-overlay"
+    :style="{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }"
   >
-    <div class="d-flex flex-column align-center">
+    <div class="loading-content">
       <v-progress-circular
         indeterminate
         size="64"
         color="primary"
       ></v-progress-circular>
-      <div class="mt-4 text-h6">Loading</div>
+      <div class="mt-4 text-h6 text-white">Loading Map</div>
     </div>
   </v-overlay>
 
@@ -85,7 +86,8 @@ const { selectedWorld, selectedContinent } = useAppState();
 const mapContainer = ref<HTMLElement>();
 
 // Track when we're rebuilding due to app state changes
-const isRebuildingFromStateChange = ref(false);
+// Default to true to show loading overlay on initial load
+const isRebuildingFromStateChange = ref(true);
 
 // Use the map initialization composable
 const {
@@ -133,16 +135,29 @@ const { mapDisplaySettings } = useMapDisplaySettings();
 
 // Computed property to determine if map is being rebuilt
 const isMapRebuilding = computed(() => {
-  // Show overlay if:
-  // 1. Map is loading (initial load or continent change)
-  // 2. We're rebuilding from a state change (world/continent) AND no content is loaded
-  return (
-    isLoading.value ||
-    (isRebuildingFromStateChange.value &&
-      map.value &&
-      currentZone.value &&
-      regionPolygons.size === 0)
-  );
+  console.debug({
+    isLoading: isLoading.value,
+    currentZone: currentZone.value,
+    region_polygons_size: regionPolygons.size,
+    error: error.value,
+    isRebuildingFromStateChange: isRebuildingFromStateChange.value,
+  });
+  // Always show loading during initial map setup
+  if (isLoading.value) {
+    return true;
+  }
+
+  // Show loading if we have zone data but no polygons (content not ready)
+  if (currentZone.value && regionPolygons.size === 0 && !error.value) {
+    return true;
+  }
+
+  // Show loading during rebuilds when we're actively clearing content
+  if (isRebuildingFromStateChange.value) {
+    return true;
+  }
+
+  return false;
 });
 
 // Function to completely rebuild map and content
@@ -277,6 +292,23 @@ onUnmounted(() => {
 
 .map-loading-overlay {
   z-index: 1000;
+  /* Ensure overlay covers the entire map area and centers content */
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 :deep(.hex-label) {
