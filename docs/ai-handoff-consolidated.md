@@ -1,4 +1,4 @@
-# AI Handoff Summary - PS2 Territory Analyzer Project (Consolidated)
+# AI Handoff Summary - PS2 Territory Analyzer Project (Updated)
 
 ## User Profile & Context
 
@@ -47,7 +47,7 @@ For complete PlanetSide 2 game mechanics, facility types, and strategic concepts
 
 - **Frontend**: Vue 3 + Composition API + TypeScript + Vuetify + Leaflet.js
 - **Backend**: Optional Python/FastAPI (available for experimentation)
-- **Data Sources**: Third-party PS2 Census API for real-time territory data
+- **Data Sources**: Census, Sanctuary, Honu
 - **Mapping**: Custom coordinate system conversion (PS2 world coordinates ↔ Leaflet coordinates)
 
 ## Architectural Foundations
@@ -132,6 +132,10 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 - **Map Zone Data Refactoring**: Migrated from arrays to Map-based data structures for O(1) lookups
 - **Visibility Toggle System**: Granular control over map layer visibility with reactive updates
 - **Auto-refresh System**: Periodic territory data updates from live API with configurable intervals and pause/resume functionality
+- **Debug Panel**: Developer options with toggle control for debugging and power user features
+- **Live Continent Status**: Honu API integration for real-time continent lock/unlock status with visual indicators
+- **Continent Statistics Display**: Panel showing faction base control counts with live updates
+- **Enhanced Dropdown UX**: Continent selection with lock status icons, alert indicators, and loading states
 
 ### 🔄 Recently Completed
 
@@ -150,7 +154,11 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 - **Base Name Labels**: MarkerEntity component enhanced with tooltip support for always-visible facility labels
 - **Dev mode data** - Add sample state for each continent for development
 - **Front-line Analysis**: `FrontlineAnalyzer` identifying front-line tactical opportunities
-- **Auto-refresh System**: Periodic territory data updates with user-configurable intervals, pause/resume controls, and automatic error handling
+- **Auto-refresh System**: Periodic territory data updates with user-configurable intervals and pause/resume controls
+- **Debug Panel Implementation**: Developer options panel with toggle control and diagnostic tools
+- **Honu API Integration**: Real-time continent status with TypeScript interfaces (`HonuWorldOverview`, `HonuZoneStatus`, etc.)
+- **Continent Status Dropdown**: Enhanced UI with visual status indicators, loading states, and world-aware data fetching
+- **Leaflet Pane Switching Fix**: Solved overlapping region display issues with remove/re-add pattern for dynamic state changes
 
 ### 🎯 Next Steps Available
 
@@ -179,12 +187,15 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 10. **TypeScript Strict Mode Migration**: Successfully enabled `noImplicitAny` across entire codebase without breaking functionality
 11. **Data Structure Performance**: Migrated from array-based to Map-based zone data for O(1) region/link lookups and future graph analysis
 12. **Facility Label Visibility**: Implemented always-visible facility names using MarkerEntity with permanent tooltips
+13. **Leaflet Pane Switching**: Leaflet doesn't automatically move objects between panes when options change - solved with remove/re-add pattern for dynamic state transitions
+14. **Real-time Continent Status**: Integrated Honu API for live continent lock/unlock status with proper error handling and loading states
 
 ### Critical Implementation Notes
 
 - **Coordinate Conversion**: ALL spatial data must go through `world_to_latLng()` utilities
 - **Component Dependencies**: Headless components require valid props (map instance, sufficient points)
 - **Provider Interfaces**: Analysis needs both territory data AND zone data to function
+- **Leaflet Pane Management**: Objects don't automatically move between panes when `options.pane` changes - must remove and re-add objects for pane transitions
 
 ## Development Practices Established
 
@@ -213,6 +224,7 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 - **Component lifecycle tracking** with console logging
 - **Territory data structure inspection** with reactive watchers
 - **Provider swap testing** for isolation of issues
+- **Debug panel integration** with developer-specific diagnostic tools
 
 ## Communication Guidelines for AI Assistant
 

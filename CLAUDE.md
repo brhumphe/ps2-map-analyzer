@@ -59,7 +59,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - **Frontend**: Vue 3 + Composition API + TypeScript + Vuetify + Leaflet.js
 - **Mapping**: Custom coordinate system (PS2 world coordinates ↔ Leaflet)
-- **Data**: Third-party PS2 Census API for real-time territory data
+- **Data**: Mixture of Census and 3rd-party APIs
 - **Optional Backend**: Python/FastAPI (available for experimentation)
 
 ### Architectural Patterns
@@ -126,6 +126,10 @@ Refer to `docs/domain-knowledge.md`
 - **User Control Layer** with reactive visibility toggles for all map elements
 - **Selective State Persistence** - localStorage for preferences, session-only for app data
 - **Auto-refresh System** - Periodic territory data updates from live API with configurable intervals
+- **Debug Panel** with developer options and toggle control for debugging and power user features
+- **Live Continent Status** via Honu API integration with visual status indicators for locked/unlocked continents
+- **Continent Statistics Display** showing faction base control counts with live updates
+- **Enhanced Dropdown UX** with continent lock status icons, alert indicators, loading states, and world-aware data fetching
 
 ### 🔄 Recently Implemented
 
@@ -140,6 +144,10 @@ Refer to `docs/domain-knowledge.md`
 - **External Tile Integration** with Honu tile server
 - **Facility Label System** using MarkerEntity with permanent tooltips
 - **Auto-refresh System** - Periodic territory data updates with user-configurable intervals and pause/resume controls
+- **Debug Panel Implementation** with configurable visibility and developer diagnostic tools
+- **Honu API Integration** with TypeScript interfaces (`HonuWorldOverview`, `HonuZoneStatus`, etc.) for real-time continent status
+- **Continent Status Dropdown** with visual indicators, loading states, and world-aware data fetching
+- **Leaflet Pane Switching Fix** for dynamic region state changes using remove/re-add pattern
 
 ### 🎯 Next Steps Available
 
@@ -235,9 +243,34 @@ onUnmounted(() => {
 });
 ```
 
-**Issue**: Leaflet objects persist even after Vue components are destroyed.
+**Issue**: Leaflet objects persist even after Vue components are destroyed unless manually removed.
 
-#### 4. Facility ID vs. Region ID Confusion
+#### 4. Leaflet Pane Switching for Dynamic States
+
+```typescript
+// ❌ This doesn't actually move the polygon to a new pane
+polygon.setStyle({ pane: 'newPane', ...otherStyles });
+
+// ✅ Must remove and re-add to change panes
+const movePolygonToPane = (
+  polygon: L.Polygon,
+  newPane: string,
+  newStyle: any
+) => {
+  const map = polygon._map;
+  map.removeLayer(polygon);
+  polygon.options.pane = newPane;
+  polygon.setStyle(newStyle);
+  polygon.addTo(map);
+};
+```
+
+**Critical**: Leaflet doesn't automatically move objects between panes when the `pane` option changes.
+
+#### 5. Facility ID vs. Region ID Confusion
+
+There is always a 1:1 relationship between region IDs and facility IDs.
+Some data may be keyed by facility ID, but most cases it should be keyed by region ID. Remap as necessary.
 
 ```typescript
 // ❌ These are different concepts!
@@ -289,9 +322,8 @@ if (territory && zone) {
 #### 3. PS2 Census API Characteristics
 
 - Rate limits: ~100 requests/minute
-- Territory data can be incomplete during server maintenance
-- Null values indicate contested regions, not missing data
 - Some facilities have missing coordinates
+- Main API provided by Daybreak Games, Sanctuary wraps many collections and adds more detail, Honu provides tiles and additional data.
 
 ```typescript
 // Always handle incomplete data
@@ -302,186 +334,10 @@ if (ownerA == null || ownerB == null) {
 
 ### Key Files for Understanding
 
-- **`src/utilities/coordinates.ts`** - ALL spatial operations go through `world_to_latLng()`
-- **`src/utilities/zone_utils.ts`** - Link identifiers and facility coordinate mapping
-- **`src/components/map/MapApp.vue`** - Main UI orchestration and app bar
-- **`src/components/map/MapComponent.vue`** - Core map lifecycle and rendering logic
-- **`src/components/map/MapSettingsMenu.vue`** - User display controls
-- **`src/composables/useAppState.ts`** - Centralized world/continent state management
-- **`src/composables/useMapDisplaySettings.ts`** - User preference management with localStorage
-- **`src/composables/map/useLeafletMap.ts`** - Core map setup and management
-- **`src/services/MapStateService.ts`** - Territory data fetching and normalization
-
-## Debugging Approaches
-
-### Spatial Issues
-
-```typescript
-// Enable mouse coordinates debug (already enabled)
-initMouseCoordinatesPopup(leafletMap);
-// Hover over map to see [x,z] coordinates
-
-// Test coordinate conversion
-const worldCoord = { x: 1000, z: 2000 };
-const latLng = world_to_latLng(worldCoord);
-const backToWorld = latLng_to_world(latLng);
-console.log('Round trip:', worldCoord, '→', latLng, '→', backToWorld);
-```
-
-### Territory Data Issues
-
-```typescript
-watch(territorySnapshot, (territory) => {
-  console.log('Territory update:', {
-    regionCount: Object.keys(territory.regions).length,
-    sampleRegions: Object.entries(territory.regions).slice(0, 5),
-    timestamp: new Date(territory.timestamp * 1000),
-  });
-});
-```
-
-### Emergency Debugging Checklist
-
-When something breaks, check these in order:
-
-1. **Browser console** - Component error messages include ID prefixes
-2. **Vue DevTools** - Check reactive state values
-3. **Map container element** - Verify DOM element exists and has correct height
-4. **Territory data structure** - Log territory snapshot to verify API data
-5. **Coordinate conversion** - Test with known coordinates
-6. **Provider configuration** - Verify correct providers are being used
-
-## Technical Problems Solved
-
-### Performance Solutions
-
-#### 1. Template Reactivity with Map Objects
-
-**Problem**: Vue templates couldn't iterate over `readonly(reactive(new Map()))`
-**Solution**: Remove readonly wrapper from reactive Maps used in templates
-**Why**: Template layer is inherently read-only, composable APIs provide mutation control
-
-#### 2. Bulk Territory Updates
-
-**Problem**: Territory updates affect 89 regions and 129 links simultaneously
-**Solution**: Individual reactive objects per map element vs large nested structures
-
-```typescript
-// ✅ Individual reactive elements
-const latticeLinks = reactive(new Map<FacilityLinkKey, LinkData>());
-const regionPolygons = reactive(new Map<RegionKey, RegionData>());
-```
-
-**Result**: Only changed elements trigger re-renders, Vue optimizes updates
-
-#### 3. Client vs Server Processing Decision
-
-**Problem**: Should link analysis happen client-side or server-side?
-**Solution**: Default client-side analysis (O(n) on 89 nodes < 1ms) vs network latency (50-200ms)
-**Result**: Immediate user feedback for tactical decisions
-
-### Coordinate System Solutions
-
-#### 1. PS2 to Leaflet Coordinate Conversion
-
-**Problem**: PS2 uses Y-up 3D coordinates, Leaflet uses 2D map coordinates
-**Solution**: Bidirectional transformation with 90-degree rotation
-
-```typescript
-const worldToLatLng = (coords: WorldCoordinate): L.LatLng => {
-  const rotationAngle = (90 * Math.PI) / 180;
-  let newX =
-    coords.x * Math.cos(rotationAngle) + coords.z * Math.sin(rotationAngle);
-  let newY =
-    coords.x * Math.sin(rotationAngle) - coords.z * Math.cos(rotationAngle);
-  return L.latLng(newY, newX);
-};
-```
-
-#### 2. Map Element Z-Ordering
-
-**Problem**: Region polygons rendered above lattice links, making links invisible
-**Solution**: Use Leaflet's pane system with explicit z-index
-
-```typescript
-// Region polygons: overlayPane (z-index: 200)
-// Lattice links: markerPane (z-index: 600)
-```
-
-#### 3. Custom Tile Layer Implementation
-
-**Problem**: PS2 tiles use `Indar_Tile_012_-004_LOD0.png` vs standard `{z}/{x}/{y}.png`
-**Solution**: Override Leaflet's `getTileUrl` with custom coordinate transformation
-
-### Data Pipeline Solutions
-
-#### 1. API Response Transformation
-
-**Problem**: Server-optimized API format inefficient for frontend
-**Solution**: Transform to frontend-optimized structures
-
-```typescript
-// API: Array with O(n) searches
-// Frontend: Record<RegionID, FactionID> for O(1) lookups
-```
-
-#### 2. Leaflet-Vue Lifecycle Bridge
-
-**Problem**: Leaflet needs manual cleanup, Vue has automatic lifecycle
-**Solution**: Headless components bridge the two systems
-
-```typescript
-onUnmounted(() => {
-  if (polyline.value && props.map) {
-    props.map.removeLayer(polyline.value);
-  }
-});
-```
-
-## Portfolio Context
-
-This project demonstrates:
-
-- Modern Vue 3 + Composition API patterns
-- Complex TypeScript integration with external libraries
-- Interactive data visualization with performance considerations
-- Reactive state management in frontend applications
-- Interface-based architecture for maintainability and testing
-
-## Technical Evolution Context
-
-### Migration Strategy
-
-**Incremental Approach**: Migrated from procedural TypeScript to reactive Vue architecture gradually, preserving complex working code (coordinate conversion, hexagon geometry, Leaflet integration) while introducing Vue benefits step-by-step.
-
-**Build System Decision**: Initially avoided complex build tools (Vite/webpack) to focus on Vue concepts, using import maps and inline components. Later evolved to proper build system as comfort with reactive patterns increased.
-
-**Component Evolution**: Started with inline components in single files, progressed to headless component architecture, then to proper Vue component architecture with provider patterns.
-
-## Communication Guidelines for AI Assistants
-
-### Effective Interaction Patterns
-
-- **Leverage Experience**: User has senior-level backend expertise - don't treat as beginner
-- **Provide Context**: Explain why recommendations make sense for this specific use case and constraints
-- **Show Examples**: Use concrete code examples from PS2 domain to illustrate concepts
-- **Acknowledge Constraints**: Consider job search timeline and practical limitations
-- **Build Incrementally**: Break complex changes into manageable steps
-- **Respect Analysis**: User will question assumptions and wants to understand "why"
-
-### Red Flags to Avoid
-
-- **Overly Complex Solutions**: Don't suggest complex patterns without clear justification
-- **Ignoring Timeline**: Remember this is portfolio project with job search pressure
-- **Beginner Treatment**: User has database/backend expertise - leverage existing knowledge
-- **Technology Trends**: Focus on practical portfolio value over latest frameworks
-- **Major Rewrites**: Prefer incremental improvements over architectural overhauls
-
-### Topics Requiring Special Attention
-
-- **Vue Framework Migration**: Vue adoption is newer skill, needs clear reactive concept explanations
-- **Portfolio Strategy**: Balance technical sophistication with development timeline
-- **Performance Trade-offs**: Address when optimization complexity is worth the benefit
-- **Type Safety**: Emphasize TypeScript patterns - aligns with user's language preferences
-
-The architecture prioritizes user experience (immediate responsiveness) while demonstrating engineering sophistication through clean separation of concerns and flexible provider patterns.
+- **`docs/*`**: Documentation for project architecture, design decisions, and implementation notes
+- **`frontend/src/components/map/*`**: Vue components for map entities and UI
+- **`frontend/src/composables/*`**: Composable functions for reactive logic
+- **`frontend/src/providers/*`**: Business logic for analysis and styling
+- **`frontend/src/services/*`**: External API integration
+- **`frontend/src/utilities/*`**: Pure functions for coordinate conversion, hexagon calculation, etc.
+- **`frontend/src/types/*`**: TypeScript type definitions. **IMPORTANT**: Always import types from here!
