@@ -55,6 +55,7 @@ const createMarker = () => {
       const tooltipOptions: L.TooltipOptions = {
         permanent: false,
         direction: 'center',
+        sticky: true, // Better positioning during zoom
         ...props.tooltipOptions,
       };
       newMarker.bindTooltip(props.tooltip, tooltipOptions);
@@ -137,6 +138,7 @@ const updateTooltip = (newTooltip: string | undefined) => {
       const tooltipOptions: L.TooltipOptions = {
         permanent: false,
         direction: 'top',
+        sticky: true, // Better positioning during zoom
         ...props.tooltipOptions,
       };
       marker.value.bindTooltip(newTooltip, tooltipOptions);
@@ -198,8 +200,42 @@ onUnmounted(() => {
 </script>
 
 <style>
-/* Hide tooltip arrows */
+/* Enhanced tooltip styling */
+.leaflet-tooltip {
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.0178571429em;
+  line-height: 1.2;
+  padding: 6px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  white-space: nowrap;
+  text-align: center;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Hide tooltip arrows - this needs !important as Leaflet applies inline styles */
 .leaflet-tooltip::before {
   display: none !important;
+}
+
+/* Subtle glow effect */
+.leaflet-tooltip::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+  border-radius: 6px;
+  z-index: -1;
+  pointer-events: none;
 }
 </style>
