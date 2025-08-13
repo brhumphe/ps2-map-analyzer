@@ -126,8 +126,18 @@ const updateStyle = (newStyle: L.PolylineOptions) => {
   if (!polygon.value) return;
 
   try {
+    const map = getMap() as L.Map;
+
+    // Because the style can include changing the map pane,
+    // need to remove and re-add the polygon to the correct pane.
+
+    // Remove from current pane
+    map.removeLayer(polygon.value);
+
+    // Update options and re-add
+    polygon.value.options.pane = newStyle.pane || polygon.value.options.pane;
     polygon.value.setStyle(newStyle);
-    // console.debug(`PolygonEntity[${props.id}]: Updated style`)
+    polygon.value.addTo(map);
   } catch (error) {
     console.error(`PolygonEntity[${props.id}]: Failed to update style:`, error);
   }
