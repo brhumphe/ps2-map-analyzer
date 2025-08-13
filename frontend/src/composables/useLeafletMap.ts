@@ -1,4 +1,4 @@
-import { readonly, ref } from 'vue';
+import { ref } from 'vue';
 import type { Map as LMap } from 'leaflet';
 import * as L from 'leaflet';
 import { Continent } from '@/types/common';
@@ -40,6 +40,7 @@ export function useLeafletMap() {
       const leafletMap = L.map(container, {
         crs: L.CRS.Simple,
         center: [0, 0],
+        zoomSnap: 0.25,
       }).setView([0, 0], 0);
       createCustomPanes(leafletMap);
 
