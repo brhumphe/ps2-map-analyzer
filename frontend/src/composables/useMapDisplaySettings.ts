@@ -11,16 +11,18 @@ interface MapDisplaySettings {
   autoRefreshInterval: number; // in seconds
 }
 
-// Singleton state
-const settings = ref<MapDisplaySettings>({
+const defaultSettings: MapDisplaySettings = {
   // showMarkers: true,
   showLatticeLinks: true,
   showRegionBorders: true,
   showFacilityNames: true,
-  showRegionHover: true,
+  showRegionHover: false,
   autoRefreshEnabled: true,
-  autoRefreshInterval: 10, // 10 seconds default
-});
+  autoRefreshInterval: 10,
+};
+
+// Singleton state
+const settings = ref<MapDisplaySettings>(defaultSettings);
 
 // Optional: Persist to localStorage
 const STORAGE_KEY = 'map-display-settings';
@@ -77,15 +79,7 @@ export function useMapDisplaySettings() {
     },
 
     resetToDefaults: () => {
-      settings.value = {
-        // showMarkers: true,
-        showLatticeLinks: true,
-        showRegionBorders: true,
-        showFacilityNames: true,
-        showRegionHover: true,
-        autoRefreshEnabled: true,
-        autoRefreshInterval: 10,
-      };
+      settings.value = defaultSettings;
     },
   };
 }
