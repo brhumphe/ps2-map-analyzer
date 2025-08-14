@@ -50,7 +50,10 @@ export function useLeafletMap() {
       // initMouseCoordinatesPopup(leafletMap);
       configureMapTileLayer(leafletMap, zone.code.toLowerCase());
 
-      console.log('Map initialized successfully for continent:', continent);
+      console.debug(
+        'Leaflet map initialized successfully for continent:',
+        continent
+      );
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : 'Unknown error occurred';

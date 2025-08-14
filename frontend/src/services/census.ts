@@ -34,6 +34,7 @@ export class CensusDataService implements PS2DataService {
       }
 
       const data: ZoneDataResponse = await response.json();
+      console.debug(`Loaded zone data from Sanctuary`, data, url);
       return parseZoneFromZoneResponse(data.zone_list[0]);
     } catch (error) {
       console.error('Error fetching zone data:', error);
@@ -65,7 +66,7 @@ export class CensusDataService implements PS2DataService {
       console.error(`Territories data load failed:`, data, url);
       throw new Error(data.error);
     }
-    // console.debug(`Loaded territory control from Census`, data, url);
+    console.debug(`Loaded territory control from Census`, data, url);
     return extractCensusMapState(data as MapListResponse, continent, world);
   }
 }

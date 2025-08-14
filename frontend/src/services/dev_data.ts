@@ -40,7 +40,7 @@ export class DevelopmentDataService extends CensusDataService {
     if (!data.zone_list || data.zone_list.length === 0) {
       throw new Error(`No zone data found for zone_id: ${continent}`);
     }
-
+    console.debug(`Loaded zone data from development`, data, url);
     return parseZoneFromZoneResponse(data.zone_list[0]);
   }
 
@@ -57,6 +57,7 @@ export class DevelopmentDataService extends CensusDataService {
       }
 
       const data = await response.json();
+      console.debug(`Loaded territory control from development`, data, url);
       return extractCensusMapState(data, continent, world);
     } catch (err) {
       throw new Error(

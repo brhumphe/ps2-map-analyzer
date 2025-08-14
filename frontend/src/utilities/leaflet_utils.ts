@@ -9,6 +9,7 @@ import { zoneUtils } from '@/utilities/zone_utils';
 /**
  * Configures and adds a custom tile layer to a Leaflet map.
  * @param {L.Map} map - The Leaflet map instance to which the custom tile layer will be added.
+ * @param zoneCode - Lowercase zone name to use for tile layer URL.
  * @return {void}
  */
 export function configureMapTileLayer(map: L.Map, zoneCode: string): void {
@@ -247,6 +248,6 @@ export function createCustomPanes(map: L.Map) {
   map.createPane(RegionPane.FRONTLINE).style.zIndex = '425'; // Between contested and priority
   map.createPane(RegionPane.PRIORITY).style.zIndex = '430'; // Highest priority
   // Keep lattice above regions
-  map.createPane(LatticePane.BASE).style.zIndex = '440';
-  map.createPane(LatticePane.FRONTLINE).style.zIndex = '450';
+  map.createPane(LatticePane.BASE).style.zIndex = '500';
+  map.createPane(LatticePane.FRONTLINE).style.zIndex = '550';
 }

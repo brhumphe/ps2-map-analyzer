@@ -135,13 +135,13 @@ const { mapDisplaySettings } = useMapDisplaySettings();
 
 // Computed property to determine if map is being rebuilt
 const isMapRebuilding = computed(() => {
-  console.debug({
-    isLoading: isLoading.value,
-    currentZone: currentZone.value,
-    region_polygons_size: regionPolygons.size,
-    error: error.value,
-    isRebuildingFromStateChange: isRebuildingFromStateChange.value,
-  });
+  // console.debug({
+  //   isLoading: isLoading.value,
+  //   currentZone: currentZone.value,
+  //   region_polygons_size: regionPolygons.size,
+  //   error: error.value,
+  //   isRebuildingFromStateChange: isRebuildingFromStateChange.value,
+  // });
   // Always show loading during initial map setup
   if (isLoading.value) {
     return true;

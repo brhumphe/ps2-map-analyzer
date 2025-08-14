@@ -23,16 +23,20 @@ class CensusData implements PS2DataService {
     world: World
   ): Promise<TerritorySnapshot> {
     if (useDevData.value) {
+      console.debug('Getting territory snapshot from development data');
       return this.dev.getCurrentTerritorySnapshot(continent, world);
     } else {
+      console.debug('Getting territory snapshot from Census');
       return this.census.getCurrentTerritorySnapshot(continent, world);
     }
   }
 
   getZoneData(continent: Continent): Promise<Zone> {
     if (useDevData.value) {
+      console.debug('Getting zone data from development data');
       return this.dev.getZoneData(continent);
     } else {
+      console.debug('Getting zone data from Sanctuary');
       return this.census.getZoneData(continent);
     }
   }
