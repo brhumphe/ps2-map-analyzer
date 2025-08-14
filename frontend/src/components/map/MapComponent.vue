@@ -1,29 +1,6 @@
 <template>
-  <!-- Loading overlay for map rebuilding - dims the entire map -->
-  <v-overlay
-    v-model="isMapRebuilding"
-    contained
-    class="map-loading-overlay"
-    :style="{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }"
-  >
-    <div class="loading-content">
-      <v-progress-circular
-        indeterminate
-        size="64"
-        color="primary"
-      ></v-progress-circular>
-      <div class="mt-4 text-h6 text-white">Loading Map</div>
-      <v-btn
-        v-if="showDismissButton"
-        @click="dismissOverlay"
-        variant="outlined"
-        color="white"
-        class="mt-4"
-      >
-        Dismiss
-      </v-btn>
-    </div>
-  </v-overlay>
+  <!-- Loading overlay for map rebuilding -->
+  <DismissibleLoadingOverlay :show="isMapRebuilding" message="Loading Map" />
 
   <!-- Error display -->
   <v-alert v-if="error || territoryError" type="error" class="ma-4">
@@ -85,6 +62,7 @@ import { useRegionMarkers } from '@/composables/useRegionMarkers';
 import PolylineEntity from '@/components/map/PolylineEntity.vue';
 import PolygonEntity from '@/components/map/PolygonEntity.vue';
 import MarkerEntity from '@/components/map/MarkerEntity.vue';
+import DismissibleLoadingOverlay from '@/components/map/ui/DismissibleLoadingOverlay.vue';
 import * as L from 'leaflet';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
 import type { RegionID } from '@/types/common.ts';
@@ -97,11 +75,6 @@ const mapContainer = ref<HTMLElement>();
 // Track when we're rebuilding due to app state changes
 // Default to true to show loading overlay on initial load
 const isRebuildingFromStateChange = ref(true);
-
-// Track overlay dismiss functionality
-const showDismissButton = ref(false);
-const dismissTimer = ref<number | null>(null);
-const userDismissedOverlay = ref(false);
 
 // Use the map initialization composable
 const {
@@ -149,11 +122,6 @@ const { mapDisplaySettings } = useMapDisplaySettings();
 
 // Computed property to determine if map is being rebuilt
 const isMapRebuilding = computed(() => {
-  // If user has dismissed the overlay, don't show it
-  if (userDismissedOverlay.value) {
-    return false;
-  }
-
   // Always show loading during initial map setup
   if (isLoading.value) {
     return true;
@@ -219,37 +187,11 @@ const isMarkerVisible = computed(() => {
   };
 });
 
-// Dismiss overlay functionality
-const dismissOverlay = () => {
-  userDismissedOverlay.value = true;
-  showDismissButton.value = false;
-  clearDismissTimer();
-};
-
-const clearDismissTimer = () => {
-  if (dismissTimer.value) {
-    clearTimeout(dismissTimer.value);
-    dismissTimer.value = null;
-  }
-};
-
-const startDismissTimer = () => {
-  clearDismissTimer();
-  showDismissButton.value = false;
-
-  dismissTimer.value = window.setTimeout(() => {
-    showDismissButton.value = true;
-  }, 3000); // Show dismiss button after 3 seconds
-};
-
 // Watch for continent changes - switch continent and load new zone
 watch(
   () => selectedContinent.value,
   async (newContinent) => {
     if (map.value) {
-      // Reset dismiss flag for new loading operation
-      userDismissedOverlay.value = false;
-
       // Set rebuilding flag
       isRebuildingFromStateChange.value = true;
 
@@ -277,9 +219,6 @@ watch(currentZone, rebuildMapContent);
 watch(
   () => selectedWorld.value,
   async () => {
-    // Reset dismiss flag for new loading operation
-    userDismissedOverlay.value = false;
-
     // Set rebuilding flag for world changes
     isRebuildingFromStateChange.value = true;
 
@@ -303,16 +242,6 @@ watch(
   }
 );
 
-// Watch for overlay visibility to start/stop dismiss timer
-watch(isMapRebuilding, (isShowing) => {
-  if (isShowing) {
-    startDismissTimer();
-  } else {
-    clearDismissTimer();
-    showDismissButton.value = false;
-  }
-});
-
 // Initialize the map when the component mounts
 onMounted(rebuildMap);
 
@@ -328,7 +257,6 @@ onUnmounted(() => {
     console.warn('Error during component cleanup:', error);
   }
   cleanupMap();
-  clearDismissTimer();
 });
 </script>
 
@@ -340,27 +268,6 @@ onUnmounted(() => {
   width: 100%;
   position: relative;
   background-color: #051110;
-}
-
-.map-loading-overlay {
-  z-index: 1000;
-  /* Ensure overlay covers the entire map area and centers content */
-  position: absolute !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.loading-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 :deep(.hex-label) {
