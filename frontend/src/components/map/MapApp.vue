@@ -9,14 +9,28 @@
           <div class="d-flex align-center ga-1">
             <v-btn
               variant="text"
-              :disabled="isRefreshing"
+              :disabled="isRefreshing || isLoading"
               @click="handleRefresh"
-              title="Refresh territory data"
+              :title="error ? 'Retry failed request' : 'Refresh territory data'"
             >
-              <v-icon :class="{ 'rotate-animation': isRefreshing }">
-                mdi-refresh
+              <v-icon
+                :class="{ 'rotate-animation': isRefreshing || isLoading }"
+                :color="error ? 'error' : undefined"
+              >
+                {{ error ? 'mdi-alert-circle' : 'mdi-refresh' }}
               </v-icon>
             </v-btn>
+
+            <!-- Add error chip if there's an error -->
+            <v-chip
+              v-if="error"
+              size="small"
+              color="error"
+              variant="tonal"
+              class="ml-2"
+            >
+              {{ error }}
+            </v-chip>
             <span
               class="text-caption text-medium-emphasis"
               v-if="lastUpdatedText"
@@ -52,8 +66,13 @@ import ContinentStatsPanel from '@/components/map/ContinentStatsPanel.vue';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 
-const { refreshTerritoryData, isRefreshing, territorySnapshot } =
-  useTerritoryData();
+const {
+  refreshTerritoryData,
+  isRefreshing,
+  isLoading,
+  error,
+  territorySnapshot,
+} = useTerritoryData();
 
 const { showRegionHover } = useMapDisplaySettings();
 

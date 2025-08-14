@@ -16,6 +16,16 @@ interface RegionPolygon {
 export function useRegionPolygons(
   regionStyles?: Ref<Map<RegionKey, Partial<L.PolylineOptions>>>
 ) {
+  // Default style for regions without territory data
+  const unknownRegionStyle: L.PolylineOptions = {
+    color: '#666666',
+    fillColor: '#333333',
+    fillOpacity: 0.2,
+    weight: 1,
+    opacity: 0.5,
+    pane: 'regionPane',
+  };
+
   // Reactive collection of region polygons
   const regionPolygons = reactive(new Map<RegionKey, RegionPolygon>());
 
@@ -55,12 +65,7 @@ export function useRegionPolygons(
    */
   const initializeRegionPolygons = (
     zone: Zone,
-    defaultStyle: L.PolylineOptions = {
-      color: 'white',
-      fillColor: 'purple',
-      fillOpacity: 0.3,
-      weight: 2,
-    }
+    defaultStyle: L.PolylineOptions = unknownRegionStyle
   ) => {
     // Clear existing polygons
     regionPolygons.clear();
@@ -99,9 +104,13 @@ export function useRegionPolygons(
       }
     }
 
-    // Apply any pending styles after initialization
+    // After creating all polygons, check if we have styles to apply
     if (regionStyles && regionStyles.value && regionStyles.value.size > 0) {
       applyRegionStyles(regionStyles.value);
+    } else {
+      console.debug(
+        'No territory data available yet, using default region styles'
+      );
     }
   };
 
