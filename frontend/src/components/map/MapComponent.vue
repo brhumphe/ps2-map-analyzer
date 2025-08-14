@@ -13,6 +13,15 @@
         color="primary"
       ></v-progress-circular>
       <div class="mt-4 text-h6 text-white">Loading Map</div>
+      <v-btn
+        v-if="showDismissButton"
+        @click="dismissOverlay"
+        variant="outlined"
+        color="white"
+        class="mt-4"
+      >
+        Dismiss
+      </v-btn>
     </div>
   </v-overlay>
 
@@ -89,6 +98,11 @@ const mapContainer = ref<HTMLElement>();
 // Default to true to show loading overlay on initial load
 const isRebuildingFromStateChange = ref(true);
 
+// Track overlay dismiss functionality
+const showDismissButton = ref(false);
+const dismissTimer = ref<number | null>(null);
+const userDismissedOverlay = ref(false);
+
 // Use the map initialization composable
 const {
   map,
@@ -135,13 +149,11 @@ const { mapDisplaySettings } = useMapDisplaySettings();
 
 // Computed property to determine if map is being rebuilt
 const isMapRebuilding = computed(() => {
-  // console.debug({
-  //   isLoading: isLoading.value,
-  //   currentZone: currentZone.value,
-  //   region_polygons_size: regionPolygons.size,
-  //   error: error.value,
-  //   isRebuildingFromStateChange: isRebuildingFromStateChange.value,
-  // });
+  // If user has dismissed the overlay, don't show it
+  if (userDismissedOverlay.value) {
+    return false;
+  }
+
   // Always show loading during initial map setup
   if (isLoading.value) {
     return true;
@@ -207,11 +219,37 @@ const isMarkerVisible = computed(() => {
   };
 });
 
+// Dismiss overlay functionality
+const dismissOverlay = () => {
+  userDismissedOverlay.value = true;
+  showDismissButton.value = false;
+  clearDismissTimer();
+};
+
+const clearDismissTimer = () => {
+  if (dismissTimer.value) {
+    clearTimeout(dismissTimer.value);
+    dismissTimer.value = null;
+  }
+};
+
+const startDismissTimer = () => {
+  clearDismissTimer();
+  showDismissButton.value = false;
+
+  dismissTimer.value = window.setTimeout(() => {
+    showDismissButton.value = true;
+  }, 3000); // Show dismiss button after 3 seconds
+};
+
 // Watch for continent changes - switch continent and load new zone
 watch(
   () => selectedContinent.value,
   async (newContinent) => {
     if (map.value) {
+      // Reset dismiss flag for new loading operation
+      userDismissedOverlay.value = false;
+
       // Set rebuilding flag
       isRebuildingFromStateChange.value = true;
 
@@ -239,6 +277,9 @@ watch(currentZone, rebuildMapContent);
 watch(
   () => selectedWorld.value,
   async () => {
+    // Reset dismiss flag for new loading operation
+    userDismissedOverlay.value = false;
+
     // Set rebuilding flag for world changes
     isRebuildingFromStateChange.value = true;
 
@@ -262,6 +303,16 @@ watch(
   }
 );
 
+// Watch for overlay visibility to start/stop dismiss timer
+watch(isMapRebuilding, (isShowing) => {
+  if (isShowing) {
+    startDismissTimer();
+  } else {
+    clearDismissTimer();
+    showDismissButton.value = false;
+  }
+});
+
 // Initialize the map when the component mounts
 onMounted(rebuildMap);
 
@@ -277,6 +328,7 @@ onUnmounted(() => {
     console.warn('Error during component cleanup:', error);
   }
   cleanupMap();
+  clearDismissTimer();
 });
 </script>
 
