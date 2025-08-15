@@ -42,7 +42,7 @@ const { playerFaction, setPlayerFaction } = useAppState();
 
 const factionItems = computed(() => [
   {
-    value: undefined,
+    value: Faction.NONE,
     name: 'No Faction',
     icon: 'mdi-help',
     color: 'grey',

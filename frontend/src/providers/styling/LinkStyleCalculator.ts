@@ -34,6 +34,7 @@ export class LinkStyleCalculator {
       opacity: 1,
       pane: LatticePane.BASE,
       weight: 2,
+      dashArray: undefined,
     };
 
     switch (linkState.status) {
