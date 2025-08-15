@@ -27,7 +27,6 @@
             {{ item.raw.icon }}
           </v-icon>
         </template>
-        <v-list-item-title>{{ item.raw.name }}</v-list-item-title>
       </v-list-item>
     </template>
   </v-select>
