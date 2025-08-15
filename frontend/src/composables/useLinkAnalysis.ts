@@ -5,6 +5,7 @@ import type { TerritorySnapshot, LinkState } from '@/types/territory';
 import type { Zone, FacilityLinkKey } from '@/types/zone_types';
 import { zoneUtils } from '@/utilities/zone_utils';
 import type L from 'leaflet';
+import { useAppState } from '@/composables/useAppState.ts';
 
 /**
  * Composable for lattice link analysis and styling coordination
@@ -19,6 +20,9 @@ export function useLinkAnalysis(
   // Analysis and styling services
   const linkAnalyzer = new ContestableLinksAnalyzer();
   const styleCalculator = new LinkStyleCalculator();
+
+  // State that style depends on
+  const { playerFaction } = useAppState();
 
   /**
    * Computed link states based on territory analysis
@@ -50,7 +54,10 @@ export function useLinkAnalysis(
       const styles = new Map<FacilityLinkKey, Partial<L.PolylineOptions>>();
 
       linkStates.value.forEach((state, linkKey) => {
-        const style = styleCalculator.calculateLinkStyle(state);
+        const style = styleCalculator.calculateLinkStyle(
+          state,
+          playerFaction.value
+        );
         styles.set(linkKey, style);
       });
 

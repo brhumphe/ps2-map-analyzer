@@ -1,3 +1,14 @@
+// Census gives these packed int representations instead of hex strings
+import { Faction } from '@/types/common.ts';
+
+export const FactionColor = new Map<Faction, string>([
+  [Faction.NONE, unpackIntToHex(7500402)],
+  [Faction.VS, unpackIntToHex(4460130)],
+  [Faction.NC, unpackIntToHex(19328)],
+  [Faction.TR, unpackIntToHex(10357519)],
+  [Faction.NSO, unpackIntToHex(5662067)],
+]);
+
 /**
  * Convert hex color to HSL color space
  * @param hex Hex color string (e.g. '#441c7a')

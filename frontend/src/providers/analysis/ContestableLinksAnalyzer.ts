@@ -47,7 +47,7 @@ export class ContestableLinksAnalyzer implements TerritoryAnalysisProvider {
 
       if (!regionA || !regionB) {
         // Can't analyze if we don't have region data for both facilities
-        linkStates.set(linkKey, 'inactive');
+        linkStates.set(linkKey, { status: 'inactive' });
         console.warn(`Link ${linkKey} has missing region data`);
         return;
       }
@@ -57,29 +57,13 @@ export class ContestableLinksAnalyzer implements TerritoryAnalysisProvider {
 
       // If either owner is None (0) or missing, link is inactive
       if (ownerA == null || ownerA === 0 || ownerB == null || ownerB === 0) {
-        linkStates.set(linkKey, 'inactive');
+        linkStates.set(linkKey, { status: 'inactive' });
       } else if (ownerA === ownerB) {
         // Same faction controls both ends
-        switch (ownerA) {
-          case 1:
-            linkStates.set(linkKey, 'VS');
-            break;
-          case 2:
-            linkStates.set(linkKey, 'NC');
-            break;
-          case 3:
-            linkStates.set(linkKey, 'TR');
-            break;
-          case 4:
-            linkStates.set(linkKey, 'NSO');
-            break;
-          default:
-            linkStates.set(linkKey, 'inactive');
-            break;
-        }
+        linkStates.set(linkKey, { status: 'safe', faction: ownerA });
       } else {
         // Different factions and neither is None = contestable link
-        linkStates.set(linkKey, 'contestable');
+        linkStates.set(linkKey, { status: 'contestable' });
       }
     });
 

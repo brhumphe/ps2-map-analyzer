@@ -7,6 +7,7 @@ import type { RegionState } from '@/types/region_analysis';
 import type { RegionID } from '@/types/common';
 import { zoneUtils } from '@/utilities/zone_utils';
 import type L from 'leaflet';
+import { useAppState } from '@/composables/useAppState.ts';
 
 /**
  * Composable for region analysis and styling coordination
@@ -22,6 +23,9 @@ export function useRegionAnalysis(
   // Analysis and styling services
   const regionAnalyzer = new RegionOwnershipAnalyzer();
   const styleCalculator = new RegionStyleCalculator();
+
+  // State that style depends on
+  const { playerFaction } = useAppState();
 
   /**
    * Computed region states based on territory analysis
@@ -53,7 +57,10 @@ export function useRegionAnalysis(
       const styles = new Map<RegionKey, Partial<L.PolylineOptions>>();
 
       regionStates.value.forEach((state, regionId) => {
-        const style = styleCalculator.calculateRegionStyle(state);
+        const style = styleCalculator.calculateRegionStyle(
+          state,
+          playerFaction.value
+        );
         const regionKey = zoneUtils.getRegionKey(regionId);
         styles.set(regionKey, style);
       });

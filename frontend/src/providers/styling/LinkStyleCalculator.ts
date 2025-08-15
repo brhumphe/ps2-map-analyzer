@@ -1,6 +1,11 @@
 import type { LinkState } from '@/types/territory';
 import type L from 'leaflet';
 import { LatticePane } from '@/utilities/leaflet_utils';
+import { Faction } from '@/types/common';
+import {
+  adjustColorLightnessSaturation,
+  FactionColor,
+} from '@/utilities/colors';
 
 /**
  * Link style calculator that converts link states into visual properties
@@ -18,16 +23,20 @@ export class LinkStyleCalculator {
    * - Inactive links: Dim gray, thin lines
    *
    * @param linkState The strategic state of the lattice link
+   * @param playerFaction
    * @returns Leaflet PolylineOptions for styling the link
    */
-  calculateLinkStyle(linkState: LinkState): Partial<L.PolylineOptions> {
+  calculateLinkStyle(
+    linkState: LinkState,
+    playerFaction: Faction | undefined
+  ): Partial<L.PolylineOptions> {
     const baseStyle: Partial<L.PolylineOptions> = {
       opacity: 1,
       pane: LatticePane.BASE,
       weight: 2,
     };
 
-    switch (linkState) {
+    switch (linkState.status) {
       case 'contestable':
         return {
           ...baseStyle,
@@ -39,38 +48,34 @@ export class LinkStyleCalculator {
           pane: LatticePane.FRONTLINE,
         };
 
-      case 'VS':
+      case 'safe':
+        let color =
+          FactionColor.get(linkState.faction ?? Faction.NONE) || '#ff00ff';
+        let lightnessAdjustment = 0.5;
+        let saturationAdjustment = 1;
+        let opacity = 0.5;
+        let weight = 2;
+        if (linkState.faction === playerFaction) {
+          lightnessAdjustment = 0.25;
+          saturationAdjustment = 0;
+          opacity = 1;
+          weight = 6;
+        }
         return {
           ...baseStyle,
-          color: '#441c7a', // VS purple
-          weight: 3, // Medium thickness
-        };
-
-      case 'NC':
-        return {
-          ...baseStyle,
-          color: '#004bad', // NC blue
-          weight: 3, // Medium thickness
-        };
-
-      case 'TR':
-        return {
-          ...baseStyle,
-          color: '#9d2621', // TR red
-          weight: 3, // Medium thickness
-        };
-
-      case 'NSO':
-        return {
-          ...baseStyle,
-          color: '#565851', // NSO gray
-          weight: 3, // Medium thickness
+          color: adjustColorLightnessSaturation(
+            color,
+            lightnessAdjustment,
+            saturationAdjustment
+          ),
+          opacity,
+          weight,
         };
 
       case 'inactive':
         return {
           ...baseStyle,
-          color: '#666666', // Dim gray
+          color: FactionColor.get(Faction.NONE), // Dim gray
           weight: 2, // Thin line
           opacity: 0.3, // Low opacity
         };

@@ -15,13 +15,10 @@ import type { FacilityLinkKey, Zone } from '@/types/zone_types';
  * and is used as input for various display modes and styling calculations.
  */
 export type LinkState =
-  | 'inactive' // Link is not operational (bases offline/inaccessible)
-  | 'NC' // Both connected bases controlled by New Conglomerate
-  | 'TR' // Both connected bases controlled by Terran Republic
-  | 'VS' // Both connected bases controlled by Vanu Sovereignty
-  | 'NSO' // Both connected bases controlled by Nanite Systems Operatives
-  | 'contestable' // Connected bases have different faction ownership (tactical opportunity)
-  | 'unknown'; // Territory data incomplete or unavailable
+  | { status: 'inactive' } // Link is not operational (bases offline/inaccessible)
+  | { status: 'safe'; faction: Faction } // Both ends are controlled by the same faction (no tactical opportunity)
+  | { status: 'contestable' } // Connected bases have different faction ownership (tactical opportunity)
+  | { status: 'unknown' }; // Territory data incomplete or unavailable
 
 /**
  * Normalized territory control snapshot optimized for frontend consumption

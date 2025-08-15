@@ -3,18 +3,9 @@ import type L from 'leaflet';
 import { Faction } from '@/types/common';
 import {
   adjustColorLightnessSaturation,
-  unpackIntToHex,
+  FactionColor,
 } from '@/utilities/colors';
 import { RegionPane } from '@/utilities/leaflet_utils';
-
-// Census gives these packed int representations instead of hex strings
-const FactionColor = new Map<Faction, string>([
-  [Faction.NONE, unpackIntToHex(7500402)],
-  [Faction.VS, unpackIntToHex(4460130)],
-  [Faction.NC, unpackIntToHex(19328)],
-  [Faction.TR, unpackIntToHex(10357519)],
-  [Faction.NSO, unpackIntToHex(5662067)],
-]);
 
 /**
  * Region style calculator that converts region states into visual properties
@@ -36,9 +27,13 @@ export class RegionStyleCalculator {
    * - unknown: Dark gray with dashed border
    *
    * @param regionState The strategic state of the region
+   * @param playerFaction Faction POV of user
    * @returns Leaflet PolylineOptions for styling the region polygon
    */
-  calculateRegionStyle(regionState: RegionState): Partial<L.PolylineOptions> {
+  calculateRegionStyle(
+    regionState: RegionState,
+    playerFaction: Faction | undefined
+  ): Partial<L.PolylineOptions> {
     let weight = 1;
     let opacity = 0.7;
     let fillOpacity = 0.6;
@@ -62,14 +57,21 @@ export class RegionStyleCalculator {
       pane = RegionPane.FRONTLINE;
       border_color = '#000000';
     } else if (regionState.is_active) {
-      fillColor = adjustColorLightnessSaturation(faction_color, -0.7, 0);
-      fillOpacity = 0.6;
-      opacity = 1.0;
-      pane = RegionPane.BASE;
+      // Controlled by a faction but not available to attack
+      const activeRegionStyle = this.calculateActiveRegionStyle(
+        regionState.owning_faction_id,
+        playerFaction,
+        faction_color
+      );
+      opacity = activeRegionStyle.opacity;
+      pane = activeRegionStyle.pane;
+      fillOpacity = activeRegionStyle.fillOpacity;
+      fillColor = activeRegionStyle.fillColor;
     } else {
       pane = RegionPane.INACTIVE;
-      opacity = 0;
-      fillOpacity = 0;
+      opacity = 0.9;
+      fillOpacity = 0.75;
+      fillColor = adjustColorLightnessSaturation(faction_color, -0.5, 0);
     }
 
     return {
@@ -79,6 +81,51 @@ export class RegionStyleCalculator {
       color: border_color,
       fillColor: fillColor,
       pane,
+    };
+  }
+
+  private calculateActiveRegionStyle(
+    owningFactionId: Faction,
+    playerFaction: Faction | undefined,
+    factionColor: string
+  ) {
+    const PLAYER_OWNED_LIGHTNESS = 0.0;
+    const ENEMY_LIGHTNESS = -0.7;
+    const NEUTRAL_LIGHTNESS = -0.5;
+    const PLAYER_OWNED_SATURATION = 0.5;
+    const ENEMY_SATURATION = 0.2;
+    const NEUTRAL_SATURATION = 0.0;
+
+    let lightnessAdjustment: number;
+    let saturationAdjustment: number;
+    let fillOpacity: number;
+
+    if (owningFactionId === playerFaction) {
+      // Player's own faction - brighter and more saturated
+      lightnessAdjustment = PLAYER_OWNED_LIGHTNESS;
+      saturationAdjustment = PLAYER_OWNED_SATURATION;
+      fillOpacity = 0.75;
+    } else if (playerFaction === undefined || playerFaction === Faction.NONE) {
+      // Neutral perspective - desaturated
+      lightnessAdjustment = ENEMY_LIGHTNESS;
+      saturationAdjustment = NEUTRAL_SATURATION;
+      fillOpacity = 0.6;
+    } else {
+      // Enemy faction - darker but slightly saturated
+      lightnessAdjustment = ENEMY_LIGHTNESS;
+      saturationAdjustment = ENEMY_SATURATION;
+      fillOpacity = 0.5;
+    }
+
+    return {
+      opacity: 1.0,
+      pane: RegionPane.BASE,
+      fillOpacity,
+      fillColor: adjustColorLightnessSaturation(
+        factionColor,
+        lightnessAdjustment,
+        saturationAdjustment
+      ),
     };
   }
 }

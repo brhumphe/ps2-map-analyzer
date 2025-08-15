@@ -38,6 +38,7 @@
               {{ lastUpdatedText }}
             </span>
           </div>
+          <FactionDropdown />
           <ContinentDropdown />
           <WorldDropdown />
           <MapSettingsMenu />
@@ -57,6 +58,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import FactionDropdown from '@/components/map/FactionDropdown.vue';
 import WorldDropdown from '@/components/map/WorldDropdown.vue';
 import ContinentDropdown from '@/components/map/ContinentDropdown.vue';
 import MapComponent from '@/components/map/MapComponent.vue';
