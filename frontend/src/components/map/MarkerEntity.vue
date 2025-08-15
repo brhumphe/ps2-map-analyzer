@@ -202,16 +202,16 @@ onUnmounted(() => {
 <style>
 /* Enhanced tooltip styling */
 .leaflet-tooltip {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 6px;
+  border-radius: 4px;
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.0178571429em;
   line-height: 1.2;
-  padding: 6px 10px;
+  padding: 4px 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
