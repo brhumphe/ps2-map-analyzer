@@ -34,6 +34,8 @@ export class LinkStyleCalculator {
           color: '#ffff00', // Bright yellow for visibility
           weight: 6, // Thick line to emphasize importance
           opacity: 0.9,
+          dashArray: '10',
+          lineCap: 'butt',
           pane: LatticePane.FRONTLINE,
         };
 
