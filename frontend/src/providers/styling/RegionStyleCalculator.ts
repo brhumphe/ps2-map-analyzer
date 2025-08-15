@@ -51,11 +51,18 @@ export class RegionStyleCalculator {
       opacity = 1.0;
       weight = 4;
     } else if (regionState.can_capture) {
-      fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
-      fillOpacity = 0.8;
-      opacity = 1.0;
-      pane = RegionPane.FRONTLINE;
-      border_color = '#000000';
+      if (regionState.relevant_to_player) {
+        fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
+        fillOpacity = 0.8;
+        opacity = 1.0;
+        pane = RegionPane.FRONTLINE;
+        border_color = '#000000';
+      } else {
+        fillColor = adjustColorLightnessSaturation(faction_color, 0.0, 0);
+        fillOpacity = 0.8;
+        opacity = 0.5;
+        pane = RegionPane.BASE;
+      }
     } else if (regionState.is_active) {
       // Controlled by a faction but not available to attack
       const activeRegionStyle = this.calculateActiveRegionStyle(

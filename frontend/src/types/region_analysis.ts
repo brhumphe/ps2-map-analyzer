@@ -17,6 +17,7 @@ export interface RegionState {
   can_steal?: boolean;
   can_capture?: boolean;
   is_active?: boolean;
+  relevant_to_player?: boolean;
 }
 
 /**
@@ -31,10 +32,12 @@ export interface RegionAnalysisProvider {
    *
    * @param territory Current territory snapshot with region ownership
    * @param zone Zone data containing region information
+   * @param playerFaction Faction of the user (for strategic analysis)
    * @returns Map of region IDs to their strategic states
    */
   analyzeRegionStates(
     territory: TerritorySnapshot,
-    zone: Zone
+    zone: Zone,
+    playerFaction: Faction
   ): Map<RegionID, RegionState>;
 }

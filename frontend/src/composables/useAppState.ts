@@ -1,11 +1,11 @@
 // composables/useAppState.ts
 import { readonly, ref } from 'vue';
-import { Continent, World, Faction } from '@/types/common';
+import { Continent, Faction, World } from '@/types/common';
 
 // Singleton state - shared across all component instances
 const selectedContinent = ref<Continent>(Continent.INDAR);
 const selectedWorld = ref<World>(World.Osprey);
-const playerFaction = ref<Faction | undefined>(undefined);
+const playerFaction = ref<Faction>(Faction.NONE);
 
 /**
  * Unified application state management for core app configuration.
@@ -26,14 +26,14 @@ export function useAppState() {
     selectedWorld.value = world;
   };
 
-  const setPlayerFaction = (faction: Faction | undefined) => {
+  const setPlayerFaction = (faction: Faction) => {
     playerFaction.value = faction;
   };
 
   const reset = () => {
     selectedContinent.value = Continent.INDAR;
     selectedWorld.value = World.Osprey;
-    playerFaction.value = undefined;
+    playerFaction.value = Faction.NONE;
   };
 
   // Read-only state exposure

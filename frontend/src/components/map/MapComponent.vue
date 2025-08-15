@@ -183,7 +183,7 @@ const rebuildMapContent = async () => {
 const isMarkerVisible = computed(() => {
   return (regionId: RegionID) => {
     const regionState = getRegionState.value(regionId);
-    return regionState?.can_capture ?? false;
+    return regionState?.relevant_to_player ?? false;
   };
 });
 

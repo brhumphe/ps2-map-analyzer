@@ -22,11 +22,13 @@ export class RegionOwnershipAnalyzer implements RegionAnalysisProvider {
    *
    * @param territory Current territory snapshot with region ownership
    * @param zone Zone data containing region information (not used in this simple analysis)
+   * @param playerFaction
    * @returns Map of region IDs to their ownership states
    */
   analyzeRegionStates(
     territory: TerritorySnapshot,
-    zone: Zone
+    zone: Zone,
+    playerFaction: Faction
   ): Map<RegionID, RegionState> {
     const regionStates = new Map<RegionID, RegionState>();
     // Collect the factions of the neighboring regions
@@ -50,6 +52,12 @@ export class RegionOwnershipAnalyzer implements RegionAnalysisProvider {
       const can_capture =
         hostile_neighbors.size > 0 && factionId != Faction.NONE;
       const can_steal = can_capture && hostile_neighbors.size > 1;
+      let relevant = this.isRegionRelevantForPlayer(
+        playerFaction,
+        factionId,
+        can_capture,
+        neighbor_ownership
+      );
 
       const state: RegionState = {
         owning_faction_id: factionId,
@@ -58,11 +66,41 @@ export class RegionOwnershipAnalyzer implements RegionAnalysisProvider {
         can_steal: can_steal,
         can_capture: can_capture,
         is_active: factionId != Faction.NONE,
+        relevant_to_player: relevant,
       };
 
       regionStates.set(regionId, state);
     });
 
     return regionStates;
+  }
+
+  private isRegionRelevantForPlayer(
+    playerFaction: Faction,
+    factionId: Faction,
+    can_capture: boolean,
+    neighbor_ownership: Set<Faction>
+  ) {
+    // Neutral regions are never relevant
+    if (factionId === Faction.NONE) {
+      return false;
+    }
+
+    let relevant = false;
+    // If there hasn't been an explicit choice, treat everything as relevant
+    if (playerFaction === Faction.NONE) {
+      relevant = true;
+    }
+
+    // Regions the player needs to defend
+    if (playerFaction === factionId && can_capture) {
+      relevant = true;
+    }
+    // Regions the player can attack
+    if (playerFaction != factionId && neighbor_ownership.has(playerFaction)) {
+      relevant = true;
+    }
+
+    return relevant;
   }
 }

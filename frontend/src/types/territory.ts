@@ -17,7 +17,7 @@ import type { FacilityLinkKey, Zone } from '@/types/zone_types';
 export type LinkState =
   | { status: 'inactive' } // Link is not operational (bases offline/inaccessible)
   | { status: 'safe'; faction: Faction } // Both ends are controlled by the same faction (no tactical opportunity)
-  | { status: 'contestable' } // Connected bases have different faction ownership (tactical opportunity)
+  | { status: 'contestable'; factionA: Faction; factionB: Faction } // Connected bases have different faction ownership (tactical opportunity)
   | { status: 'unknown' }; // Territory data incomplete or unavailable
 
 /**

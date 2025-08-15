@@ -63,7 +63,11 @@ export class ContestableLinksAnalyzer implements TerritoryAnalysisProvider {
         linkStates.set(linkKey, { status: 'safe', faction: ownerA });
       } else {
         // Different factions and neither is None = contestable link
-        linkStates.set(linkKey, { status: 'contestable' });
+        linkStates.set(linkKey, {
+          status: 'contestable',
+          factionA: ownerA,
+          factionB: ownerB,
+        });
       }
     });
 

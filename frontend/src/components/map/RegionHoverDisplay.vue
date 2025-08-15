@@ -46,6 +46,14 @@
         </v-chip>
       </div>
 
+      <!-- State information as JSON -->
+      <div v-if="hoveredRegionState" class="mt-2">
+        <div class="text-caption text-medium-emphasis mb-1">Region State:</div>
+        <pre class="style-json">{{
+          JSON.stringify(hoveredRegionState, null, 2)
+        }}</pre>
+      </div>
+
       <!-- Style information as JSON -->
       <div v-if="hoveredRegionStyle" class="mt-2">
         <div class="text-caption text-medium-emphasis mb-1">Region Style:</div>

@@ -38,11 +38,24 @@ export class LinkStyleCalculator {
 
     switch (linkState.status) {
       case 'contestable':
+        let weight_contestable = 2;
+        let color_contestable = '#b58648';
+        let opacity_contestable = 0.4;
+        if (
+          linkState.factionA === playerFaction ||
+          linkState.factionB === playerFaction
+        ) {
+          // Player's faction is involved in the link - emphasize it
+          weight_contestable = 6; // Thick line to emphasize importance
+          color_contestable = '#ffff00'; // Bright yellow for visibility
+          opacity_contestable = 0.9;
+        }
+
         return {
           ...baseStyle,
-          color: '#ffff00', // Bright yellow for visibility
-          weight: 6, // Thick line to emphasize importance
-          opacity: 0.9,
+          color: color_contestable,
+          weight: weight_contestable,
+          opacity: opacity_contestable,
           dashArray: '10',
           lineCap: 'butt',
           pane: LatticePane.FRONTLINE,

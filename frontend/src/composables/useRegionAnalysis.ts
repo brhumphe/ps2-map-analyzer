@@ -39,7 +39,8 @@ export function useRegionAnalysis(
 
     return regionAnalyzer.analyzeRegionStates(
       territorySnapshot.value,
-      currentZone.value
+      currentZone.value,
+      playerFaction.value
     );
   });
 
