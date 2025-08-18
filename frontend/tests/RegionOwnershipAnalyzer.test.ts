@@ -9,7 +9,7 @@ import {
 import type { Zone } from '../src/types/zone_types';
 import type { TerritorySnapshot } from '../src/types/territory';
 import { World, Continent } from '../src/types/common';
-import { RegionOwnershipAnalyzer } from '../src/providers/analysis/RegionOwnershipAnalyzer';
+import { RegionAnalyzer } from '@/providers/analysis/RegionAnalyzer.ts';
 
 describe('Census Parsers', () => {
   let esamirZone: Zone;
@@ -35,7 +35,7 @@ describe('Census Parsers', () => {
   });
 
   test('Region ownership analysis', () => {
-    const analyser = new RegionOwnershipAnalyzer();
+    const analyser = new RegionAnalyzer();
     const analysis = analyser.analyzeRegionStates(esamirMapState, esamirZone);
     // 18005 was a region being incorrectly flagged as capturable
     expect(analysis.get(18005)).toStrictEqual({

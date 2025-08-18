@@ -1,6 +1,6 @@
 import type {
   TerritorySnapshot,
-  TerritoryAnalysisProvider,
+  LinkAnalysisProvider,
   LinkState,
 } from '@/types/territory';
 import type { Zone, FacilityLinkKey } from '@/types/zone_types';
@@ -13,7 +13,7 @@ import { zoneUtils } from '@/utilities/zone_utils';
  * facilities controlled by different factions, representing tactical opportunities
  * for attack or defense.
  */
-export class ContestableLinksAnalyzer implements TerritoryAnalysisProvider {
+export class ContestableLinksAnalyzer implements LinkAnalysisProvider {
   /**
    * Analyze lattice links to identify contestable connections
    *

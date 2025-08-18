@@ -1,9 +1,8 @@
 import { computed, type Ref } from 'vue';
-import { RegionOwnershipAnalyzer } from '@/providers/analysis/RegionOwnershipAnalyzer';
+import { RegionAnalyzer } from '@/providers/analysis/RegionAnalyzer.ts';
 import { RegionStyleCalculator } from '@/providers/styling/RegionStyleCalculator';
-import type { TerritorySnapshot } from '@/types/territory';
+import type { RegionState, TerritorySnapshot } from '@/types/territory';
 import type { Zone, RegionKey } from '@/types/zone_types';
-import type { RegionState } from '@/types/region_analysis';
 import type { RegionID } from '@/types/common';
 import { zoneUtils } from '@/utilities/zone_utils';
 import type L from 'leaflet';
@@ -21,7 +20,7 @@ export function useRegionAnalysis(
   currentZone: Ref<Zone | null>
 ) {
   // Analysis and styling services
-  const regionAnalyzer = new RegionOwnershipAnalyzer();
+  const regionAnalyzer = new RegionAnalyzer();
   const styleCalculator = new RegionStyleCalculator();
 
   // State that style depends on

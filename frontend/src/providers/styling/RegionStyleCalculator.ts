@@ -1,4 +1,3 @@
-import type { RegionState } from '@/types/region_analysis';
 import type L from 'leaflet';
 import { Faction } from '@/types/common';
 import {
@@ -6,6 +5,7 @@ import {
   FactionColor,
 } from '@/utilities/colors';
 import { RegionPane } from '@/utilities/leaflet_utils';
+import type { RegionState } from '@/types/territory.ts';
 
 /**
  * Region style calculator that converts region states into visual properties

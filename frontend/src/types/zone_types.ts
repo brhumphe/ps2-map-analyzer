@@ -1,4 +1,9 @@
-import type { Continent, FacilityID, RegionID } from '@/types/common';
+import type {
+  Continent,
+  FacilityID,
+  FacilityType,
+  RegionID,
+} from '@/types/common';
 
 /**
  * Represents coordinates in the game world coordinate system.
@@ -22,7 +27,7 @@ export interface RegionHex {
 export interface Region {
   facility_id: FacilityID;
   facility_name: string;
-  facility_type_id: number;
+  facility_type_id: FacilityType;
   map_region_id: RegionID;
   location: WorldCoordinate;
   zone_id: Continent;
