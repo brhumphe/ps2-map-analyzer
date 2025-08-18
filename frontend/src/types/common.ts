@@ -6,6 +6,26 @@ export enum Faction {
   NSO = 4, // NS Operatives
 }
 
+export enum FacilityType {
+  DEFAULT = 1,
+  AMP_STATION = 2,
+  BIO_LAB = 3,
+  TECH_PLANT = 4,
+  LARGE_OUTPOST = 5,
+  SMALL_OUTPOST = 6,
+  WARPGATE = 7,
+  INTERLINK_FACILITY = 8,
+  CONSTRUCTION_OUTPOST = 9,
+  RELIC_OUTPOST = 10,
+  CONTAINMENT_SITE = 11,
+  TRIDENT = 12,
+  SEAPOST = 13,
+  LARGE_OUTPOST_CTF = 14,
+  SMALL_OUTPOST_CTF = 15,
+  AMP_STATION_CTF = 16,
+  CONSTRUCTION_OUTPOST_CTF = 17,
+}
+
 export enum Continent {
   INDAR = 2,
   HOSSIN = 4,

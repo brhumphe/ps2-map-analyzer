@@ -48,12 +48,29 @@ export type RegionKey = `region_${number}` & { readonly __brand: 'RegionKey' };
  * This is static data that should not change unless developers revise maps.
  */
 export interface Zone {
+  /** The continent identifier (e.g., Indar, Amerish, Hossin, Esamir) */
   zone_id: Continent;
+
+  /** Short code for the zone (e.g., "indar", "amerish") */
   code: string;
+
+  /** Human-readable zone name (e.g., "Indar", "Amerish") */
   name: string;
+
+  /** Size of hexagonal grid cells (inner diameter) */
   hex_size: number;
+
+  /** Map of all regions/facilities in this zone, keyed by region ID */
   regions: Map<RegionID, Region>;
+
+  /** Map of all lattice links between facilities, keyed by facility link key */
   links: Map<FacilityLinkKey, FacilityLink>;
+
+  // Computed properties
+
+  /** Map of each region to its adjacent regions */
   neighbors: Map<RegionID, Set<RegionID>>;
+
+  /** Reverse lookup map from facility ID to the region that contains it */
   facility_to_region_map: Map<FacilityID, RegionID>;
 }

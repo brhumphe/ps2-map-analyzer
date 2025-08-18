@@ -12,11 +12,15 @@ export interface RegionState {
   owning_faction_id: Faction;
   // Mostly for debugging purposes
   region_id: RegionID;
-  // Factions who control adjacent regions. Used to determine capturability
+  /** Factions who control adjacent regions. Used to determine capturability */
   adjacent_faction_ids?: Set<Faction>;
+  /** If the region can be stolen by any faction (last-minute intervention in 3-way fight) */
   can_steal?: boolean;
+  /** Whether any faction can capture this region */
   can_capture?: boolean;
+  /** Whether this region is enabled for faction control */
   is_active?: boolean;
+  /** Regions that are important right now (can be attacked or defended) */
   relevant_to_player?: boolean;
 }
 

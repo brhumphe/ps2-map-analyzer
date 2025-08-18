@@ -1,4 +1,4 @@
-// Create a new file: src/utils/zone_utils.ts
+// src/utils/zone_utils.ts
 
 import type {
   Zone,
