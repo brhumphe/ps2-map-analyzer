@@ -92,7 +92,7 @@ async function fetchWithRetry<T>(
 export function useTerritoryData() {
   // Dependencies
   const { dataService } = useCensusData();
-  const { selectedWorld, selectedContinent } = useAppState();
+  const { selectedWorld, selectedContinent, useDevData } = useAppState();
   const { autoRefreshEnabled, autoRefreshInterval } = useMapDisplaySettings();
 
   /**
@@ -316,6 +316,17 @@ export function useTerritoryData() {
     },
     { immediate: true }
   );
+
+  // Watch for dev data toggle changes and refresh
+  watch(useDevData, () => {
+    // Only refresh if we have valid world/continent selection
+    if (selectedWorld.value && selectedContinent.value) {
+      console.log(
+        `Data source changed to: ${useDevData.value ? 'development' : 'live'}`
+      );
+      refreshTerritoryData();
+    }
+  });
 
   // Cleanup on unmount
   onUnmounted(() => {

@@ -30,6 +30,30 @@
 
         <v-divider></v-divider>
 
+        <!-- Development Settings Section -->
+        <v-list density="compact">
+          <v-list-subheader class="text-caption text-medium-emphasis">
+            Development Options
+          </v-list-subheader>
+          <v-list-item>
+            <v-switch
+              v-model="useDevDataModel"
+              label="Use Development Data"
+              color="warning"
+              hide-details
+              density="compact"
+              class="ml-2"
+            ></v-switch>
+            <template v-slot:subtitle>
+              <span class="text-caption text-medium-emphasis">
+                Load sample data for testing purposes.
+              </span>
+            </template>
+          </v-list-item>
+        </v-list>
+
+        <v-divider></v-divider>
+
         <v-card-actions>
           <v-btn variant="text" size="small" @click="resetToDefaults">
             Reset to Defaults
@@ -45,14 +69,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
+import { useAppState } from '@/composables/useAppState';
 
 // Local state - just for menu open/closed
 const menu = ref(false);
 
 // Global display settings from composable
 const { mapDisplaySettings, resetToDefaults } = useMapDisplaySettings();
+
+// Development settings from app state
+const { useDevData, setUseDevData } = useAppState();
+
+// Create computed property for v-model binding
+const useDevDataModel = computed({
+  get: () => useDevData.value,
+  set: (value: boolean) => setUseDevData(value),
+});
 
 // Define the settings configuration
 const displaySettingsList = [

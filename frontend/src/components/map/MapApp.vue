@@ -67,6 +67,7 @@ import RegionHoverDisplay from '@/components/map/RegionHoverDisplay.vue';
 import ContinentStatsPanel from '@/components/map/ContinentStatsPanel.vue';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
+import { useAppState } from '@/composables/useAppState';
 
 const {
   refreshTerritoryData,
@@ -77,6 +78,7 @@ const {
 } = useTerritoryData();
 
 const { showRegionHover } = useMapDisplaySettings();
+const { useDevData } = useAppState();
 
 const handleRefresh = async () => {
   await refreshTerritoryData();
@@ -84,6 +86,12 @@ const handleRefresh = async () => {
 
 // Format the last updated timestamp for display
 const lastUpdatedText = computed(() => {
+  // Show development mode status when using dev data
+  if (useDevData.value) {
+    return 'Using development data';
+  }
+
+  // Show timestamp for live data
   if (!territorySnapshot.value || !territorySnapshot.value.timestamp) {
     return null;
   }
