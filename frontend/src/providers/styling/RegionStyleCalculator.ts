@@ -96,10 +96,10 @@ export class RegionStyleCalculator {
     playerFaction: Faction | undefined,
     factionColor: string
   ) {
-    const PLAYER_OWNED_LIGHTNESS = 0.0;
+    const PLAYER_OWNED_LIGHTNESS = -0.25;
     const ENEMY_LIGHTNESS = -0.7;
     const NEUTRAL_LIGHTNESS = -0.5;
-    const PLAYER_OWNED_SATURATION = 0.5;
+    const PLAYER_OWNED_SATURATION = 0.0;
     const ENEMY_SATURATION = 0.2;
     const NEUTRAL_SATURATION = 0.0;
 
@@ -111,7 +111,7 @@ export class RegionStyleCalculator {
       // Player's own faction - brighter and more saturated
       lightnessAdjustment = PLAYER_OWNED_LIGHTNESS;
       saturationAdjustment = PLAYER_OWNED_SATURATION;
-      fillOpacity = 0.75;
+      fillOpacity = 0.65;
     } else if (playerFaction === undefined || playerFaction === Faction.NONE) {
       // Neutral perspective - desaturated
       lightnessAdjustment = ENEMY_LIGHTNESS;
