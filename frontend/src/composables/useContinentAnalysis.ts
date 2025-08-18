@@ -61,6 +61,19 @@ export function useContinentAnalysis(
     return counts;
   });
 
+  const factionTerritoryPercentage = computed(() => {
+    if (!territorySnapshot.value || !currentZone.value) {
+      return { VS: 0, NC: 0, TR: 0 };
+    }
+    const counts = factionTerritoryCount.value;
+    const active = counts.VS + counts.NC + counts.TR;
+    return {
+      VS: (counts.VS / active) * 100,
+      NC: (counts.NC / active) * 100,
+      TR: (counts.TR / active) * 100,
+    };
+  });
+
   /**
    * Total number of regions on the continent
    */
@@ -117,6 +130,7 @@ export function useContinentAnalysis(
   return {
     // Territory counts
     factionTerritoryCount,
+    factionTerritoryPercentage,
     totalRegions,
     trackedRegions,
 

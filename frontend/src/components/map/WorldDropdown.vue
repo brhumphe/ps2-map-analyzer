@@ -1,20 +1,17 @@
 <template>
   <div class="text-center">
-    <v-menu open-on-hover>
-      <template v-slot:activator="{ props }">
-        <v-btn variant="tonal" v-bind="props">{{ selectedWorldName }}</v-btn>
-      </template>
-
-      <v-list>
-        <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-          @click="selectWorld(item)"
-        >
-          <v-list-item-title>{{ item.name }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+    <v-select
+      :model-value="selectedWorld"
+      @update:model-value="selectWorld"
+      :items="items"
+      item-title="name"
+      item-value="world_id"
+      variant="outlined"
+      density="compact"
+      class="world-select"
+      style="min-width: 140px"
+      hide-details
+    />
   </div>
 </template>
 
@@ -36,7 +33,7 @@ const selectedWorldName = computed(
   () => WorldName.get(selectedWorld.value) || 'Select World'
 );
 
-const selectWorld = (item: { name: string; world_id: World }) => {
-  setWorld(item.world_id);
+const selectWorld = (worldId: World) => {
+  setWorld(worldId);
 };
 </script>

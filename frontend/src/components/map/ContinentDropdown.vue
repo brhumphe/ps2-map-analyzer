@@ -1,55 +1,48 @@
 <template>
-  <div class="text-center">
-    <v-menu @update:model-value="onMenuToggle">
-      <template v-slot:activator="{ props }">
-        <v-btn variant="tonal" v-bind="props" class="d-flex align-center">
+  <div class="d-flex align-center ga-1">
+    <v-select
+      :model-value="selectedContinent"
+      @update:model-value="selectContinent"
+      :items="selectItems"
+      item-title="name"
+      item-value="continent"
+      :loading="isLoading"
+      :error="hasError"
+      :error-messages="hasError ? 'Failed to load status' : undefined"
+      variant="outlined"
+      density="compact"
+      class="continent-select"
+      @click:control="onSelectClick"
+      style="min-width: 140px"
+      hide-details
+    >
+      <template v-slot:selection="{ item }">
+        <div class="d-flex align-center">
           <v-icon
-            v-if="isLoading"
-            icon="mdi-loading"
-            size="small"
-            class="mr-2 mdi-spin"
-          />
-          <v-icon
-            v-else
-            :icon="getContinentIcon(selectedContinent).icon"
-            :color="getContinentIcon(selectedContinent).color"
+            :icon="getContinentIcon(item.raw.continent).icon"
+            :color="getContinentIcon(item.raw.continent).color"
             size="small"
             class="mr-2"
           />
-
-          {{ selectedContinentName }}
-        </v-btn>
+          {{ item.raw.name }}
+        </div>
       </template>
 
-      <v-list>
-        <v-list-item v-if="isLoading">
-          <v-list-item-title>Loading...</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item v-else-if="hasError">
-          <v-list-item-title class="text-error">
-            Failed to load status
-          </v-list-item-title>
-        </v-list-item>
-
+      <template v-slot:item="{ item, props }">
         <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-          @click="selectContinent(item)"
-          :class="getContinentStatusClass(item.continent)"
+          v-bind="props"
+          :class="getContinentStatusClass(item.raw.continent)"
         >
           <template v-slot:prepend>
             <v-icon
-              :icon="getContinentIcon(item.continent).icon"
-              :color="getContinentIcon(item.continent).color"
+              :icon="getContinentIcon(item.raw.continent).icon"
+              :color="getContinentIcon(item.raw.continent).color"
               size="small"
             />
           </template>
-
-          <v-list-item-title>{{ item.name }}</v-list-item-title>
         </v-list-item>
-      </v-list>
-    </v-menu>
+      </template>
+    </v-select>
   </div>
 </template>
 <script setup lang="ts">
@@ -150,20 +143,17 @@ const getContinentIcon = (
   return { icon: 'mdi-help-circle-outline', color: 'grey' };
 };
 
-const selectedContinentName = computed(
-  () => continentNames.get(selectedContinent.value) || 'Select Continent'
-);
-
-const onMenuToggle = (isOpen: boolean) => {
-  if (isOpen && continentStatusMap.value.size === 0) {
+const onSelectClick = () => {
+  if (continentStatusMap.value.size === 0) {
     fetchActiveContinents();
   }
 };
 
-const selectContinent = (item: { name: string; continent: Continent }) => {
-  setContinent(item.continent);
+const selectContinent = (continent: Continent) => {
+  setContinent(continent);
 };
-const items = computed(() => allContinents);
+
+const selectItems = computed(() => allContinents);
 
 // Fetch continent status on component mount
 onMounted(() => {

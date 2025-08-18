@@ -13,7 +13,7 @@
     hide-details
   >
     <template v-slot:selection="{ item }">
-      <div class="d-flex align-center ga-2">
+      <div class="d-flex align-center">
         <v-icon :color="item.raw.color" size="small">
           {{ item.raw.icon }}
         </v-icon>
@@ -75,6 +75,6 @@ const factionItems = computed(() => [
 
 <style scoped>
 .faction-dropdown {
-  max-width: 200px;
+  max-width: 250px;
 }
 </style>

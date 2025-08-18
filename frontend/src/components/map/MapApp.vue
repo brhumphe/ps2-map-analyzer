@@ -1,10 +1,11 @@
 <template>
   <v-app>
     <v-app-bar theme="dark">
-      <v-app-bar-title
-        >PS2 Map State Application - Territory Analyzer</v-app-bar-title
-      >
+      <v-app-bar-title>PS2 Territory Analyzer</v-app-bar-title>
       <template v-slot:append>
+        <WorldDropdown />
+        <ContinentDropdown />
+        <FactionDropdown />
         <div class="d-flex align-center ga-2">
           <div class="d-flex align-center ga-1">
             <v-btn
@@ -38,9 +39,6 @@
               {{ lastUpdatedText }}
             </span>
           </div>
-          <FactionDropdown />
-          <ContinentDropdown />
-          <WorldDropdown />
           <MapSettingsMenu />
         </div>
       </template>
