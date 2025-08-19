@@ -11,7 +11,27 @@
       class="world-select"
       style="min-width: 140px"
       hide-details
-    />
+    >
+      <template v-slot:selection="{ item }">
+        <div class="d-flex align-center">
+          <v-icon
+            icon="mdi-server-network"
+            color="grey"
+            size="small"
+            class="mr-2"
+          />
+          {{ item.raw.name }}
+        </div>
+      </template>
+
+      <template v-slot:item="{ item, props }">
+        <v-list-item v-bind="props">
+          <template v-slot:prepend>
+            <v-icon icon="mdi-server-network" color="grey" size="small" />
+          </template>
+        </v-list-item>
+      </template>
+    </v-select>
   </div>
 </template>
 

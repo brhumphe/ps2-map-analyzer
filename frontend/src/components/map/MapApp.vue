@@ -2,6 +2,9 @@
   <v-app>
     <v-app-bar theme="dark">
       <v-app-bar-title>PS2 Territory Analyzer</v-app-bar-title>
+      <v-spacer />
+      <AboutButton />
+      <v-spacer />
       <template v-slot:append>
         <WorldDropdown />
         <ContinentDropdown />
@@ -63,6 +66,7 @@ import MapComponent from '@/components/map/MapComponent.vue';
 import MapSettingsMenu from '@/components/map/ui/MapSettingsMenu.vue';
 import RegionHoverDisplay from '@/components/map/ui/RegionHoverDisplay.vue';
 import ContinentStatsPanel from '@/components/map/ui/ContinentStatsPanel.vue';
+import AboutButton from '@/components/map/ui/AboutButton.vue';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 import { useAppState } from '@/composables/useAppState';
