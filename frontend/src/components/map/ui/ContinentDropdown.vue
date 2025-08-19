@@ -144,9 +144,7 @@ const getContinentIcon = (
 };
 
 const onSelectClick = () => {
-  if (continentStatusMap.value.size === 0) {
-    fetchActiveContinents();
-  }
+  fetchActiveContinents();
 };
 
 const selectContinent = (continent: Continent) => {

@@ -20,6 +20,7 @@
               <v-icon
                 :class="{ 'rotate-animation': isRefreshing || isLoading }"
                 :color="error ? 'error' : undefined"
+                :size="20"
               >
                 {{ error ? 'mdi-alert-circle' : 'mdi-refresh' }}
               </v-icon>
