@@ -109,63 +109,63 @@ Third-party PS2 API → Territory Data Service → Analysis Provider → Style P
 
 ## Current Implementation Status
 
-### ✅ Completed & Working
+### ✅ Working Features
 
-- Vue 3 application with Vuetify UI framework
-- Leaflet map integration with custom PS2 tile layers
-- Zone data loading and hexagon boundary calculation
-- Coordinate conversion utilities (PS2 world ↔ Leaflet coordinates)
-- Headless component architecture for map objects
-- Reactive lattice links and region polygons rendering
-- Territory data service integration with third-party API
-- Type system foundation for territory analysis
+- **Vue 3 application** with Vuetify UI framework
+- **Leaflet map integration** with custom PS2 tile layers and external Honu tile server
+- **Zone data loading** and hexagon boundary calculation
+- **Coordinate conversion** utilities (PS2 world ↔ Leaflet coordinates)
+- **Headless component architecture** for managing leaflet map objects
+- **Reactive leaflet updates** lattice links, region polygons, and facility markers rendering
+- **Territory data service** integration with third-party API
 - **Complete territory data pipeline** with `useTerritoryData()` composable
 - **Region analysis system** with faction-based coloring
 - **Link analysis system** with contestable link detection
+- **Front-line Analysis** with `FrontlineAnalyzer` identifying tactical opportunities
 - **Reactive styling pipeline** following architecture separation
-- **Development mode** with local JSON data loading
-- **Map Display Settings**: `MapSettingsMenu` component with toggleable controls for lattice links, region polygons, and facility markers
-- **Facility Name Labels**: `MarkerEntity` component with tooltip-based always-visible facility names
-- **Census Data Integration**: Working PS2 Census API integration with proper data parsing
-- **Advanced Composable Architecture**: Complete migration to composable-based state management (`useAppState`, `useMapDisplaySettings`, `useRegionMarkers`, etc.)
-- **TypeScript Strict Mode**: Enabled `noImplicitAny` for enhanced type safety across codebase
-- **Map Zone Data Refactoring**: Migrated from arrays to Map-based data structures for O(1) lookups
-- **Visibility Toggle System**: Granular control over map layer visibility with reactive updates
-- **Auto-refresh System**: Periodic territory data updates from live API with configurable intervals and pause/resume functionality
-- **Debug Panel**: Developer options with toggle control for debugging and power user features
-- **Live Continent Status**: Honu API integration for real-time continent lock/unlock status with visual indicators
-- **Continent Statistics Display**: Panel showing faction base control counts with live updates
-- **Enhanced Dropdown UX**: Continent selection with lock status icons, alert indicators, and loading states
+- **Development mode** with local JSON data loading and sample state for each continent
+- **Live PS2 Census API integration** with proper data parsing
+- **Map Display Settings** with `MapSettingsMenu` component and toggleable controls for lattice links, region polygons, and facility markers
+- **Facility Name Labels** with `MarkerEntity` component using tooltip-based always-visible facility names
+- **Advanced Composable Architecture** with complete migration to composable-based state management (`useAppState`, `useMapDisplaySettings`, `useRegionMarkers`, etc.)
+- **TypeScript Strict Mode** with enabled `noImplicitAny` for enhanced type safety across codebase
+- **Map Zone Data Refactoring** migrated from arrays to Map-based data structures for O(1) lookups
+- **Visibility Toggle System** with granular control over map layer visibility and reactive updates
+- **Selective State Persistence** with localStorage for preferences and session-only for app data
+- **Auto-refresh System** with periodic territory data updates from live API, configurable intervals, and pause/resume functionality
+- **Debug Panel** with developer options, toggle control for debugging, and power user features
+- **Live Continent Status** via Honu API integration with real-time continent lock/unlock status and visual indicators
+- **Continent Statistics Display** showing faction base control counts with live updates and territory percentages
+- **Enhanced Dropdown UX** with continent selection, lock status icons, alert indicators, loading states, and world-aware data fetching
+- **Region Hover System** with `RegionHoverDisplay.vue` component providing tactical information display, JSON state inspection, and faction details
+- **Continent-Wide Statistics** via `useContinentAnalysis.ts` with faction territory counts, percentages, and dominant faction calculation
+- **Faction-Aware POV Analysis** with player faction selection, region relevance filtering, and tactical emphasis
+- **Development Data Toggle** allowing user toggle between development/live data modes
+- **Refined Visual Styling** with region and link styling based on player faction perspective and relevance-based emphasis
 
-### 🔄 Recently Completed
+### 🔄 Recently Implemented
 
-- **Territory Analysis Pipeline**: Full implementation of the reactive pipeline from territory data through analysis to visual rendering
-- **Region Ownership Analysis**: `RegionOwnershipAnalyzer` with faction-based region coloring
-- **Contestable Links Analysis**: `ContestableLinksAnalyzer` identifying tactical opportunities
-- **Style Calculation Layers**: Separate styling systems for regions and links
-- **Reactive Integration**: Automatic updates when territory data changes
-- **Timing Issue Resolution**: Fixed initialization order and style application timing
-- **World/Continent Selection**: Fully functional dropdown menus with reactive integration
-- **Component Architecture Refactoring**: Separated MapApp.vue (UI chrome) from MapComponent.vue (map lifecycle)
-- **Map Lifecycle Management**: Resolved Leaflet container reinitialization errors with destroy/recreate pattern
-- **External Tile Integration**: Working integration with Honu tile server (CORS warnings resolved/ignored)
-- **Reactive Prop Flow**: Clean props-down data flow for world/continent changes
-- **Zone Watcher Pattern**: Centralized content rebuilding triggered by currentZone changes
-- **Base Name Labels**: MarkerEntity component enhanced with tooltip support for always-visible facility labels
-- **Dev mode data** - Add sample state for each continent for development
-- **Front-line Analysis**: `FrontlineAnalyzer` identifying front-line tactical opportunities
-- **Auto-refresh System**: Periodic territory data updates with user-configurable intervals and pause/resume controls
-- **Debug Panel Implementation**: Developer options panel with toggle control and diagnostic tools
-- **Honu API Integration**: Real-time continent status with TypeScript interfaces (`HonuWorldOverview`, `HonuZoneStatus`, etc.)
-- **Continent Status Dropdown**: Enhanced UI with visual status indicators, loading states, and world-aware data fetching
-- **Leaflet Pane Switching Fix**: Solved overlapping region display issues with remove/re-add pattern for dynamic state changes
+- **Territory Analysis Pipeline** with full implementation of reactive pipeline from territory data through analysis to visual rendering
+- **Region Ownership Analysis** via `RegionOwnershipAnalyzer` with faction-based region coloring
+- **Contestable Links Analysis** with `ContestableLinksAnalyzer` identifying tactical opportunities
+- **Style Calculation Layers** with separate styling systems for regions and links
+- **Reactive Integration** providing automatic updates when territory data changes
+- **Timing Issue Resolution** fixing initialization order and style application timing
+- **World/Continent Selection** with fully functional dropdown menus and reactive integration
+- **Component Architecture Refactoring** separating MapApp.vue (UI chrome) from MapComponent.vue (map lifecycle)
+- **Map Lifecycle Management** resolving Leaflet container reinitialization errors with destroy/recreate pattern
+- **Reactive Prop Flow** with clean props-down data flow for world/continent changes
+- **Zone Watcher Pattern** providing centralized content rebuilding triggered by currentZone changes
+- **Base Name Labels** with MarkerEntity component enhanced with tooltip support for always-visible facility labels
+- **Honu API Integration** with TypeScript interfaces (`HonuWorldOverview`, `HonuZoneStatus`, etc.) for real-time continent status
+- **Leaflet Pane Switching Fix** solving overlapping region display issues with remove/re-add pattern for dynamic state changes
 
 ### 🎯 Next Steps Available
 
+- **Onboarding Experience** - Give an explainer for what and how to use the application
 - **Performance Optimization** - Caching, selective updates, analysis throttling
 - **Additional Analysis Modes** - Strategic value scoring, cutoff identification
 - **Live Population Info** - Integrate population per region via Sanctuary
-- **UI Polish** - Remove debug logs, add legend, territory statistics display
 - **Enhanced Display Modes** - More sophisticated analysis visualization options
 - **Improved map loading responsiveness** - Load and display regions with default style faster during continent switch
 - **User-customizable Styles** - Allow user to customize region/link colors
