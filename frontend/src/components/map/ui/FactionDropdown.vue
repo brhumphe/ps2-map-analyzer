@@ -34,8 +34,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useAppState } from '@/composables/useAppState';
-import { Faction } from '@/types/common';
+import { useAppState } from '@/composables/useAppState.ts';
+import { Faction } from '@/types/common.ts';
 
 const { playerFaction, setPlayerFaction } = useAppState();
 

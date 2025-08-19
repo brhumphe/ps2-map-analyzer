@@ -56,13 +56,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import FactionDropdown from '@/components/map/FactionDropdown.vue';
-import WorldDropdown from '@/components/map/WorldDropdown.vue';
-import ContinentDropdown from '@/components/map/ContinentDropdown.vue';
+import FactionDropdown from '@/components/map/ui/FactionDropdown.vue';
+import WorldDropdown from '@/components/map/ui/WorldDropdown.vue';
+import ContinentDropdown from '@/components/map/ui/ContinentDropdown.vue';
 import MapComponent from '@/components/map/MapComponent.vue';
-import MapSettingsMenu from '@/components/map/MapSettingsMenu.vue';
-import RegionHoverDisplay from '@/components/map/RegionHoverDisplay.vue';
-import ContinentStatsPanel from '@/components/map/ContinentStatsPanel.vue';
+import MapSettingsMenu from '@/components/map/ui/MapSettingsMenu.vue';
+import RegionHoverDisplay from '@/components/map/ui/RegionHoverDisplay.vue';
+import ContinentStatsPanel from '@/components/map/ui/ContinentStatsPanel.vue';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 import { useAppState } from '@/composables/useAppState';

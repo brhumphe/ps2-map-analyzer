@@ -67,12 +67,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useRegionHover } from '@/composables/useRegionHover';
-import { useTerritoryData } from '@/composables/useTerritoryData';
-import { useLeafletMap } from '@/composables/useLeafletMap';
-import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
-import { zoneUtils } from '@/utilities/zone_utils';
-import { Faction } from '@/types/common';
+import { useRegionHover } from '@/composables/useRegionHover.ts';
+import { useTerritoryData } from '@/composables/useTerritoryData.ts';
+import { useLeafletMap } from '@/composables/useLeafletMap.ts';
+import { useRegionAnalysis } from '@/composables/useRegionAnalysis.ts';
+import { zoneUtils } from '@/utilities/zone_utils.ts';
+import { Faction } from '@/types/common.ts';
 
 const { currentHoveredRegion } = useRegionHover();
 const { territorySnapshot } = useTerritoryData();
