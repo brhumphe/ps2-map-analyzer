@@ -50,7 +50,7 @@
 
     <v-main>
       <MapComponent />
-      <RegionHoverDisplay v-if="showRegionHover" />
+      <RegionHoverDisplay />
 
       <!-- Continent statistics panel at bottom -->
       <ContinentStatsPanel />
@@ -80,7 +80,7 @@ const {
   territorySnapshot,
 } = useTerritoryData();
 
-const { showRegionHover } = useMapDisplaySettings();
+const { showRegionDebugInfo } = useMapDisplaySettings();
 const { useDevData } = useAppState();
 
 const handleRefresh = async () => {

@@ -7,10 +7,7 @@
   >
     <v-card-text class="pa-3">
       <div class="text-subtitle-2 text-high-emphasis mb-1">
-        {{ hoveredRegionInfo.facility_name }}<br />
-        Facility ID: {{ hoveredRegionInfo.facility_id }}<br />
-        Facility Type ID: {{ hoveredRegionInfo.facility_type_id }}<br />
-        Region ID: {{ hoveredRegionInfo.map_region_id }}
+        {{ hoveredRegionInfo.facility_name }}
       </div>
       <div class="text-body-2 text-medium-emphasis">
         <v-chip :color="factionColor" size="small" variant="flat">
@@ -45,21 +42,31 @@
           Inactive
         </v-chip>
       </div>
+      <div v-if="showRegionDebugInfo">
+        <div class="text-subtitle-2 text-high-emphasis mb-1">
+          Facility ID: {{ hoveredRegionInfo.facility_id }}<br />
+          Facility Type ID: {{ hoveredRegionInfo.facility_type_id }}<br />
+          Region ID: {{ hoveredRegionInfo.map_region_id }}
+        </div>
+        <!-- State information as JSON -->
+        <div v-if="hoveredRegionState" class="mt-2">
+          <div class="text-caption text-medium-emphasis mb-1">
+            Region State:
+          </div>
+          <pre class="style-json">{{
+            JSON.stringify(hoveredRegionState, null, 2)
+          }}</pre>
+        </div>
 
-      <!-- State information as JSON -->
-      <div v-if="hoveredRegionState" class="mt-2">
-        <div class="text-caption text-medium-emphasis mb-1">Region State:</div>
-        <pre class="style-json">{{
-          JSON.stringify(hoveredRegionState, null, 2)
-        }}</pre>
-      </div>
-
-      <!-- Style information as JSON -->
-      <div v-if="hoveredRegionStyle" class="mt-2">
-        <div class="text-caption text-medium-emphasis mb-1">Region Style:</div>
-        <pre class="style-json">{{
-          JSON.stringify(hoveredRegionStyle, null, 2)
-        }}</pre>
+        <!-- Style information as JSON -->
+        <div v-if="hoveredRegionStyle" class="mt-2">
+          <div class="text-caption text-medium-emphasis mb-1">
+            Region Style:
+          </div>
+          <pre class="style-json">{{
+            JSON.stringify(hoveredRegionStyle, null, 2)
+          }}</pre>
+        </div>
       </div>
     </v-card-text>
   </v-card>
@@ -73,10 +80,12 @@ import { useLeafletMap } from '@/composables/useLeafletMap.ts';
 import { useRegionAnalysis } from '@/composables/useRegionAnalysis.ts';
 import { zoneUtils } from '@/utilities/zone_utils.ts';
 import { Faction } from '@/types/common.ts';
+import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
 
 const { currentHoveredRegion } = useRegionHover();
 const { territorySnapshot } = useTerritoryData();
 const { currentZone } = useLeafletMap();
+const { showRegionDebugInfo } = useMapDisplaySettings();
 
 // Add region analysis for style and tactical information
 const { getRegionStyle, getRegionState } = useRegionAnalysis(
