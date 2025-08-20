@@ -57,7 +57,6 @@ export class DevelopmentDataService extends CensusDataService {
       }
 
       const data = await response.json();
-      console.debug(`Loaded territory control from development`, data, url);
       return extractCensusMapState(data, continent, world);
     } catch (err) {
       throw new Error(
