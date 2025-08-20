@@ -41,8 +41,10 @@ export class RegionStyleCalculator {
 
     const faction_color: string =
       FactionColor.get(regionState.owning_faction_id) || '#ff00ff';
-    let border_color = '#404040';
+    let border_color = '#292929';
     let fillColor: string = FactionColor.get(Faction.NONE) || '#ff00ff';
+    // 3-way fights can be "stolen" if one faction intervenes when the timer
+    // is low, taking it from the other attacker.
     if (regionState.can_steal) {
       fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
       fillOpacity = 0.8;
@@ -52,12 +54,14 @@ export class RegionStyleCalculator {
       weight = 4;
     } else if (regionState.can_capture) {
       if (regionState.relevant_to_player) {
+        // Player's faction is involved in the region - brighter
         fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
         fillOpacity = 0.8;
         opacity = 1.0;
         pane = RegionPane.FRONTLINE;
         border_color = '#000000';
       } else {
+        // Player's faction is not involved in the region - dimmer
         fillColor = adjustColorLightnessSaturation(faction_color, 0.0, 0);
         fillOpacity = 0.8;
         opacity = 0.5;
@@ -75,6 +79,7 @@ export class RegionStyleCalculator {
       fillOpacity = activeRegionStyle.fillOpacity;
       fillColor = activeRegionStyle.fillColor;
     } else {
+      // Not controlled by any faction and unavailable for capture
       pane = RegionPane.INACTIVE;
       opacity = 0.9;
       fillOpacity = 0.75;
