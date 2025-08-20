@@ -22,7 +22,7 @@ const defaultSettings: MapDisplaySettings = {
 };
 
 // Singleton state
-const settings = ref<MapDisplaySettings>(defaultSettings);
+const settings = ref<MapDisplaySettings>({ ...defaultSettings });
 
 // Optional: Persist to localStorage
 const STORAGE_KEY = 'map-display-settings';
@@ -79,7 +79,7 @@ export function useMapDisplaySettings() {
     },
 
     resetToDefaults: () => {
-      settings.value = defaultSettings;
+      settings.value = { ...defaultSettings };
     },
   };
 }

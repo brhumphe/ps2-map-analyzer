@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar theme="dark">
-      <v-app-bar-title>PS2 Territory Analyzer</v-app-bar-title>
+      <v-app-bar-title shrink>PS2 Territory Analyzer</v-app-bar-title>
       <v-spacer />
       <AboutButton />
       <v-spacer />
