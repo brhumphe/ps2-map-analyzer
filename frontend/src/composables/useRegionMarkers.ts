@@ -1,9 +1,15 @@
-import { reactive, computed } from 'vue';
+import { reactive, computed, watch } from 'vue';
 import * as L from 'leaflet';
 import type { RegionKey, Zone } from '@/types/zone_types';
 import type { RegionID } from '@/types/common';
+import { Faction } from '@/types/common';
 import { zoneUtils } from '@/utilities/zone_utils';
 import { world_to_latLng } from '@/utilities/coordinates.ts';
+import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
+import { useRegionHover } from '@/composables/useRegionHover';
+import { useTerritoryData } from '@/composables/useTerritoryData';
+import { useLeafletMap } from '@/composables/useLeafletMap';
+import { useAppState } from '@/composables/useAppState';
 
 interface RegionMarker {
   position: L.LatLng;
@@ -11,9 +17,17 @@ interface RegionMarker {
   options?: L.MarkerOptions;
   regionId: RegionID;
   facilityName: string;
+  tooltip?: string;
 }
 
 export function useRegionMarkers() {
+  // Get dependencies from singleton composables
+  const { territorySnapshot } = useTerritoryData();
+  const { currentZone } = useLeafletMap();
+  const { getRegionState } = useRegionAnalysis(territorySnapshot, currentZone);
+  const { currentHoveredRegion } = useRegionHover();
+  const { playerFaction } = useAppState();
+
   // Reactive collection of region markers
   const regionMarkers = reactive(new Map<RegionKey, RegionMarker>());
 
@@ -45,12 +59,16 @@ export function useRegionMarkers() {
           options: { ...defaultOptions },
           regionId: region.map_region_id,
           facilityName: region.facility_name,
+          tooltip: region.facility_name, // Initially set tooltip to facility name
         });
       } catch (error) {
         // Skip regions that can't be created
         continue;
       }
     }
+
+    // Update initial visibility after markers are created
+    updateMarkerVisibility();
   };
 
   /**
@@ -109,6 +127,52 @@ export function useRegionMarkers() {
   const regionIds = computed(() => {
     return Array.from(regionMarkers.values()).map((marker) => marker.regionId);
   });
+
+  /**
+   * Update marker opacity and tooltip visibility based on strategic relevance and hover state
+   */
+  const updateMarkerVisibility = () => {
+    for (const [key, marker] of regionMarkers) {
+      const regionState = getRegionState.value(marker.regionId);
+      const isHovered = currentHoveredRegion.value === marker.regionId;
+      const isRelevantToPlayer = regionState?.relevant_to_player ?? false;
+      const isStrategicallyRelevant =
+        isRelevantToPlayer && regionState?.can_capture;
+
+      // Hide all markers
+      const shouldShowMarker = false;
+
+      // Show tooltip logic:
+      // - If hovered (always show on hover)
+      // - OR if relevant to player (but not if no faction selected and active region)
+      const noFactionSelected = playerFaction.value === Faction.NONE;
+      const isActiveRegion = regionState?.is_active ?? false;
+      const shouldHideActiveWhenNoFaction = noFactionSelected && isActiveRegion;
+
+      const shouldShowTooltip =
+        isHovered || (isRelevantToPlayer && !shouldHideActiveWhenNoFaction);
+
+      // Update marker opacity
+      if (marker.options) {
+        marker.options.opacity = shouldShowMarker ? 1 : 0;
+      }
+
+      // Update tooltip based on relevance to player
+      if (shouldShowTooltip) {
+        // Show tooltip with facility name
+        marker.tooltip = marker.facilityName;
+      } else {
+        // Hide tooltip by setting undefined
+        marker.tooltip = undefined;
+      }
+    }
+  };
+
+  // Watch for hover changes and update visibility
+  watch(currentHoveredRegion, updateMarkerVisibility);
+
+  // Watch for region state changes and update visibility
+  watch(getRegionState, updateMarkerVisibility, { deep: true });
 
   return {
     // State

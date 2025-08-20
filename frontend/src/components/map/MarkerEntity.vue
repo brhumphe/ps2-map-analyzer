@@ -15,7 +15,6 @@ interface Props {
   popup?: string;
   tooltip?: string;
   tooltipOptions?: L.TooltipOptions;
-  visible: boolean;
 }
 
 const props = defineProps<Props>();
@@ -176,22 +175,27 @@ watch(
   }
 );
 
+// Watch for options changes and update marker style
 watch(
-  () => props.visible,
-  (newVisible) => {
-    if (newVisible) {
-      createMarker();
-    } else {
-      removeMarker();
+  () => props.options,
+  (newOptions) => {
+    if (marker.value && newOptions) {
+      try {
+        marker.value.setOpacity(newOptions.opacity ?? 1);
+      } catch (error) {
+        console.error(
+          `MarkerEntity[${props.id}]: Failed to update opacity:`,
+          error
+        );
+      }
     }
-  }
+  },
+  { deep: true }
 );
 
 // Lifecycle hooks
 onMounted(() => {
-  if (props.visible) {
-    createMarker();
-  }
+  createMarker();
 });
 
 onUnmounted(() => {
@@ -217,7 +221,6 @@ onUnmounted(() => {
   -webkit-backdrop-filter: blur(4px);
   white-space: nowrap;
   text-align: center;
-  transition: opacity 0.2s ease-in-out;
 }
 
 /* Hide tooltip arrows - this needs !important as Leaflet applies inline styles */

@@ -42,9 +42,8 @@
       :position="markerData.position"
       :popup="markerData.popup"
       :options="markerData.options as Partial<L.MarkerOptions>"
-      :tooltip="markerData.facilityName"
+      :tooltip="markerData.tooltip"
       :tooltipOptions="{ permanent: true, direction: 'bottom' }"
-      :visible="isMarkerVisible(markerData.regionId)"
     />
   </template>
 </template>
@@ -179,15 +178,6 @@ const rebuildMapContent = async () => {
   // Clear rebuilding flag once everything is loaded
   isRebuildingFromStateChange.value = false;
 };
-
-const isMarkerVisible = computed(() => {
-  return (regionId: RegionID) => {
-    const regionState = getRegionState.value(regionId);
-    return (
-      (regionState?.relevant_to_player && regionState.can_capture) ?? false
-    );
-  };
-});
 
 // Watch for continent changes - switch continent and load new zone
 watch(
