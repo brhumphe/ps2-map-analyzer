@@ -136,21 +136,11 @@ export function useRegionMarkers() {
       const regionState = getRegionState.value(marker.regionId);
       const isHovered = currentHoveredRegion.value === marker.regionId;
       const isRelevantToPlayer = regionState?.relevant_to_player ?? false;
-      const isStrategicallyRelevant =
-        isRelevantToPlayer && regionState?.can_capture;
 
-      // Hide all markers
+      // Hide all markers by default
       const shouldShowMarker = false;
 
-      // Show tooltip logic:
-      // - If hovered (always show on hover)
-      // - OR if relevant to player (but not if no faction selected and active region)
-      const noFactionSelected = playerFaction.value === Faction.NONE;
-      const isActiveRegion = regionState?.is_active ?? false;
-      const shouldHideActiveWhenNoFaction = noFactionSelected && isActiveRegion;
-
-      const shouldShowTooltip =
-        isHovered || (isRelevantToPlayer && !shouldHideActiveWhenNoFaction);
+      const shouldShowTooltip = isHovered || isRelevantToPlayer;
 
       // Update marker opacity
       if (marker.options) {

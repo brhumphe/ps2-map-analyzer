@@ -132,8 +132,8 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
       return false;
     }
 
-    // If no faction selected, treat all active regions as relevant
-    if (playerFaction === Faction.NONE) {
+    // If no faction selected, treat all capturable regions as relevant
+    if (playerFaction === Faction.NONE && canCapture) {
       return true;
     }
 
