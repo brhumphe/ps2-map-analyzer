@@ -1,35 +1,20 @@
-# PS2 Territory Analyzer
+# Planetside 2 Map Analyzer
 
-A tactical visualization tool for PlanetSide 2 that helps players make strategic decisions by visualizing lattice connections, territory ownership, and tactical opportunities on interactive maps.
+## What does this project do?
 
-## Why This Tool?
+With 60-100 bases to fight over in each of the major continents, it can be very overwhelming to understand the big picture without thousands of hours of in-game experience leading squads and platoons. The goal of this project is to make strategic gameplay more accessible.
 
-Existing PlanetSide 2 community tools (Fisu, Honu, Voidwell) excel at showing historical data but lack strategic analysis:
+This application provides a real-time view of each map, analyzes the current territory control state, and conveys this information visually to the user. The purpose is to surface useful information (e.g., what facilities are open to attack right now) while de-emphasizing less relevant info (e.g., bases unavailable to attack by the player's faction).
 
-- **Static Information**: Display current territory control without strategic context
-- **Limited Predictive Value**: No analysis of what territories _could_ be captured
-- **Missing Time Constraints**: Don't account for alert time limits in strategic planning
+## Technical Overview
 
-This tool focuses on **predictive analysis** and **strategic planning** to answer questions like "What's our best path to 40% territory before this alert ends?"
+Built with Vue 3, Leaflet, and TypeScript. The Leaflet library provides the interactive map and map overlays. Headless Vue components manage each leaflet object, tying imperative leaflet operations to the Vue component lifecycle and reactive updates. The UI is made using Vuetify components for layout and styling.
 
-## Features
+Live territory control data is provided by the official Census API, with additional data provided by the community-run projects [Honu](https://wt.honu.pw/) and [Sanctuary](https://github.com/PS2Sanctuary/Sanctuary.Census. Includes automatic retry logic and user feedback for API failures.
 
-- **Real-time Territory Visualization**: Interactive maps showing current faction control
-- **Tactical Analysis**: Identify contestable lattice links and strategic opportunities
-- **Strategic Intelligence**:
-  - Time-based territory projection capabilities
-  - Vulnerability analysis for critical territorial nodes
-  - Cut-off territory detection and reconnection opportunities
-- **Custom Map Integration**: PlanetSide 2 game maps with accurate coordinate transformation
-- **Headless Component Architecture**: Efficient individual object updates without full re-renders
-- **Responsive UI**: Vue 3 + Vuetify interface with dark theme optimized for tactical use
+## Links
 
-## Technology Stack
-
-- **Frontend**: Vue 3 + Composition API + TypeScript + Vuetify + Leaflet.js
-- **Mapping**: Custom coordinate conversion for PlanetSide 2 world coordinates
-- **Data**: Third-party PS2 Census API integration
-- **Optional Backend**: Python/FastAPI (available for experimentation)
+Use it here: [Nanite Nexus](https://www.nanite.nexus/) or follow the directions below to build it manually.
 
 ## Quick Start
 
@@ -65,7 +50,7 @@ This tool focuses on **predictive analysis** and **strategic planning** to answe
    npm run test         # Run Jest tests
    ```
 
-### Optional Backend Setup
+### ON HOLD - Backend Setup
 
 Originally designed as backend-focused, development revealed that client-side processing better serves this use case. The backend remains available for experimentation:
 
@@ -87,93 +72,3 @@ Originally designed as backend-focused, development revealed that client-side pr
    uvicorn backend.main:app --reload
    ```
    Backend will be available at `http://localhost:8000`
-
-## Project Architecture
-
-### Architectural Evolution
-
-This project demonstrates **iterative architectural decision-making** by evolving from initial assumptions to user-centered solutions:
-
-- **Original Design**: Backend-focused analysis (leveraging Python expertise)
-- **Discovery**: Client-side processing provides better UX (89 regions × O(n) < 1ms vs 50-200ms network latency)
-- **Current State**: Frontend-first with optional backend for architectural experimentation
-
-This evolution showcases **evidence-based architecture decisions** that prioritize user experience over technical preferences.
-
-### Key Components
-
-- **Interactive Maps**: Leaflet.js integration with custom PlanetSide 2 coordinate systems
-- **Headless Architecture**: Individual Vue components manage Leaflet objects (polygons, polylines)
-- **Provider Pattern**: Swappable analysis and styling providers for different visualization modes
-- **Reactive Pipeline**: Vue reactivity drives updates through the entire visualization chain
-
-### Project Structure
-
-```
-frontend/
-  src/
-    components/        # Vue components (headless map entities)
-    composables/       # Vue composables for coordination logic
-    services/          # Business logic and API integration
-    utilities/         # Pure functions (coordinates, geometry)
-    types/            # TypeScript definitions
-  tiles/              # Custom PlanetSide 2 map tiles
-
-backend/              # Optional Python/FastAPI backend
-  analysis/           # Territory analysis algorithms
-  services/           # API service integrations
-  shared/models/      # Common data models
-
-docs/                 # Architecture and development documentation
-```
-
-## Domain Context
-
-### PlanetSide 2 Game Mechanics
-
-- **4 Continents**: Indar, Amerish, Esamir, Hossin (each ~89 capturable regions)
-- **4 Factions**: VS (Purple), NC (Blue), TR (Red), NSO (Gray)
-- **Lattice System**: Strategic connections between facilities (~129 links per continent)
-- **Territory Control**: Real-time ownership changes during large-scale battles
-
-### Tactical Value
-
-- **Contestable Links**: Connections between enemy facilities represent tactical opportunities
-- **Territory Flow**: Visual analysis of faction control and strategic positioning
-- **Real-time Updates**: Current territory status for immediate tactical decision-making
-
-## Development
-
-### Code Quality
-
-- **Pre-commit hooks**: Automatic code formatting (Prettier) and linting (Ruff)
-- **TypeScript**: Full type safety with strict configuration
-- **Testing**: Jest for frontend, pytest for backend
-
-### Architecture Patterns
-
-- **Composition API**: Modern Vue 3 reactive patterns
-- **Interface-based Design**: Provider pattern for extensibility
-- **Pure Functions**: Testable utilities for coordinates and geometry
-- **Incremental Development**: Small changes with verification at each step
-
-## Portfolio Demonstration
-
-This project showcases several advanced development practices:
-
-- **Architecture Migration**: Procedural TypeScript → Reactive Vue 3 patterns
-- **Complex Integration**: Vue reactivity with imperative mapping libraries (Leaflet)
-- **Performance Engineering**: Client-side analysis optimization for real-time tactical decisions
-- **Interface Design**: Provider patterns enabling swappable analysis/styling implementations
-- **Domain Modeling**: Custom coordinate systems and complex data transformations
-
-## Contributing
-
-This project demonstrates modern frontend architecture patterns and would benefit from:
-
-- Additional territory analysis algorithms
-- Enhanced visualization modes
-- Performance optimizations for large datasets
-- Extended PlanetSide 2 game mechanic integration
-
-See `docs/architecture.md` for detailed architectural theory, `CLAUDE.md` for development guidance, and `docs/ai-handoff-consolidated.md` for comprehensive project context.
