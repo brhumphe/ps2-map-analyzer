@@ -14,7 +14,7 @@
     <v-dialog v-model="dialog" max-width="600">
       <v-card>
         <v-card-title class="d-flex align-center justify-space-between">
-          <span>About PS2 Map Analyzer</span>
+          <span>About Nanite Nexus Map Analyzer</span>
           <v-btn
             icon="mdi-close"
             variant="text"

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar theme="dark">
-      <v-app-bar-title shrink>PS2 Territory Analyzer</v-app-bar-title>
+      <v-app-bar-title shrink>Nanite Nexus Map Analyzer</v-app-bar-title>
       <v-spacer />
       <AboutButton />
       <v-spacer />
@@ -51,8 +51,6 @@
     <v-main>
       <MapComponent />
       <RegionHoverDisplay />
-
-      <!-- Continent statistics panel at bottom -->
       <ContinentStatsPanel />
     </v-main>
   </v-app>
@@ -69,7 +67,6 @@ import RegionHoverDisplay from '@/components/map/ui/RegionHoverDisplay.vue';
 import ContinentStatsPanel from '@/components/map/ui/ContinentStatsPanel.vue';
 import AboutButton from '@/components/map/ui/AboutButton.vue';
 import { useTerritoryData } from '@/composables/useTerritoryData';
-import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 import { useAppState } from '@/composables/useAppState';
 
 const {
@@ -79,8 +76,6 @@ const {
   error,
   territorySnapshot,
 } = useTerritoryData();
-
-const { showRegionDebugInfo } = useMapDisplaySettings();
 const { useDevData } = useAppState();
 
 const handleRefresh = async () => {
