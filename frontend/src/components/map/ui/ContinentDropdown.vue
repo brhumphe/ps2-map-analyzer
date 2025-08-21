@@ -64,8 +64,7 @@ const allContinents = [
 const continentStatusMap = ref<Map<number, HonuZoneStatus>>(new Map());
 const isLoading = ref(false);
 const hasError = ref(false);
-
-const continentNames = new Map([
+new Map([
   [Continent.INDAR, 'Indar'],
   [Continent.HOSSIN, 'Hossin'],
   [Continent.AMERISH, 'Amerish'],
@@ -123,7 +122,7 @@ const getContinentStatusClass = (continent: Continent): string => {
   if (isContinentLocked(continent)) {
     return 'text-disabled';
   } else if (hasAlertInfo(continent)) {
-    return 'text-error';
+    return 'continent-alert';
   } else if (isContinentOpen(continent)) {
     return 'text-success';
   }
@@ -136,7 +135,7 @@ const getContinentIcon = (
   if (isContinentLocked(continent)) {
     return { icon: 'mdi-lock' };
   } else if (isContinentOpen(continent) && hasAlertInfo(continent)) {
-    return { icon: 'mdi-alarm-light', color: 'error' };
+    return { icon: 'mdi-alarm-light', color: '#ff1610' };
   } else if (isContinentOpen(continent)) {
     return { icon: 'mdi-earth', color: 'success' };
   }
@@ -164,3 +163,8 @@ watch(selectedWorld, () => {
   fetchActiveContinents();
 });
 </script>
+<style scoped>
+.continent-alert {
+  background-color: #751010;
+}
+</style>
