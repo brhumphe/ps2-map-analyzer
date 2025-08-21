@@ -10,7 +10,7 @@ This application provides a real-time view of each map, analyzes the current ter
 
 Built with Vue 3, Leaflet, and TypeScript. The Leaflet library provides the interactive map and map overlays. Headless Vue components manage each leaflet object, tying imperative leaflet operations to the Vue component lifecycle and reactive updates. The UI is made using Vuetify components for layout and styling.
 
-Live territory control data is provided by the official Census API, with additional data provided by the community-run projects [Honu](https://wt.honu.pw/) and [Sanctuary](https://github.com/PS2Sanctuary/Sanctuary.Census. Includes automatic retry logic and user feedback for API failures.
+Live territory control data is provided by the official Census API, with additional data provided by the community-run projects [Honu](https://wt.honu.pw/) and [Sanctuary](https://github.com/PS2Sanctuary/Sanctuary.Census). Includes automatic retry logic and user feedback for API failures.
 
 ## Links
 
