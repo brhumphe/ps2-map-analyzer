@@ -1,11 +1,6 @@
 // types/territory.ts
 
-import {
-  Continent,
-  Faction,
-  type RegionID,
-  type WorldID,
-} from '@/types/common';
+import { Continent, Faction, type RegionID, World } from '@/types/common';
 import type { FacilityLinkKey, Zone } from '@/types/zone_types';
 
 /**
@@ -36,7 +31,7 @@ export interface TerritorySnapshot {
   continent: Continent;
 
   /** World/server identifier where this territory state applies */
-  world: WorldID;
+  world: World;
 
   /**
    * Mapping of region ID to controlling faction ID

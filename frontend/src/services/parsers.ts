@@ -1,4 +1,11 @@
-import { Continent, Faction, type RegionID, World } from '@/types/common';
+import {
+  Continent,
+  type FacilityID,
+  FacilityType,
+  Faction,
+  type RegionID,
+  World,
+} from '@/types/common';
 import type {
   FacilityLink,
   FacilityLinkKey,
@@ -13,8 +20,8 @@ export interface RegionResponse {
   map_region_id: RegionID;
   location_x: number;
   location_z: number;
-  facility_id: number;
-  facility_type_id: number;
+  facility_id: FacilityID;
+  facility_type_id: FacilityType;
   facility_name: string;
   hexes: {
     x: number;
@@ -110,7 +117,7 @@ export function parseZoneFromZoneResponse(response: ZoneResponse): Zone {
     }
   });
 
-  const facility_to_region_map = new Map<number, RegionID>();
+  const facility_to_region_map = new Map<FacilityID, RegionID>();
   response.regions.forEach((region) => {
     if (region.facility_id) {
       facility_to_region_map.set(region.facility_id, region.map_region_id);
@@ -146,8 +153,8 @@ export function extractCensusMapState(
 
   for (const map of data.map_list) {
     for (const row of map.Regions.Row) {
-      const regionId = parseInt(row.RowData.RegionId);
-      const factionId = parseInt(row.RowData.FactionId);
+      const regionId = parseInt(row.RowData.RegionId) as RegionID;
+      const factionId = parseInt(row.RowData.FactionId) as Faction;
       regionOwnership[regionId] = factionId;
     }
   }

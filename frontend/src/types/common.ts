@@ -56,6 +56,5 @@ export const WorldName = new Map<World, string>([
   [World.SolTech, 'SolTech'],
 ]);
 
-export type RegionID = number;
-export type WorldID = number;
-export type FacilityID = number;
+export type RegionID = number & { readonly brand: unique symbol };
+export type FacilityID = number & { readonly brand: unique symbol };

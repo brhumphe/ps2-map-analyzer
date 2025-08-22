@@ -1,7 +1,7 @@
 // composables/useTerritoryData.ts
 import { ref, computed, watch, onUnmounted } from 'vue';
 import type { TerritorySnapshot } from '@/types/territory';
-import type { Continent, WorldID, RegionID } from '@/types/common';
+import { type Continent, type RegionID, World } from '@/types/common';
 import { useCensusData } from '@/composables/useCensusData';
 import { useAppState } from '@/composables/useAppState';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
@@ -107,7 +107,7 @@ export function useTerritoryData() {
    * Fetch territory data with timeout and retry
    */
   const fetchTerritoryData = async (
-    world: WorldID,
+    world: World,
     continent: Continent,
     isAutoRefresh = false
   ): Promise<void> => {
