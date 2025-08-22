@@ -41,9 +41,10 @@ export function useRegionMarkers() {
     for (const region of zone.regions.values()) {
       try {
         // Convert coordinates to Leaflet position
-        const position = world_to_latLng(
-          zoneUtils.getRegionCenter(zone, region.map_region_id)
-        );
+        const position = world_to_latLng({
+          x: region.location.x,
+          z: region.location.z,
+        });
 
         // Create popup content
         const popup = `Region ${region.facility_name} regionID:${region.map_region_id} @ ${region.location.x}, ${region.location.z}`;

@@ -41,8 +41,15 @@ const createMarker = () => {
   }
 
   try {
+    const icon = L.icon({
+      iconUrl:
+        'https://census.daybreakgames.com/files/ps2/images/static/93.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+    });
     // Create the Leaflet marker
     const newMarker = L.marker(props.position, props.options);
+    newMarker.setIcon(icon);
 
     // Add popup if provided
     if (props.popup) {
@@ -55,6 +62,7 @@ const createMarker = () => {
         permanent: false,
         direction: 'center',
         sticky: true, // Better positioning during zoom
+        offset: [0, 0],
         ...props.tooltipOptions,
       };
       newMarker.bindTooltip(props.tooltip, tooltipOptions);
