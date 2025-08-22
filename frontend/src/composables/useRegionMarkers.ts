@@ -2,14 +2,12 @@ import { reactive, computed, watch } from 'vue';
 import * as L from 'leaflet';
 import type { RegionKey, Zone } from '@/types/zone_types';
 import type { RegionID } from '@/types/common';
-import { Faction } from '@/types/common';
 import { zoneUtils } from '@/utilities/zone_utils';
 import { world_to_latLng } from '@/utilities/coordinates.ts';
 import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
 import { useRegionHover } from '@/composables/useRegionHover';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useLeafletMap } from '@/composables/useLeafletMap';
-import { useAppState } from '@/composables/useAppState';
 
 interface RegionMarker {
   position: L.LatLng;
@@ -26,9 +24,8 @@ export function useRegionMarkers() {
   const { currentZone } = useLeafletMap();
   const { getRegionState } = useRegionAnalysis(territorySnapshot, currentZone);
   const { currentHoveredRegion } = useRegionHover();
-  const { playerFaction } = useAppState();
 
-  // Reactive collection of region markers
+  // Reactive collection of region marker data (leaflet objects handled in MarkerEntity component)
   const regionMarkers = reactive(new Map<RegionKey, RegionMarker>());
 
   /**

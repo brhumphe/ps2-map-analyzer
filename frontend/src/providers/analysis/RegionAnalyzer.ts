@@ -57,6 +57,15 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
       playerFaction
     );
 
+    let relevantToPlayer = this.isRegionRelevantForPlayer(
+      playerFaction,
+      owningFaction,
+      tacticalInfo.canCapture,
+      neighborFactions
+    );
+    if (regionId === 2303) {
+      console.log('relevant to player', relevantToPlayer);
+    }
     return {
       owning_faction_id: owningFaction,
       region_id: regionId,
@@ -64,12 +73,7 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
       can_steal: tacticalInfo.canSteal,
       can_capture: tacticalInfo.canCapture,
       is_active: owningFaction !== Faction.NONE,
-      relevant_to_player: this.isRegionRelevantForPlayer(
-        playerFaction,
-        owningFaction,
-        tacticalInfo.canCapture,
-        neighborFactions
-      ),
+      relevant_to_player: relevantToPlayer,
     };
   }
 
@@ -132,19 +136,15 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
       return false;
     }
 
-    // If no faction selected, treat all capturable regions as relevant
-    if (playerFaction === Faction.NONE && canCapture) {
-      return true;
+    if (playerFaction === Faction.NONE) {
+      // If no faction selected, treat all capturable regions as relevant
+      return canCapture;
+    } else if (playerFaction === owningFaction) {
+      // Player's regions under threat are relevant
+      return canCapture;
+    } else {
+      // Enemy regions the player can attack are relevant
+      return neighborFactions.has(playerFaction);
     }
-
-    // Player's regions under threat are relevant
-    if (playerFaction === owningFaction && canCapture) {
-      return true;
-    }
-
-    // Enemy regions the player can attack are relevant
-    return (
-      playerFaction !== owningFaction && neighborFactions.has(playerFaction)
-    );
   }
 }
