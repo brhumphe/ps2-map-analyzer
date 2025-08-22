@@ -63,9 +63,7 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
       tacticalInfo.canCapture,
       neighborFactions
     );
-    if (regionId === 2303) {
-      console.log('relevant to player', relevantToPlayer);
-    }
+
     return {
       owning_faction_id: owningFaction,
       region_id: regionId,
