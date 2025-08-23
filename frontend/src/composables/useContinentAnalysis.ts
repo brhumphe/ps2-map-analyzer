@@ -36,7 +36,7 @@ export function useContinentAnalysis(
     // Count all regions that exist in the zone
     currentZone.value.regions.forEach((region) => {
       const regionId = region.map_region_id;
-      const faction = territorySnapshot.value!.region_ownership[regionId];
+      const faction = territorySnapshot.value!.region_ownership.get(regionId);
 
       switch (faction) {
         case 1:

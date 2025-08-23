@@ -47,7 +47,8 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     neighborMap: Map<RegionID, Set<RegionID>>,
     playerFaction: Faction
   ): RegionState {
-    const owningFaction = territory.region_ownership[regionId];
+    const owningFaction =
+      territory.region_ownership.get(regionId) ?? Faction.NONE;
     const neighbors = neighborMap.get(regionId) ?? new Set<RegionID>();
 
     const neighborFactions = this.getNeighborFactions(neighbors, territory);
@@ -85,7 +86,8 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     const neighborFactions = new Set<Faction>();
 
     for (const neighborId of neighbors) {
-      const faction = territory.region_ownership[neighborId];
+      const faction =
+        territory.region_ownership.get(neighborId) ?? Faction.NONE;
       neighborFactions.add(faction);
     }
 

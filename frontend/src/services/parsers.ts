@@ -149,13 +149,13 @@ export function extractCensusMapState(
   world: World
 ): TerritorySnapshot {
   // Transform API response format to TerritorySnapshot
-  const regionOwnership: Record<RegionID, Faction> = {};
+  const regionOwnership = new Map<RegionID, Faction>();
 
   for (const map of data.map_list) {
     for (const row of map.Regions.Row) {
       const regionId = parseInt(row.RowData.RegionId) as RegionID;
       const factionId = parseInt(row.RowData.FactionId) as Faction;
-      regionOwnership[regionId] = factionId;
+      regionOwnership.set(regionId, factionId);
     }
   }
 

@@ -38,7 +38,7 @@ export interface TerritorySnapshot {
    * - Key: Region ID (map_region_id from zone data)
    * - Value: Faction ID (1=VS, 2=NC, 3=TR, 4=NSO)
    */
-  region_ownership: Record<RegionID, Faction>;
+  region_ownership: Map<RegionID, Faction>;
 }
 
 /**

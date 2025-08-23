@@ -224,7 +224,7 @@ export function useTerritoryData() {
    */
   const getRegionOwner = computed(() => {
     return (regionId: RegionID) => {
-      return territorySnapshot.value?.region_ownership[regionId] || null;
+      return territorySnapshot.value?.region_ownership.get(regionId) ?? null;
     };
   });
 
