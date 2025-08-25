@@ -237,32 +237,6 @@ export function findConnectedRegions(
   return result;
 }
 
-function findWarpgateByFaction(warpgateRegions: RegionID[], graph: PS2Graph) {
-  let wgByFaction = {
-    vs: [] as RegionID[],
-    nc: [] as RegionID[],
-    tr: [] as RegionID[],
-  };
-
-  for (const regionID of warpgateRegions) {
-    const regionInfo = graph.nodes.get(regionID);
-    if (regionInfo && regionInfo.owning_faction) {
-      switch (regionInfo.owning_faction) {
-        case Faction.VS:
-          wgByFaction.vs.push(regionID);
-          break;
-        case Faction.NC:
-          wgByFaction.nc.push(regionID);
-          break;
-        case Faction.TR:
-          wgByFaction.tr.push(regionID);
-          break;
-      }
-    }
-  }
-  return wgByFaction;
-}
-
 export function findWarpgateConnectedRegions(
   graph: PS2Graph
 ): Map<RegionID, number> {

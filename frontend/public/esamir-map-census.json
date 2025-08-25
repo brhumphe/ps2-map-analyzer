@@ -50,7 +50,7 @@
           {
             "RowData": {
               "RegionId": "18210",
-              "FactionId": "3"
+              "FactionId": "2"
             }
           },
           {
@@ -116,7 +116,7 @@
           {
             "RowData": {
               "RegionId": "18038",
-              "FactionId": "0"
+              "FactionId": "1"
             }
           },
           {
@@ -146,7 +146,7 @@
           {
             "RowData": {
               "RegionId": "18013",
-              "FactionId": "0"
+              "FactionId": "1"
             }
           },
           {
@@ -164,7 +164,7 @@
           {
             "RowData": {
               "RegionId": "18015",
-              "FactionId": "0"
+              "FactionId": "1"
             }
           },
           {
@@ -176,7 +176,7 @@
           {
             "RowData": {
               "RegionId": "18208",
-              "FactionId": "0"
+              "FactionId": "1"
             }
           },
           {
@@ -308,7 +308,7 @@
           {
             "RowData": {
               "RegionId": "18253",
-              "FactionId": "0"
+              "FactionId": "1"
             }
           }
         ]
