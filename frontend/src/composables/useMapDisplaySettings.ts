@@ -65,6 +65,7 @@ export function useMapDisplaySettings() {
     showRegionDebugInfo: computed(() => settings.value.showRegionDebugInfo),
     autoRefreshEnabled: computed(() => settings.value.autoRefreshEnabled),
     autoRefreshInterval: computed(() => settings.value.autoRefreshInterval),
+    highlightSteals: computed(() => settings.value.highlightSteals),
 
     // Utility methods
     // toggleMarkers: () => {

@@ -88,6 +88,10 @@ export class RegionStyleCalculator {
       fillOpacity = 0.75;
       fillColor = adjustColorLightnessSaturation(faction_color, -0.5, 0);
     }
+    // User settings can override border opacity
+    if (!mapSettings.showRegionBorders) {
+      opacity = 0.0;
+    }
 
     return {
       weight,
