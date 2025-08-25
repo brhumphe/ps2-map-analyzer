@@ -96,5 +96,6 @@ const displaySettingsList = [
   { key: 'showFacilityNames', label: 'Show Facility Names' },
   { key: 'showRegionDebugInfo', label: 'Show Region Debug Info' },
   { key: 'autoRefreshEnabled', label: 'Enable Auto-Refresh' },
+  { key: 'highlightSteals', label: 'Highlight Steals' },
 ] as const;
 </script>

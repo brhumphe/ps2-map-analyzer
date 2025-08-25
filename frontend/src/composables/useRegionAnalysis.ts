@@ -7,6 +7,7 @@ import type { RegionID } from '@/types/common';
 import { zoneUtils } from '@/utilities/zone_utils';
 import type L from 'leaflet';
 import { useAppState } from '@/composables/useAppState.ts';
+import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
 
 /**
  * Composable for region analysis and styling coordination
@@ -25,6 +26,7 @@ export function useRegionAnalysis(
 
   // State that style depends on
   const { playerFaction } = useAppState();
+  const { mapDisplaySettings } = useMapDisplaySettings();
 
   /**
    * Computed region states based on territory analysis
@@ -59,7 +61,8 @@ export function useRegionAnalysis(
       regionStates.value.forEach((state, regionId) => {
         const style = styleCalculator.calculateRegionStyle(
           state,
-          playerFaction.value
+          playerFaction.value,
+          mapDisplaySettings.value
         );
         const regionKey = zoneUtils.getRegionKey(regionId);
         styles.set(regionKey, style);

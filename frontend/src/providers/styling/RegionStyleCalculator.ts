@@ -6,6 +6,7 @@ import {
 } from '@/utilities/colors';
 import { RegionPane } from '@/utilities/leaflet_utils';
 import type { RegionState } from '@/types/territory.ts';
+import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
 
 /**
  * Region style calculator that converts region states into visual properties
@@ -28,11 +29,13 @@ export class RegionStyleCalculator {
    *
    * @param regionState The strategic state of the region
    * @param playerFaction Faction POV of user
+   * @param mapSettings
    * @returns Leaflet PolylineOptions for styling the region polygon
    */
   calculateRegionStyle(
     regionState: RegionState,
-    playerFaction: Faction | undefined
+    playerFaction: Faction | undefined,
+    mapSettings: MapDisplaySettings
   ): Partial<L.PolylineOptions> {
     let weight = 1;
     let opacity = 0.7;
@@ -45,7 +48,7 @@ export class RegionStyleCalculator {
     let fillColor: string = FactionColor.get(Faction.NONE) || '#ff00ff';
     // 3-way fights can be "stolen" if one faction intervenes when the timer
     // is low, taking it from the other attacker.
-    if (regionState.can_steal) {
+    if (regionState.can_steal && mapSettings.highlightSteals) {
       fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
       fillOpacity = 0.8;
       border_color = '#2eff00';
