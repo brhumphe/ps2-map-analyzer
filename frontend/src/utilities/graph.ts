@@ -1,7 +1,7 @@
 import {
   type Continent,
   type FacilityID,
-  type FacilityType,
+  FacilityType,
   Faction,
   type RegionID,
 } from '@/types/common.ts';
@@ -59,12 +59,14 @@ export type PS2Graph = Graph<
   Edge<RegionID>
 > & {
   facility_to_region_map: Map<FacilityID, RegionID>;
+  facility_type_to_region_map: Map<FacilityType, RegionID[]>;
 };
 
 export namespace PS2Graph {
   export function build(zone: Zone, snapshot: TerritorySnapshot): PS2Graph {
     const nodes = new Map<RegionID, RegionNodeData>();
     const facility_to_region_map = zone.facility_to_region_map;
+    const facility_type_to_region_map = zone.facility_type_to_region_map;
 
     for (const [regionId, region] of zone.regions) {
       const node: RegionNodeData = {
@@ -88,7 +90,13 @@ export namespace PS2Graph {
       edges.set(RegionEdge.makeKey(new_edge), new_edge);
     }
 
-    return { neighbors: zone.neighbors, edges, nodes, facility_to_region_map };
+    return {
+      neighbors: zone.neighbors,
+      edges,
+      nodes,
+      facility_to_region_map,
+      facility_type_to_region_map,
+    };
   }
 }
 
@@ -101,7 +109,7 @@ export namespace PS2Graph {
  * @property {RegionID} id - The unique identifier for the region associated with the node.
  * @property {TVisitArgs} args - Arguments or parameters associated with the node visit operation.
  */
-type NodeQueueItem<TVisitArgs> = { id: RegionID; args: TVisitArgs };
+export type NodeQueueItem<TVisitArgs> = { id: RegionID; args: TVisitArgs };
 
 /**
  * Performs a multi-source breadth-first search (BFS) on the given graph.
@@ -151,4 +159,128 @@ export function multisourceBfs<TNodeResult, TVisitArgs>(
   }
 
   return results;
+}
+
+// TNodeResult
+type NodeDistanceResult = { distance: number };
+// TVisitArgs
+type VisitDistanceArgs = {
+  /** Distance of the node currently being visited */
+  distance: number;
+  /** Faction of the node previously visited. Should be the same as the current node's faction. */
+  faction: Faction;
+};
+
+/**
+ * Given a list of regions, find all regions by following links to friendly regions.
+ * Uses the faction ID of the starting regions to determine which links to follow.
+ * Distances are in number of hops from the starting regions.
+ *
+ * If multiple starting regions belong to the same faction, the distance
+ * will be the minimum distance from any of the starting regions.
+ *
+ * @param startingRegions
+ * @param graph
+ * @private
+ */
+export function findConnectedRegions(
+  startingRegions: RegionID[],
+  graph: PS2Graph
+): Map<RegionID, NodeDistanceResult> {
+  const start: NodeQueueItem<VisitDistanceArgs>[] = [];
+  for (const regionID of startingRegions) {
+    const regionInfo = graph.nodes.get(regionID);
+    const faction = regionInfo?.owning_faction;
+    if (!faction) {
+      // Can't follow links if we don't know the faction of the region.
+      continue;
+    }
+    start.push({
+      id: regionID,
+      args: { distance: 0, faction: faction },
+    });
+  }
+  const result = multisourceBfs<NodeDistanceResult, VisitDistanceArgs>(
+    graph,
+    start,
+    (
+      node: RegionID,
+      args: VisitDistanceArgs,
+      graph: PS2Graph,
+      results: ReadonlyMap<RegionID, NodeDistanceResult>,
+      visited: Set<RegionID>
+    ) => {
+      const regionInfo = graph.nodes.get(node);
+      const faction = regionInfo?.owning_faction;
+      // Follow links to friendly regions
+      const visitNext: NodeQueueItem<VisitDistanceArgs>[] = [];
+      for (const neighborID of graph.neighbors.get(node) ?? []) {
+        const neighborFaction = graph.nodes.get(neighborID)?.owning_faction;
+        if (neighborFaction != undefined && neighborFaction === faction) {
+          // Follow the link.
+          // DFS should guarantee that the first time a node is visited will
+          // be the one with the shortest distance of all starting nodes.
+          visitNext.push({
+            id: neighborID,
+            args: { distance: args.distance + 1, faction: faction },
+          });
+        }
+      }
+
+      return {
+        result: { distance: args.distance, faction: faction },
+        visitNext: visitNext,
+      };
+    }
+  );
+
+  return result;
+}
+
+function findWarpgateByFaction(warpgateRegions: RegionID[], graph: PS2Graph) {
+  let wgByFaction = {
+    vs: [] as RegionID[],
+    nc: [] as RegionID[],
+    tr: [] as RegionID[],
+  };
+
+  for (const regionID of warpgateRegions) {
+    const regionInfo = graph.nodes.get(regionID);
+    if (regionInfo && regionInfo.owning_faction) {
+      switch (regionInfo.owning_faction) {
+        case Faction.VS:
+          wgByFaction.vs.push(regionID);
+          break;
+        case Faction.NC:
+          wgByFaction.nc.push(regionID);
+          break;
+        case Faction.TR:
+          wgByFaction.tr.push(regionID);
+          break;
+      }
+    }
+  }
+  return wgByFaction;
+}
+
+export function findWarpgateConnectedRegions(
+  graph: PS2Graph
+): Map<RegionID, number> {
+  const warpgateRegions = graph.facility_type_to_region_map.get(
+    FacilityType.WARPGATE
+  );
+  if (!warpgateRegions) {
+    // No warpgate regions found. This should never happen, but just in case.
+    console.warn('No warpgate regions found in the graph.');
+    return new Map<RegionID, number>();
+  }
+  const wgDistances = new Map<RegionID, number>();
+  const results: Map<RegionID, NodeDistanceResult> = findConnectedRegions(
+    warpgateRegions,
+    graph
+  );
+  for (const [regionID, result] of results) {
+    wgDistances.set(regionID, result.distance);
+  }
+  return wgDistances;
 }

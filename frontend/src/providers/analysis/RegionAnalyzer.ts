@@ -26,7 +26,7 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     const regionStates = new Map<RegionID, RegionState>();
 
     for (const region of zone.regions.values()) {
-      const regionState = this.analyzeRegion(
+      const regionState = this.analyzeSingleRegion(
         region.map_region_id,
         territory,
         zone.neighbors,
@@ -41,7 +41,7 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
   /**
    * Analyze a single region to determine its tactical state
    */
-  private analyzeRegion(
+  private analyzeSingleRegion(
     regionId: RegionID,
     territory: TerritorySnapshot,
     neighborMap: Map<RegionID, Set<RegionID>>,
@@ -52,7 +52,7 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     const neighbors = neighborMap.get(regionId) ?? new Set<RegionID>();
 
     const neighborFactions = this.getNeighborFactions(neighbors, territory);
-    const tacticalInfo = this.calculateTacticalOpportunities(
+    const { canCapture, canSteal } = this.calculateCaptureSteal(
       owningFaction,
       neighborFactions,
       playerFaction
@@ -61,7 +61,7 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     let relevantToPlayer = this.isRegionRelevantForPlayer(
       playerFaction,
       owningFaction,
-      tacticalInfo.canCapture,
+      canCapture,
       neighborFactions
     );
 
@@ -69,8 +69,8 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
       owning_faction_id: owningFaction,
       region_id: regionId,
       adjacent_faction_ids: neighborFactions,
-      can_steal: tacticalInfo.canSteal,
-      can_capture: tacticalInfo.canCapture,
+      can_steal: canSteal,
+      can_capture: canCapture,
       is_active: owningFaction !== Faction.NONE,
       relevant_to_player: relevantToPlayer,
     };
@@ -97,7 +97,7 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
   /**
    * Calculate tactical capture and steal opportunities for a region
    */
-  private calculateTacticalOpportunities(
+  private calculateCaptureSteal(
     owningFaction: Faction,
     neighborFactions: Set<Faction>,
     playerFaction: Faction

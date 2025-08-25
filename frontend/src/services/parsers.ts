@@ -124,6 +124,16 @@ export function parseZoneFromZoneResponse(response: ZoneResponse): Zone {
     }
   });
 
+  const facility_type_to_region_map = new Map<FacilityType, RegionID[]>();
+  response.regions.forEach((region) => {
+    if (region.facility_type_id) {
+      const region_ids =
+        facility_type_to_region_map.get(region.facility_type_id) ?? [];
+      region_ids.push(region.map_region_id);
+      facility_type_to_region_map.set(region.facility_type_id, region_ids);
+    }
+  });
+
   return {
     zone_id: response.zone_id,
     code: response.code,
@@ -133,6 +143,7 @@ export function parseZoneFromZoneResponse(response: ZoneResponse): Zone {
     links,
     neighbors,
     facility_to_region_map,
+    facility_type_to_region_map,
   };
 }
 
