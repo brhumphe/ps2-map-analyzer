@@ -1,5 +1,5 @@
 import { extractCensusMapState } from '../src/services/parsers';
-import { Continent, World } from '../src/types/common';
+import { Continent, RegionID, World } from '../src/types/common';
 
 describe('services', () => {
   test('Can parse census formatted map state', () => {
@@ -29,14 +29,13 @@ describe('services', () => {
       returned: 1,
     };
     const result = extractCensusMapState(data, Continent.INDAR, World.Osprey);
-    expect(result).toEqual({
-      timestamp: expect.any(Number),
-      continent: Continent.INDAR,
-      world: World.Osprey,
-      region_ownership: {
-        2101: 1,
-        2421: 3,
-      },
-    });
+
+    expect(result.timestamp).toEqual(expect.any(Number));
+    expect(result.continent).toBe(Continent.INDAR);
+    expect(result.world).toBe(World.Osprey);
+    expect(result.region_ownership).toBeInstanceOf(Map);
+    expect(result.region_ownership.get(2101 as RegionID)).toBe(1);
+    expect(result.region_ownership.get(2421 as RegionID)).toBe(3);
+    expect(result.region_ownership.size).toBe(2);
   });
 });
