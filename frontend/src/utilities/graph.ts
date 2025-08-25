@@ -258,3 +258,32 @@ export function findWarpgateConnectedRegions(
   }
   return wgDistances;
 }
+
+export function findDistancesFromFrontline(
+  graph: PS2Graph
+): Map<RegionID, number> {
+  const frontlineRegions: Set<RegionID> = new Set();
+  for (const [edgeKey, edge] of graph.edges) {
+    const factionA = graph.nodes.get(edge.from)?.owning_faction;
+    const factionB = graph.nodes.get(edge.to)?.owning_faction;
+    if (
+      factionA != undefined &&
+      factionB != undefined &&
+      factionA != Faction.NONE &&
+      factionB != Faction.NONE &&
+      factionA !== factionB
+    ) {
+      frontlineRegions.add(edge.from);
+      frontlineRegions.add(edge.to);
+    }
+  }
+  const frontlineDistances = new Map<RegionID, number>();
+  const results: Map<RegionID, NodeDistanceResult> = findConnectedRegions(
+    [...frontlineRegions],
+    graph
+  );
+  for (const [regionID, result] of results) {
+    frontlineDistances.set(regionID, result.distance);
+  }
+  return frontlineDistances;
+}

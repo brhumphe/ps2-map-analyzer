@@ -1,7 +1,11 @@
 import { describe, it, expect, beforeAll } from '@jest/globals';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { findWarpgateConnectedRegions, PS2Graph } from '../src/utilities/graph';
+import {
+  findDistancesFromFrontline,
+  findWarpgateConnectedRegions,
+  PS2Graph,
+} from '../src/utilities/graph';
 import {
   extractCensusMapState,
   parseZoneFromZoneResponse,
@@ -52,5 +56,19 @@ describe('Graph Algorithms', () => {
     expect(connectedRegions.get(18249 as RegionID)).toBeUndefined();
     // When there are multiple valid paths, the shortest one is chosen
     expect(connectedRegions.get(18032 as RegionID)).toBe(4); // Echo Valley
+  });
+
+  it('should find distances from frontline', () => {
+    const graph = PS2Graph.build(zone, snapshot);
+    const frontlineDistances = findDistancesFromFrontline(graph);
+    expect(frontlineDistances.size).toBe(25); // 25 regions are on the frontline, including cut-off regions
+    expect(frontlineDistances.get(18030 as RegionID)).toBe(4);
+    expect(frontlineDistances.get(18250 as RegionID)).toBe(1);
+    expect(frontlineDistances.get(18062 as RegionID)).toBe(3);
+    expect(frontlineDistances.get(18013 as RegionID)).toBe(4);
+    expect(frontlineDistances.get(18015 as RegionID)).toBe(4);
+    expect(frontlineDistances.get(18067 as RegionID)).toBe(0);
+    expect(frontlineDistances.get(18025 as RegionID)).toBe(0);
+    expect(frontlineDistances.get(18261 as RegionID)).toBeUndefined();
   });
 });
