@@ -78,6 +78,10 @@ export interface RegionState {
   is_active?: boolean;
   /** Regions that are important right now (can be attacked or defended) */
   relevant_to_player?: boolean;
+  /** Distance to warpgate in number of lattice links. -1 if there is no valid path to the faction warpgate. */
+  distance_to_wg?: number;
+  /** Hops to frontline of lattice links. -1 if there is no valid path to a contested region. */
+  distance_to_front?: number;
 }
 
 /**

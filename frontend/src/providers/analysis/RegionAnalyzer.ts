@@ -5,6 +5,11 @@ import type {
   TerritorySnapshot,
 } from '@/types/territory';
 import type { Zone } from '@/types/zone_types';
+import {
+  findDistancesFromFrontline,
+  findWarpgateConnectedRegions,
+  PS2Graph,
+} from '@/utilities/graph.ts';
 
 /**
  * Per-region analysis
@@ -24,6 +29,9 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     playerFaction: Faction
   ): Map<RegionID, RegionState> {
     const regionStates = new Map<RegionID, RegionState>();
+    const graph = PS2Graph.build(zone, territory);
+    const wg_conn = findWarpgateConnectedRegions(graph);
+    const front_dist = findDistancesFromFrontline(graph);
 
     for (const region of zone.regions.values()) {
       const regionState = this.analyzeSingleRegion(
@@ -32,6 +40,9 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
         zone.neighbors,
         playerFaction
       );
+      regionState.distance_to_wg = wg_conn.get(region.map_region_id) ?? -1;
+      regionState.distance_to_front =
+        front_dist.get(region.map_region_id) ?? -1;
       regionStates.set(region.map_region_id, regionState);
     }
 
