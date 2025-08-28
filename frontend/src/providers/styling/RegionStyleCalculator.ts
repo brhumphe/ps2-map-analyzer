@@ -1,4 +1,4 @@
-import type L from 'leaflet';
+import type { PolylineOptions } from 'leaflet';
 import { Faction } from '@/types/common';
 import {
   adjustColorLightnessSaturation,
@@ -36,7 +36,42 @@ export class RegionStyleCalculator {
     regionState: RegionState,
     playerFaction: Faction | undefined,
     mapSettings: MapDisplaySettings
-  ): Partial<L.PolylineOptions> {
+  ): Partial<PolylineOptions> {
+    let style = this.calculateBaseStyle(
+      regionState,
+      mapSettings,
+      playerFaction
+    );
+
+    style = this.applyDistanceFading(style, regionState);
+    style = this.applyUserPreferences(style, mapSettings);
+    return style;
+  }
+
+  private applyDistanceFading(
+    style: Partial<PolylineOptions>,
+    regionState: RegionState
+  ): Partial<PolylineOptions> {
+    // TODO: Implement distance-based fading
+    // For now, just return unchanged
+    return style;
+  }
+
+  private applyUserPreferences(
+    style: Partial<PolylineOptions>,
+    mapSettings: MapDisplaySettings
+  ): Partial<PolylineOptions> {
+    if (!mapSettings.showRegionBorders) {
+      return { ...style, opacity: 0.0 };
+    }
+    return style;
+  }
+
+  private calculateBaseStyle(
+    regionState: RegionState,
+    mapSettings: MapDisplaySettings,
+    playerFaction: Faction | undefined
+  ): Partial<PolylineOptions> {
     let weight = 1;
     let opacity = 0.7;
     let fillOpacity = 0.6;
@@ -88,18 +123,13 @@ export class RegionStyleCalculator {
       fillOpacity = 0.75;
       fillColor = adjustColorLightnessSaturation(faction_color, -0.5, 0);
     }
-    // User settings can override border opacity
-    if (!mapSettings.showRegionBorders) {
-      opacity = 0.0;
-    }
-
     return {
       weight,
       opacity,
       fillOpacity,
-      color: border_color,
-      fillColor: fillColor,
       pane,
+      color: border_color,
+      fillColor,
     };
   }
 
