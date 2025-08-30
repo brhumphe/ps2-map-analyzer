@@ -86,7 +86,13 @@ export namespace PS2Graph {
     for (const link of zone.links.values()) {
       const regionA = zone.facility_to_region_map.get(link.facility_id_a);
       const regionB = zone.facility_to_region_map.get(link.facility_id_b);
-      const new_edge = { from: regionA!, to: regionB! };
+      if (!regionA || !regionB) {
+        console.warn(
+          `Link ${link.facility_id_a} -> ${link.facility_id_b} has missing region IDs.`
+        );
+        continue;
+      }
+      const new_edge = { from: regionA, to: regionB };
       edges.set(RegionEdge.makeKey(new_edge), new_edge);
     }
 
