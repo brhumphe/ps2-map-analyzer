@@ -8,6 +8,13 @@ import { RegionPane } from '@/utilities/leaflet_utils';
 import type { RegionState } from '@/types/territory';
 import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings';
 
+type InterpolationCurve = 'linear' | 'easeIn' | 'easeOut' | 'easeInOut';
+type InterpolationSettings = {
+  curve: InterpolationCurve;
+  start: number;
+  end: number;
+};
+
 /**
  * Region style calculator that converts region states into visual properties
  *
@@ -16,6 +23,112 @@ import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings';
  * between analysis (what does the data mean) and presentation (how should it look).
  */
 export class RegionStyleCalculator {
+  // Configuration constants at class level for easy adjustment
+  private static readonly FADE_MAX_DISTANCE = 7;
+  private static readonly NON_PLAYER_FADE_MULTIPLIER = 1;
+
+  // Interpolation settings for different properties and factions
+  private static readonly PLAYER_BRIGHTNESS_SETTINGS: InterpolationSettings = {
+    curve: 'easeOut',
+    start: -0.8,
+    end: 0.6,
+  };
+
+  private static readonly PLAYER_SATURATION_SETTINGS: InterpolationSettings = {
+    curve: 'easeOut',
+    start: -0.4,
+    end: 0.5,
+  };
+
+  private static readonly PLAYER_OPACITY_SETTINGS: InterpolationSettings = {
+    curve: 'linear',
+    start: 1,
+    end: 0.7,
+  };
+
+  private static readonly NON_PLAYER_BRIGHTNESS_SETTINGS: InterpolationSettings =
+    {
+      curve: 'easeIn',
+      start: -0.8,
+      end: -0.2,
+    };
+
+  private static readonly NON_PLAYER_SATURATION_SETTINGS: InterpolationSettings =
+    {
+      curve: 'easeIn',
+      start: -0.4,
+      end: 0.2,
+    };
+
+  private static readonly NON_PLAYER_OPACITY_SETTINGS: InterpolationSettings = {
+    curve: 'easeOut',
+    start: 1,
+    end: 0.5,
+  };
+  /**
+   * Interpolates using InterpolationSettings object
+   *
+   * @param settings Settings containing curve, min, and max values
+   * @param t Progress from 0.0 to 1.0
+   * @returns Interpolated value
+   */
+  private static interpolate(
+    settings: InterpolationSettings,
+    t: number
+  ): number;
+
+  private static interpolate(
+    startOrSettings: number | InterpolationSettings,
+    endOrT: number,
+    t?: number,
+    curve: InterpolationCurve = 'linear'
+  ): number {
+    let start: number;
+    let end: number;
+    let actualT: number;
+    let actualCurve: InterpolationCurve;
+
+    if (typeof startOrSettings === 'object') {
+      // Using InterpolationSettings overload
+      start = startOrSettings.end;
+      end = startOrSettings.start;
+      actualT = endOrT;
+      actualCurve = startOrSettings.curve;
+    } else {
+      // Using individual parameters overload
+      start = startOrSettings;
+      end = endOrT;
+      actualT = t!;
+      actualCurve = curve;
+    }
+
+    // Clamp t to [0, 1]
+    actualT = Math.max(0, Math.min(1, actualT));
+
+    // Apply curve transformation
+    let curvedT: number;
+    switch (actualCurve) {
+      case 'easeIn':
+        curvedT = actualT * actualT; // Quadratic ease in
+        break;
+      case 'easeOut':
+        curvedT = 1 - (1 - actualT) * (1 - actualT); // Quadratic ease out
+        break;
+      case 'easeInOut':
+        curvedT =
+          actualT < 0.5
+            ? 2 * actualT * actualT
+            : 1 - 2 * (1 - actualT) * (1 - actualT); // Quadratic ease in-out
+        break;
+      case 'linear':
+      default:
+        curvedT = actualT;
+        break;
+    }
+
+    return start + (end - start) * curvedT;
+  }
+
   /**
    * Convert a region state to Leaflet polygon styling options
    *
@@ -43,18 +156,93 @@ export class RegionStyleCalculator {
       playerFaction
     );
 
-    style = this.applyDistanceFading(style, regionState);
+    style = this.applyDistanceFading(
+      style,
+      regionState,
+      mapSettings,
+      playerFaction
+    );
     style = this.applyUserPreferences(style, mapSettings);
     return style;
   }
 
   private applyDistanceFading(
     style: Partial<PolylineOptions>,
-    _regionState: RegionState
+    regionState: RegionState,
+    mapSettings: MapDisplaySettings,
+    playerFaction: Faction | undefined
   ): Partial<PolylineOptions> {
-    // TODO: Implement distance-based fading
-    // For now, just return unchanged
-    return style;
+    // Skip if distance unknown or fading disabled
+    if (
+      regionState.distance_to_front === undefined ||
+      regionState.distance_to_front < 0 ||
+      !mapSettings.fadeDistantRegions
+    ) {
+      return style;
+    }
+
+    const distance = regionState.distance_to_front;
+
+    // Get the base faction color to work from
+    const faction_color: string =
+      FactionColor.get(regionState.owning_faction_id) || '#ff00ff';
+
+    // Check if this region belongs to the player's faction
+    const isPlayerFaction =
+      playerFaction !== undefined &&
+      regionState.owning_faction_id === playerFaction;
+
+    // Calculate fade intensity with faction-based multiplier
+    // Non-player factions fade faster (higher effective distance)
+    const effectiveDistance = isPlayerFaction
+      ? distance
+      : distance * RegionStyleCalculator.NON_PLAYER_FADE_MULTIPLIER;
+
+    const fadeIntensity = Math.min(
+      effectiveDistance / RegionStyleCalculator.FADE_MAX_DISTANCE,
+      1.0
+    );
+
+    // Select settings based on faction
+    const brightnessSettings = isPlayerFaction
+      ? RegionStyleCalculator.PLAYER_BRIGHTNESS_SETTINGS
+      : RegionStyleCalculator.NON_PLAYER_BRIGHTNESS_SETTINGS;
+    const saturationSettings = isPlayerFaction
+      ? RegionStyleCalculator.PLAYER_SATURATION_SETTINGS
+      : RegionStyleCalculator.NON_PLAYER_SATURATION_SETTINGS;
+    const opacitySettings = isPlayerFaction
+      ? RegionStyleCalculator.PLAYER_OPACITY_SETTINGS
+      : RegionStyleCalculator.NON_PLAYER_OPACITY_SETTINGS;
+
+    // Use interpolation function with settings objects
+    const brightnessAdjustment = RegionStyleCalculator.interpolate(
+      brightnessSettings,
+      fadeIntensity
+    );
+
+    const saturationAdjustment = RegionStyleCalculator.interpolate(
+      saturationSettings,
+      fadeIntensity
+    );
+
+    // Calculate opacity boost (higher opacity for more distant regions)
+    const fillOpacity = RegionStyleCalculator.interpolate(
+      opacitySettings,
+      fadeIntensity
+    );
+
+    // Apply color adjustments to base faction color
+    const adjustedFillColor = adjustColorLightnessSaturation(
+      faction_color,
+      brightnessAdjustment,
+      saturationAdjustment
+    );
+
+    return {
+      ...style,
+      fillColor: adjustedFillColor,
+      fillOpacity: fillOpacity,
+    };
   }
 
   private applyUserPreferences(
@@ -126,10 +314,10 @@ export class RegionStyleCalculator {
     return {
       weight,
       opacity,
-      fillOpacity,
+      fillOpacity: 1.0,
       pane,
       color: border_color,
-      fillColor,
+      fillColor: faction_color,
     };
   }
 
