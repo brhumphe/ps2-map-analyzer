@@ -5,7 +5,7 @@ import type {
 } from '@/types/territory';
 import type { FacilityLinkKey, Zone } from '@/types/zone_types';
 import { zoneUtils } from '@/utilities/zone_utils';
-import { Faction } from '@/types/common.ts';
+import { Faction } from '@/types/common';
 
 /**
  * Contestable links analyzer that identifies tactical opportunities

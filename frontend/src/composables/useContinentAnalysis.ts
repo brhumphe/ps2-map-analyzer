@@ -1,6 +1,7 @@
 import { computed, type Ref } from 'vue';
 import type { TerritorySnapshot } from '@/types/territory';
 import type { Zone } from '@/types/zone_types';
+import { Faction } from '@/types/common';
 
 // Type exports for components
 export type FactionTerritoryCount = {
@@ -39,16 +40,16 @@ export function useContinentAnalysis(
       const faction = territorySnapshot.value!.region_ownership.get(regionId);
 
       switch (faction) {
-        case 1:
+        case Faction.VS:
           counts.VS++;
           break;
-        case 2:
+        case Faction.NC:
           counts.NC++;
           break;
-        case 3:
+        case Faction.TR:
           counts.TR++;
           break;
-        case 4:
+        case Faction.NSO:
           counts.NSO++;
           break;
         default:

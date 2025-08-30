@@ -9,7 +9,7 @@ import {
   findDistancesFromFrontline,
   findWarpgateConnectedRegions,
   PS2Graph,
-} from '@/utilities/graph.ts';
+} from '@/utilities/graph';
 
 /**
  * Per-region analysis

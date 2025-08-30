@@ -7,7 +7,7 @@ import {
   extractCensusMapState,
   type MapListResponse,
   type ZoneDataResponse,
-} from '@/services/parsers.ts';
+} from '@/services/parsers';
 
 export class CensusDataService implements PS2DataService {
   baseUrl: string;

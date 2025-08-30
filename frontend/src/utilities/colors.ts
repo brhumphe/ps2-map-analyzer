@@ -1,5 +1,5 @@
 // Census gives these packed int representations instead of hex strings
-import { Faction } from '@/types/common.ts';
+import { Faction } from '@/types/common';
 
 export const FactionColor = new Map<Faction, string>([
   [Faction.NONE, unpackIntToHex(7500402)],

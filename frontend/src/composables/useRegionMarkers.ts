@@ -3,7 +3,7 @@ import * as L from 'leaflet';
 import type { RegionKey, Zone } from '@/types/zone_types';
 import type { RegionID } from '@/types/common';
 import { zoneUtils } from '@/utilities/zone_utils';
-import { world_to_latLng } from '@/utilities/coordinates.ts';
+import { world_to_latLng } from '@/utilities/coordinates';
 import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
 import { useRegionHover } from '@/composables/useRegionHover';
 import { useTerritoryData } from '@/composables/useTerritoryData';

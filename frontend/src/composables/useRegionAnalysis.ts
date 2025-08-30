@@ -1,13 +1,13 @@
 import { computed, type Ref } from 'vue';
-import { RegionAnalyzer } from '@/providers/analysis/RegionAnalyzer.ts';
+import { RegionAnalyzer } from '@/providers/analysis/RegionAnalyzer';
 import { RegionStyleCalculator } from '@/providers/styling/RegionStyleCalculator';
 import type { RegionState, TerritorySnapshot } from '@/types/territory';
 import type { Zone, RegionKey } from '@/types/zone_types';
 import type { RegionID } from '@/types/common';
 import { zoneUtils } from '@/utilities/zone_utils';
 import type L from 'leaflet';
-import { useAppState } from '@/composables/useAppState.ts';
-import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
+import { useAppState } from '@/composables/useAppState';
+import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 
 /**
  * Composable for region analysis and styling coordination

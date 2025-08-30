@@ -5,8 +5,8 @@ import {
   FactionColor,
 } from '@/utilities/colors';
 import { RegionPane } from '@/utilities/leaflet_utils';
-import type { RegionState } from '@/types/territory.ts';
-import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
+import type { RegionState } from '@/types/territory';
+import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings';
 
 /**
  * Region style calculator that converts region states into visual properties

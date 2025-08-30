@@ -4,9 +4,9 @@ import {
   FacilityType,
   Faction,
   type RegionID,
-} from '@/types/common.ts';
-import type { WorldCoordinate, Zone } from '@/types/zone_types.ts';
-import type { TerritorySnapshot } from '@/types/territory.ts';
+} from '@/types/common';
+import type { WorldCoordinate, Zone } from '@/types/zone_types';
+import type { TerritorySnapshot } from '@/types/territory';
 
 ////////////////////////////
 // Generic Graph Types
