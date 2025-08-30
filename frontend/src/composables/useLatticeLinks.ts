@@ -36,14 +36,12 @@ export function useLatticeLinks(
   const applyLinkStyles = (
     styles: Map<FacilityLinkKey, Partial<L.PolylineOptions>>
   ) => {
-    let appliedCount = 0;
     styles.forEach((style, linkKey) => {
       const link = latticeLinks.get(linkKey);
 
       if (link) {
         // Replace the entire style object to ensure reactivity
         link.style = { ...link.style, ...style };
-        appliedCount++;
       }
     });
   };

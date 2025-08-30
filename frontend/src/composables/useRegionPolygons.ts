@@ -48,14 +48,12 @@ export function useRegionPolygons(
   const applyRegionStyles = (
     styles: Map<RegionKey, Partial<L.PolylineOptions>>
   ) => {
-    let appliedCount = 0;
     styles.forEach((style, regionKey) => {
       const region = regionPolygons.get(regionKey);
 
       if (region) {
         // Replace the entire style object to ensure reactivity
         region.style = { ...style };
-        appliedCount++;
       }
     });
   };
@@ -98,7 +96,7 @@ export function useRegionPolygons(
           regionId: region.map_region_id,
           facilityName: region.facility_name,
         });
-      } catch (error) {
+      } catch (_error) {
         // Skip regions that can't be created
         continue;
       }

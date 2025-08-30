@@ -16,7 +16,7 @@
       v-for="[regionKey, regionData] in regionPolygons"
       :id="regionKey"
       :key="regionKey"
-      :region_id="regionData.regionId"
+      :region-id="regionData.regionId"
       :points="regionData.points"
       :style="regionData.style as Partial<L.PolylineOptions>"
     />
@@ -64,7 +64,6 @@ import MarkerEntity from '@/components/map/MarkerEntity.vue';
 import DismissibleLoadingOverlay from '@/components/map/ui/DismissibleLoadingOverlay.vue';
 import * as L from 'leaflet';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
-import type { RegionID } from '@/types/common.ts';
 
 const { selectedWorld, selectedContinent } = useAppState();
 
@@ -89,17 +88,12 @@ const {
 // Use the territory data composable
 const {
   territorySnapshot,
-  isLoading: territoryLoading,
-  isRefreshing: territoryRefreshing,
   error: territoryError,
   refreshTerritoryData,
 } = useTerritoryData();
 
 // Use region analysis to get faction-based styling
-const { regionStyles, getRegionState } = useRegionAnalysis(
-  territorySnapshot,
-  currentZone
-);
+const { regionStyles } = useRegionAnalysis(territorySnapshot, currentZone);
 
 // Use link analysis to get contestable link styling
 const { linkStyles } = useLinkAnalysis(territorySnapshot, currentZone);

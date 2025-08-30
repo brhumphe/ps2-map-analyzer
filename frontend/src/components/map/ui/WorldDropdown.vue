@@ -24,7 +24,7 @@
         </div>
       </template>
 
-      <template #item="{ item, props }">
+      <template #item="{ props }">
         <v-list-item v-bind="props">
           <template #prepend>
             <v-icon icon="mdi-server-network" color="grey" size="small" />
@@ -49,9 +49,7 @@ const items = [
   { name: 'SolTech', world_id: World.SolTech },
 ];
 
-const selectedWorldName = computed(
-  () => WorldName.get(selectedWorld.value) || 'Select World'
-);
+computed(() => WorldName.get(selectedWorld.value) || 'Select World');
 
 const selectWorld = (worldId: World) => {
   setWorld(worldId);

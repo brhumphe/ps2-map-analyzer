@@ -50,7 +50,7 @@ export class RegionStyleCalculator {
 
   private applyDistanceFading(
     style: Partial<PolylineOptions>,
-    regionState: RegionState
+    _regionState: RegionState
   ): Partial<PolylineOptions> {
     // TODO: Implement distance-based fading
     // For now, just return unchanged
@@ -140,7 +140,6 @@ export class RegionStyleCalculator {
   ) {
     const PLAYER_OWNED_LIGHTNESS = -0.25;
     const ENEMY_LIGHTNESS = -0.7;
-    const NEUTRAL_LIGHTNESS = -0.5;
     const PLAYER_OWNED_SATURATION = 0.0;
     const ENEMY_SATURATION = 0.2;
     const NEUTRAL_SATURATION = 0.0;

@@ -39,7 +39,15 @@ export default [
     },
     rules: {
       // Basic TypeScript rules
-      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+        },
+      ],
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-inferrable-types': 'off',
       'no-unused-vars': 'off', // Use TypeScript version instead
@@ -79,7 +87,15 @@ export default [
       'vue/attributes-order': 'warn', // Make less strict
       'vue/v-slot-style': 'warn', // Make less strict
       // TypeScript in Vue
-      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+        },
+      ],
       '@typescript-eslint/no-explicit-any': 'warn',
       'no-unused-vars': 'off', // Use TypeScript version instead
       'no-redeclare': 'off', // TypeScript handles this

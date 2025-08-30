@@ -105,8 +105,10 @@ export function parseEdgeString(str: string): HexEdge {
       start: vertex1,
       end: vertex2,
     };
-  } catch (error: any) {
-    throw new Error(`Invalid edge string format: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Invalid edge string format: ${error instanceof Error ? error.message : String(error)}`
+    );
   }
 }
 
@@ -157,7 +159,7 @@ export interface CubeCoordinate {
   readonly s: number;
 }
 
-function hexInDirection(
+export function hexInDirection(
   coord: HexCoordinate,
   dir: keyof typeof HexDirection
 ): HexCoordinate {

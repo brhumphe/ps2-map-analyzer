@@ -12,8 +12,8 @@
       density="compact"
       class="continent-select"
       style="min-width: 140px"
-      @update:model-value="selectContinent"
       hide-details
+      @update:model-value="selectContinent"
       @click:control="onSelectClick"
     >
       <template #selection="{ item }">

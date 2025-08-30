@@ -3,7 +3,7 @@ import type { RegionID } from '@/types/common';
 
 // Singleton state - shared across all component instances
 const hoveredRegion = ref<RegionID | null>(null);
-let hoverClearTimeout: NodeJS.Timeout | null = null;
+let hoverClearTimeout: ReturnType<typeof setTimeout> | null = null;
 
 /**
  * Composable for managing region hover state with Vue reactivity

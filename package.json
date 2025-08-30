@@ -48,6 +48,7 @@
     "singleQuote": true,
     "trailingComma": "es5",
     "printWidth": 80,
-    "insertPragma": false
+    "insertPragma": false,
+    "endOfLine": "lf"
   }
 }

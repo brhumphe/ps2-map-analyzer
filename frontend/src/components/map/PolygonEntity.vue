@@ -11,7 +11,7 @@ import type { RegionID } from '@/types/common.ts';
 
 interface Props {
   id: string;
-  region_id: RegionID;
+  regionId: RegionID;
   points: L.LatLng[];
   style: Partial<L.PolylineOptions>;
 }
@@ -42,8 +42,11 @@ const createPolygon = () => {
 
   try {
     map = getMap() as L.Map; // Will throw if map not ready
-  } catch (error) {
-    console.debug(`PolygonEntity[${props.id}]: Map not yet initialized`);
+  } catch (_error) {
+    console.debug(
+      `PolygonEntity[${props.id}]: Map not yet initialized`,
+      _error
+    );
     return;
   }
 
