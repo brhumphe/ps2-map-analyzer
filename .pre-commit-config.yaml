@@ -25,6 +25,17 @@ repos:
         pass_filenames: false
         stages: [pre-commit]
 
+  # ESLint
+  - repo: local
+    hooks:
+      - id: eslint
+        name: ESLint
+        entry: npm run lint:fix
+        language: system
+        files: \.(js|ts|vue)$
+        pass_filenames: false
+        stages: [pre-commit]
+
   # General file checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
