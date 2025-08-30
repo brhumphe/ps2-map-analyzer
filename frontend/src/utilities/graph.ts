@@ -200,41 +200,42 @@ export function findConnectedRegions(
       args: { distance: 0, faction: faction },
     });
   }
-  const result = multisourceBfs<NodeDistanceResult, VisitDistanceArgs>(
+
+  function visitNode(
+    node: RegionID,
+    args: VisitDistanceArgs,
+    graph: PS2Graph,
+    results: ReadonlyMap<RegionID, NodeDistanceResult>,
+    visited: Set<RegionID>
+  ) {
+    const regionInfo = graph.nodes.get(node);
+    const faction = regionInfo?.owning_faction;
+    // Follow links to friendly regions
+    const visitNext: NodeQueueItem<VisitDistanceArgs>[] = [];
+    for (const neighborID of graph.neighbors.get(node) ?? []) {
+      const neighborFaction = graph.nodes.get(neighborID)?.owning_faction;
+      if (neighborFaction != undefined && neighborFaction === faction) {
+        // Follow the link.
+        // DFS should guarantee that the first time a node is visited will
+        // be the one with the shortest distance of all starting nodes.
+        visitNext.push({
+          id: neighborID,
+          args: { distance: args.distance + 1, faction: faction },
+        });
+      }
+    }
+
+    return {
+      result: { distance: args.distance },
+      visitNext: visitNext,
+    };
+  }
+
+  return multisourceBfs<NodeDistanceResult, VisitDistanceArgs>(
     graph,
     start,
-    (
-      node: RegionID,
-      args: VisitDistanceArgs,
-      graph: PS2Graph,
-      results: ReadonlyMap<RegionID, NodeDistanceResult>,
-      visited: Set<RegionID>
-    ) => {
-      const regionInfo = graph.nodes.get(node);
-      const faction = regionInfo?.owning_faction;
-      // Follow links to friendly regions
-      const visitNext: NodeQueueItem<VisitDistanceArgs>[] = [];
-      for (const neighborID of graph.neighbors.get(node) ?? []) {
-        const neighborFaction = graph.nodes.get(neighborID)?.owning_faction;
-        if (neighborFaction != undefined && neighborFaction === faction) {
-          // Follow the link.
-          // DFS should guarantee that the first time a node is visited will
-          // be the one with the shortest distance of all starting nodes.
-          visitNext.push({
-            id: neighborID,
-            args: { distance: args.distance + 1, faction: faction },
-          });
-        }
-      }
-
-      return {
-        result: { distance: args.distance, faction: faction },
-        visitNext: visitNext,
-      };
-    }
+    visitNode
   );
-
-  return result;
 }
 
 export function findWarpgateConnectedRegions(
