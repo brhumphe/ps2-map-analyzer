@@ -5,6 +5,11 @@ import type {
   TerritorySnapshot,
 } from '@/types/territory';
 import type { Zone } from '@/types/zone_types';
+import {
+  findDistancesFromFrontline,
+  findWarpgateConnectedRegions,
+  PS2Graph,
+} from '@/utilities/graph';
 
 /**
  * Per-region analysis
@@ -24,14 +29,20 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     playerFaction: Faction
   ): Map<RegionID, RegionState> {
     const regionStates = new Map<RegionID, RegionState>();
+    const graph = PS2Graph.build(zone, territory);
+    const wg_conn = findWarpgateConnectedRegions(graph);
+    const front_dist = findDistancesFromFrontline(graph);
 
     for (const region of zone.regions.values()) {
-      const regionState = this.analyzeRegion(
+      const regionState = this.analyzeSingleRegion(
         region.map_region_id,
         territory,
         zone.neighbors,
         playerFaction
       );
+      regionState.distance_to_wg = wg_conn.get(region.map_region_id) ?? -1;
+      regionState.distance_to_front =
+        front_dist.get(region.map_region_id) ?? -1;
       regionStates.set(region.map_region_id, regionState);
     }
 
@@ -41,17 +52,18 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
   /**
    * Analyze a single region to determine its tactical state
    */
-  private analyzeRegion(
+  private analyzeSingleRegion(
     regionId: RegionID,
     territory: TerritorySnapshot,
     neighborMap: Map<RegionID, Set<RegionID>>,
     playerFaction: Faction
   ): RegionState {
-    const owningFaction = territory.region_ownership[regionId];
+    const owningFaction =
+      territory.region_ownership.get(regionId) ?? Faction.NONE;
     const neighbors = neighborMap.get(regionId) ?? new Set<RegionID>();
 
     const neighborFactions = this.getNeighborFactions(neighbors, territory);
-    const tacticalInfo = this.calculateTacticalOpportunities(
+    const { canCapture, canSteal } = this.calculateCaptureSteal(
       owningFaction,
       neighborFactions,
       playerFaction
@@ -60,7 +72,7 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     let relevantToPlayer = this.isRegionRelevantForPlayer(
       playerFaction,
       owningFaction,
-      tacticalInfo.canCapture,
+      canCapture,
       neighborFactions
     );
 
@@ -68,8 +80,8 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
       owning_faction_id: owningFaction,
       region_id: regionId,
       adjacent_faction_ids: neighborFactions,
-      can_steal: tacticalInfo.canSteal,
-      can_capture: tacticalInfo.canCapture,
+      can_steal: canSteal,
+      can_capture: canCapture,
       is_active: owningFaction !== Faction.NONE,
       relevant_to_player: relevantToPlayer,
     };
@@ -85,7 +97,8 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     const neighborFactions = new Set<Faction>();
 
     for (const neighborId of neighbors) {
-      const faction = territory.region_ownership[neighborId];
+      const faction =
+        territory.region_ownership.get(neighborId) ?? Faction.NONE;
       neighborFactions.add(faction);
     }
 
@@ -95,7 +108,7 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
   /**
    * Calculate tactical capture and steal opportunities for a region
    */
-  private calculateTacticalOpportunities(
+  private calculateCaptureSteal(
     owningFaction: Faction,
     neighborFactions: Set<Faction>,
     playerFaction: Faction

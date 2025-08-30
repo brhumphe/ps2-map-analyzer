@@ -1,7 +1,7 @@
 // composables/useMapDisplaySettings.ts
 import { computed, ref, watch } from 'vue';
 
-interface MapDisplaySettings {
+export interface MapDisplaySettings {
   // showMarkers: boolean;
   showLatticeLinks: boolean;
   showRegionBorders: boolean;
@@ -9,6 +9,7 @@ interface MapDisplaySettings {
   showRegionDebugInfo: boolean;
   autoRefreshEnabled: boolean;
   autoRefreshInterval: number; // in seconds
+  highlightSteals: boolean;
 }
 
 const defaultSettings: MapDisplaySettings = {
@@ -19,6 +20,7 @@ const defaultSettings: MapDisplaySettings = {
   showRegionDebugInfo: false,
   autoRefreshEnabled: true,
   autoRefreshInterval: 10,
+  highlightSteals: true,
 };
 
 // Singleton state
@@ -63,6 +65,7 @@ export function useMapDisplaySettings() {
     showRegionDebugInfo: computed(() => settings.value.showRegionDebugInfo),
     autoRefreshEnabled: computed(() => settings.value.autoRefreshEnabled),
     autoRefreshInterval: computed(() => settings.value.autoRefreshInterval),
+    highlightSteals: computed(() => settings.value.highlightSteals),
 
     // Utility methods
     // toggleMarkers: () => {

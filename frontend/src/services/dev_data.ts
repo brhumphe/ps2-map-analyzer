@@ -6,7 +6,7 @@ import {
   extractCensusMapState,
   parseZoneFromZoneResponse,
   type ZoneDataResponse,
-} from '@/services/parsers.ts';
+} from '@/services/parsers';
 
 export class DevelopmentDataService extends CensusDataService {
   constructor(serviceId: string = 'dev') {

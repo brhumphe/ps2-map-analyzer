@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll } from '@jest/globals';
+import { beforeAll, describe, expect } from '@jest/globals';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import {
@@ -8,8 +8,8 @@ import {
 } from '../src/services/parsers';
 import type { Zone } from '../src/types/zone_types';
 import type { TerritorySnapshot } from '../src/types/territory';
-import { World, Continent } from '../src/types/common';
-import { RegionAnalyzer } from '@/providers/analysis/RegionAnalyzer.ts';
+import { Continent, Faction, RegionID, World } from '../src/types/common';
+import { RegionAnalyzer } from '../src/providers/analysis/RegionAnalyzer';
 
 describe('Census Parsers', () => {
   let esamirZone: Zone;
@@ -36,15 +36,20 @@ describe('Census Parsers', () => {
 
   test('Region ownership analysis', () => {
     const analyser = new RegionAnalyzer();
-    const analysis = analyser.analyzeRegionStates(esamirMapState, esamirZone);
+    const analysis = analyser.analyzeRegionStates(
+      esamirMapState,
+      esamirZone,
+      Faction.NONE
+    );
     // 18005 was a region being incorrectly flagged as capturable
-    expect(analysis.get(18005)).toStrictEqual({
+    expect(analysis.get(18005 as RegionID)).toStrictEqual({
       owning_faction_id: 0,
       region_id: 18005,
       adjacent_faction_ids: new Set([0, 1, 3]),
       can_steal: false,
+      is_active: false,
       can_capture: false,
+      relevant_to_player: false,
     });
-    console.log(analysis.get(18005));
   });
 });

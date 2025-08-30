@@ -37,6 +37,16 @@
           </v-list-subheader>
           <v-list-item>
             <v-switch
+              v-model="mapDisplaySettings['showRegionDebugInfo']"
+              label="Show Region Debug Info"
+              color="primary"
+              hide-details
+              density="compact"
+              class="ml-2"
+            ></v-switch>
+          </v-list-item>
+          <v-list-item>
+            <v-switch
               v-model="useDevDataModel"
               label="Use Development Data"
               color="warning"
@@ -92,9 +102,9 @@ const useDevDataModel = computed({
 const displaySettingsList = [
   // { key: 'showMarkers', label: 'Show Facility Markers' },
   { key: 'showLatticeLinks', label: 'Show Lattice Links' },
-  // { key: 'showRegionBorders', label: 'Show Region Borders' },
+  { key: 'showRegionBorders', label: 'Show Region Borders' },
   { key: 'showFacilityNames', label: 'Show Facility Names' },
-  { key: 'showRegionDebugInfo', label: 'Show Region Debug Info' },
+  { key: 'highlightSteals', label: 'Highlight Steals' },
   { key: 'autoRefreshEnabled', label: 'Enable Auto-Refresh' },
 ] as const;
 </script>

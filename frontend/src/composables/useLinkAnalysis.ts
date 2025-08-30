@@ -5,7 +5,7 @@ import type { TerritorySnapshot, LinkState } from '@/types/territory';
 import type { Zone, FacilityLinkKey } from '@/types/zone_types';
 import { zoneUtils } from '@/utilities/zone_utils';
 import type L from 'leaflet';
-import { useAppState } from '@/composables/useAppState.ts';
+import { useAppState } from '@/composables/useAppState';
 
 /**
  * Composable for lattice link analysis and styling coordination

@@ -1,4 +1,11 @@
-import { Continent, Faction, type RegionID, World } from '@/types/common';
+import {
+  Continent,
+  type FacilityID,
+  FacilityType,
+  Faction,
+  type RegionID,
+  World,
+} from '@/types/common';
 import type {
   FacilityLink,
   FacilityLinkKey,
@@ -13,8 +20,8 @@ export interface RegionResponse {
   map_region_id: RegionID;
   location_x: number;
   location_z: number;
-  facility_id: number;
-  facility_type_id: number;
+  facility_id: FacilityID;
+  facility_type_id: FacilityType;
   facility_name: string;
   hexes: {
     x: number;
@@ -110,10 +117,20 @@ export function parseZoneFromZoneResponse(response: ZoneResponse): Zone {
     }
   });
 
-  const facility_to_region_map = new Map<number, RegionID>();
+  const facility_to_region_map = new Map<FacilityID, RegionID>();
   response.regions.forEach((region) => {
     if (region.facility_id) {
       facility_to_region_map.set(region.facility_id, region.map_region_id);
+    }
+  });
+
+  const facility_type_to_region_map = new Map<FacilityType, RegionID[]>();
+  response.regions.forEach((region) => {
+    if (region.facility_type_id) {
+      const region_ids =
+        facility_type_to_region_map.get(region.facility_type_id) ?? [];
+      region_ids.push(region.map_region_id);
+      facility_type_to_region_map.set(region.facility_type_id, region_ids);
     }
   });
 
@@ -126,6 +143,7 @@ export function parseZoneFromZoneResponse(response: ZoneResponse): Zone {
     links,
     neighbors,
     facility_to_region_map,
+    facility_type_to_region_map,
   };
 }
 
@@ -142,13 +160,13 @@ export function extractCensusMapState(
   world: World
 ): TerritorySnapshot {
   // Transform API response format to TerritorySnapshot
-  const regionOwnership: Record<RegionID, Faction> = {};
+  const regionOwnership = new Map<RegionID, Faction>();
 
   for (const map of data.map_list) {
     for (const row of map.Regions.Row) {
-      const regionId = parseInt(row.RowData.RegionId);
-      const factionId = parseInt(row.RowData.FactionId);
-      regionOwnership[regionId] = factionId;
+      const regionId = parseInt(row.RowData.RegionId) as RegionID;
+      const factionId = parseInt(row.RowData.FactionId) as Faction;
+      regionOwnership.set(regionId, factionId);
     }
   }
 

@@ -1,11 +1,6 @@
 // types/territory.ts
 
-import {
-  Continent,
-  Faction,
-  type RegionID,
-  type WorldID,
-} from '@/types/common';
+import { Continent, Faction, type RegionID, World } from '@/types/common';
 import type { FacilityLinkKey, Zone } from '@/types/zone_types';
 
 /**
@@ -36,14 +31,14 @@ export interface TerritorySnapshot {
   continent: Continent;
 
   /** World/server identifier where this territory state applies */
-  world: WorldID;
+  world: World;
 
   /**
    * Mapping of region ID to controlling faction ID
    * - Key: Region ID (map_region_id from zone data)
    * - Value: Faction ID (1=VS, 2=NC, 3=TR, 4=NSO)
    */
-  region_ownership: Record<RegionID, Faction>;
+  region_ownership: Map<RegionID, Faction>;
 }
 
 /**
@@ -83,6 +78,10 @@ export interface RegionState {
   is_active?: boolean;
   /** Regions that are important right now (can be attacked or defended) */
   relevant_to_player?: boolean;
+  /** Distance to warpgate in number of lattice links. -1 if there is no valid path to the faction warpgate. */
+  distance_to_wg?: number;
+  /** Hops to frontline of lattice links. -1 if there is no valid path to a contested region. */
+  distance_to_front?: number;
 }
 
 /**

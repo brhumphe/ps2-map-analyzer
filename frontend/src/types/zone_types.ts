@@ -78,4 +78,6 @@ export interface Zone {
 
   /** Reverse lookup map from facility ID to the region that contains it */
   facility_to_region_map: Map<FacilityID, RegionID>;
+
+  facility_type_to_region_map: Map<FacilityType, RegionID[]>;
 }

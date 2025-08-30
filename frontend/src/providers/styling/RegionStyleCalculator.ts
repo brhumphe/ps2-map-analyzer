@@ -1,11 +1,12 @@
-import type L from 'leaflet';
+import type { PolylineOptions } from 'leaflet';
 import { Faction } from '@/types/common';
 import {
   adjustColorLightnessSaturation,
   FactionColor,
 } from '@/utilities/colors';
 import { RegionPane } from '@/utilities/leaflet_utils';
-import type { RegionState } from '@/types/territory.ts';
+import type { RegionState } from '@/types/territory';
+import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings';
 
 /**
  * Region style calculator that converts region states into visual properties
@@ -28,12 +29,49 @@ export class RegionStyleCalculator {
    *
    * @param regionState The strategic state of the region
    * @param playerFaction Faction POV of user
+   * @param mapSettings
    * @returns Leaflet PolylineOptions for styling the region polygon
    */
   calculateRegionStyle(
     regionState: RegionState,
+    playerFaction: Faction | undefined,
+    mapSettings: MapDisplaySettings
+  ): Partial<PolylineOptions> {
+    let style = this.calculateBaseStyle(
+      regionState,
+      mapSettings,
+      playerFaction
+    );
+
+    style = this.applyDistanceFading(style, regionState);
+    style = this.applyUserPreferences(style, mapSettings);
+    return style;
+  }
+
+  private applyDistanceFading(
+    style: Partial<PolylineOptions>,
+    regionState: RegionState
+  ): Partial<PolylineOptions> {
+    // TODO: Implement distance-based fading
+    // For now, just return unchanged
+    return style;
+  }
+
+  private applyUserPreferences(
+    style: Partial<PolylineOptions>,
+    mapSettings: MapDisplaySettings
+  ): Partial<PolylineOptions> {
+    if (!mapSettings.showRegionBorders) {
+      return { ...style, opacity: 0.0 };
+    }
+    return style;
+  }
+
+  private calculateBaseStyle(
+    regionState: RegionState,
+    mapSettings: MapDisplaySettings,
     playerFaction: Faction | undefined
-  ): Partial<L.PolylineOptions> {
+  ): Partial<PolylineOptions> {
     let weight = 1;
     let opacity = 0.7;
     let fillOpacity = 0.6;
@@ -45,7 +83,7 @@ export class RegionStyleCalculator {
     let fillColor: string = FactionColor.get(Faction.NONE) || '#ff00ff';
     // 3-way fights can be "stolen" if one faction intervenes when the timer
     // is low, taking it from the other attacker.
-    if (regionState.can_steal) {
+    if (regionState.can_steal && mapSettings.highlightSteals) {
       fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
       fillOpacity = 0.8;
       border_color = '#2eff00';
@@ -85,14 +123,13 @@ export class RegionStyleCalculator {
       fillOpacity = 0.75;
       fillColor = adjustColorLightnessSaturation(faction_color, -0.5, 0);
     }
-
     return {
       weight,
       opacity,
       fillOpacity,
-      color: border_color,
-      fillColor: fillColor,
       pane,
+      color: border_color,
+      fillColor,
     };
   }
 

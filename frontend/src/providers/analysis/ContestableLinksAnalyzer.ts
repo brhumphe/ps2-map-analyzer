@@ -1,10 +1,11 @@
 import type {
-  TerritorySnapshot,
   LinkAnalysisProvider,
   LinkState,
+  TerritorySnapshot,
 } from '@/types/territory';
-import type { Zone, FacilityLinkKey } from '@/types/zone_types';
+import type { FacilityLinkKey, Zone } from '@/types/zone_types';
 import { zoneUtils } from '@/utilities/zone_utils';
+import { Faction } from '@/types/common';
 
 /**
  * Contestable links analyzer that identifies tactical opportunities
@@ -52,8 +53,10 @@ export class ContestableLinksAnalyzer implements LinkAnalysisProvider {
         return;
       }
 
-      const ownerA = territory.region_ownership[regionA.map_region_id];
-      const ownerB = territory.region_ownership[regionB.map_region_id];
+      const ownerA: Faction =
+        territory.region_ownership.get(regionA.map_region_id) ?? Faction.NONE;
+      const ownerB: Faction =
+        territory.region_ownership.get(regionB.map_region_id) ?? Faction.NONE;
 
       // If either owner is None (0) or missing, link is inactive
       if (ownerA == null || ownerA === 0 || ownerB == null || ownerB === 0) {
