@@ -102,7 +102,7 @@ export function setColorBrightness(color: string, brightness: number): string {
   brightness = Math.min(1, Math.max(0, brightness));
 
   // Convert to HSL
-  const { h, s, l: originalL } = hexToHSL(color);
+  const { h, s } = hexToHSL(color);
 
   // Create new color with specified brightness
   return hslToHex(h, s, brightness);

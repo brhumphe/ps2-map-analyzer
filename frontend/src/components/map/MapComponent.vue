@@ -14,9 +14,9 @@
   <template v-if="map && currentZone">
     <PolygonEntity
       v-for="[regionKey, regionData] in regionPolygons"
-      :key="regionKey"
       :id="regionKey"
-      :region_id="regionData.regionId"
+      :key="regionKey"
+      :region-id="regionData.regionId"
       :points="regionData.points"
       :style="regionData.style as Partial<L.PolylineOptions>"
     />
@@ -26,8 +26,8 @@
   <template v-if="map && currentZone && mapDisplaySettings.showLatticeLinks">
     <PolylineEntity
       v-for="[linkId, linkData] in latticeLinks"
-      :key="linkId"
       :id="linkId"
+      :key="linkId"
       :points="linkData.points"
       :style="linkData.style as Partial<L.PolylineOptions>"
     />
@@ -37,13 +37,13 @@
   <template v-if="map && currentZone && mapDisplaySettings.showFacilityNames">
     <MarkerEntity
       v-for="[regionKey, markerData] in regionMarkers"
-      :key="regionKey"
       :id="regionKey"
+      :key="regionKey"
       :position="markerData.position"
       :popup="markerData.popup"
       :options="markerData.options as Partial<L.MarkerOptions>"
       :tooltip="markerData.tooltip"
-      :tooltipOptions="{ permanent: true, direction: 'bottom' }"
+      :tooltip-options="{ permanent: true, direction: 'bottom' }"
     />
   </template>
 </template>
@@ -64,7 +64,6 @@ import MarkerEntity from '@/components/map/MarkerEntity.vue';
 import DismissibleLoadingOverlay from '@/components/map/ui/DismissibleLoadingOverlay.vue';
 import * as L from 'leaflet';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
-import type { RegionID } from '@/types/common.ts';
 
 const { selectedWorld, selectedContinent } = useAppState();
 
@@ -89,17 +88,12 @@ const {
 // Use the territory data composable
 const {
   territorySnapshot,
-  isLoading: territoryLoading,
-  isRefreshing: territoryRefreshing,
   error: territoryError,
   refreshTerritoryData,
 } = useTerritoryData();
 
 // Use region analysis to get faction-based styling
-const { regionStyles, getRegionState } = useRegionAnalysis(
-  territorySnapshot,
-  currentZone
-);
+const { regionStyles } = useRegionAnalysis(territorySnapshot, currentZone);
 
 // Use link analysis to get contestable link styling
 const { linkStyles } = useLinkAnalysis(territorySnapshot, currentZone);

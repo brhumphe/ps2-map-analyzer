@@ -3,9 +3,9 @@
     <v-btn
       variant="tonal"
       color="primary"
-      @click="dialog = true"
       title="About"
       style="text-transform: none"
+      @click="dialog = true"
     >
       <v-icon>mdi-information</v-icon>
       <span class="ml-1">About</span>

@@ -61,7 +61,7 @@ export function drawRegion(
 
 declare module 'leaflet' {
   interface Map {
-    cursor: Handler;
+    cursor: L.Handler;
   }
 }
 

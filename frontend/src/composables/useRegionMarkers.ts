@@ -58,7 +58,7 @@ export function useRegionMarkers() {
           facilityName: region.facility_name,
           tooltip: region.facility_name, // Initially set tooltip to facility name
         });
-      } catch (error) {
+      } catch (_error) {
         // Skip regions that can't be created
         continue;
       }
@@ -129,7 +129,7 @@ export function useRegionMarkers() {
    * Update marker opacity and tooltip visibility based on strategic relevance and hover state
    */
   const updateMarkerVisibility = () => {
-    for (const [key, marker] of regionMarkers) {
+    for (const [_, marker] of regionMarkers) {
       const regionState = getRegionState.value(marker.regionId);
       const isHovered = currentHoveredRegion.value === marker.regionId;
       const isRelevantToPlayer = regionState?.relevant_to_player ?? false;

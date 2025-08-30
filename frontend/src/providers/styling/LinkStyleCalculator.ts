@@ -38,7 +38,7 @@ export class LinkStyleCalculator {
     };
 
     switch (linkState.status) {
-      case 'contestable':
+      case 'contestable': {
         let weight_contestable = 2;
         let color_contestable = '#b58648';
         let opacity_contestable = 0.4;
@@ -61,8 +61,9 @@ export class LinkStyleCalculator {
           lineCap: 'butt',
           pane: LatticePane.FRONTLINE,
         };
+      }
 
-      case 'safe':
+      case 'safe': {
         let color =
           FactionColor.get(linkState.faction ?? Faction.NONE) || '#ff00ff';
         let lightnessAdjustment = 0.5;
@@ -85,6 +86,7 @@ export class LinkStyleCalculator {
           opacity,
           weight,
         };
+      }
 
       case 'inactive':
         return {

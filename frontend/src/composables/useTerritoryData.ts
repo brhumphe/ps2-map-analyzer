@@ -19,7 +19,7 @@ const error = ref<string | null>(null);
 const lastSuccessfulFetch = ref<number | null>(null);
 
 // Auto-refresh state
-const autoRefreshTimer = ref<NodeJS.Timeout | null>(null);
+const autoRefreshTimer = ref<ReturnType<typeof setInterval> | null>(null);
 const isAutoRefreshActive = ref(true);
 
 // Track active requests for cleanup

@@ -1,7 +1,6 @@
 <template>
   <v-select
     :model-value="playerFaction"
-    @update:model-value="setPlayerFaction"
     :items="factionItems"
     item-title="name"
     item-value="value"
@@ -11,8 +10,9 @@
     class="faction-dropdown"
     style="min-width: 140px"
     hide-details
+    @update:model-value="setPlayerFaction"
   >
-    <template v-slot:selection="{ item }">
+    <template #selection="{ item }">
       <div class="d-flex align-center">
         <v-icon
           :color="item.raw.value === Faction.NONE ? item.raw.color : undefined"
@@ -30,9 +30,9 @@
         <span>{{ item.raw.name }}</span>
       </div>
     </template>
-    <template v-slot:item="{ props, item }">
+    <template #item="{ props, item }">
       <v-list-item v-bind="props">
-        <template v-slot:prepend>
+        <template #prepend>
           <v-icon
             :color="
               item.raw.value === Faction.NONE ? item.raw.color : undefined

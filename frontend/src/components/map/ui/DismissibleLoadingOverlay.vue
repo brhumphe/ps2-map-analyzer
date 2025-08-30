@@ -14,10 +14,10 @@
       <div class="mt-4 text-h6 text-white">{{ message }}</div>
       <v-btn
         v-if="showDismissButton"
-        @click="handleDismiss"
         variant="outlined"
         color="white"
         class="mt-4"
+        @click="handleDismiss"
       >
         Continue anyways
       </v-btn>

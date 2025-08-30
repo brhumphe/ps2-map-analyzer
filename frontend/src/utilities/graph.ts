@@ -211,8 +211,8 @@ export function findConnectedRegions(
     node: RegionID,
     args: VisitDistanceArgs,
     graph: PS2Graph,
-    results: ReadonlyMap<RegionID, NodeDistanceResult>,
-    visited: Set<RegionID>
+    _results: ReadonlyMap<RegionID, NodeDistanceResult>,
+    _visited: Set<RegionID>
   ) {
     const regionInfo = graph.nodes.get(node);
     const faction = regionInfo?.owning_faction;
@@ -270,7 +270,7 @@ export function findDistancesFromFrontline(
   graph: PS2Graph
 ): Map<RegionID, number> {
   const frontlineRegions: Set<RegionID> = new Set();
-  for (const [edgeKey, edge] of graph.edges) {
+  for (const [_, edge] of graph.edges) {
     const factionA = graph.nodes.get(edge.from)?.owning_faction;
     const factionB = graph.nodes.get(edge.to)?.owning_faction;
     if (

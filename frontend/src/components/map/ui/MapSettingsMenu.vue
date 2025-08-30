@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <v-menu v-model="menu" :close-on-content-click="false" location="end">
-      <template v-slot:activator="{ props }">
+      <template #activator="{ props }">
         <v-btn icon v-bind="props">
           <v-icon>mdi-cog</v-icon>
         </v-btn>
@@ -54,7 +54,7 @@
               density="compact"
               class="ml-2"
             ></v-switch>
-            <template v-slot:subtitle>
+            <template #subtitle>
               <span class="text-caption text-medium-emphasis">
                 Load sample data for testing purposes.
               </span>

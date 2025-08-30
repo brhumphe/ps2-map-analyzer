@@ -2,7 +2,6 @@
   <div class="d-flex align-center ga-1">
     <v-select
       :model-value="selectedContinent"
-      @update:model-value="selectContinent"
       :items="selectItems"
       item-title="name"
       item-value="continent"
@@ -12,11 +11,12 @@
       variant="outlined"
       density="compact"
       class="continent-select"
-      @click:control="onSelectClick"
       style="min-width: 140px"
       hide-details
+      @update:model-value="selectContinent"
+      @click:control="onSelectClick"
     >
-      <template v-slot:selection="{ item }">
+      <template #selection="{ item }">
         <div class="d-flex align-center">
           <v-icon
             :icon="getContinentIcon(item.raw.continent).icon"
@@ -28,12 +28,12 @@
         </div>
       </template>
 
-      <template v-slot:item="{ item, props }">
+      <template #item="{ item, props }">
         <v-list-item
           v-bind="props"
           :class="getContinentStatusClass(item.raw.continent)"
         >
-          <template v-slot:prepend>
+          <template #prepend>
             <v-icon
               :icon="getContinentIcon(item.raw.continent).icon"
               :color="getContinentIcon(item.raw.continent).color"
