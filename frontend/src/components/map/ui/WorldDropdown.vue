@@ -2,7 +2,6 @@
   <div class="text-center">
     <v-select
       :model-value="selectedWorld"
-      @update:model-value="selectWorld"
       :items="items"
       item-title="name"
       item-value="world_id"
@@ -11,8 +10,9 @@
       class="world-select"
       style="min-width: 140px"
       hide-details
+      @update:model-value="selectWorld"
     >
-      <template v-slot:selection="{ item }">
+      <template #selection="{ item }">
         <div class="d-flex align-center">
           <v-icon
             icon="mdi-server-network"
@@ -24,9 +24,9 @@
         </div>
       </template>
 
-      <template v-slot:item="{ item, props }">
+      <template #item="{ item, props }">
         <v-list-item v-bind="props">
-          <template v-slot:prepend>
+          <template #prepend>
             <v-icon icon="mdi-server-network" color="grey" size="small" />
           </template>
         </v-list-item>

@@ -14,8 +14,8 @@
   <template v-if="map && currentZone">
     <PolygonEntity
       v-for="[regionKey, regionData] in regionPolygons"
-      :key="regionKey"
       :id="regionKey"
+      :key="regionKey"
       :region_id="regionData.regionId"
       :points="regionData.points"
       :style="regionData.style as Partial<L.PolylineOptions>"
@@ -26,8 +26,8 @@
   <template v-if="map && currentZone && mapDisplaySettings.showLatticeLinks">
     <PolylineEntity
       v-for="[linkId, linkData] in latticeLinks"
-      :key="linkId"
       :id="linkId"
+      :key="linkId"
       :points="linkData.points"
       :style="linkData.style as Partial<L.PolylineOptions>"
     />
@@ -37,13 +37,13 @@
   <template v-if="map && currentZone && mapDisplaySettings.showFacilityNames">
     <MarkerEntity
       v-for="[regionKey, markerData] in regionMarkers"
-      :key="regionKey"
       :id="regionKey"
+      :key="regionKey"
       :position="markerData.position"
       :popup="markerData.popup"
       :options="markerData.options as Partial<L.MarkerOptions>"
       :tooltip="markerData.tooltip"
-      :tooltipOptions="{ permanent: true, direction: 'bottom' }"
+      :tooltip-options="{ permanent: true, direction: 'bottom' }"
     />
   </template>
 </template>

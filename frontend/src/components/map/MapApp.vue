@@ -5,7 +5,7 @@
       <v-spacer />
       <AboutButton />
       <v-spacer />
-      <template v-slot:append>
+      <template #append>
         <WorldDropdown />
         <ContinentDropdown />
         <FactionDropdown />
@@ -14,8 +14,8 @@
             <v-btn
               variant="text"
               :disabled="isRefreshing || isLoading"
-              @click="handleRefresh"
               :title="error ? 'Retry failed request' : 'Refresh territory data'"
+              @click="handleRefresh"
             >
               <v-icon
                 :class="{ 'rotate-animation': isRefreshing || isLoading }"
@@ -37,8 +37,8 @@
               {{ error }}
             </v-chip>
             <span
-              class="text-caption text-medium-emphasis"
               v-if="lastUpdatedText"
+              class="text-caption text-medium-emphasis"
             >
               {{ lastUpdatedText }}
             </span>

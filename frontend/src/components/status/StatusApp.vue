@@ -47,31 +47,31 @@
               <v-card-text>
                 <div class="d-flex flex-column ga-2">
                   <v-btn
-                    @click="testBackendConnection"
                     :loading="isLoading"
                     color="primary"
                     variant="flat"
                     prepend-icon="mdi-lan-connect"
+                    @click="testBackendConnection"
                   >
                     Test Backend Connection
                   </v-btn>
 
                   <v-btn
-                    @click="fetchCapturableBases"
                     :loading="isLoading"
                     color="secondary"
                     variant="flat"
                     prepend-icon="mdi-database-search"
+                    @click="fetchCapturableBases"
                   >
                     Get Capturable Bases
                   </v-btn>
 
                   <v-btn
-                    @click="history.clearHistory"
                     :disabled="isLoading"
                     color="warning"
                     variant="outlined"
                     prepend-icon="mdi-delete"
+                    @click="history.clearHistory"
                   >
                     Clear History
                   </v-btn>
