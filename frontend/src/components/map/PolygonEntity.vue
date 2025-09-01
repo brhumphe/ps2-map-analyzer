@@ -29,7 +29,7 @@ const polygon = ref<L.Polygon>();
 
 // Mouse event handlers
 const handleMouseOver = () => {
-  setHoveredRegion(props.region_id);
+  setHoveredRegion(props.regionId);
 };
 
 const handleMouseOut = () => {

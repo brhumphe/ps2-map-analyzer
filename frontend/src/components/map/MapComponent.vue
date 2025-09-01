@@ -16,7 +16,7 @@
       v-for="[regionKey, regionData] in regionPolygons"
       :id="regionKey"
       :key="regionKey"
-      :region-id="regionData.regionId"
+      :regionId="regionData.regionId"
       :points="regionData.points"
       :style="regionData.style as Partial<L.PolylineOptions>"
     />
