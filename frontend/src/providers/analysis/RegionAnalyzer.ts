@@ -40,10 +40,12 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
         zone.neighbors,
         playerFaction
       );
-      regionState.distance_to_wg = wg_conn.get(region.map_region_id) ?? -1;
-      regionState.distance_to_front =
-        front_dist.get(region.map_region_id) ?? -1;
-      regionStates.set(region.map_region_id, regionState);
+      const state = {
+        ...regionState,
+        distance_to_wg: wg_conn.get(region.map_region_id) ?? -1,
+        distance_to_front: front_dist.get(region.map_region_id) ?? -1,
+      };
+      regionStates.set(region.map_region_id, state);
     }
 
     return regionStates;
@@ -57,7 +59,15 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     territory: TerritorySnapshot,
     neighborMap: Map<RegionID, Set<RegionID>>,
     playerFaction: Faction
-  ): RegionState {
+  ): {
+    owning_faction_id: Faction;
+    region_id: RegionID;
+    adjacent_faction_ids: Set<Faction>;
+    can_steal: boolean;
+    can_capture: boolean;
+    is_active: boolean;
+    relevant_to_player: boolean;
+  } {
     const owningFaction =
       territory.region_ownership.get(regionId) ?? Faction.NONE;
     const neighbors = neighborMap.get(regionId) ?? new Set<RegionID>();

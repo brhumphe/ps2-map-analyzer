@@ -262,18 +262,18 @@ export class RegionStyleCalculator {
   ): Partial<PolylineOptions> {
     let weight = 1;
     let opacity = 0.7;
-    let fillOpacity = 0.6;
+    let _fillOpacity = 0.6;
     let pane: RegionPane;
 
     const faction_color: string =
       FactionColor.get(regionState.owning_faction_id) || '#ff00ff';
     let border_color = '#292929';
-    let fillColor: string = FactionColor.get(Faction.NONE) || '#ff00ff';
+    let _fillColor: string = FactionColor.get(Faction.NONE) || '#ff00ff';
     // 3-way fights can be "stolen" if one faction intervenes when the timer
     // is low, taking it from the other attacker.
     if (regionState.can_steal && mapSettings.highlightSteals) {
-      fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
-      fillOpacity = 0.8;
+      _fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
+      _fillOpacity = 0.8;
       border_color = '#2eff00';
       pane = RegionPane.PRIORITY;
       opacity = 1.0;
@@ -281,15 +281,15 @@ export class RegionStyleCalculator {
     } else if (regionState.can_capture) {
       if (regionState.relevant_to_player) {
         // Player's faction is involved in the region - brighter
-        fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
-        fillOpacity = 0.8;
+        _fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
+        _fillOpacity = 0.8;
         opacity = 1.0;
         pane = RegionPane.FRONTLINE;
         border_color = '#000000';
       } else {
         // Player's faction is not involved in the region - dimmer
-        fillColor = adjustColorLightnessSaturation(faction_color, 0.0, 0);
-        fillOpacity = 0.8;
+        _fillColor = adjustColorLightnessSaturation(faction_color, 0.0, 0);
+        _fillOpacity = 0.8;
         opacity = 0.5;
         pane = RegionPane.BASE;
       }
@@ -302,14 +302,14 @@ export class RegionStyleCalculator {
       );
       opacity = activeRegionStyle.opacity;
       pane = activeRegionStyle.pane;
-      fillOpacity = activeRegionStyle.fillOpacity;
-      fillColor = activeRegionStyle.fillColor;
+      _fillOpacity = activeRegionStyle.fillOpacity;
+      _fillColor = activeRegionStyle.fillColor;
     } else {
       // Not controlled by any faction and unavailable for capture
       pane = RegionPane.INACTIVE;
       opacity = 0.9;
-      fillOpacity = 0.75;
-      fillColor = adjustColorLightnessSaturation(faction_color, -0.5, 0);
+      _fillOpacity = 0.75;
+      _fillColor = adjustColorLightnessSaturation(faction_color, -0.5, 0);
     }
     return {
       weight,
