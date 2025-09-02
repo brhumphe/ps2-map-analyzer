@@ -241,8 +241,8 @@ export function interpolate(
 
   if (typeof startOrSettings === 'object') {
     // Using InterpolationSettings overload
-    start = startOrSettings.end;
-    end = startOrSettings.start;
+    start = startOrSettings.start;
+    end = startOrSettings.end;
     actualT = endOrT;
     actualCurve = startOrSettings.curve;
   } else {
