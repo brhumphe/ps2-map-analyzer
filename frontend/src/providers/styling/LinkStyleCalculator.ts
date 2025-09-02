@@ -65,7 +65,7 @@ export class LinkStyleCalculator {
 
       case 'safe': {
         let color =
-          FactionColor.get(linkState.faction ?? Faction.NONE) || '#ff00ff';
+          FactionColor[linkState.faction ?? Faction.NONE] || '#ff00ff';
         let lightnessAdjustment = 0.5;
         let saturationAdjustment = 1;
         let opacity = 0.5;
@@ -91,7 +91,7 @@ export class LinkStyleCalculator {
       case 'inactive':
         return {
           ...baseStyle,
-          color: FactionColor.get(Faction.NONE), // Dim gray
+          color: FactionColor[Faction.NONE], // Dim gray
           weight: 2, // Thin line
           opacity: 0.3, // Low opacity
         };
