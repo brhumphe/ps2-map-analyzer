@@ -1,7 +1,12 @@
 import { Faction } from '@/types/common.ts';
 import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
 import type { RegionState } from '@/types/territory.ts';
-import { type Rule, type RuleId, RuleSet } from '@/types/rules.ts';
+import {
+  type Rule,
+  type RuleEvaluationResult,
+  type RuleId,
+  RuleSet,
+} from '@/types/rules.ts';
 import type { PolylineOptions } from 'leaflet';
 import {
   adjustColorLightnessSaturation,
@@ -21,6 +26,8 @@ type StyleContext = {
  * Rule interface for applying styling based on region state
  */
 interface StyleRule extends Rule<StyleContext, PolylineOptions> {}
+
+export type StyleEvaluationResult = RuleEvaluationResult<PolylineOptions>;
 
 const highlightSteals: StyleRule = {
   id: 'highlight-steals' as RuleId,

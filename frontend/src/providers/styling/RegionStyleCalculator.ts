@@ -1,9 +1,11 @@
-import type { PolylineOptions } from 'leaflet';
 import { Faction } from '@/types/common';
 import { FactionColor } from '@/utilities/colors';
 import type { RegionState } from '@/types/territory';
 import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings';
-import { StyleRuleSet } from '@/utilities/style_rules.ts';
+import {
+  type StyleEvaluationResult,
+  StyleRuleSet,
+} from '@/utilities/style_rules.ts';
 
 /**
  * Region style calculator that converts region states into visual properties
@@ -33,7 +35,7 @@ export class RegionStyleCalculator {
     regionState: RegionState,
     playerFaction: Faction | undefined,
     mapSettings: MapDisplaySettings
-  ): Partial<PolylineOptions> {
+  ): StyleEvaluationResult {
     const context = {
       playerFaction: playerFaction ?? Faction.NONE,
       mapSettings: mapSettings,
@@ -41,7 +43,8 @@ export class RegionStyleCalculator {
       factionColor: FactionColor[regionState.owning_faction_id] ?? '#ff00ff',
     };
     const data = {};
-    const eval_result = StyleRuleSet.evaluate(
+
+    return StyleRuleSet.evaluate(
       [
         'default-region-style',
         'inactive-region',
@@ -52,8 +55,5 @@ export class RegionStyleCalculator {
       context,
       data
     );
-
-    console.log(eval_result);
-    return eval_result.result;
   }
 }
