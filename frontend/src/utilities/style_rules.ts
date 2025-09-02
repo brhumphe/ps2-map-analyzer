@@ -162,44 +162,47 @@ const NON_PLAYER_FADE_MULTIPLIER = 1;
 // Interpolation settings for different properties and factions
 const PLAYER_BRIGHTNESS_SETTINGS: InterpolationSettings = {
   curve: 'easeOut',
-  start: -0.8,
-  end: 0.6,
+  start: 0.6,
+  end: -0.8,
 };
 
 const PLAYER_SATURATION_SETTINGS: InterpolationSettings = {
   curve: 'easeOut',
-  start: -0.4,
-  end: 0.5,
+  start: 0.5,
+  end: -0.4,
 };
 
 const PLAYER_OPACITY_SETTINGS: InterpolationSettings = {
   curve: 'linear',
-  start: 1,
-  end: 0.7,
+  start: 0.4,
+  end: 1,
 };
 
 const NON_PLAYER_BRIGHTNESS_SETTINGS: InterpolationSettings = {
   curve: 'easeIn',
-  start: -0.8,
-  end: -0.2,
+  start: -0.2,
+  end: -0.8,
 };
 
 const NON_PLAYER_SATURATION_SETTINGS: InterpolationSettings = {
   curve: 'easeIn',
-  start: -0.4,
-  end: 0.2,
+  start: 0.7,
+  end: -0.7,
 };
 
 const NON_PLAYER_OPACITY_SETTINGS: InterpolationSettings = {
   curve: 'easeOut',
-  start: 1,
-  end: 0.5,
+  start: 0.45,
+  end: 1,
 };
 
 const fadeFromFront: StyleRule = {
   id: 'fade-with-distance-from-front',
-  applicable(_context: StyleContext): boolean {
-    return true;
+  applicable(context: StyleContext): boolean {
+    return (
+      context.regionState.distance_to_front >= 0 &&
+      context.mapSettings.fadeDistantRegions
+    );
   },
   apply(
     context: StyleContext,
