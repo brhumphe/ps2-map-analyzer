@@ -52,6 +52,7 @@ export class RegionStyleCalculator {
         'active-region',
         'fade-with-distance-from-front',
         'player-can-capture-region',
+        'outline-cutoff-region',
       ],
       context,
       data

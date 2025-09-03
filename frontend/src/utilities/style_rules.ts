@@ -277,6 +277,29 @@ const fadeFromFront: StyleRule = {
   },
 };
 
+const outlineCutoffRegion: StyleRule = {
+  id: 'outline-cutoff-region',
+  applicable(context: StyleContext): boolean {
+    const regionState = context.regionState;
+    return (
+      regionState.distance_to_wg < 0 &&
+      regionState.owning_faction_id !== Faction.NONE
+    );
+  },
+  apply(
+    _context: StyleContext,
+    data: Partial<PolylineOptions>
+  ): Partial<PolylineOptions> {
+    const fillColor = data.fillColor ?? '#ff00ff';
+    return {
+      color: '#ffeb00',
+      weight: 5,
+      pane: RegionPane.PRIORITY,
+      fillColor: adjustColorLightnessSaturation(fillColor, -0.5, 0.5),
+    };
+  },
+};
+
 export const StyleRuleSet = new RuleSet<StyleContext, PolylineOptions>([
   defaultRegionStyle,
   inactiveRegion,
@@ -284,4 +307,5 @@ export const StyleRuleSet = new RuleSet<StyleContext, PolylineOptions>([
   fadeFromFront,
   playerCapturableRegion,
   highlightSteals,
+  outlineCutoffRegion,
 ]);
