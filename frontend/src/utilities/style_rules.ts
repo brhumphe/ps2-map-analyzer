@@ -163,43 +163,43 @@ const activeRegion: StyleRule = {
 };
 
 // Configuration constants at class level for easy adjustment
-const FADE_MAX_DISTANCE = 7;
-const NON_PLAYER_FADE_MULTIPLIER = 1;
+const FADE_MAX_DISTANCE = 5;
+const NON_PLAYER_FADE_MULTIPLIER = 1.5;
 
 // Interpolation settings for different properties and factions
 const PLAYER_BRIGHTNESS_SETTINGS: InterpolationSettings = {
-  curve: 'easeOut',
+  curve: 'linear',
   start: 0.6,
-  end: -0.8,
+  end: -0.25,
+};
+
+const NON_PLAYER_BRIGHTNESS_SETTINGS: InterpolationSettings = {
+  curve: 'linear',
+  start: -0.1,
+  end: -0.6,
 };
 
 const PLAYER_SATURATION_SETTINGS: InterpolationSettings = {
-  curve: 'easeOut',
-  start: 0.5,
-  end: -0.4,
+  curve: 'linear',
+  start: 0.6,
+  end: -0.6,
+};
+
+const NON_PLAYER_SATURATION_SETTINGS: InterpolationSettings = {
+  curve: 'linear',
+  start: -0.25,
+  end: -0.8,
 };
 
 const PLAYER_OPACITY_SETTINGS: InterpolationSettings = {
   curve: 'linear',
-  start: 0.4,
+  start: 0.85,
   end: 1,
 };
 
-const NON_PLAYER_BRIGHTNESS_SETTINGS: InterpolationSettings = {
-  curve: 'easeIn',
-  start: -0.2,
-  end: -0.8,
-};
-
-const NON_PLAYER_SATURATION_SETTINGS: InterpolationSettings = {
-  curve: 'easeIn',
-  start: 0.7,
-  end: -0.7,
-};
-
 const NON_PLAYER_OPACITY_SETTINGS: InterpolationSettings = {
-  curve: 'easeOut',
-  start: 0.45,
+  curve: 'linear',
+  start: 0.85,
   end: 1,
 };
 
