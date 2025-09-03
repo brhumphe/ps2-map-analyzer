@@ -42,7 +42,7 @@ export class RuleSet<TContext, TData> {
   evaluate(
     ids: RuleId[],
     context: TContext,
-    init: TData
+    init: Partial<TData>
   ): RuleEvaluationResult<TData> {
     const evals: RuleEvaluation<TData>[] = [];
     let result: Partial<TData> = { ...init };

@@ -6,7 +6,8 @@ import {
   type StyleContext,
   type StyleEvaluationResult,
   StyleRuleSet,
-} from '@/utilities/style_rules.ts';
+} from '@/utilities/style_rules';
+import type { PolylineOptions } from 'leaflet';
 
 /**
  * Region style calculator that converts region states into visual properties
@@ -18,18 +19,10 @@ import {
 export class RegionStyleCalculator {
   /**
    * Convert a region state to Leaflet polygon styling options
-   *
-   * Maps region control states to faction colors:
-   * - VS: Purple/Teal (#441c7a)
-   * - NC: Blue (#004bad)
-   * - TR: Red (#9d2621)
-   * - NSO: Gray (#565851)
-   * - none: Light gray with low opacity
-   * - unknown: Dark gray with dashed border
-   *
+   *   *
    * @param regionState The strategic state of the region
    * @param playerFaction Faction POV of user
-   * @param mapSettings
+   * @param mapSettings Global map settings
    * @returns Leaflet PolylineOptions for styling the region polygon
    */
   calculateRegionStyle(
@@ -41,9 +34,9 @@ export class RegionStyleCalculator {
       playerFaction: playerFaction ?? Faction.NONE,
       mapSettings: mapSettings,
       regionState: regionState,
-      factionColor: FactionColor[regionState.owning_faction_id] ?? '#ff00ff',
+      factionColor: FactionColor[regionState.owning_faction_id] ?? '#ff00ff', // Default to magenta to indicate error
     };
-    const data: Partial<L.PolylineOptions> = {};
+    const data: Partial<PolylineOptions> = {};
 
     return StyleRuleSet.evaluate(
       [
