@@ -69,19 +69,19 @@ export interface RegionState {
   // Mostly for debugging purposes
   region_id: RegionID;
   /** Factions who control adjacent regions. Used to determine capturability */
-  adjacent_faction_ids?: Set<Faction>;
+  adjacent_faction_ids: Set<Faction>;
   /** If the region can be stolen by any faction (last-minute intervention in 3-way fight) */
-  can_steal?: boolean;
+  can_steal: boolean;
   /** Whether any faction can capture this region */
-  can_capture?: boolean;
+  can_capture: boolean;
   /** Whether this region is enabled for faction control */
-  is_active?: boolean;
+  is_active: boolean;
   /** Regions that are important right now (can be attacked or defended) */
-  relevant_to_player?: boolean;
+  relevant_to_player: boolean;
   /** Distance to warpgate in number of lattice links. -1 if there is no valid path to the faction warpgate. */
-  distance_to_wg?: number;
+  distance_to_wg: number;
   /** Hops to frontline of lattice links. -1 if there is no valid path to a contested region. */
-  distance_to_front?: number;
+  distance_to_front: number;
 }
 
 /**

@@ -5,6 +5,7 @@ import type { RegionID } from '@/types/common';
 import { world_to_latLng } from '@/utilities/coordinates';
 import { zoneUtils } from '@/utilities/zone_utils';
 import { HexGeometry } from '@/utilities/hexagons';
+import type { StyleEvaluationResult } from '@/utilities/style_rules.ts';
 
 interface RegionPolygon {
   points: L.LatLng[];
@@ -14,7 +15,7 @@ interface RegionPolygon {
 }
 
 export function useRegionPolygons(
-  regionStyles?: Ref<Map<RegionKey, Partial<L.PolylineOptions>>>
+  regionStyles?: Ref<Map<RegionKey, StyleEvaluationResult>>
 ) {
   // Default style for regions without territory data
   const unknownRegionStyle: L.PolylineOptions = {
@@ -45,15 +46,13 @@ export function useRegionPolygons(
   /**
    * Apply styles from the analysis pipeline to regions
    */
-  const applyRegionStyles = (
-    styles: Map<RegionKey, Partial<L.PolylineOptions>>
-  ) => {
+  const applyRegionStyles = (styles: Map<RegionKey, StyleEvaluationResult>) => {
     styles.forEach((style, regionKey) => {
       const region = regionPolygons.get(regionKey);
 
       if (region) {
         // Replace the entire style object to ensure reactivity
-        region.style = { ...style };
+        region.style = { ...style.result };
       }
     });
   };

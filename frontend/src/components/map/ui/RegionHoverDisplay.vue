@@ -64,7 +64,13 @@
             Region Style:
           </div>
           <pre class="style-json">{{
-            JSON.stringify(hoveredRegionStyle, null, 2)
+            JSON.stringify(hoveredRegionStyle.result, null, 2)
+          }}</pre>
+          <div class="text-caption text-medium-emphasis mb-1">
+            Rules application info:
+          </div>
+          <pre class="style-json">{{
+            JSON.stringify(hoveredRegionStyle.evals, null, 2)
           }}</pre>
         </div>
       </div>
@@ -133,7 +139,8 @@ const controllingFaction = computed(() => {
     return null;
   }
   return (
-    territorySnapshot.value.region_ownership[currentHoveredRegion.value] || null
+    territorySnapshot.value.region_ownership.get(currentHoveredRegion.value) ||
+    null
   );
 });
 

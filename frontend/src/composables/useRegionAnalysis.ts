@@ -5,9 +5,9 @@ import type { RegionState, TerritorySnapshot } from '@/types/territory';
 import type { Zone, RegionKey } from '@/types/zone_types';
 import type { RegionID } from '@/types/common';
 import { zoneUtils } from '@/utilities/zone_utils';
-import type L from 'leaflet';
 import { useAppState } from '@/composables/useAppState';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
+import type { StyleEvaluationResult } from '@/utilities/style_rules.ts';
 
 /**
  * Composable for region analysis and styling coordination
@@ -50,27 +50,25 @@ export function useRegionAnalysis(
    *
    * Automatically recalculates when region states change
    */
-  const regionStyles = computed<Map<RegionKey, Partial<L.PolylineOptions>>>(
-    () => {
-      if (regionStates.value.size === 0) {
-        return new Map();
-      }
-
-      const styles = new Map<RegionKey, Partial<L.PolylineOptions>>();
-
-      regionStates.value.forEach((state, regionId) => {
-        const style = styleCalculator.calculateRegionStyle(
-          state,
-          playerFaction.value,
-          mapDisplaySettings.value
-        );
-        const regionKey = zoneUtils.getRegionKey(regionId);
-        styles.set(regionKey, style);
-      });
-
-      return styles;
+  const regionStyles = computed<Map<RegionKey, StyleEvaluationResult>>(() => {
+    if (regionStates.value.size === 0) {
+      return new Map();
     }
-  );
+
+    const styles = new Map<RegionKey, StyleEvaluationResult>();
+
+    regionStates.value.forEach((state, regionId) => {
+      const evaluationResult = styleCalculator.calculateRegionStyle(
+        state,
+        playerFaction.value,
+        mapDisplaySettings.value
+      );
+      const regionKey = zoneUtils.getRegionKey(regionId);
+      styles.set(regionKey, evaluationResult);
+    });
+
+    return styles;
+  });
 
   /**
    * Get style for a specific region

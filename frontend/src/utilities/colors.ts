@@ -1,13 +1,20 @@
-// Census gives these packed int representations instead of hex strings
 import { Faction } from '@/types/common';
 
-export const FactionColor = new Map<Faction, string>([
-  [Faction.NONE, unpackIntToHex(7500402)],
-  [Faction.VS, unpackIntToHex(4460130)],
-  [Faction.NC, unpackIntToHex(19328)],
-  [Faction.TR, unpackIntToHex(10357519)],
-  [Faction.NSO, unpackIntToHex(5662067)],
-]);
+// Census gives these packed int representations instead of hex strings
+// export const FactionColor = new Map<Faction, string>([
+//   [Faction.NONE, unpackIntToHex(7500402)],
+//   [Faction.VS, unpackIntToHex(4460130)],
+//   [Faction.NC, unpackIntToHex(19328)],
+//   [Faction.TR, unpackIntToHex(10357519)],
+//   [Faction.NSO, unpackIntToHex(5662067)],
+// ]);
+export const FactionColor: Record<Faction, string> = {
+  [Faction.NONE]: '#727272',
+  [Faction.VS]: '#440e62',
+  [Faction.NC]: '#004b80',
+  [Faction.TR]: '#9e0b0f',
+  [Faction.NSO]: '#566573',
+};
 
 /**
  * Convert hex color to HSL color space
@@ -203,4 +210,72 @@ export function desaturateColor(hex: string, amount: number): string {
  */
 export function unpackIntToHex(packed: number): string {
   return '#' + packed.toString(16).padStart(6, '0');
+}
+
+export type InterpolationCurve = 'linear' | 'easeIn' | 'easeOut' | 'easeInOut';
+export type InterpolationSettings = {
+  curve: InterpolationCurve;
+  start: number;
+  end: number;
+};
+
+/**
+ * Interpolates using InterpolationSettings object
+ *
+ * @param settings Settings containing curve, min, and max values
+ * @param t Progress from 0.0 to 1.0
+ * @returns Interpolated value
+ */
+export function interpolate(settings: InterpolationSettings, t: number): number;
+
+export function interpolate(
+  startOrSettings: number | InterpolationSettings,
+  endOrT: number,
+  t?: number,
+  curve: InterpolationCurve = 'linear'
+): number {
+  let start: number;
+  let end: number;
+  let actualT: number;
+  let actualCurve: InterpolationCurve;
+
+  if (typeof startOrSettings === 'object') {
+    // Using InterpolationSettings overload
+    start = startOrSettings.start;
+    end = startOrSettings.end;
+    actualT = endOrT;
+    actualCurve = startOrSettings.curve;
+  } else {
+    // Using individual parameters overload
+    start = startOrSettings;
+    end = endOrT;
+    actualT = t!;
+    actualCurve = curve;
+  }
+
+  // Clamp t to [0, 1]
+  actualT = Math.max(0, Math.min(1, actualT));
+
+  // Apply curve transformation
+  let curvedT: number;
+  switch (actualCurve) {
+    case 'easeIn':
+      curvedT = actualT * actualT; // Quadratic ease in
+      break;
+    case 'easeOut':
+      curvedT = 1 - (1 - actualT) * (1 - actualT); // Quadratic ease out
+      break;
+    case 'easeInOut':
+      curvedT =
+        actualT < 0.5
+          ? 2 * actualT * actualT
+          : 1 - 2 * (1 - actualT) * (1 - actualT); // Quadratic ease in-out
+      break;
+    case 'linear':
+    default:
+      curvedT = actualT;
+      break;
+  }
+
+  return start + (end - start) * curvedT;
 }

@@ -1,12 +1,13 @@
-import type { PolylineOptions } from 'leaflet';
 import { Faction } from '@/types/common';
-import {
-  adjustColorLightnessSaturation,
-  FactionColor,
-} from '@/utilities/colors';
-import { RegionPane } from '@/utilities/leaflet_utils';
+import { FactionColor } from '@/utilities/colors';
 import type { RegionState } from '@/types/territory';
 import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings';
+import {
+  type StyleContext,
+  type StyleEvaluationResult,
+  StyleRuleSet,
+} from '@/utilities/style_rules';
+import type { PolylineOptions } from 'leaflet';
 
 /**
  * Region style calculator that converts region states into visual properties
@@ -18,162 +19,37 @@ import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings';
 export class RegionStyleCalculator {
   /**
    * Convert a region state to Leaflet polygon styling options
-   *
-   * Maps region control states to faction colors:
-   * - VS: Purple/Teal (#441c7a)
-   * - NC: Blue (#004bad)
-   * - TR: Red (#9d2621)
-   * - NSO: Gray (#565851)
-   * - none: Light gray with low opacity
-   * - unknown: Dark gray with dashed border
-   *
+   *   *
    * @param regionState The strategic state of the region
    * @param playerFaction Faction POV of user
-   * @param mapSettings
+   * @param mapSettings Global map settings
    * @returns Leaflet PolylineOptions for styling the region polygon
    */
   calculateRegionStyle(
     regionState: RegionState,
     playerFaction: Faction | undefined,
     mapSettings: MapDisplaySettings
-  ): Partial<PolylineOptions> {
-    let style = this.calculateBaseStyle(
-      regionState,
-      mapSettings,
-      playerFaction
+  ): StyleEvaluationResult {
+    const context: StyleContext = {
+      playerFaction: playerFaction ?? Faction.NONE,
+      mapSettings: mapSettings,
+      regionState: regionState,
+      factionColor: FactionColor[regionState.owning_faction_id] ?? '#ff00ff', // Default to magenta to indicate error
+    };
+    const data: Partial<PolylineOptions> = {};
+
+    return StyleRuleSet.evaluate(
+      [
+        'default-region-style',
+        'inactive-region',
+        'active-region',
+        'fade-with-distance-from-front',
+        'player-can-capture-region',
+        'highlight-steals',
+        'outline-cutoff-region',
+      ],
+      context,
+      data
     );
-
-    style = this.applyDistanceFading(style, regionState);
-    style = this.applyUserPreferences(style, mapSettings);
-    return style;
-  }
-
-  private applyDistanceFading(
-    style: Partial<PolylineOptions>,
-    _regionState: RegionState
-  ): Partial<PolylineOptions> {
-    // TODO: Implement distance-based fading
-    // For now, just return unchanged
-    return style;
-  }
-
-  private applyUserPreferences(
-    style: Partial<PolylineOptions>,
-    mapSettings: MapDisplaySettings
-  ): Partial<PolylineOptions> {
-    if (!mapSettings.showRegionBorders) {
-      return { ...style, opacity: 0.0 };
-    }
-    return style;
-  }
-
-  private calculateBaseStyle(
-    regionState: RegionState,
-    mapSettings: MapDisplaySettings,
-    playerFaction: Faction | undefined
-  ): Partial<PolylineOptions> {
-    let weight = 1;
-    let opacity = 0.7;
-    let fillOpacity = 0.6;
-    let pane: RegionPane;
-
-    const faction_color: string =
-      FactionColor.get(regionState.owning_faction_id) || '#ff00ff';
-    let border_color = '#292929';
-    let fillColor: string = FactionColor.get(Faction.NONE) || '#ff00ff';
-    // 3-way fights can be "stolen" if one faction intervenes when the timer
-    // is low, taking it from the other attacker.
-    if (regionState.can_steal && mapSettings.highlightSteals) {
-      fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
-      fillOpacity = 0.8;
-      border_color = '#2eff00';
-      pane = RegionPane.PRIORITY;
-      opacity = 1.0;
-      weight = 4;
-    } else if (regionState.can_capture) {
-      if (regionState.relevant_to_player) {
-        // Player's faction is involved in the region - brighter
-        fillColor = adjustColorLightnessSaturation(faction_color, 0.5, 1);
-        fillOpacity = 0.8;
-        opacity = 1.0;
-        pane = RegionPane.FRONTLINE;
-        border_color = '#000000';
-      } else {
-        // Player's faction is not involved in the region - dimmer
-        fillColor = adjustColorLightnessSaturation(faction_color, 0.0, 0);
-        fillOpacity = 0.8;
-        opacity = 0.5;
-        pane = RegionPane.BASE;
-      }
-    } else if (regionState.is_active) {
-      // Controlled by a faction but not available to attack
-      const activeRegionStyle = this.calculateActiveRegionStyle(
-        regionState.owning_faction_id,
-        playerFaction,
-        faction_color
-      );
-      opacity = activeRegionStyle.opacity;
-      pane = activeRegionStyle.pane;
-      fillOpacity = activeRegionStyle.fillOpacity;
-      fillColor = activeRegionStyle.fillColor;
-    } else {
-      // Not controlled by any faction and unavailable for capture
-      pane = RegionPane.INACTIVE;
-      opacity = 0.9;
-      fillOpacity = 0.75;
-      fillColor = adjustColorLightnessSaturation(faction_color, -0.5, 0);
-    }
-    return {
-      weight,
-      opacity,
-      fillOpacity,
-      pane,
-      color: border_color,
-      fillColor,
-    };
-  }
-
-  private calculateActiveRegionStyle(
-    owningFactionId: Faction,
-    playerFaction: Faction | undefined,
-    factionColor: string
-  ) {
-    const PLAYER_OWNED_LIGHTNESS = -0.25;
-    const ENEMY_LIGHTNESS = -0.7;
-    const PLAYER_OWNED_SATURATION = 0.0;
-    const ENEMY_SATURATION = 0.2;
-    const NEUTRAL_SATURATION = 0.0;
-
-    let lightnessAdjustment: number;
-    let saturationAdjustment: number;
-    let fillOpacity: number;
-
-    if (owningFactionId === playerFaction) {
-      // Player's own faction - brighter and more saturated
-      lightnessAdjustment = PLAYER_OWNED_LIGHTNESS;
-      saturationAdjustment = PLAYER_OWNED_SATURATION;
-      fillOpacity = 0.65;
-    } else if (playerFaction === undefined || playerFaction === Faction.NONE) {
-      // Neutral perspective - desaturated
-      lightnessAdjustment = ENEMY_LIGHTNESS;
-      saturationAdjustment = NEUTRAL_SATURATION;
-      fillOpacity = 0.6;
-    } else {
-      // Enemy faction - darker but slightly saturated
-      lightnessAdjustment = ENEMY_LIGHTNESS;
-      saturationAdjustment = ENEMY_SATURATION;
-      fillOpacity = 0.5;
-    }
-
-    return {
-      opacity: 1.0,
-      pane: RegionPane.BASE,
-      fillOpacity,
-      fillColor: adjustColorLightnessSaturation(
-        factionColor,
-        lightnessAdjustment,
-        saturationAdjustment
-      ),
-    };
   }
 }

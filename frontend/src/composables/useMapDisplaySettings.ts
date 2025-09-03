@@ -10,6 +10,7 @@ export interface MapDisplaySettings {
   autoRefreshEnabled: boolean;
   autoRefreshInterval: number; // in seconds
   highlightSteals: boolean;
+  fadeDistantRegions: boolean;
 }
 
 const defaultSettings: MapDisplaySettings = {
@@ -21,6 +22,7 @@ const defaultSettings: MapDisplaySettings = {
   autoRefreshEnabled: true,
   autoRefreshInterval: 10,
   highlightSteals: true,
+  fadeDistantRegions: true,
 };
 
 // Singleton state
