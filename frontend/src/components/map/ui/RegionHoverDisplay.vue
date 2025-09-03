@@ -52,6 +52,14 @@
         >
           Inactive
         </v-chip>
+        <v-chip
+          v-if="displayedRegionState.distance_to_wg === -1"
+          color="error"
+          size="x-small"
+          class="mr-1 mb-1"
+        >
+          Cut Off
+        </v-chip>
       </div>
 
       <!-- Debug info section with scrollable container -->
