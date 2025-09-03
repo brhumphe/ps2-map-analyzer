@@ -43,7 +43,7 @@ export class RegionStyleCalculator {
       regionState: regionState,
       factionColor: FactionColor[regionState.owning_faction_id] ?? '#ff00ff',
     };
-    const data = {};
+    const data: Partial<L.PolylineOptions> = {};
 
     return StyleRuleSet.evaluate(
       [
@@ -52,6 +52,7 @@ export class RegionStyleCalculator {
         'active-region',
         'fade-with-distance-from-front',
         'player-can-capture-region',
+        'highlight-steals',
         'outline-cutoff-region',
       ],
       context,
