@@ -53,36 +53,41 @@
           Inactive
         </v-chip>
       </div>
-      <div v-if="showRegionDebugInfo">
-        <div class="text-subtitle-2 text-high-emphasis mb-1">
-          Facility ID: {{ displayedRegionInfo.facility_id }}<br />
-          Facility Type ID: {{ displayedRegionInfo.facility_type_id }}<br />
-          Region ID: {{ displayedRegionInfo.map_region_id }}
-        </div>
-        <!-- State information as JSON -->
-        <div v-if="displayedRegionState" class="mt-2">
-          <div class="text-caption text-medium-emphasis mb-1">
-            Region State:
-          </div>
-          <pre class="style-json">{{
-            JSON.stringify(displayedRegionState, null, 2)
-          }}</pre>
-        </div>
 
-        <!-- Style information as JSON -->
-        <div v-if="displayedRegionStyle" class="mt-2">
-          <div class="text-caption text-medium-emphasis mb-1">
-            Region Style:
+      <!-- Debug info section with scrollable container -->
+      <div v-if="showRegionDebugInfo" class="debug-section">
+        <div class="debug-scroll-container">
+          <div class="text-subtitle-2 text-high-emphasis mb-1">
+            Facility ID: {{ displayedRegionInfo.facility_id }}<br />
+            Facility Type ID: {{ displayedRegionInfo.facility_type_id }}<br />
+            Region ID: {{ displayedRegionInfo.map_region_id }}
           </div>
-          <pre class="style-json">{{
-            JSON.stringify(displayedRegionStyle.result, null, 2)
-          }}</pre>
-          <div class="text-caption text-medium-emphasis mb-1">
-            Rules application info:
+
+          <!-- State information as JSON -->
+          <div v-if="displayedRegionState" class="mt-2">
+            <div class="text-caption text-medium-emphasis mb-1">
+              Region State:
+            </div>
+            <pre class="style-json">{{
+              JSON.stringify(displayedRegionState, null, 2)
+            }}</pre>
           </div>
-          <pre class="style-json">{{
-            JSON.stringify(displayedRegionStyle.evals, null, 2)
-          }}</pre>
+
+          <!-- Style information as JSON -->
+          <div v-if="displayedRegionStyle" class="mt-2">
+            <div class="text-caption text-medium-emphasis mb-1">
+              Region Style:
+            </div>
+            <pre class="style-json">{{
+              JSON.stringify(displayedRegionStyle.result, null, 2)
+            }}</pre>
+            <div class="text-caption text-medium-emphasis mb-1">
+              Rules application info:
+            </div>
+            <pre class="style-json">{{
+              JSON.stringify(displayedRegionStyle.evals, null, 2)
+            }}</pre>
+          </div>
         </div>
       </div>
     </v-card-text>
@@ -214,8 +219,46 @@ const factionColor = computed(() => {
   top: 80px;
   right: 16px;
   min-width: 250px;
+  max-width: 400px;
   z-index: 1000;
-  pointer-events: none;
+  /* Enable pointer events for the entire display */
+  pointer-events: auto;
+  transition: border-color 0.3s ease;
+}
+
+.region-selected {
+  border: 2px solid #1976d2;
+}
+
+.debug-section {
+  /* Ensure debug section also captures pointer events */
+  pointer-events: auto;
+}
+
+.debug-scroll-container {
+  max-height: 400px;
+  overflow-y: auto;
+  /* Ensure scrolling works and captures pointer events */
+  pointer-events: auto;
+}
+
+/* Custom scrollbar styling for better visibility */
+.debug-scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.debug-scroll-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.debug-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.debug-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .style-json {
@@ -228,5 +271,7 @@ const factionColor = computed(() => {
   overflow-x: auto;
   white-space: pre;
   font-family: 'Courier New', monospace;
+  /* Ensure JSON blocks also capture pointer events */
+  pointer-events: auto;
 }
 </style>
