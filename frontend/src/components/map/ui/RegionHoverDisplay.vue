@@ -240,8 +240,6 @@ const factionColor = computed(() => {
   right: 16px;
   width: 400px; /* Fixed width instead of min/max */
   z-index: 1000;
-  /* Enable pointer events for the entire display */
-  pointer-events: auto;
   transition: border-color 0.3s ease;
 }
 
@@ -251,20 +249,11 @@ const factionColor = computed(() => {
 
 .debug-toggle {
   margin-left: 0;
-  /* Ensure the toggle can receive pointer events */
-  pointer-events: auto;
-}
-
-.debug-section {
-  /* Ensure debug section also captures pointer events */
-  pointer-events: auto;
 }
 
 .debug-scroll-container {
   max-height: 400px;
   overflow-y: auto;
-  /* Ensure scrolling works and captures pointer events */
-  pointer-events: auto;
 }
 
 /* Custom scrollbar styling for better visibility */
@@ -296,7 +285,5 @@ const factionColor = computed(() => {
   overflow-x: auto;
   white-space: pre;
   font-family: 'Courier New', monospace;
-  /* Ensure JSON blocks also capture pointer events */
-  pointer-events: auto;
 }
 </style>

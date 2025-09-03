@@ -212,6 +212,11 @@ watch(
 
       // Now switch continent
       await switchContinent(newContinent);
+
+      // Re-add the map interaction handler after continent switch
+      if (map.value) {
+        addMapInteractionHandler(map.value, handleMapClick);
+      }
     }
   }
 );
