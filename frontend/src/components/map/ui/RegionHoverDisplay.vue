@@ -62,6 +62,18 @@
         </v-chip>
       </div>
 
+      <!-- Debug Toggle -->
+      <div class="mt-2">
+        <v-switch
+          v-model="mapDisplaySettings['showRegionDebugInfo']"
+          label="Show Debug Info"
+          color="primary"
+          hide-details
+          density="compact"
+          class="debug-toggle"
+        ></v-switch>
+      </div>
+
       <!-- Debug info section with scrollable container -->
       <div v-if="showRegionDebugInfo" class="debug-section">
         <div class="debug-scroll-container">
@@ -117,7 +129,7 @@ const { currentHoveredRegion } = useRegionHover();
 const { currentSelectedRegion } = useRegionSelection();
 const { territorySnapshot } = useTerritoryData();
 const { currentZone } = useLeafletMap();
-const { showRegionDebugInfo } = useMapDisplaySettings();
+const { showRegionDebugInfo, mapDisplaySettings } = useMapDisplaySettings();
 
 // Add region analysis for style and tactical information
 const { getRegionStyle, getRegionState } = useRegionAnalysis(
@@ -226,8 +238,7 @@ const factionColor = computed(() => {
   position: fixed;
   top: 80px;
   right: 16px;
-  min-width: 250px;
-  max-width: 400px;
+  width: 400px; /* Fixed width instead of min/max */
   z-index: 1000;
   /* Enable pointer events for the entire display */
   pointer-events: auto;
@@ -236,6 +247,12 @@ const factionColor = computed(() => {
 
 .region-selected {
   border: 2px solid #1976d2;
+}
+
+.debug-toggle {
+  margin-left: 0;
+  /* Ensure the toggle can receive pointer events */
+  pointer-events: auto;
 }
 
 .debug-section {
