@@ -227,13 +227,21 @@ const fadeFromFront: StyleRule = {
       playerFaction !== undefined &&
       regionState.owning_faction_id === playerFaction;
 
+    // Normalize distance: treat negative/unknown distances as 0
+    // Negative distances should cause applicable to return false
+    const normalizedDistance = Math.max(distance, 0);
+
     // Calculate fade intensity with faction-based multiplier
     // Non-player factions fade faster (higher effective distance)
     const effectiveDistance = isPlayerFaction
-      ? distance
-      : distance * NON_PLAYER_FADE_MULTIPLIER;
+      ? normalizedDistance
+      : normalizedDistance * NON_PLAYER_FADE_MULTIPLIER;
 
-    const fadeIntensity = Math.min(effectiveDistance / FADE_MAX_DISTANCE, 1.0);
+    // Clamp fadeIntensity to [0, 1] range
+    const fadeIntensity = Math.min(
+      Math.max(effectiveDistance / FADE_MAX_DISTANCE, 0),
+      1
+    );
 
     // Select settings based on faction
     const brightnessSettings = isPlayerFaction
