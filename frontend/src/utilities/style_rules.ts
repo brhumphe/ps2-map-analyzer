@@ -15,7 +15,7 @@ import {
 } from '@/utilities/colors.ts';
 import { RegionPane } from '@/utilities/leaflet_utils.ts';
 
-type StyleContext = {
+export type StyleContext = {
   playerFaction: Faction;
   mapSettings: MapDisplaySettings;
   regionState: RegionState;

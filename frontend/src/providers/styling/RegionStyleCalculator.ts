@@ -3,6 +3,7 @@ import { FactionColor } from '@/utilities/colors';
 import type { RegionState } from '@/types/territory';
 import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings';
 import {
+  type StyleContext,
   type StyleEvaluationResult,
   StyleRuleSet,
 } from '@/utilities/style_rules.ts';
@@ -36,7 +37,7 @@ export class RegionStyleCalculator {
     playerFaction: Faction | undefined,
     mapSettings: MapDisplaySettings
   ): StyleEvaluationResult {
-    const context = {
+    const context: StyleContext = {
       playerFaction: playerFaction ?? Faction.NONE,
       mapSettings: mapSettings,
       regionState: regionState,
