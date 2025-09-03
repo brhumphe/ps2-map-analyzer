@@ -26,16 +26,16 @@ export type Rule<TContext, TData> = {
 };
 
 export class RuleSet<TContext, TData> {
-  rules: Record<RuleId, Rule<TContext, TData>> = {};
+  private readonly rules = new Map<RuleId, Rule<TContext, TData>>();
 
   constructor(rules: Rule<TContext, TData>[]) {
     for (const rule of rules) {
-      if (rule.id in this.rules) {
+      if (this.rules.has(rule.id)) {
         throw new Error(
           `Duplicate rule ID detected: '${rule.id}'. Each rule must have a unique identifier.`
         );
       }
-      this.rules[rule.id] = rule;
+      this.rules.set(rule.id, rule);
     }
   }
 
@@ -47,7 +47,7 @@ export class RuleSet<TContext, TData> {
     const evals: RuleEvaluation<TData>[] = [];
     let result: Partial<TData> = { ...init };
     for (const id of ids) {
-      const rule = this.rules[id];
+      const rule = this.rules.get(id);
       if (!rule) {
         console.warn(`Rule ${id} not found`);
         continue;
