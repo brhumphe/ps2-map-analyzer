@@ -50,7 +50,7 @@ export function drawRegion(
       ...options,
     }).addTo(leafletMap);
   } catch (e) {
-    console.log(e, {
+    console.error(e, {
       zoneID: zone.zone_id,
       regionID: regionId,
       hexCoordinates: hexCoordinates,
@@ -250,4 +250,27 @@ export function createCustomPanes(map: L.Map) {
   // Keep lattice above regions
   map.createPane(LatticePane.BASE).style.zIndex = '500';
   map.createPane(LatticePane.FRONTLINE).style.zIndex = '550';
+}
+
+/**
+ * Sets up global map interaction handlers for region selection
+ * @param map - The Leaflet map instance
+ * @param onMapClick - Callback function to handle map background clicks
+ */
+export function addMapInteractionHandler(
+  map: L.Map,
+  onMapClick: () => void
+): void {
+  // Handle clicks on map background (not on polygons) to deselect regions
+  // Leaflet's event propagation means if we click on a polygon, this won't fire
+  // because the polygon's click handler will stop propagation
+  map.on('click', onMapClick);
+}
+
+/**
+ * Removes global map interaction handlers
+ * @param map - The Leaflet map instance
+ */
+export function removeMapInteractionHandlers(map: L.Map): void {
+  map.off('click');
 }

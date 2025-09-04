@@ -73,7 +73,10 @@ new Map([
 ]);
 
 const fetchActiveContinents = async () => {
-  console.log('Fetching active continents');
+  if (import.meta.env.DEV) {
+    console.debug('Fetching active continents');
+  }
+
   if (isLoading.value) return;
 
   isLoading.value = true;

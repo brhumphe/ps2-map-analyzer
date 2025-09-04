@@ -58,12 +58,17 @@ import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
 import { useLinkAnalysis } from '@/composables/useLinkAnalysis';
 import { useRegionMarkers } from '@/composables/useRegionMarkers';
+import { useRegionSelection } from '@/composables/useRegionSelection';
 import PolylineEntity from '@/components/map/PolylineEntity.vue';
 import PolygonEntity from '@/components/map/PolygonEntity.vue';
 import MarkerEntity from '@/components/map/MarkerEntity.vue';
 import DismissibleLoadingOverlay from '@/components/map/ui/DismissibleLoadingOverlay.vue';
 import * as L from 'leaflet';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
+import {
+  addMapInteractionHandler,
+  removeMapInteractionHandlers,
+} from '@/utilities/leaflet_utils';
 
 const { selectedWorld, selectedContinent } = useAppState();
 
@@ -113,6 +118,9 @@ const { regionMarkers, initializeRegionMarkers, clearMarkers } =
 // Use map display settings
 const { mapDisplaySettings } = useMapDisplaySettings();
 
+// Use region selection handlers
+const { handleMapClick } = useRegionSelection();
+
 // Computed property to determine if map is being rebuilt
 const isMapRebuilding = computed(() => {
   // Always show loading during initial map setup
@@ -137,11 +145,21 @@ const isMapRebuilding = computed(() => {
 const rebuildMap = async () => {
   if (!mapContainer.value) return;
 
+  // Remove existing event handlers if map exists
+  if (map.value) {
+    removeMapInteractionHandlers(map.value);
+  }
+
   // Destroy existing map completely
   cleanupMap();
 
   // Create fresh map with selected continent
   await initializeMap(mapContainer.value, selectedContinent.value);
+
+  // Setup event handlers for the new map
+  if (map.value) {
+    addMapInteractionHandler(map.value, handleMapClick);
+  }
 
   // Fetch territory data using current app state
   await refreshTerritoryData();
@@ -194,6 +212,11 @@ watch(
 
       // Now switch continent
       await switchContinent(newContinent);
+
+      // Re-add the map interaction handler after continent switch
+      if (map.value) {
+        addMapInteractionHandler(map.value, handleMapClick);
+      }
     }
   }
 );
@@ -236,6 +259,9 @@ onUnmounted(() => {
   // Clean up map elements first, then the map itself
   // This ensures proper cleanup order and prevents stale references
   try {
+    if (map.value) {
+      removeMapInteractionHandlers(map.value);
+    }
     clearMarkers();
     clearLinks();
     clearRegions();
