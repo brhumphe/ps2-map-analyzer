@@ -157,9 +157,11 @@ export function useTerritoryData() {
 
       // If this was an auto-refresh, don't clear existing data
       if (isAutoRefresh && territorySnapshot.value) {
-        console.log(
-          'Keeping existing territory data after auto-refresh failure'
-        );
+        if (import.meta.env.DEV) {
+          console.debug(
+            'Keeping existing territory data after auto-refresh failure'
+          );
+        }
       }
     } finally {
       if (!isAutoRefresh) {

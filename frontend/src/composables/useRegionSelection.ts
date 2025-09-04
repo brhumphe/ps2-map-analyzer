@@ -24,7 +24,9 @@ export function useRegionSelection() {
    * @param regionId The region ID being selected, or null to clear selection
    */
   const setSelectedRegion = (regionId: RegionID | null): void => {
-    console.log(`Setting selected region to ${regionId}`);
+    if (import.meta.env.DEV) {
+      console.debug('Setting selected region:', regionId);
+    }
     selectedRegion.value = regionId;
   };
 
@@ -32,7 +34,9 @@ export function useRegionSelection() {
    * Clear the selection state
    */
   const clearSelectedRegion = (): void => {
-    console.log('Clearing selected region');
+    if (import.meta.env.DEV) {
+      console.debug('Clearing selected region');
+    }
     selectedRegion.value = null;
   };
 
@@ -43,7 +47,9 @@ export function useRegionSelection() {
    * @param regionId The region ID to toggle selection for
    */
   const toggleRegionSelection = (regionId: RegionID): void => {
-    console.log(`Toggling selection for region ${regionId}`);
+    if (import.meta.env.DEV) {
+      console.debug(`Toggling selection for region ${regionId}`);
+    }
     if (selectedRegion.value === regionId) {
       // Deselect if clicking on already selected region
       selectedRegion.value = null;

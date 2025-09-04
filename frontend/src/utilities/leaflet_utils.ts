@@ -50,7 +50,7 @@ export function drawRegion(
       ...options,
     }).addTo(leafletMap);
   } catch (e) {
-    console.log(e, {
+    console.error(e, {
       zoneID: zone.zone_id,
       regionID: regionId,
       hexCoordinates: hexCoordinates,
