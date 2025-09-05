@@ -266,10 +266,10 @@ export function findWarpgateConnectedRegions(
   return wgDistances;
 }
 
-export function findDistancesFromFrontline(
+export function findFrontlineRegions(
   graph: PS2Graph
-): Map<RegionID, number> {
-  const frontlineRegions: Set<RegionID> = new Set();
+): Map<Faction, Set<RegionID>> {
+  const byFaction = new Map<Faction, Set<RegionID>>();
   for (const [_, edge] of graph.edges) {
     const factionA = graph.nodes.get(edge.from)?.owning_faction;
     const factionB = graph.nodes.get(edge.to)?.owning_faction;
@@ -280,13 +280,26 @@ export function findDistancesFromFrontline(
       factionB != Faction.NONE &&
       factionA !== factionB
     ) {
-      frontlineRegions.add(edge.from);
-      frontlineRegions.add(edge.to);
+      byFaction.set(
+        factionA,
+        (byFaction.get(factionA) ?? new Set()).add(edge.from)
+      );
+      byFaction.set(
+        factionB,
+        (byFaction.get(factionB) ?? new Set()).add(edge.to)
+      );
     }
   }
+  return byFaction;
+}
+
+export function findDistancesFromFrontline(
+  graph: PS2Graph
+): Map<RegionID, number> {
+  const frontlineRegions = findFrontlineRegions(graph);
   const frontlineDistances = new Map<RegionID, number>();
   const results: Map<RegionID, NodeDistanceResult> = findConnectedRegions(
-    [...frontlineRegions],
+    [...frontlineRegions.values()].flatMap((regions) => [...regions.values()]),
     graph
   );
   for (const [regionID, result] of results) {
