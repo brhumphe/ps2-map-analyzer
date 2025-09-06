@@ -8,6 +8,7 @@ import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
 import { useRegionHover } from '@/composables/useRegionHover';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useLeafletMap } from '@/composables/useLeafletMap';
+import { useAppState } from '@/composables/useAppState.ts';
 
 interface RegionMarker {
   position: L.LatLng;
@@ -24,6 +25,7 @@ export function useRegionMarkers() {
   const { currentZone } = useLeafletMap();
   const { getRegionState } = useRegionAnalysis(territorySnapshot, currentZone);
   const { currentHoveredRegion } = useRegionHover();
+  const { playerFaction } = useAppState();
 
   // Reactive collection of region marker data (leaflet objects handled in MarkerEntity component)
   const regionMarkers = reactive(new Map<RegionKey, RegionMarker>());
@@ -160,6 +162,12 @@ export function useRegionMarkers() {
 
   // Watch for region state changes and update visibility
   watch(getRegionState, updateMarkerVisibility, { deep: true });
+
+  watch(currentZone, updateMarkerVisibility);
+
+  watch(territorySnapshot, updateMarkerVisibility);
+
+  watch(playerFaction, updateMarkerVisibility);
 
   return {
     // State
