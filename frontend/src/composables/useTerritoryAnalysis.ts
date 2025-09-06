@@ -5,6 +5,7 @@ import {
   findDistancesFromFrontline,
   findFrontlineRegions,
   findWarpgateConnectedRegions,
+  type NodeDistanceResult,
   PS2Graph,
 } from '@/utilities/graph.ts';
 import { Faction, type RegionID } from '@/types/common.ts';
@@ -39,7 +40,10 @@ export function useTerritoryAnalysis(
     }
   });
 
-  const distancesToFrontline = computed<Map<RegionID, number> | null>(() => {
+  const distancesToFrontline = computed<Map<
+    RegionID,
+    NodeDistanceResult
+  > | null>(() => {
     if (graph.value) {
       return findDistancesFromFrontline(graph.value);
     } else {

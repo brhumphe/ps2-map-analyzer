@@ -168,13 +168,17 @@ export function multisourceBfs<TNodeResult, TVisitArgs>(
 }
 
 // TNodeResult
-type NodeDistanceResult = { distance: number };
+export type NodeDistanceResult = { distance: number; path: RegionID[] };
 // TVisitArgs
 type VisitDistanceArgs = {
   /** Distance of the node currently being visited */
   distance: number;
   /** Faction of the node previously visited. Should be the same as the current node's faction. */
   faction: Faction;
+  /** Path of the node currently being visited in order of discovery. This will be
+   * the nearest of the set of starting nodes, or if multiple starting nodes are the same distance,
+   * the first one encountered. Not necessarily deterministic which path is returned in the case of ties.*/
+  path: RegionID[];
 };
 
 /**
@@ -189,11 +193,12 @@ type VisitDistanceArgs = {
  * @param graph
  * @private
  */
-export function findConnectedRegions(
+export function findConnectedFriendlyRegions(
   startingRegions: RegionID[],
   graph: PS2Graph
 ): Map<RegionID, NodeDistanceResult> {
   const start: NodeQueueItem<VisitDistanceArgs>[] = [];
+  // Collect all starting nodes.
   for (const regionID of startingRegions) {
     const regionInfo = graph.nodes.get(regionID);
     const faction = regionInfo?.owning_faction;
@@ -203,7 +208,7 @@ export function findConnectedRegions(
     }
     start.push({
       id: regionID,
-      args: { distance: 0, faction: faction },
+      args: { distance: 0, faction: faction, path: [regionID] },
     });
   }
 
@@ -213,7 +218,10 @@ export function findConnectedRegions(
     graph: PS2Graph,
     _results: ReadonlyMap<RegionID, NodeDistanceResult>,
     _visited: Set<RegionID>
-  ) {
+  ): {
+    result: { distance: number; path: RegionID[] };
+    visitNext: NodeQueueItem<VisitDistanceArgs>[];
+  } {
     const regionInfo = graph.nodes.get(node);
     const faction = regionInfo?.owning_faction;
     // Follow links to friendly regions
@@ -226,13 +234,17 @@ export function findConnectedRegions(
         // be the one with the shortest distance of all starting nodes.
         visitNext.push({
           id: neighborID,
-          args: { distance: args.distance + 1, faction: faction },
+          args: {
+            distance: args.distance + 1,
+            faction: faction,
+            path: [...args.path, neighborID],
+          },
         });
       }
     }
 
     return {
-      result: { distance: args.distance },
+      result: { distance: args.distance, path: args.path },
       visitNext: visitNext,
     };
   }
@@ -256,10 +268,8 @@ export function findWarpgateConnectedRegions(
     return new Map<RegionID, number>();
   }
   const wgDistances = new Map<RegionID, number>();
-  const results: Map<RegionID, NodeDistanceResult> = findConnectedRegions(
-    warpgateRegions,
-    graph
-  );
+  const results: Map<RegionID, NodeDistanceResult> =
+    findConnectedFriendlyRegions(warpgateRegions, graph);
   for (const [regionID, result] of results) {
     wgDistances.set(regionID, result.distance);
   }
@@ -295,15 +305,18 @@ export function findFrontlineRegions(
 
 export function findDistancesFromFrontline(
   graph: PS2Graph
-): Map<RegionID, number> {
+): Map<RegionID, NodeDistanceResult> {
   const frontlineRegions = findFrontlineRegions(graph);
-  const frontlineDistances = new Map<RegionID, number>();
-  const results: Map<RegionID, NodeDistanceResult> = findConnectedRegions(
-    [...frontlineRegions.values()].flatMap((regions) => [...regions.values()]),
-    graph
-  );
+  const frontlineDistances = new Map<RegionID, NodeDistanceResult>();
+  const results: Map<RegionID, NodeDistanceResult> =
+    findConnectedFriendlyRegions(
+      [...frontlineRegions.values()].flatMap((regions) => [
+        ...regions.values(),
+      ]),
+      graph
+    );
   for (const [regionID, result] of results) {
-    frontlineDistances.set(regionID, result.distance);
+    frontlineDistances.set(regionID, result);
   }
   return frontlineDistances;
 }

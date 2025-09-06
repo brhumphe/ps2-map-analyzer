@@ -43,7 +43,7 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
       const state = {
         ...regionState,
         distance_to_wg: wg_conn.get(region.map_region_id) ?? -1,
-        distance_to_front: front_dist.get(region.map_region_id) ?? -1,
+        distance_to_front: front_dist.get(region.map_region_id)?.distance ?? -1,
       };
       regionStates.set(region.map_region_id, state);
     }
