@@ -50,4 +50,11 @@ export function useTerritoryAnalysis(
       return null;
     }
   });
+
+  return {
+    graph,
+    warpgateConnectedRegions,
+    frontlineRegions,
+    distancesToFrontline,
+  };
 }
