@@ -7,7 +7,7 @@ import type { RegionID } from '@/types/common';
 import { zoneUtils } from '@/utilities/zone_utils';
 import { useAppState } from '@/composables/useAppState';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
-import type { StyleEvaluationResult } from '@/utilities/style_rules.ts';
+import type { StyleEvaluationResult } from '@/providers/styling/RegionStyleRules.ts';
 
 /**
  * Composable for region analysis and styling coordination

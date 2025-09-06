@@ -158,8 +158,8 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
     }
 
     if (playerFaction === Faction.NONE) {
-      // If no faction selected, treat all capturable regions as relevant
-      return canCapture;
+      // If no faction selected, no regions are relevant
+      return false;
     } else if (playerFaction === owningFaction) {
       // Player's regions under threat are relevant
       return canCapture;

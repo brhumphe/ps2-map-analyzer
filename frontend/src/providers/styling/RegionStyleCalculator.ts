@@ -6,7 +6,7 @@ import {
   type StyleContext,
   type StyleEvaluationResult,
   StyleRuleSet,
-} from '@/utilities/style_rules';
+} from '@/providers/styling/RegionStyleRules.ts';
 import type { PolylineOptions } from 'leaflet';
 
 /**
