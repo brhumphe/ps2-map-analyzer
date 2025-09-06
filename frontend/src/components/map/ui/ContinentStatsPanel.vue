@@ -111,9 +111,9 @@
 </template>
 
 <script setup lang="ts">
-import { useTerritoryData } from '@/composables/useTerritoryData.ts';
-import { useContinentAnalysis } from '@/composables/useContinentAnalysis.ts';
-import { useLeafletMap } from '@/composables/useLeafletMap.ts';
+import { useTerritoryData } from '@/composables/useTerritoryData';
+import { useContinentAnalysis } from '@/composables/useContinentAnalysis';
+import { useLeafletMap } from '@/composables/useLeafletMap';
 
 // Use composables directly instead of props
 const { territorySnapshot } = useTerritoryData();

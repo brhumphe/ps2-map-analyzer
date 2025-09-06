@@ -1,19 +1,19 @@
-import { Faction } from '@/types/common.ts';
-import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
-import type { RegionState } from '@/types/territory.ts';
+import { Faction } from '@/types/common';
+import type { MapDisplaySettings } from '@/composables/useMapDisplaySettings';
+import type { RegionState } from '@/types/territory';
 import {
   type Rule,
   type RuleEvaluationResult,
   type RuleId,
   RuleSet,
-} from '@/types/rules.ts';
+} from '@/types/rules';
 import type { PolylineOptions } from 'leaflet';
 import {
   adjustColorLightnessSaturation,
   interpolate,
   type InterpolationSettings,
-} from '@/utilities/colors.ts';
-import { RegionPane } from '@/utilities/leaflet_utils.ts';
+} from '@/utilities/colors';
+import { RegionPane } from '@/utilities/leaflet_utils';
 
 export type StyleContext = {
   playerFaction: Faction;

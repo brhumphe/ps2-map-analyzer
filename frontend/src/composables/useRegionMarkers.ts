@@ -8,7 +8,7 @@ import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
 import { useRegionHover } from '@/composables/useRegionHover';
 import { useTerritoryData } from '@/composables/useTerritoryData';
 import { useLeafletMap } from '@/composables/useLeafletMap';
-import { useAppState } from '@/composables/useAppState.ts';
+import { useAppState } from '@/composables/useAppState';
 
 interface RegionMarker {
   position: L.LatLng;

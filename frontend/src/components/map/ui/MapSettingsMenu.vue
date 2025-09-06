@@ -80,8 +80,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
-import { useAppState } from '@/composables/useAppState.ts';
+import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
+import { useAppState } from '@/composables/useAppState';
 
 // Local state - just for menu open/closed
 const menu = ref(false);

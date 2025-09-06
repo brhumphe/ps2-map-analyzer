@@ -1,14 +1,14 @@
 import { computed, type Ref } from 'vue';
-import type { TerritorySnapshot } from '@/types/territory.ts';
-import type { Zone } from '@/types/zone_types.ts';
+import type { TerritorySnapshot } from '@/types/territory';
+import type { Zone } from '@/types/zone_types';
 import {
   findDistancesFromFrontline,
   findFrontlineRegions,
   findWarpgateConnectedRegions,
   type NodeDistanceResult,
   PS2Graph,
-} from '@/utilities/graph.ts';
-import { Faction, type RegionID } from '@/types/common.ts';
+} from '@/utilities/graph';
+import { Faction, type RegionID } from '@/types/common';
 
 export function useTerritoryAnalysis(
   territorySnapshot: Ref<TerritorySnapshot | null>,

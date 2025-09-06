@@ -64,7 +64,7 @@ import PolygonEntity from '@/components/map/PolygonEntity.vue';
 import MarkerEntity from '@/components/map/MarkerEntity.vue';
 import DismissibleLoadingOverlay from '@/components/map/ui/DismissibleLoadingOverlay.vue';
 import * as L from 'leaflet';
-import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
+import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 import {
   addMapInteractionHandler,
   removeMapInteractionHandlers,
