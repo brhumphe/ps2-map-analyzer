@@ -16,12 +16,18 @@ export const FactionColor: Record<Faction, string> = {
   [Faction.NSO]: '#566573',
 };
 
+export interface HSLColor {
+  h: number;
+  s: number;
+  l: number;
+}
+
 /**
  * Convert hex color to HSL color space
  * @param hex Hex color string (e.g. '#441c7a')
  * @returns Object with hue, saturation, and lightness
  */
-export function hexToHSL(hex: string): { h: number; s: number; l: number } {
+export function hexToHSL(hex: string): HSLColor {
   // Remove the # if present
   hex = hex.replace('#', '');
 

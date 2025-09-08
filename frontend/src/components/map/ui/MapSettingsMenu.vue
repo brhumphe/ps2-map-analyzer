@@ -7,7 +7,7 @@
         </v-btn>
       </template>
 
-      <v-card min-width="300">
+      <v-card min-width="300" max-width="400">
         <v-card-title class="text-h6"> Map Display Settings </v-card-title>
 
         <v-divider></v-divider>
@@ -29,7 +29,8 @@
         </v-list>
 
         <v-divider></v-divider>
-
+        <RuleParameterEditor />
+        <v-divider></v-divider>
         <!-- Development Settings Section -->
         <v-list density="compact">
           <v-list-subheader class="text-caption text-medium-emphasis">
@@ -82,6 +83,7 @@
 import { ref, computed } from 'vue';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 import { useAppState } from '@/composables/useAppState';
+import RuleParameterEditor from '@/components/map/ui/RuleParameterEditor.vue';
 
 // Local state - just for menu open/closed
 const menu = ref(false);

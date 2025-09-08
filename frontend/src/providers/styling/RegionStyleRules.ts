@@ -14,12 +14,17 @@ import {
   type InterpolationSettings,
 } from '@/utilities/colors';
 import { RegionPane } from '@/utilities/leaflet_utils';
+import type { RuleSchemas } from '@/providers/styling/RegionRuleParameters';
+import type { SchemaValues } from '@/types/RuleParameterSchema.ts';
 
 export type StyleContext = {
   playerFaction: Faction;
   mapSettings: MapDisplaySettings;
   regionState: RegionState;
   factionColor: string;
+  getParams<K extends keyof RuleSchemas>(
+    ruleId: K
+  ): SchemaValues<RuleSchemas[K]>;
 };
 
 /**
@@ -281,21 +286,34 @@ const outlineCutoffRegion: StyleRule = {
   id: 'outline-cutoff-region',
   applicable(context: StyleContext): boolean {
     const regionState = context.regionState;
+    const params = context.getParams<'outline-cutoff-region'>(
+      'outline-cutoff-region'
+    );
     return (
+      params.enabled &&
       regionState.distance_to_wg < 0 &&
       regionState.owning_faction_id !== Faction.NONE
     );
   },
   apply(
-    _context: StyleContext,
+    context: StyleContext,
     data: Partial<PolylineOptions>
   ): Partial<PolylineOptions> {
     const fillColor = data.fillColor ?? '#ff00ff';
+    const params = context.getParams<'outline-cutoff-region'>(
+      'outline-cutoff-region'
+    );
     return {
-      color: '#ffeb00',
-      weight: 5,
+      color: params.borderColor ?? '#ff00ff',
+      weight: params.borderWidth ?? 1,
       pane: RegionPane.PRIORITY,
-      fillColor: adjustColorLightnessSaturation(fillColor, -0.5, 0.5),
+      fillColor: adjustColorLightnessSaturation(
+        fillColor,
+        params.lightnessAdjustment,
+        params.saturationAdjustment
+      ),
+      opacity: params.borderOpacity ?? 1,
+      fillOpacity: params.fillOpacity ?? 0.5,
     };
   },
 };

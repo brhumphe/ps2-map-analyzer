@@ -8,6 +8,8 @@ import {
   StyleRuleSet,
 } from '@/providers/styling/RegionStyleRules';
 import type { PolylineOptions } from 'leaflet';
+import { useRuleParameters } from '@/composables/useRuleParameters.ts';
+import type { RuleSchemas } from '@/providers/styling/RegionRuleParameters.ts';
 
 /**
  * Region style calculator that converts region states into visual properties
@@ -17,6 +19,7 @@ import type { PolylineOptions } from 'leaflet';
  * between analysis (what does the data mean) and presentation (how should it look).
  */
 export class RegionStyleCalculator {
+  private ruleParams = useRuleParameters();
   /**
    * Convert a region state to Leaflet polygon styling options
    *   *
@@ -34,7 +37,10 @@ export class RegionStyleCalculator {
       playerFaction: playerFaction ?? Faction.NONE,
       mapSettings: mapSettings,
       regionState: regionState,
-      factionColor: FactionColor[regionState.owning_faction_id] ?? '#ff00ff', // Default to magenta to indicate error
+      factionColor: FactionColor[regionState.owning_faction_id] ?? '#ff00ff',
+      getParams: <K extends keyof RuleSchemas>(ruleId: K) => {
+        return this.ruleParams.getRuleParams(ruleId);
+      },
     };
     const data: Partial<PolylineOptions> = {};
 
