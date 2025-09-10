@@ -297,7 +297,7 @@ const outlineCutoffRegion: StyleRule = {
   },
   apply(
     context: StyleContext,
-    data: Partial<PolylineOptions>
+    _data: Partial<PolylineOptions>
   ): Partial<PolylineOptions> {
     const fillColor = context.factionColor ?? '#ff00ff';
     const params = context.getParams<'outline-cutoff-region'>(

@@ -7,6 +7,34 @@ import {
 } from '@/providers/styling/RegionRuleParameters';
 import type { SchemaValues, ParameterValue } from '@/types/RuleParameterSchema';
 
+// Simple deep merge utility to avoid adding lodash dependency
+function deepMerge<T extends Record<string, unknown>>(
+  target: T,
+  source: Record<string, unknown>
+): T {
+  const result = { ...target };
+
+  for (const key in source) {
+    if (
+      source[key] &&
+      typeof source[key] === 'object' &&
+      !Array.isArray(source[key])
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (result as any)[key] = deepMerge(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ((target as any)[key] as Record<string, unknown>) || {},
+        source[key] as Record<string, unknown>
+      );
+    } else if (source[key] !== undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (result as any)[key] = source[key];
+    }
+  }
+
+  return result as T;
+}
+
 // Storage for all rule parameters - use a more flexible type for the ref
 const ruleParameters = ref<Record<string, Record<string, unknown>>>({});
 
@@ -23,20 +51,30 @@ for (const [ruleId, schema] of Object.entries(ruleSchemas)) {
 const STORAGE_KEY = 'rule-parameters';
 
 // Load from localStorage
-try {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    Object.assign(ruleParameters.value, JSON.parse(stored));
+if (typeof window !== 'undefined' && window.localStorage) {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      Object.assign(ruleParameters.value, JSON.parse(stored));
+    }
+  } catch (error) {
+    console.warn('Failed to load rule parameters from localStorage:', error);
   }
-} catch (e) {
-  console.warn('Failed to load rule parameters:', e);
 }
 
 // Save on change
 watch(
   ruleParameters,
   (newParams) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newParams));
+    // Guard against SSR and test environments where localStorage isn't available
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newParams));
+      } catch (error) {
+        // Storage may fail due to privacy settings, quota limits, or other restrictions
+        console.warn('Failed to save rule parameters to localStorage:', error);
+      }
+    }
   },
   { deep: true }
 );
@@ -46,10 +84,13 @@ export function useRuleParameters() {
   function getRuleParams<K extends keyof RuleSchemas>(
     ruleId: K
   ): SchemaValues<RuleSchemas[K]> {
-    return (
-      (ruleParameters.value[ruleId] as SchemaValues<RuleSchemas[K]>) ||
-      getDefaults(ruleId)
-    );
+    const defaults = getDefaults(ruleId);
+    const stored = ruleParameters.value[ruleId] || {};
+
+    // Always merge defaults with stored values to ensure all fields are populated
+    const merged = deepMerge(defaults as Record<string, unknown>, stored);
+
+    return merged as SchemaValues<RuleSchemas[K]>;
   }
 
   // Update a single parameter with proper typing
