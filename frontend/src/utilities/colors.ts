@@ -122,6 +122,29 @@ export function setColorBrightness(color: string, brightness: number): string {
 }
 
 /**
+ * Set the absolute lightness and saturation of a hex color
+ * @param hex Hex color string (e.g. '#441c7a')
+ * @param lightness Absolute lightness value (0-1, where 0 is black, 1 is white)
+ * @param saturation Absolute saturation value (0-1, where 0 is grayscale, 1 is fully saturated)
+ * @returns Hex color string with specified lightness and saturation
+ */
+export function setColorLightnessSaturation(
+  hex: string,
+  lightness: number,
+  saturation: number
+): string {
+  // Clamp values to valid ranges
+  lightness = Math.min(1, Math.max(0, lightness));
+  saturation = Math.min(1, Math.max(0, saturation));
+
+  // Convert to HSL
+  const { h } = hexToHSL(hex);
+
+  // Use the provided absolute values directly
+  return hslToHex(h, saturation, lightness);
+}
+
+/**
  * Adjust the lightness and saturation of a hex color
  * @param hex Hex color string (e.g. '#441c7a')
  * @param lightnessAdjustment Amount to adjust lightness (-1 to 1, where -1 is black, 1 is white)

@@ -12,7 +12,7 @@ import {
   adjustColorLightnessSaturation,
   interpolate,
   type InterpolationCurve,
-  type InterpolationSettings,
+  setColorLightnessSaturation,
 } from '@/utilities/colors';
 import { RegionPane } from '@/utilities/leaflet_utils';
 import type { RuleSchemas } from '@/providers/styling/RegionRuleParameters';
@@ -235,7 +235,7 @@ function applyFrontlineFade<T>(
   const fillOpacity = interpolate(opacitySettings, fadeIntensity);
 
   // Apply color adjustments to base faction color
-  const adjustedFillColor = adjustColorLightnessSaturation(
+  const adjustedFillColor = setColorLightnessSaturation(
     context.factionColor,
     brightnessAdjustment,
     saturationAdjustment

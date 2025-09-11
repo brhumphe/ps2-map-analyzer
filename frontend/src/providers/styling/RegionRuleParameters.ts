@@ -114,36 +114,36 @@ export const fadePlayerFactionFromFrontSchema = {
 
   brightnessStart: {
     type: 'number',
-    defaultValue: 0.6,
-    label: 'Brightness Adjustment Start',
-    min: -1,
+    defaultValue: 0.63,
+    label: 'Brightness Start',
+    min: 0,
     max: 1,
     step: 0.01,
   } as NumberParameter,
 
   brightnessEnd: {
     type: 'number',
-    defaultValue: -0.25,
-    label: 'Brightness Adjustment End',
-    min: -1,
+    defaultValue: 0.18,
+    label: 'Brightness End',
+    min: 0,
     max: 1,
     step: 0.01,
   } as NumberParameter,
 
   saturationStart: {
     type: 'number',
-    defaultValue: 0.6,
-    label: 'Saturation Adjustment Start',
-    min: -1,
+    defaultValue: 0.67,
+    label: 'Saturation Start',
+    min: 0,
     max: 1,
     step: 0.01,
   } as NumberParameter,
 
   saturationEnd: {
     type: 'number',
-    defaultValue: -0.6,
-    label: 'Saturation Adjustment End',
-    min: -1,
+    defaultValue: 0.6,
+    label: 'Saturation End',
+    min: 0,
     max: 1,
     step: 0.01,
   } as NumberParameter,
@@ -151,7 +151,7 @@ export const fadePlayerFactionFromFrontSchema = {
   opacityStart: {
     type: 'number',
     defaultValue: 0.85,
-    label: 'Opacity Adjustment Start',
+    label: 'Opacity Start',
     min: 0,
     max: 1,
     step: 0.01,
@@ -159,8 +159,8 @@ export const fadePlayerFactionFromFrontSchema = {
 
   opacityEnd: {
     type: 'number',
-    defaultValue: 1,
-    label: 'Opacity Adjustment End',
+    defaultValue: 0.95,
+    label: 'Opacity End',
     min: 0,
     max: 1,
     step: 0.01,
@@ -197,44 +197,44 @@ export const fadeNonPlayerFactionFromFrontSchema = {
 
   brightnessStart: {
     type: 'number',
-    defaultValue: -0.1,
-    label: 'Brightness Adjustment Start',
-    min: -1,
+    defaultValue: 0.35,
+    label: 'Brightness Start',
+    min: 0,
     max: 1,
     step: 0.01,
   } as NumberParameter,
 
   brightnessEnd: {
     type: 'number',
-    defaultValue: -0.6,
-    label: 'Brightness Adjustment End',
-    min: -1,
+    defaultValue: 0.1,
+    label: 'Brightness End',
+    min: 0,
     max: 1,
     step: 0.01,
   } as NumberParameter,
 
   saturationStart: {
     type: 'number',
-    defaultValue: -0.25,
-    label: 'Saturation Adjustment Start',
-    min: -1,
+    defaultValue: 0.32,
+    label: 'Saturation Start',
+    min: 0,
     max: 1,
     step: 0.01,
   } as NumberParameter,
 
   saturationEnd: {
     type: 'number',
-    defaultValue: -0.8,
-    label: 'Saturation Adjustment End',
-    min: -1,
+    defaultValue: 0.8,
+    label: 'Saturation End',
+    min: 0,
     max: 1,
     step: 0.01,
   } as NumberParameter,
 
   opacityStart: {
     type: 'number',
-    defaultValue: 0.85,
-    label: 'Opacity Adjustment Start',
+    defaultValue: 0.8,
+    label: 'Opacity Start',
     min: 0,
     max: 1,
     step: 0.01,
@@ -242,8 +242,8 @@ export const fadeNonPlayerFactionFromFrontSchema = {
 
   opacityEnd: {
     type: 'number',
-    defaultValue: 1,
-    label: 'Opacity Adjustment End',
+    defaultValue: 0.9,
+    label: 'Opacity End',
     min: 0,
     max: 1,
     step: 0.01,
