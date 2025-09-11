@@ -167,57 +167,22 @@ const activeRegion: StyleRule = {
   },
 };
 
-// Configuration constants at class level for easy adjustment
-const FADE_MAX_DISTANCE = 5;
-const NON_PLAYER_FADE_MULTIPLIER = 1.5;
-
-// Interpolation settings for different properties and factions
-const PLAYER_BRIGHTNESS_SETTINGS: InterpolationSettings = {
-  curve: 'linear',
-  start: 0.6,
-  end: -0.25,
-};
-
-const NON_PLAYER_BRIGHTNESS_SETTINGS: InterpolationSettings = {
-  curve: 'linear',
-  start: -0.1,
-  end: -0.6,
-};
-
-const PLAYER_SATURATION_SETTINGS: InterpolationSettings = {
-  curve: 'linear',
-  start: 0.6,
-  end: -0.6,
-};
-
-const NON_PLAYER_SATURATION_SETTINGS: InterpolationSettings = {
-  curve: 'linear',
-  start: -0.25,
-  end: -0.8,
-};
-
-const PLAYER_OPACITY_SETTINGS: InterpolationSettings = {
-  curve: 'linear',
-  start: 0.85,
-  end: 1,
-};
-
-const NON_PLAYER_OPACITY_SETTINGS: InterpolationSettings = {
-  curve: 'linear',
-  start: 0.85,
-  end: 1,
-};
-
-const fadeFromFront: StyleRule = {
-  id: 'fade-with-distance-from-front',
+const fadePlayerFactionFromFront: StyleRule = {
+  id: 'fade-player-faction-from-front',
   applicable(context: StyleContext): boolean {
-    const params = context.getParams<'fade-with-distance-from-front'>(
-      'fade-with-distance-from-front'
+    const params = context.getParams<'fade-player-faction-from-front'>(
+      'fade-player-faction-from-front'
     );
     if (!params.enabled) {
       return false;
     }
+
+    const isPlayerFaction =
+      context.playerFaction !== undefined &&
+      context.regionState.owning_faction_id === context.playerFaction;
+
     return (
+      isPlayerFaction &&
       context.regionState.distance_to_front >= 0 &&
       context.mapSettings.fadeDistantRegions
     );
@@ -226,59 +191,122 @@ const fadeFromFront: StyleRule = {
     context: StyleContext,
     data: Partial<PolylineOptions>
   ): Partial<PolylineOptions> {
-    const regionState = context.regionState;
-    const playerFaction = context.playerFaction;
-    const distance = regionState.distance_to_front;
-    const params = context.getParams<'fade-with-distance-from-front'>(
-      'fade-with-distance-from-front'
+    const distance = context.regionState.distance_to_front;
+    const params = context.getParams<'fade-player-faction-from-front'>(
+      'fade-player-faction-from-front'
     );
 
-    // Get the base faction color to work from
-    const faction_color: string = context.factionColor;
-
-    // Check if this region belongs to the player's faction
-    const isPlayerFaction =
-      playerFaction !== undefined &&
-      regionState.owning_faction_id === playerFaction;
-
     // Normalize distance: treat negative/unknown distances as 0
-    // Negative distances should cause applicable to return false
     const normalizedDistance = Math.max(distance, 0);
 
-    // Calculate fade intensity with faction-based multiplier
-    // Non-player factions fade faster (higher effective distance)
-    const effectiveDistance = isPlayerFaction
-      ? normalizedDistance * params.playerMultiplier
-      : normalizedDistance * params.nonPlayerMultiplier;
-
-    // Clamp fadeIntensity to [0, 1] range
+    // Calculate fade intensity for player faction
+    const effectiveDistance = normalizedDistance * params.playerMultiplier;
     const fadeIntensity = Math.min(
       Math.max(effectiveDistance / params.maxDistance, 0),
       1
     );
 
-    // Select settings based on faction
-    const brightnessSettings = isPlayerFaction
-      ? PLAYER_BRIGHTNESS_SETTINGS
-      : NON_PLAYER_BRIGHTNESS_SETTINGS;
-    const saturationSettings = isPlayerFaction
-      ? PLAYER_SATURATION_SETTINGS
-      : NON_PLAYER_SATURATION_SETTINGS;
-    const opacitySettings = isPlayerFaction
-      ? PLAYER_OPACITY_SETTINGS
-      : NON_PLAYER_OPACITY_SETTINGS;
+    // Create dynamic interpolation settings from parameters
+    const brightnessSettings = {
+      curve: 'linear' as const,
+      start: params.brightnessStart,
+      end: params.brightnessEnd,
+    };
+    const saturationSettings = {
+      curve: 'linear' as const,
+      start: params.saturationStart,
+      end: params.saturationEnd,
+    };
+    const opacitySettings = {
+      curve: 'linear' as const,
+      start: params.opacityStart,
+      end: params.opacityEnd,
+    };
 
-    // Use interpolation function with settings objects
+    // Use dynamic settings
     const brightnessAdjustment = interpolate(brightnessSettings, fadeIntensity);
-
     const saturationAdjustment = interpolate(saturationSettings, fadeIntensity);
-
-    // Calculate opacity boost (higher opacity for more distant regions)
     const fillOpacity = interpolate(opacitySettings, fadeIntensity);
 
     // Apply color adjustments to base faction color
     const adjustedFillColor = adjustColorLightnessSaturation(
-      faction_color,
+      context.factionColor,
+      brightnessAdjustment,
+      saturationAdjustment
+    );
+
+    return {
+      ...data,
+      fillColor: adjustedFillColor,
+      fillOpacity: fillOpacity,
+    };
+  },
+};
+
+const fadeNonPlayerFactionFromFront: StyleRule = {
+  id: 'fade-non-player-faction-from-front',
+  applicable(context: StyleContext): boolean {
+    const params = context.getParams<'fade-non-player-faction-from-front'>(
+      'fade-non-player-faction-from-front'
+    );
+    if (!params.enabled) {
+      return false;
+    }
+
+    const isPlayerFaction =
+      context.playerFaction !== undefined &&
+      context.regionState.owning_faction_id === context.playerFaction;
+
+    return (
+      !isPlayerFaction &&
+      context.regionState.distance_to_front >= 0 &&
+      context.mapSettings.fadeDistantRegions
+    );
+  },
+  apply(
+    context: StyleContext,
+    data: Partial<PolylineOptions>
+  ): Partial<PolylineOptions> {
+    const distance = context.regionState.distance_to_front;
+    const params = context.getParams<'fade-non-player-faction-from-front'>(
+      'fade-non-player-faction-from-front'
+    );
+
+    // Normalize distance: treat negative/unknown distances as 0
+    const normalizedDistance = Math.max(distance, 0);
+
+    // Calculate fade intensity for non-player faction
+    const effectiveDistance = normalizedDistance * params.nonPlayerMultiplier;
+    const fadeIntensity = Math.min(
+      Math.max(effectiveDistance / params.maxDistance, 0),
+      1
+    );
+
+    // Create dynamic interpolation settings from parameters
+    const brightnessSettings = {
+      curve: 'linear' as const,
+      start: params.brightnessStart,
+      end: params.brightnessEnd,
+    };
+    const saturationSettings = {
+      curve: 'linear' as const,
+      start: params.saturationStart,
+      end: params.saturationEnd,
+    };
+    const opacitySettings = {
+      curve: 'linear' as const,
+      start: params.opacityStart,
+      end: params.opacityEnd,
+    };
+
+    // Use dynamic settings
+    const brightnessAdjustment = interpolate(brightnessSettings, fadeIntensity);
+    const saturationAdjustment = interpolate(saturationSettings, fadeIntensity);
+    const fillOpacity = interpolate(opacitySettings, fadeIntensity);
+
+    // Apply color adjustments to base faction color
+    const adjustedFillColor = adjustColorLightnessSaturation(
+      context.factionColor,
       brightnessAdjustment,
       saturationAdjustment
     );
@@ -331,7 +359,8 @@ export const StyleRuleSet = new RuleSet<StyleContext, PolylineOptions>([
   defaultRegionStyle,
   inactiveRegion,
   activeRegion,
-  fadeFromFront,
+  fadePlayerFactionFromFront,
+  fadeNonPlayerFactionFromFront,
   playerCapturableRegion,
   highlightSteals,
   outlineCutoffRegion,
