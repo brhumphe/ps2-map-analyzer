@@ -11,11 +11,17 @@ import type { PolylineOptions } from 'leaflet';
 import {
   adjustColorLightnessSaturation,
   interpolate,
+  type InterpolationCurve,
   type InterpolationSettings,
 } from '@/utilities/colors';
 import { RegionPane } from '@/utilities/leaflet_utils';
 import type { RuleSchemas } from '@/providers/styling/RegionRuleParameters';
-import type { SchemaValues } from '@/types/RuleParameterSchema.ts';
+import type {
+  BooleanParameter,
+  NumberParameter,
+  SchemaValues,
+  SelectParameter,
+} from '@/types/RuleParameterSchema.ts';
 
 export type StyleContext = {
   playerFaction: Faction;
@@ -56,8 +62,13 @@ const highlightSteals: StyleRule = {
 const playerCapturableRegion: StyleRule = {
   id: 'player-can-capture-region' as RuleId,
   applicable(context: StyleContext): boolean {
+    const params = context.getParams<'player-can-capture-region'>(
+      'player-can-capture-region'
+    );
+
     const regionState = context.regionState;
     return (
+      params.enabled &&
       (regionState.can_capture ?? false) &&
       (regionState.relevant_to_player ?? false)
     );
@@ -67,9 +78,16 @@ const playerCapturableRegion: StyleRule = {
     context: StyleContext,
     _data: Partial<PolylineOptions>
   ): Partial<PolylineOptions> {
+    const params = context.getParams<'player-can-capture-region'>(
+      'player-can-capture-region'
+    );
     // Player's faction is involved in the region - brighter
     return {
-      fillColor: adjustColorLightnessSaturation(context.factionColor, 0.5, 1),
+      fillColor: adjustColorLightnessSaturation(
+        context.factionColor,
+        params.lightnessAdjustment,
+        params.saturationAdjustment
+      ),
       fillOpacity: 0.8,
       opacity: 1.0,
       pane: RegionPane.FRONTLINE,
@@ -167,6 +185,69 @@ const activeRegion: StyleRule = {
   },
 };
 
+function applyFrontlineFade<T>(
+  distance: number,
+  params: SchemaValues<{
+    readonly enabled: BooleanParameter;
+    readonly maxDistance: NumberParameter;
+    readonly fadeIntensity: NumberParameter;
+    readonly interpolationCurve: SelectParameter<InterpolationCurve>;
+    readonly brightnessStart: NumberParameter;
+    readonly brightnessEnd: NumberParameter;
+    readonly saturationStart: NumberParameter;
+    readonly saturationEnd: NumberParameter;
+    readonly opacityStart: NumberParameter;
+    readonly opacityEnd: NumberParameter;
+  }>,
+  context: StyleContext,
+  data: Partial<PolylineOptions>
+) {
+  // Normalize distance: treat negative/unknown distances as 0
+  const normalizedDistance = Math.max(distance, 0);
+
+  // Calculate fade intensity for non-player faction
+  const effectiveDistance = normalizedDistance * params.fadeIntensity;
+  const fadeIntensity = Math.min(
+    Math.max(effectiveDistance / params.maxDistance, 0),
+    1
+  );
+
+  // Create dynamic interpolation settings from parameters
+  const brightnessSettings = {
+    curve: params.interpolationCurve as InterpolationCurve,
+    start: params.brightnessStart,
+    end: params.brightnessEnd,
+  };
+  const saturationSettings = {
+    curve: params.interpolationCurve as InterpolationCurve,
+    start: params.saturationStart,
+    end: params.saturationEnd,
+  };
+  const opacitySettings = {
+    curve: params.interpolationCurve as InterpolationCurve,
+    start: params.opacityStart,
+    end: params.opacityEnd,
+  };
+
+  // Use dynamic settings
+  const brightnessAdjustment = interpolate(brightnessSettings, fadeIntensity);
+  const saturationAdjustment = interpolate(saturationSettings, fadeIntensity);
+  const fillOpacity = interpolate(opacitySettings, fadeIntensity);
+
+  // Apply color adjustments to base faction color
+  const adjustedFillColor = adjustColorLightnessSaturation(
+    context.factionColor,
+    brightnessAdjustment,
+    saturationAdjustment
+  );
+
+  return {
+    ...data,
+    fillColor: adjustedFillColor,
+    fillOpacity: fillOpacity,
+  };
+}
+
 const fadePlayerFactionFromFront: StyleRule = {
   id: 'fade-player-faction-from-front',
   applicable(context: StyleContext): boolean {
@@ -196,50 +277,7 @@ const fadePlayerFactionFromFront: StyleRule = {
       'fade-player-faction-from-front'
     );
 
-    // Normalize distance: treat negative/unknown distances as 0
-    const normalizedDistance = Math.max(distance, 0);
-
-    // Calculate fade intensity for player faction
-    const effectiveDistance = normalizedDistance * params.playerMultiplier;
-    const fadeIntensity = Math.min(
-      Math.max(effectiveDistance / params.maxDistance, 0),
-      1
-    );
-
-    // Create dynamic interpolation settings from parameters
-    const brightnessSettings = {
-      curve: 'linear' as const,
-      start: params.brightnessStart,
-      end: params.brightnessEnd,
-    };
-    const saturationSettings = {
-      curve: 'linear' as const,
-      start: params.saturationStart,
-      end: params.saturationEnd,
-    };
-    const opacitySettings = {
-      curve: 'linear' as const,
-      start: params.opacityStart,
-      end: params.opacityEnd,
-    };
-
-    // Use dynamic settings
-    const brightnessAdjustment = interpolate(brightnessSettings, fadeIntensity);
-    const saturationAdjustment = interpolate(saturationSettings, fadeIntensity);
-    const fillOpacity = interpolate(opacitySettings, fadeIntensity);
-
-    // Apply color adjustments to base faction color
-    const adjustedFillColor = adjustColorLightnessSaturation(
-      context.factionColor,
-      brightnessAdjustment,
-      saturationAdjustment
-    );
-
-    return {
-      ...data,
-      fillColor: adjustedFillColor,
-      fillOpacity: fillOpacity,
-    };
+    return applyFrontlineFade(distance, params, context, data);
   },
 };
 
@@ -271,51 +309,7 @@ const fadeNonPlayerFactionFromFront: StyleRule = {
     const params = context.getParams<'fade-non-player-faction-from-front'>(
       'fade-non-player-faction-from-front'
     );
-
-    // Normalize distance: treat negative/unknown distances as 0
-    const normalizedDistance = Math.max(distance, 0);
-
-    // Calculate fade intensity for non-player faction
-    const effectiveDistance = normalizedDistance * params.nonPlayerMultiplier;
-    const fadeIntensity = Math.min(
-      Math.max(effectiveDistance / params.maxDistance, 0),
-      1
-    );
-
-    // Create dynamic interpolation settings from parameters
-    const brightnessSettings = {
-      curve: 'linear' as const,
-      start: params.brightnessStart,
-      end: params.brightnessEnd,
-    };
-    const saturationSettings = {
-      curve: 'linear' as const,
-      start: params.saturationStart,
-      end: params.saturationEnd,
-    };
-    const opacitySettings = {
-      curve: 'linear' as const,
-      start: params.opacityStart,
-      end: params.opacityEnd,
-    };
-
-    // Use dynamic settings
-    const brightnessAdjustment = interpolate(brightnessSettings, fadeIntensity);
-    const saturationAdjustment = interpolate(saturationSettings, fadeIntensity);
-    const fillOpacity = interpolate(opacitySettings, fadeIntensity);
-
-    // Apply color adjustments to base faction color
-    const adjustedFillColor = adjustColorLightnessSaturation(
-      context.factionColor,
-      brightnessAdjustment,
-      saturationAdjustment
-    );
-
-    return {
-      ...data,
-      fillColor: adjustedFillColor,
-      fillOpacity: fillOpacity,
-    };
+    return applyFrontlineFade(distance, params, context, data);
   },
 };
 

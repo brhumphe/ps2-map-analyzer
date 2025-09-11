@@ -26,8 +26,7 @@ export interface BooleanParameter extends BaseParameter<boolean> {
 
 export interface SelectParameter<T extends string> extends BaseParameter<T> {
   type: 'select';
-  options: readonly T[];
-  optionLabels?: Record<T, string>;
+  options: readonly { value: T; label: string }[];
 }
 
 export interface HslColorParameter extends BaseParameter<HSLColor> {

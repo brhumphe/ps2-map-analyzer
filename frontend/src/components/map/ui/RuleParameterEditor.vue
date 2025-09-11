@@ -50,6 +50,19 @@
                 hide-details
                 @update:model-value="setParameter(ruleId, key, $event)"
               />
+
+              <!-- Select parameter -->
+              <v-select
+                v-else-if="param.type === 'select'"
+                :model-value="ruleParameters[ruleId]?.[key]"
+                :label="param.label"
+                :items="param.options"
+                item-title="label"
+                item-value="value"
+                density="compact"
+                hide-details
+                @update:model-value="setParameter(ruleId, key, $event)"
+              />
             </div>
 
             <v-btn

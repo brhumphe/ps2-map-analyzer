@@ -7,13 +7,32 @@ import type {
   SchemaValues,
 } from '@/types/RuleParameterSchema';
 
-// Define schema for outline-cutoff rule
-export const outlineCutoffSchema = {
+// Shared parameter definitions that can be composed into multiple schemas
+const enabledParam = {
   enabled: {
     type: 'boolean',
     defaultValue: true,
     label: 'Enable',
   } as BooleanParameter,
+} as const;
+
+const curveParam = {
+  interpolationCurve: {
+    type: 'select',
+    defaultValue: 'linear' as const,
+    label: 'Curve',
+    options: [
+      { value: 'linear', label: 'Linear' },
+      { value: 'easeIn', label: 'Ease In' },
+      { value: 'easeOut', label: 'Ease Out' },
+      { value: 'easeInOut', label: 'Ease In Out' },
+    ],
+  },
+};
+
+// Define schema for outline-cutoff rule
+export const outlineCutoffSchema = {
+  ...enabledParam,
   borderColor: {
     type: 'color',
     defaultValue: '#ffeb00',
@@ -72,12 +91,7 @@ export type OutlineCutoffParams = SchemaValues<typeof outlineCutoffSchema>;
 
 // Define schema for fade-player-faction-from-front rule
 export const fadePlayerFactionFromFrontSchema = {
-  enabled: {
-    type: 'boolean',
-    defaultValue: true,
-    label: 'Enable Player Faction Fade',
-  } as BooleanParameter,
-
+  ...enabledParam,
   maxDistance: {
     type: 'number',
     defaultValue: 5,
@@ -87,19 +101,21 @@ export const fadePlayerFactionFromFrontSchema = {
     step: 1,
   } as NumberParameter,
 
-  playerMultiplier: {
+  fadeIntensity: {
     type: 'number',
     defaultValue: 1,
-    label: 'Player Fade Multiplier',
+    label: 'Fade Intensity',
     min: 0.1,
     max: 3,
     step: 0.1,
   } as NumberParameter,
 
+  ...curveParam,
+
   brightnessStart: {
     type: 'number',
     defaultValue: 0.6,
-    label: 'Brightness Start',
+    label: 'Brightness Adjustment Start',
     min: -1,
     max: 1,
     step: 0.01,
@@ -108,7 +124,7 @@ export const fadePlayerFactionFromFrontSchema = {
   brightnessEnd: {
     type: 'number',
     defaultValue: -0.25,
-    label: 'Brightness End',
+    label: 'Brightness Adjustment End',
     min: -1,
     max: 1,
     step: 0.01,
@@ -117,7 +133,7 @@ export const fadePlayerFactionFromFrontSchema = {
   saturationStart: {
     type: 'number',
     defaultValue: 0.6,
-    label: 'Saturation Start',
+    label: 'Saturation Adjustment Start',
     min: -1,
     max: 1,
     step: 0.01,
@@ -126,7 +142,7 @@ export const fadePlayerFactionFromFrontSchema = {
   saturationEnd: {
     type: 'number',
     defaultValue: -0.6,
-    label: 'Saturation End',
+    label: 'Saturation Adjustment End',
     min: -1,
     max: 1,
     step: 0.01,
@@ -135,7 +151,7 @@ export const fadePlayerFactionFromFrontSchema = {
   opacityStart: {
     type: 'number',
     defaultValue: 0.85,
-    label: 'Opacity Start',
+    label: 'Opacity Adjustment Start',
     min: 0,
     max: 1,
     step: 0.01,
@@ -144,7 +160,7 @@ export const fadePlayerFactionFromFrontSchema = {
   opacityEnd: {
     type: 'number',
     defaultValue: 1,
-    label: 'Opacity End',
+    label: 'Opacity Adjustment End',
     min: 0,
     max: 1,
     step: 0.01,
@@ -157,11 +173,7 @@ export type FadePlayerFactionFromFrontParams = SchemaValues<
 
 // Define schema for fade-non-player-faction-from-front rule
 export const fadeNonPlayerFactionFromFrontSchema = {
-  enabled: {
-    type: 'boolean',
-    defaultValue: true,
-    label: 'Enable Non-Player Faction Fade',
-  } as BooleanParameter,
+  ...enabledParam,
 
   maxDistance: {
     type: 'number',
@@ -172,19 +184,21 @@ export const fadeNonPlayerFactionFromFrontSchema = {
     step: 1,
   } as NumberParameter,
 
-  nonPlayerMultiplier: {
+  fadeIntensity: {
     type: 'number',
     defaultValue: 1.5,
-    label: 'Enemy Fade Multiplier',
+    label: 'Fade Intensity',
     min: 0.1,
     max: 3,
     step: 0.1,
   } as NumberParameter,
 
+  ...curveParam,
+
   brightnessStart: {
     type: 'number',
     defaultValue: -0.1,
-    label: 'Brightness Start',
+    label: 'Brightness Adjustment Start',
     min: -1,
     max: 1,
     step: 0.01,
@@ -193,7 +207,7 @@ export const fadeNonPlayerFactionFromFrontSchema = {
   brightnessEnd: {
     type: 'number',
     defaultValue: -0.6,
-    label: 'Brightness End',
+    label: 'Brightness Adjustment End',
     min: -1,
     max: 1,
     step: 0.01,
@@ -202,7 +216,7 @@ export const fadeNonPlayerFactionFromFrontSchema = {
   saturationStart: {
     type: 'number',
     defaultValue: -0.25,
-    label: 'Saturation Start',
+    label: 'Saturation Adjustment Start',
     min: -1,
     max: 1,
     step: 0.01,
@@ -211,7 +225,7 @@ export const fadeNonPlayerFactionFromFrontSchema = {
   saturationEnd: {
     type: 'number',
     defaultValue: -0.8,
-    label: 'Saturation End',
+    label: 'Saturation Adjustment End',
     min: -1,
     max: 1,
     step: 0.01,
@@ -220,7 +234,7 @@ export const fadeNonPlayerFactionFromFrontSchema = {
   opacityStart: {
     type: 'number',
     defaultValue: 0.85,
-    label: 'Opacity Start',
+    label: 'Opacity Adjustment Start',
     min: 0,
     max: 1,
     step: 0.01,
@@ -229,7 +243,7 @@ export const fadeNonPlayerFactionFromFrontSchema = {
   opacityEnd: {
     type: 'number',
     defaultValue: 1,
-    label: 'Opacity End',
+    label: 'Opacity Adjustment End',
     min: 0,
     max: 1,
     step: 0.01,
@@ -240,12 +254,39 @@ export type FadeNonPlayerFactionFromFrontParams = SchemaValues<
   typeof fadeNonPlayerFactionFromFrontSchema
 >;
 
+export const highlightPlayerCapturableRegionsSchema = {
+  ...enabledParam,
+
+  fillOpacity: {
+    type: 'number',
+    defaultValue: 0.8,
+    label: 'Fill Opacity',
+    min: 0,
+    max: 1,
+    step: 0.01,
+  },
+
+  lightnessAdjustment: {
+    type: 'number',
+    defaultValue: 0.5,
+    label: 'Lightness Adjustment',
+    min: -1,
+    max: 1,
+  },
+
+  saturationAdjustment: {
+    type: 'number',
+    defaultValue: 0.5,
+    label: 'Saturation Adjustment',
+  },
+};
+
 // Collect all rule schemas
 export const ruleSchemas = {
   'outline-cutoff-region': outlineCutoffSchema,
   'fade-player-faction-from-front': fadePlayerFactionFromFrontSchema,
   'fade-non-player-faction-from-front': fadeNonPlayerFactionFromFrontSchema,
-  // Add more as needed
+  'player-can-capture-region': highlightPlayerCapturableRegionsSchema,
 };
 
 export type RuleSchemas = typeof ruleSchemas;
