@@ -95,6 +95,15 @@ export const fadeFromFrontSchema = {
     max: 3,
     step: 0.1,
   } as NumberParameter,
+
+  playerMultiplier: {
+    type: 'number',
+    defaultValue: 1,
+    label: 'Player Fade Multiplier',
+    min: 0.1,
+    max: 3,
+    step: 0.1,
+  },
 } as const;
 
 export type FadeFromFrontParams = SchemaValues<typeof fadeFromFrontSchema>;

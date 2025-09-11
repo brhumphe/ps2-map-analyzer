@@ -211,6 +211,12 @@ const NON_PLAYER_OPACITY_SETTINGS: InterpolationSettings = {
 const fadeFromFront: StyleRule = {
   id: 'fade-with-distance-from-front',
   applicable(context: StyleContext): boolean {
+    const params = context.getParams<'fade-with-distance-from-front'>(
+      'fade-with-distance-from-front'
+    );
+    if (!params.enabled) {
+      return false;
+    }
     return (
       context.regionState.distance_to_front >= 0 &&
       context.mapSettings.fadeDistantRegions
@@ -223,6 +229,9 @@ const fadeFromFront: StyleRule = {
     const regionState = context.regionState;
     const playerFaction = context.playerFaction;
     const distance = regionState.distance_to_front;
+    const params = context.getParams<'fade-with-distance-from-front'>(
+      'fade-with-distance-from-front'
+    );
 
     // Get the base faction color to work from
     const faction_color: string = context.factionColor;
@@ -239,12 +248,12 @@ const fadeFromFront: StyleRule = {
     // Calculate fade intensity with faction-based multiplier
     // Non-player factions fade faster (higher effective distance)
     const effectiveDistance = isPlayerFaction
-      ? normalizedDistance
-      : normalizedDistance * NON_PLAYER_FADE_MULTIPLIER;
+      ? normalizedDistance * params.playerMultiplier
+      : normalizedDistance * params.nonPlayerMultiplier;
 
     // Clamp fadeIntensity to [0, 1] range
     const fadeIntensity = Math.min(
-      Math.max(effectiveDistance / FADE_MAX_DISTANCE, 0),
+      Math.max(effectiveDistance / params.maxDistance, 0),
       1
     );
 
