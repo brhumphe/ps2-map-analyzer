@@ -82,7 +82,10 @@ export function useRegionMarkers() {
 
     if (marker) {
       // Merge updates with existing marker data
-      Object.assign(marker, updates);
+      regionMarkers.set(key, {
+        ...marker,
+        ...updates,
+      });
     }
   };
 
