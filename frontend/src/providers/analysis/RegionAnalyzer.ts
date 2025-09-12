@@ -5,7 +5,7 @@ import type {
   TerritorySnapshot,
 } from '@/types/territory';
 import type { Zone } from '@/types/zone_types';
-import type { NodeDistanceResult } from '@/utilities/graph.ts';
+import type { NodeDistanceResult } from '@/utilities/graph';
 
 /**
  * Per-region analysis

@@ -8,7 +8,7 @@ import { zoneUtils } from '@/utilities/zone_utils';
 import { useAppState } from '@/composables/useAppState';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 import type { StyleEvaluationResult } from '@/providers/styling/RegionStyleRules';
-import { useTerritoryAnalysis } from '@/composables/useTerritoryAnalysis.ts';
+import { useTerritoryAnalysis } from '@/composables/useTerritoryAnalysis';
 
 /**
  * Composable for region analysis and styling coordination
@@ -28,6 +28,8 @@ export function useRegionAnalysis(
   // State that style depends on
   const { playerFaction } = useAppState();
   const { mapDisplaySettings } = useMapDisplaySettings();
+  const { warpgateConnectedRegions, distancesToFrontline } =
+    useTerritoryAnalysis(territorySnapshot, currentZone);
 
   /**
    * Computed region states based on territory analysis
@@ -38,8 +40,6 @@ export function useRegionAnalysis(
     if (!territorySnapshot.value || !currentZone.value) {
       return new Map();
     }
-    const { warpgateConnectedRegions, distancesToFrontline } =
-      useTerritoryAnalysis(territorySnapshot, currentZone);
 
     return regionAnalyzer.analyzeRegionStates(
       territorySnapshot.value,

@@ -2,7 +2,7 @@
 
 import { Continent, Faction, type RegionID, World } from '@/types/common';
 import type { FacilityLinkKey, Zone } from '@/types/zone_types';
-import type { NodeDistanceResult } from '@/utilities/graph.ts';
+import type { NodeDistanceResult } from '@/utilities/graph';
 
 /**
  * Strategic classification of lattice links based on connected region ownership
