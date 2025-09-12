@@ -62,13 +62,13 @@ describe('Graph Algorithms', () => {
     const graph = PS2Graph.build(zone, snapshot);
     const frontlineDistances = findDistancesFromFrontline(graph);
     expect(frontlineDistances.size).toBe(25); // 25 regions are on the frontline, including cut-off regions
-    expect(frontlineDistances.get(18030 as RegionID)).toBe(4);
-    expect(frontlineDistances.get(18250 as RegionID)).toBe(1);
-    expect(frontlineDistances.get(18062 as RegionID)).toBe(3);
-    expect(frontlineDistances.get(18013 as RegionID)).toBe(4);
-    expect(frontlineDistances.get(18015 as RegionID)).toBe(4);
-    expect(frontlineDistances.get(18067 as RegionID)).toBe(0);
-    expect(frontlineDistances.get(18025 as RegionID)).toBe(0);
-    expect(frontlineDistances.get(18261 as RegionID)).toBeUndefined();
+    expect(frontlineDistances.get(18030 as RegionID)?.distance).toBe(4);
+    expect(frontlineDistances.get(18250 as RegionID)?.distance).toBe(1);
+    expect(frontlineDistances.get(18062 as RegionID)?.distance).toBe(3);
+    expect(frontlineDistances.get(18013 as RegionID)?.distance).toBe(4);
+    expect(frontlineDistances.get(18015 as RegionID)?.distance).toBe(4);
+    expect(frontlineDistances.get(18067 as RegionID)?.distance).toBe(0);
+    expect(frontlineDistances.get(18025 as RegionID)?.distance).toBe(0);
+    expect(frontlineDistances.get(18261 as RegionID)?.distance).toBeUndefined();
   });
 });

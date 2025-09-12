@@ -5,7 +5,7 @@ import type { RegionID } from '@/types/common';
 import { world_to_latLng } from '@/utilities/coordinates';
 import { zoneUtils } from '@/utilities/zone_utils';
 import { HexGeometry } from '@/utilities/hexagons';
-import type { StyleEvaluationResult } from '@/utilities/style_rules.ts';
+import type { StyleEvaluationResult } from '@/providers/styling/RegionStyleRules';
 
 interface RegionPolygon {
   points: L.LatLng[];

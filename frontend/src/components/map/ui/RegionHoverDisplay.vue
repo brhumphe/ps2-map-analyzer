@@ -116,14 +116,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useRegionHover } from '@/composables/useRegionHover.ts';
-import { useRegionSelection } from '@/composables/useRegionSelection.ts';
-import { useTerritoryData } from '@/composables/useTerritoryData.ts';
-import { useLeafletMap } from '@/composables/useLeafletMap.ts';
-import { useRegionAnalysis } from '@/composables/useRegionAnalysis.ts';
-import { zoneUtils } from '@/utilities/zone_utils.ts';
-import { Faction } from '@/types/common.ts';
-import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings.ts';
+import { useRegionHover } from '@/composables/useRegionHover';
+import { useRegionSelection } from '@/composables/useRegionSelection';
+import { useTerritoryData } from '@/composables/useTerritoryData';
+import { useLeafletMap } from '@/composables/useLeafletMap';
+import { useRegionAnalysis } from '@/composables/useRegionAnalysis';
+import { zoneUtils } from '@/utilities/zone_utils';
+import { Faction } from '@/types/common';
+import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 
 const { currentHoveredRegion } = useRegionHover();
 const { currentSelectedRegion } = useRegionSelection();

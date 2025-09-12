@@ -16,12 +16,18 @@ export const FactionColor: Record<Faction, string> = {
   [Faction.NSO]: '#566573',
 };
 
+export interface HSLColor {
+  h: number;
+  s: number;
+  l: number;
+}
+
 /**
  * Convert hex color to HSL color space
  * @param hex Hex color string (e.g. '#441c7a')
  * @returns Object with hue, saturation, and lightness
  */
-export function hexToHSL(hex: string): { h: number; s: number; l: number } {
+export function hexToHSL(hex: string): HSLColor {
   // Remove the # if present
   hex = hex.replace('#', '');
 
@@ -113,6 +119,29 @@ export function setColorBrightness(color: string, brightness: number): string {
 
   // Create new color with specified brightness
   return hslToHex(h, s, brightness);
+}
+
+/**
+ * Set the absolute lightness and saturation of a hex color
+ * @param hex Hex color string (e.g. '#441c7a')
+ * @param lightness Absolute lightness value (0-1, where 0 is black, 1 is white)
+ * @param saturation Absolute saturation value (0-1, where 0 is grayscale, 1 is fully saturated)
+ * @returns Hex color string with specified lightness and saturation
+ */
+export function setColorLightnessSaturation(
+  hex: string,
+  lightness: number,
+  saturation: number
+): string {
+  // Clamp values to valid ranges
+  lightness = Math.min(1, Math.max(0, lightness));
+  saturation = Math.min(1, Math.max(0, saturation));
+
+  // Convert to HSL
+  const { h } = hexToHSL(hex);
+
+  // Use the provided absolute values directly
+  return hslToHex(h, saturation, lightness);
 }
 
 /**

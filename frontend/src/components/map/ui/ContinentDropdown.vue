@@ -47,9 +47,9 @@
 </template>
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
-import { Continent } from '@/types/common.ts';
-import { useAppState } from '@/composables/useAppState.ts';
-import type { HonuWorldOverview, HonuZoneStatus } from '@/types/honu-api.ts';
+import { Continent } from '@/types/common';
+import { useAppState } from '@/composables/useAppState';
+import type { HonuWorldOverview, HonuZoneStatus } from '@/types/honu-api';
 
 const { setContinent, selectedContinent, selectedWorld } = useAppState();
 

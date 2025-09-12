@@ -37,8 +37,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { World, WorldName } from '@/types/common.ts';
-import { useAppState } from '@/composables/useAppState.ts';
+import { World, WorldName } from '@/types/common';
+import { useAppState } from '@/composables/useAppState';
 
 const { setWorld, selectedWorld } = useAppState();
 

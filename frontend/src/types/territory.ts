@@ -2,6 +2,7 @@
 
 import { Continent, Faction, type RegionID, World } from '@/types/common';
 import type { FacilityLinkKey, Zone } from '@/types/zone_types';
+import type { NodeDistanceResult } from '@/utilities/graph';
 
 /**
  * Strategic classification of lattice links based on connected region ownership
@@ -16,12 +17,10 @@ export type LinkState =
   | { status: 'unknown' }; // Territory data incomplete or unavailable
 
 /**
- * Normalized territory control snapshot optimized for frontend consumption
+ * Raw territory data containing region ownership information
  *
  * This format provides efficient lookups for region ownership while being
  * compatible with both client-side analysis and backend API responses.
- * The region map only includes regions with known ownership - missing
- * regions should be treated as contested or unknown.
  */
 export interface TerritorySnapshot {
   /** Unix timestamp when this snapshot was captured */
@@ -86,9 +85,6 @@ export interface RegionState {
 
 /**
  * Region analysis provider interface that converts territory data into region states
- *
- * This interface enables different analysis strategies for region control
- * (e.g., simple ownership passthrough, contested detection, strategic value analysis)
  */
 export interface RegionAnalysisProvider {
   /**
@@ -97,11 +93,15 @@ export interface RegionAnalysisProvider {
    * @param territory Current territory snapshot with region ownership
    * @param zone Zone data containing region information
    * @param playerFaction Faction of the user (for strategic analysis)
+   * @param warpgateConnectedRegions Distances to warpgate, if connected.
+   * @param distancesToFrontline Distances to the nearest frontline region.
    * @returns Map of region IDs to their strategic states
    */
   analyzeRegionStates(
     territory: TerritorySnapshot,
     zone: Zone,
-    playerFaction: Faction
+    playerFaction: Faction,
+    warpgateConnectedRegions: Map<RegionID, number> | null,
+    distancesToFrontline: Map<RegionID, NodeDistanceResult> | null
   ): Map<RegionID, RegionState>;
 }

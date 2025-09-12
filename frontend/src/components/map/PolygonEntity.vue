@@ -8,7 +8,7 @@ import * as L from 'leaflet';
 import { useLeafletMap } from '@/composables/useLeafletMap';
 import { useRegionHover } from '@/composables/useRegionHover';
 import { useRegionSelection } from '@/composables/useRegionSelection';
-import type { RegionID } from '@/types/common.ts';
+import type { RegionID } from '@/types/common';
 
 interface Props {
   id: string;
