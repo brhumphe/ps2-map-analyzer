@@ -21,7 +21,7 @@ import type {
   NumberParameter,
   SchemaValues,
   SelectParameter,
-} from '@/types/RuleParameterSchema.ts';
+} from '@/types/RuleParameterSchema';
 
 export type StyleContext = {
   playerFaction: Faction;

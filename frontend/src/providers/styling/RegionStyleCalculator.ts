@@ -8,8 +8,8 @@ import {
   StyleRuleSet,
 } from '@/providers/styling/RegionStyleRules';
 import type { PolylineOptions } from 'leaflet';
-import { useRuleParameters } from '@/composables/useRuleParameters.ts';
-import type { RuleSchemas } from '@/providers/styling/RegionRuleParameters.ts';
+import { useRuleParameters } from '@/composables/useRuleParameters';
+import type { RuleSchemas } from '@/providers/styling/RegionRuleParameters';
 
 /**
  * Region style calculator that converts region states into visual properties

@@ -1,7 +1,7 @@
 // RuleParameterSchema.ts
 
 // Define the possible parameter types and their UI hints
-import type { HSLColor } from '@/utilities/colors.ts';
+import type { HSLColor } from '@/utilities/colors';
 
 export interface BaseParameter<T> {
   defaultValue: T;

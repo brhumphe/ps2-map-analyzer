@@ -7,7 +7,7 @@ import type {
   SchemaValues,
   SelectParameter,
 } from '@/types/RuleParameterSchema';
-import type { InterpolationCurve } from '@/utilities/colors.ts';
+import type { InterpolationCurve } from '@/utilities/colors';
 
 // Shared parameter definitions that can be composed into multiple schemas
 const enabledParam = {

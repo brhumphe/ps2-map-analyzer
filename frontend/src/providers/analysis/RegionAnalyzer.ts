@@ -5,11 +5,7 @@ import type {
   TerritorySnapshot,
 } from '@/types/territory';
 import type { Zone } from '@/types/zone_types';
-import {
-  findDistancesFromFrontline,
-  findWarpgateConnectedRegions,
-  PS2Graph,
-} from '@/utilities/graph';
+import type { NodeDistanceResult } from '@/utilities/graph.ts';
 
 /**
  * Per-region analysis
@@ -21,17 +17,18 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
    * @param territory Current territory snapshot with region ownership
    * @param zone Zone data containing region information
    * @param playerFaction Player's selected faction
+   * @param warpgateConnectedRegions
+   * @param distancesToFrontline
    * @returns Map of region IDs to their ownership states
    */
   analyzeRegionStates(
     territory: TerritorySnapshot,
     zone: Zone,
-    playerFaction: Faction
+    playerFaction: Faction,
+    warpgateConnectedRegions: Map<RegionID, number> | null,
+    distancesToFrontline: Map<RegionID, NodeDistanceResult> | null
   ): Map<RegionID, RegionState> {
     const regionStates = new Map<RegionID, RegionState>();
-    const graph = PS2Graph.build(zone, territory);
-    const wg_conn = findWarpgateConnectedRegions(graph);
-    const front_dist = findDistancesFromFrontline(graph);
 
     for (const region of zone.regions.values()) {
       const regionState = this.analyzeSingleRegion(
@@ -42,8 +39,10 @@ export class RegionAnalyzer implements RegionAnalysisProvider {
       );
       const state = {
         ...regionState,
-        distance_to_wg: wg_conn.get(region.map_region_id) ?? -1,
-        distance_to_front: front_dist.get(region.map_region_id)?.distance ?? -1,
+        distance_to_wg:
+          warpgateConnectedRegions?.get(region.map_region_id) ?? -1,
+        distance_to_front:
+          distancesToFrontline?.get(region.map_region_id)?.distance ?? -1,
       };
       regionStates.set(region.map_region_id, state);
     }
