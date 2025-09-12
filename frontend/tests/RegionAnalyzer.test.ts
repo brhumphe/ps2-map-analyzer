@@ -39,9 +39,11 @@ describe('Census Parsers', () => {
     const analysis = analyser.analyzeRegionStates(
       esamirMapState,
       esamirZone,
-      Faction.NONE
+      Faction.NONE,
+      null,
+      null
     );
-    // 18005 was a region being incorrectly flagged as capturable
+    // 18005 was a region being incorrectly flagged as capturable, despite being unowned
     expect(analysis.get(18005 as RegionID)).toStrictEqual({
       owning_faction_id: 0,
       region_id: 18005,
@@ -50,6 +52,8 @@ describe('Census Parsers', () => {
       is_active: false,
       can_capture: false,
       relevant_to_player: false,
+      distance_to_wg: -1,
+      distance_to_front: -1,
     });
   });
 });
