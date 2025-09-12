@@ -88,7 +88,7 @@ const playerCapturableRegion: StyleRule = {
         params.lightnessAdjustment,
         params.saturationAdjustment
       ),
-      fillOpacity: 0.8,
+      fillOpacity: params.fillOpacity ?? 0.8,
       opacity: 1.0,
       pane: RegionPane.FRONTLINE,
       color: '#000000',

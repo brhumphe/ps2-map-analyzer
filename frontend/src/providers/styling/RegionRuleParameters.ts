@@ -5,7 +5,9 @@ import type {
   ColorParameter,
   NumberParameter,
   SchemaValues,
+  SelectParameter,
 } from '@/types/RuleParameterSchema';
+import type { InterpolationCurve } from '@/utilities/colors.ts';
 
 // Shared parameter definitions that can be composed into multiple schemas
 const enabledParam = {
@@ -27,8 +29,8 @@ const curveParam = {
       { value: 'easeOut', label: 'Ease Out' },
       { value: 'easeInOut', label: 'Ease In Out' },
     ],
-  },
-};
+  } as SelectParameter<InterpolationCurve>,
+} as const;
 
 // Define schema for outline-cutoff rule
 export const outlineCutoffSchema = {
@@ -264,7 +266,7 @@ export const highlightPlayerCapturableRegionsSchema = {
     min: 0,
     max: 1,
     step: 0.01,
-  },
+  } as NumberParameter,
 
   lightnessAdjustment: {
     type: 'number',
@@ -272,13 +274,13 @@ export const highlightPlayerCapturableRegionsSchema = {
     label: 'Lightness Adjustment',
     min: -1,
     max: 1,
-  },
+  } as NumberParameter,
 
   saturationAdjustment: {
     type: 'number',
     defaultValue: 0.5,
     label: 'Saturation Adjustment',
-  },
+  } as NumberParameter,
 };
 
 // Collect all rule schemas
