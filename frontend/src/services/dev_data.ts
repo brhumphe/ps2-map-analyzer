@@ -1,47 +1,11 @@
 import { Continent, ContinentName, World } from '@/types/common';
-import type { Zone } from '@/types/zone_types';
 import type { TerritorySnapshot } from '@/types/territory';
 import { CensusDataService } from '@/services/census';
-import {
-  extractCensusMapState,
-  parseZoneFromZoneResponse,
-  type ZoneDataResponse,
-} from '@/services/parsers';
+import { extractCensusMapState } from '@/services/parsers';
 
 export class DevelopmentDataService extends CensusDataService {
   constructor(serviceId: string = 'dev') {
     super(serviceId);
-  }
-
-  async getZoneData(continent: Continent): Promise<Zone> {
-    const url = `/public/${ContinentName.get(continent)?.toLowerCase()}-zone.json`;
-    let data: ZoneDataResponse;
-
-    try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        // noinspection ExceptionCaughtLocallyJS
-        throw new Error(
-          `HTTP Error: ${response.status} - ${response.statusText}`
-        );
-      }
-      data = await response.json();
-    } catch (error) {
-      console.error('Error fetching zone data:', error);
-      throw error;
-    }
-
-    if (!data.zone_list || data.zone_list.length === 0) {
-      throw new Error(`No zone data found for zone_id: ${continent}`);
-    }
-    console.debug(`Loaded zone data from development`, data, url);
-    return parseZoneFromZoneResponse(data.zone_list[0]);
   }
 
   async getCurrentTerritorySnapshot(
@@ -53,6 +17,7 @@ export class DevelopmentDataService extends CensusDataService {
       // Load local JSON file from public directory
       const response = await fetch(url);
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error(`Failed to load development data: ${response.status}`);
       }
 
