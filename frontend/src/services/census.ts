@@ -1,4 +1,4 @@
-import { Continent, World } from '@/types/common';
+import { Continent, ContinentName, World } from '@/types/common';
 import type { Zone } from '@/types/zone_types';
 import type { TerritorySnapshot } from '@/types/territory';
 import type { PS2DataService } from '@/types/services';
@@ -16,9 +16,9 @@ export class CensusDataService implements PS2DataService {
   }
 
   async getZoneData(continent: Continent): Promise<Zone> {
-    // Always use sanctuary for this to avoid literally thousands of calls to parseInt
-    const baseUrl = 'https://census.lithafalcon.cc/get/ps2/zone';
-    const url = `${baseUrl}?zone_id=${continent}&c:join=facility_link^on:zone_id^to:zone_id^list:1^inject_at:links^hide:description'zone_id,map_region^list:1^inject_at:regions^hide:zone_id'localized_facility_name(map_hex^list:1^inject_at:hexes^hide:zone_id'map_region_id)&c:lang=en&c:hide=name,description&c:censusJSON=false`;
+    const url = `/public/${ContinentName.get(continent)?.toLowerCase()}-zone.json`;
+    let data: ZoneDataResponse;
+
     try {
       const response = await fetch(url, {
         method: 'GET',
@@ -28,18 +28,22 @@ export class CensusDataService implements PS2DataService {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error(
           `HTTP Error: ${response.status} - ${response.statusText}`
         );
       }
-
-      const data: ZoneDataResponse = await response.json();
-      console.debug(`Loaded zone data from Sanctuary`);
-      return parseZoneFromZoneResponse(data.zone_list[0]);
+      data = await response.json();
     } catch (error) {
       console.error('Error fetching zone data:', error);
       throw error;
     }
+
+    if (!data.zone_list || data.zone_list.length === 0) {
+      throw new Error(`No zone data found for zone_id: ${continent}`);
+    }
+    console.debug(`Loaded zone data from development`, data, url);
+    return parseZoneFromZoneResponse(data.zone_list[0]);
   }
 
   async getCurrentTerritorySnapshot(
