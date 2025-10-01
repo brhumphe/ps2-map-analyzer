@@ -19,6 +19,7 @@ export default defineConfig({
     vueDevTools({ launchEditor: 'pycharm' }),
   ],
   root: 'frontend',
+  publicDir: 'public',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
