@@ -16,7 +16,7 @@ export class CensusDataService implements PS2DataService {
   }
 
   async getZoneData(continent: Continent): Promise<Zone> {
-    const url = `/public/${ContinentName.get(continent)?.toLowerCase()}-zone.json`;
+    const url = `/${ContinentName.get(continent)?.toLowerCase()}-zone.json`;
     let data: ZoneDataResponse;
 
     try {
