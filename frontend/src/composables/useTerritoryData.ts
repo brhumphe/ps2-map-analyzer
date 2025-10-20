@@ -7,9 +7,9 @@ import { useAppState } from '@/composables/useAppState';
 import { useMapDisplaySettings } from '@/composables/useMapDisplaySettings';
 
 // Configuration
-const REQUEST_TIMEOUT_MS = 10000; // 10 seconds
+const REQUEST_TIMEOUT_MS = 30000;
 const MAX_RETRY_ATTEMPTS = 3;
-const RETRY_DELAYS = [1000, 2000, 4000]; // Exponential backoff
+const RETRY_DELAYS = [5000, 8000, 12000]; // Exponential backoff
 
 // Singleton state - shared across all component instances
 const territorySnapshot = ref<TerritorySnapshot | null>(null);
